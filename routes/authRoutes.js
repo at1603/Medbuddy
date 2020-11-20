@@ -5,7 +5,7 @@ var express = require("express"),
 //Login get requests
 router.get('/userLogin', function(req,res){
     // console.log(req.flash(error));
-    res.render("login/userLogin"); 
+    res.render("auth/login"); 
  });
 
  //login post requests
@@ -30,7 +30,7 @@ router.get("/logout", function(req,res){
 
 //Signup get requests
 router.get('/register', function(req,res){
-    res.render("login/userSignup"); 
+    res.render("auth/signup"); 
  });
  
 
