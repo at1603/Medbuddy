@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname + '/public')));
 
 var indexRoutes = require('./routes/indexRoutes.js')
 
-app.use(indexRoutes)
+app.use(indexRoutes);
 
 app.use(passport.initialize());
 app.use(passport.session());
