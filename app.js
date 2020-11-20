@@ -8,16 +8,26 @@ var express = require("express"),
     mongoose = require("mongoose"),
     flash = require('connect-flash')
 
-var User = require('./models/userSchema')
+var User = require('./models/userSchema');
 
 mongoose.connect("mongodb://localhost:27017/medbuddy", {useNewUrlParser: true, useUnifiedTopology: true});
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname + '/public')));
 
-var indexRoutes = require('./routes/indexRoutes.js')
+var indexRoutes = require('./routes/indexRoutes.js'),
+    authRoutes = require('./routes/authRoutes'),
+    section1Routes = require('./routes/section1Routes'),
+    section2Routes = require('./routes/section2Routes'),
+    section3Routes = require('./routes/section3Routes'),
+    section4Routes = require('./routes/section4Routes');
 
 app.use(indexRoutes);
+app.use(authRoutes);
+app.use(section1Routes);
+app.use(section2Routes);
+app.use(section3Routes);
+app.use(section4Routes);
 
 app.use(passport.initialize());
 app.use(passport.session());
