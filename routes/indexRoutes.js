@@ -16,5 +16,9 @@ router.get("/contact", function(req, res){
    res.render("contact");
 });
 
+router.get("/timeline", function(req,res){
+   res.render("timeline");
+});
+
 
 module.exports = router;

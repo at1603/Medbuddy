@@ -22,7 +22,7 @@ router.post("/userLogin", passport.authenticate("local",
 
 
 //logout 
-router.get("/logout", middleware.isLoggedIn, function(req,res){
+router.get("/logout", function(req,res){
     req.logout();
     req.flash("success", "Logged Out Successfully! ");
     res.redirect("/");
@@ -33,6 +33,5 @@ router.get('/register', function(req,res){
     res.render("login/userSignup"); 
  });
  
-
 
 module.exports = router;
