@@ -1,5 +1,10 @@
 # MedBuddy
-Simple Website for health purposes.
+Simple Website for health purposes. 
+
+## How to run
+```
+nodemon
+```
 
 # Contributors
 Abhinav Tripathi  
