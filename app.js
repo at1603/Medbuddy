@@ -8,7 +8,8 @@ var express = require("express"),
     mongoose = require("mongoose"),
     flash = require('connect-flash')
 
-var User = require('./models/userSchema');
+var User = require('./models/userSchema'),
+    Doctor = require('./models/docSchema');
 
 mongoose.connect("mongodb://localhost:27017/medbuddy", {useNewUrlParser: true, useUnifiedTopology: true});
 app.use(bodyParser.urlencoded({extended: true}));
