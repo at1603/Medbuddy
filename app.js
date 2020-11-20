@@ -8,6 +8,8 @@ var express = require("express"),
     mongoose = require("mongoose"),
     flash = require('connect-flash')
 
+var User = require('./models/userSchema')
+
 mongoose.connect("mongodb://localhost:27017/medbuddy", {useNewUrlParser: true, useUnifiedTopology: true});
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -30,7 +32,7 @@ app.use(require("express-session")({
 }));
 
 app.use(function(req, res, next){
-    res.locals.currentUser = req.user;
+    //res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
     next();
