@@ -1,8 +1,8 @@
-const socket = io('/start_call')
+const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
 const myPeer = new Peer(undefined, {
-  host: '/start_call',
-  port: '5000'
+  host: '/',
+  port: '3001'
 })
 const myVideo = document.createElement('video')
 myVideo.muted = true
@@ -22,11 +22,11 @@ navigator.mediaDevices.getUserMedia({
   })
 
   socket.on('user-connected', userId => {
-    // user is joining
     setTimeout(() => {
       // user joined
       connectToNewUser(userId, stream)
     }, 3000)
+    
   })
 })
 
@@ -58,5 +58,3 @@ function addVideoStream(video, stream) {
   })
   videoGrid.append(video)
 }
-
-
