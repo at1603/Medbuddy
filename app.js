@@ -25,17 +25,6 @@ var indexRoutes = require('./routes/indexRoutes.js'),
     seedDB = require("./seeds");
 
 // seedDB();
-app.use(indexRoutes);
-app.use(authRoutes);
-app.use(section1Routes);
-app.use(section2Routes);
-app.use(section3Routes);
-app.use(section4Routes);
-
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(methodOverride("_method"));
-app.use(flash());
 
 //Passport Configuration
 app.use(require("express-session")({
@@ -44,16 +33,29 @@ app.use(require("express-session")({
     saveUninitialized: false
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(methodOverride("_method"));
+app.use(flash());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(indexRoutes);
+app.use(authRoutes);
+app.use(section1Routes);
+app.use(section2Routes);
+app.use(section3Routes);
+app.use(section4Routes);
+
+
 app.use(function(req, res, next){
     //res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
     next();
  });
-
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 
 app.listen(3000, function(){
