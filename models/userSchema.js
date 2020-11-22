@@ -15,6 +15,7 @@ var userSchema = new mongoose.Schema({
    zip:String,
    role:String,
    gender:String,
+   roomId : {type:String, default:null},
    joinedAt:{type:Date, default:Date.now},
    isAdmin: {type: Boolean, default: false}
 });
