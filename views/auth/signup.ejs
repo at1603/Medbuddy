@@ -1,32 +1,8 @@
 <%- include("../partials/header"); -%>
 
-<!-- <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Sign Up</title> -->
-
-    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-up/"> -->
-
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <!-- <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style> -->
     <!-- Custom styles for this template -->
     <link href="/stylesheets/signup.css" rel="stylesheet">
   </head>
@@ -37,27 +13,32 @@
   <!-- <label for="inputEmail" class="sr-only">Email address</label> -->
   <div class="row">
     <div class="col-6">
-      <input type="name" class="form-control" placeholder="First Name" required autofocus>
-      <input type="text" class="form-control" placeholder="City" required autofocus>
-      <input type="name" class="form-control" placeholder="Username" required autofocus>
-      <input type="tel" class="form-control" placeholder="Phone" required autofocus>
-      <input type="email" class="form-control" placeholder="Email" required autofocus>
-      <input type="file" class="form-control" placeholder="Upload Photo" autofocus>
-      <input type="text" class="form-control" placeholder="Address" required autofocus>  
+      <input type="name" name='firstname' class="form-control" placeholder="First Name" required autofocus>
+      <input type="text" name='city'class="form-control" placeholder="City" required autofocus>
+      <input type="name" name='username'class="form-control" placeholder="Username" required autofocus>
+      <input type="tel" name='phone'class="form-control" placeholder="Phone" required autofocus>
+      <input type="email" name='email'class="form-control" placeholder="Email" required autofocus>
+      <input type="url" name='avatar'class="form-control" placeholder="Upload Photo(insert Url)" autofocus>
+      <input type="text" name='address'class="form-control" placeholder="Address" required autofocus>  
     </div>
     <div class="col-6">
-      <input type="name" class="form-control" placeholder="Last Name" required autofocus>
-      <input type="text" class="form-control" placeholder="State" required autofocus>
-      <input type="number" class="form-control" placeholder="Pincode" required autofocus>
+      <input type="name" name='lastname'class="form-control" placeholder="Last Name" required autofocus>
+      <input type="text" name='state'class="form-control" placeholder="State" required autofocus>
+      <input type="number" name='zip'class="form-control" placeholder="Pincode" required autofocus>
       <select class="form-control" name="gender" id="gender">
+        <option selected disabled>--select--</option>
         <option value="male">Male</option>
         <option value="female">Female</option>
         <option value="others">Others</option>
       </select>     
-      
-      <input type="text" class="form-control" placeholder="Role" required autofocus>
+      <select class="form-control" name="userRole" id="userRole" placeholder="select">
+        <option selected disabled>--select--</option>
+        <option value="patient">Patient</option>
+        <option value="doctor">Doctor</option>
+        <option value="management">Management</option>
+      </select> 
       <!-- <label for="inputPassword" class="sr-only">Password</label> -->
-      <input type="password" id="password" class="form-control" placeholder="Password" required>
+      <input type="password" id="password" name='password' class="form-control" placeholder="Password" required>
       <input type="password" id="confirm_password" class="form-control" placeholder="Confirm Password" required>
     </div>
     
@@ -67,7 +48,7 @@
   
   <div class="checkbox mb-3">
     <label>
-      <input type="checkbox" value="remember-me" style="margin-top: 20px;"> Remember me
+      <input type="checkbox" value="remember-me" style="margin-top: 20px;"> I accept <a href="#">terms and conditions</a>
     </label>
   </div>
   <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>

@@ -14,6 +14,7 @@ var userSchema = new mongoose.Schema({
    city: String,
    zip:String,
    role:String,
+   gender:String,
    joinedAt:{type:Date, default:Date.now},
    isAdmin: {type: Boolean, default: false}
 });
