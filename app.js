@@ -6,7 +6,7 @@ var express = require("express"),
     path  = require("path"),
     methodOverride = require('method-override'),
     mongoose = require("mongoose"),
-    flash = require('connect-flash')
+    flash = require('connect-flash');
 
 var User = require('./models/userSchema'),
     Doctor = require('./models/docSchema');
@@ -22,7 +22,9 @@ var indexRoutes = require('./routes/indexRoutes.js'),
     section2Routes = require('./routes/section2Routes'),
     section3Routes = require('./routes/section3Routes'),
     section4Routes = require('./routes/section4Routes');
+    seedDB = require("./seeds");
 
+// seedDB();
 app.use(indexRoutes);
 app.use(authRoutes);
 app.use(section1Routes);

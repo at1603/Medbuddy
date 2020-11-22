@@ -1,6 +1,7 @@
 var express = require("express"),
     router = express.Router(),
     passport = require('passport');
+var User =require("../models/userSchema");
 
 //Login get requests
 router.get('/userLogin', function(req,res){
@@ -28,11 +29,12 @@ router.get("/logout", function(req,res){
 
 //Signup get requests
 router.get('/register', function(req,res){
-    res.render("auth/signup"); 
+    res.render("auth/signup");
 });
  
-//signup post request
+//Signup post request
 router.post("/register", function(req, res){
+    // console.log("post in /register");
     var newUser = new User({
        username: req.body.username,
        firstName: req.body.firstname,
@@ -49,11 +51,11 @@ router.post("/register", function(req, res){
     });
     User.register(newUser, req.body.password, function(err, user){
        if(err){
-        //    req.flash("error", err.message);
+           console.log(err);
            res.redirect("/register");
        }else{
        passport.authenticate("local")(req, res, function(){
-        //   req.flash("success", "Welcome to JOBify " + user.username);
+          // req.flash("success", "Welcome to JOBify " + user.username);
           res.redirect("/"); 
        });
     }
