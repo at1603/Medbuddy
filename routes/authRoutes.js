@@ -1,7 +1,8 @@
 var express = require("express"),
     router = express.Router(),
-    passport = require('passport');
-var User =require("../models/userSchema");
+    passport = require('passport'),
+    User = require('../models/userSchema');
+
 
 //Login get requests
 router.get('/userLogin', function(req,res){
@@ -14,8 +15,6 @@ router.post("/userLogin", passport.authenticate("local",
 {
     successRedirect: "/", 
     failureRedirect: "/userlogin",
-    failureFlash : true,
-    successFlash: 'Welcome! '
     }),function(req, res){
 
 });
@@ -23,7 +22,6 @@ router.post("/userLogin", passport.authenticate("local",
 //logout 
 router.get("/logout", function(req,res){
     req.logout();
-    req.flash("success", "Logged Out Successfully! ");
     res.redirect("/");
 });
 
