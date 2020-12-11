@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-var sendMail = require('./mail');
+var sendMail = require('../public/mail');
 //home page route
 router.get('/', function(req, res){
    res.render("landing"); 
