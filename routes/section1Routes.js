@@ -16,6 +16,24 @@ router.get('/section1/reports/:id', function(req,res){
     res.render('section1/reports');
 })
 
+router.post('/sendEmail', (req, res) => {
+    const Data={
+     name :req.body.name,
+    email:req.body.email,
+    subject:req.body.subject,
+    text:req.body.text
+};
+
+    sendMail(Data.name, Data.email, Data.subject, Data.text, function(err, data) {
+        if (err) {
+            res.status(500).json({ message: 'Internal Error' });
+        } else {
+            res.redirect("/section1/patientinfo")
+            res.status({ message: 'Email sent!!!' });
+        }
+    });
+});
+
 ////+++////
 
 //patient routes

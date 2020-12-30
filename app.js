@@ -1,5 +1,11 @@
+if(process.env.NODE_ENV!=='production'){
+    require('dotenv').config()
+  }
 var express = require("express"),
     app = express(),
+    server = require('http').Server(app),
+    io = require('socket.io')(server),
+    { v4: uuidV4 } = require('uuid'),
     bodyParser = require("body-parser"),
     passport = require("passport"),
     LocalStrategy = require("passport-local"),
@@ -22,6 +28,7 @@ var indexRoutes = require('./routes/indexRoutes.js'),
     section2Routes = require('./routes/section2Routes'),
     section3Routes = require('./routes/section3Routes'),
     section4Routes = require('./routes/section4Routes');
+    videoCallRoute = require('./videocall/videoRoutes')
     seedDB = require("./seeds");
 
 // seedDB();
@@ -48,6 +55,7 @@ app.use(section1Routes);
 app.use(section2Routes);
 app.use(section3Routes);
 app.use(section4Routes);
+app.use(videoCallRoute);
 
 
 app.use(function(req, res, next){
@@ -57,7 +65,20 @@ app.use(function(req, res, next){
     next();
  });
 
+ //socket connection
+ io.on('connection', socket => {
+  socket.on('join-room', (roomId, userId) => {
+    socket.join(roomId)
+    socket.to(roomId).broadcast.emit('user-connected', userId)
 
-app.listen(3000, function(){
+    socket.on('disconnect', () => {
+      socket.to(roomId).broadcast.emit('user-disconnected', userId)
+    })
+  })
+})
+
+
+
+server.listen(3000, function(){
     console.log("server is connected!!");
 });
