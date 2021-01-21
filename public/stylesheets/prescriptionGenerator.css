@@ -1,0 +1,195 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+}
+
+.code-area {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    border-right: 1px solid #555;
+}
+
+.code-area textarea {
+    resize: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.preview-area {
+    width: 50%;
+}
+
+.preview-area iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.card {
+    /* Add shadows to create the "card" effect */
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
+    transition: 0.3s;
+    margin: 10%;
+    margin-top: 5%;
+    height: fit-content;
+}
+
+h1, h5 {
+    margin-left: 20%;
+    color: white;
+}
+
+#date {
+    float: right;
+    padding-right: 28px;
+}
+
+#age {
+    padding: 4px;
+}
+
+#contact {
+    padding: 4px;
+}
+
+input {
+    background: transparent;
+    border: none;
+}
+
+.header, .footer {
+    background-color: rgb(90, 150, 230);
+}
+
+.text {
+    display: inline-block;
+    width: fit-content;
+    padding: 10px;
+}
+
+#icon {
+    font-size: 60px;
+    float: right;
+    padding: 10px;
+    margin-right: 20%;
+}
+
+hr {
+    margin: auto !important;
+    width: 80% !important;
+}
+
+.docInfo {
+    margin: auto;
+    width: 80%;
+    padding: 6px;
+}
+
+#prescNo {
+    float: right !important;
+    margin-right: 28px;
+}
+
+/* .p1, .p2, .p3 {
+    padding-bottom: 15px;
+} */
+
+p {
+    padding-bottom: 15px;
+}
+
+.card {
+    width: fit-content;
+    height: fit-content !important;
+    margin: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
+}
+
+#subCard {
+    width: 70%;
+    padding: 20px;
+}
+
+th {
+    text-align: center !important;
+}
+
+td {
+    text-align: center !important;
+}
+
+.patInfo {
+    margin: auto;
+    width: 80%;
+    padding: 6px;
+}
+
+#footerIcon1 {
+    display: inline-block;
+    width: fit-content;
+    padding: 10px;
+    margin-left: 25%;
+}
+
+#footerIcon2 {
+    /* font-size: 60px; */
+    float: right;
+    padding: 10px;
+    margin-right: 25%;
+}
+
+.footer {
+    position: relative;
+    bottom: 30px;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: fit-content;
+    height: fit-content;
+    /* perspective: 1000px; */
+}
+
+.flip-card-inner {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    /* position: absolute; */
+    width: fit-content;
+    height: fit-content;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    background-color: #bbb;
+    color: black;
+}
+
+.flip-card-back {
+    background-color: #2980b9;
+    color: white;
+    transform: rotateY(180deg);
+}
