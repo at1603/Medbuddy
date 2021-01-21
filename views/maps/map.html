@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+      integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+      integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+      crossorigin=""
+    ></script>
+    <style>
+      #Map {
+        height: 360px;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body onload="getlocation()">
+    <div id="Map"></div>
+
+    <script>
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.watchPosition(showPosition);
+        } else {
+          x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }
+      getLocation();
+      const mymap = L.map("Map").setView([0, 0], 15);
+      const attribution =
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+      const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+      const tiles = L.tileLayer(tileUrl, { attribution });
+      tiles.addTo(mymap);
+
+      let marker = L.marker([0, 0]).addTo(mymap);
+
+      const api_url = "https://api.wheretheiss.at/v1/satellites/25544";
+
+      let firstTime = true;
+
+      async function showPosition(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        // Always set the view to current lat lon and zoom!
+        mymap.setView([latitude, longitude], mymap.getZoom());
+        marker.setLatLng([latitude, longitude]);
+
+        document.getElementById("lat").textContent = latitude.toFixed(2);
+        document.getElementById("lon").textContent = longitude.toFixed(2);
+      }
+
+      showPosition();
+    </script>
+  </body>
+</html>
