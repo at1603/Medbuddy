@@ -7,5 +7,4 @@ var roomIdSchema = new mongoose.Schema({
 });
 
 
-
-    module.exports = mongoose.model("roomId", roomIdSchema);
+module.exports = mongoose.model("roomId", roomIdSchema);
