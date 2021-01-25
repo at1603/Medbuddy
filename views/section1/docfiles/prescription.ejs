@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="/stylesheets/prescriptionGenerator.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/section1.css" />
+<html>
+  <%- include("../../partials/header"); -%>
+  
+
+  <body>
+    <%-include("../../components/Navbar"); -%>
+    <%-include("../../components/Sidebar");-%>
+      <div class="content-block">
+        <div class="non-preview-area">
+          <div class="patInfo-non-preview">
+            <p>
+              <span>
+                Mr./Ms./Mrs.:
+                <input type="text" placeholder="Name" />
+              </span>
+            </p>
+            <p>
+              <span>
+                Age:
+                <input type="text" />
+              </span>
+            </p>
+            <p>
+              <span>
+                Address:
+                <input type="text" />
+              </span>
+            </p>
+            <p>
+              <span>
+                Contact:
+                <input type="text" />
+              </span>
+            </p>
+          </div>
+          <div>
+            <form action="">
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="medicine">Choose a Medicine:</label>
+
+                  <select name="medicine" id="medicine" class="form-control">
+                    <option value="Norflox">Norflox</option>
+                    <option value="Paracetamol">Paracetamol</option>
+                    <option value="Crocin">Crocin</option>
+                    <option value="Cough Syrup">Cough Syrup</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-2">
+                  <label for="dosage-amount">Choose Dosage</label>
+
+                  <select
+                    name="dosage-amount"
+                    id="dosage-amount"
+                    class="form-control"
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="dosage-times">Frequency</label>
+
+                  <select
+                    name="dosage-times"
+                    id="dosage-times"
+                    class="form-control"
+                  >
+                    <option value="day">day</option>
+                    <option value="week">week</option>
+                    <option value="month">month</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-2">
+                  <button type="button" class="btn btn-success">Add</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div>
+            <form action="">
+              <div class="form-row">
+                <div class="form-group col-md-9">
+                  <label for="medicine">Choose a Test:</label>
+
+                  <select name="medicine" id="medicine" class="form-control">
+                    <option value="Blood-Test">Blood-Test</option>
+                    <option value="X-Ray">X-Ray</option>
+                    <option value="MRI">MRI</option>
+                    <option value="CT-Scan">CT-Scan</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-md-2">
+                  <button type="button" class="btn btn-success">Add</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="code-area">
+            <textarea
+              id="comment"
+              placeholder=""
+              oninput="showPreview()"
+            ></textarea>
+          </div>
+        </div>
+        <div class="preview-area">
+          <div class="card-outer">
+            <br />
+            <br />
+            <br />
+            <div class="header">
+              <div class="text">
+                <h1>MedBuddy</h1>
+              </div>
+              <div id="icon">
+                <i class="fa fa-heartbeat" aria-hidden="true"></i>
+              </div>
+            </div>
+            <br />
+            <br />
+
+            <hr />
+
+            <i
+              id="dropdown"
+              class="fa fa-sort-desc"
+              aria-hidden="true"
+              data-toggle="collapse"
+              href="#docInfo"
+              role="button"
+              aria-expanded="false"
+              aria-controls="docInfo"
+            ></i>
+            <div class="docInfo collapse" id="docInfo">
+              <p class="p1">
+                <span id="docName">
+                  <input type="text" placeholder="Name" />
+                </span>
+                <span id="prescNo">
+                  Prescription No:
+                  <input type="text" />
+                </span>
+              </p>
+              <p class="p2">
+                <span>
+                  <input type="text" placeholder="MBBS" />
+                </span>
+                <span id="date">
+                  Date:
+                  <input type="text" />
+                </span>
+              </p>
+              <p class="p3">
+                <span>
+                  <input type="text" placeholder="Contact" />
+                </span>
+              </p>
+            </div>
+            <hr />
+            <br />
+            <br />
+
+            <div class="flipcard">
+              <div class="flipcardinner">
+                <div class="flipcardfront">
+                  <table>
+                    <thead>
+                      <tr class="table100-head">
+                        <th class="column1">Medicine</th>
+                        <th class="column1">Power</th>
+                        <th class="column1">Dosage</th>
+                      </tr>
+                    </thead>
+                    <tbody id="front">
+                      <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column1">300MG</td>
+                        <td class="column1">4 Times a Day</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column1">300MG</td>
+                        <td class="column1">4 Times a Day</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column1">300MG</td>
+                        <td class="column1">4 Times a Day</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column1">300MG</td>
+                        <td class="column1">4 Times a Day</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column1">300MG</td>
+                        <td class="column1">4 Times a Day</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column1">300MG</td>
+                        <td class="column1">4 Times a Day</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column1">300MG</td>
+                        <td class="column1">4 Times a Day</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column1">300MG</td>
+                        <td class="column1">4 Times a Day</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column1">300MG</td>
+                        <td class="column1">4 Times a Day</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column1">300MG</td>
+                        <td class="column1">4 Times a Day</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column1">300MG</td>
+                        <td class="column1">4 Times a Day</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column1">300MG</td>
+                        <td class="column1">4 Times a Day</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="flipcardback">
+                  <table>
+                    <thead>
+                      <tr class="table100-head">
+                        <th class="column1">Recommended Test</th>
+                      </tr>
+                    </thead>
+                    <tbody id="back">
+                      <tr>
+                        <td class="column1">X-Ray</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">X-Ray</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">X-Ray</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">X-Ray</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">X-Ray</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">CT-Scan</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">Blood-Test</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br /><br />
+            <br />
+
+            <iframe id="preview-window"> </iframe>
+
+            <div class="patInfo">
+              <p>
+                <span>
+                  Mr./Ms./Mrs.:
+                  <input type="text" placeholder="Name" />
+                </span>
+              </p>
+              <p>
+                <span>
+                  Age:
+                  <input type="text" />
+                </span>
+              </p>
+              <p>
+                <span>
+                  Address:
+                  <input type="text" />
+                </span>
+              </p>
+              <p>
+                <span>
+                  Contact:
+                  <input type="text" />
+                </span>
+              </p>
+            </div>
+
+            <div id="footer">
+              <div id="footerIcon1">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+              </div>
+              <div id="footerIcon2">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+              </div>
+            </div>
+            <br />
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <script>
+      function showPreview() {
+        var comment = document.getElementById("comment").value;
+        var frame = document.getElementById("preview-window").contentWindow
+          .document;
+        frame.open();
+        frame.write(comment);
+        frame.close();
+      }
+    </script>
+
+    <script>
+      $(".flipcard .flipcardinner").click(function () {
+        $(this).closest(".flipcard").toggleClass("click");
+        $(this).css("transform, rotateY(180deg)");
+      });
+    </script>
+     <%-include("../../partials/footer"); -%>
+  </body>
+</html>
