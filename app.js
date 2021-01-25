@@ -24,10 +24,10 @@ app.use(express.static(path.join(__dirname + '/public')));
 
 var indexRoutes = require('./routes/indexRoutes.js'),
     authRoutes = require('./routes/authRoutes'),
-    section1Routes = require('./routes/section1Routes'),
-    section2Routes = require('./routes/section2Routes'),
-    section3Routes = require('./routes/section3Routes'),
-    section4Routes = require('./routes/section4Routes');
+    userDocRoutes = require('./routes/userDocRoutes'),
+    userHospRoutes = require('./routes/userHospRoutes'),
+    hospHospRoutes = require('./routes/hospHospRoutes'),
+    miscRoutes = require('./routes/miscRoutes');
     videoCallRoute = require('./videocall/videoRoutes')
     seedDB = require("./seeds");
 
@@ -51,10 +51,10 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(indexRoutes);
 app.use(authRoutes);
-app.use(section1Routes);
-app.use(section2Routes);
-app.use(section3Routes);
-app.use(section4Routes);
+app.use(userDocRoutes);
+app.use(userHospRoutes);
+app.use(hospHospRoutes);
+app.use(miscRoutes);
 app.use(videoCallRoute);
 
 
