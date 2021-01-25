@@ -1,18 +1,104 @@
-<%- include("./partials/header"); -%>
-
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>MedBuddy-Home Page</title>
+    <title>MedBuddy</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
-
+    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> -->
     <style>
+      .customNav{
+        background: rgba( 0, 0, 0, 0.30 );
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        backdrop-filter: blur( 11.0px );
+        -webkit-backdrop-filter: blur( 11.0px );
+        border-bottom: 1px solid rgba( 255, 255, 255, 0.4 );
+
+        width: 100%;
+        height: 4.5rem;
+        z-index: 100;
+        top: 0;
+        margin-bottom: 3rem;
+        position: fixed;
+        color: white;
+        padding: 12px;
+      }
+
+      .customNav .nav-items {
+        padding: 12px;
+        cursor: pointer;
+      }
+
+      .customNav .nav-title h3 {
+        line-height: 0.9;
+        padding: 12px;
+        cursor: pointer;
+      }
+
+      .customNav .nav-items h4 {
+        font-weight: 100;
+      }
+
+      .customNav .nav-items a{
+        cursor: pointer;
+        color: white;
+        text-decoration: none;
+        font-weight: 100;
+        font-size: 1.5rem;
+        line-height: 0.9;
+      }
+      .customNav .nav-ham a {
+        cursor: pointer;
+        color: white;
+        text-decoration: none;
+        font-weight: 100;
+        font-size: 1.5rem;
+        line-height: 1;
+        padding: 12px;
+        display: none;
+        
+      }
+
+      @media (max-width: 790px) {
+        .customNav .nav-items {
+          display: none;
+        }
+        .customNav .nav-ham a {
+          margin-left: auto;
+          display: block;
+          position: absolute;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+      .customNav .nav-ham.responsive {position: relative;}
+      .customNav .nav-ham.responsive a {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .customNav .nav-ham.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+      }
+    }
+
+    /* footer css */
+
+    .footer {
+      height: 20rem;
+      background-color: rgba(24, 22, 22, 0.863);
+      position: absolute;
+      width: 100%;
+      margin-top: 4rem;
+      text-align: center;
+    }
 
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -33,8 +119,51 @@
     <link href="/stylesheets/landing.css" rel="stylesheet">
   </head>
   <body>
-<main role="main">
 
+    <script>
+      function myFunction() {
+        var x = document.getElementById("topNav");
+        if (x.className === ".customNav .d-flex .flex-row .bd-highlight") {
+          x.className += " responsive";
+        } else {
+          x.className = ".customNav .d-flex .flex-row .bd-highlight";
+        }
+      }
+    </script>
+    <!-- Navbar for landing page -->
+
+    <div class="customNav d-flex flex-row bd-highlight">
+      <div class="nav-title pr-2 bd-highlight">
+        <h3>MedBuddy</h3>
+      </div>
+      <div class="pr-2 nav-items">
+        <a href="#">Services</a>
+      </div>
+      <div class="pr-2 nav-items">
+        <a href="#">About</a>
+      </div>
+      <div class="pr-2 nav-items nav-links">
+        <a href="#">Contact</a>
+      </div>
+      <div class="pr-2 nav-items nav-links">
+        <a href="#">Explore</a>
+      </div>
+      <div class="pr-2 bd-highlight nav-items" style="margin-left: auto;">
+        <a class="p-3" href="#">SignUp</a>
+        <a href="#">Login</a>
+      </div>
+      <div class="pr-2 bd-highlight nav-ham" id="topNav">
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+    </div>
+
+
+    <main role="main">
+
+
+<!-- Carousel Code -->
   <div id="myCarousel" class="carousel slide" data-ride="carousel" >
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -44,22 +173,22 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
         <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg> -->
-        <img src="https://images.unsplash.com/photo-1554734867-bf3c00a49371?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" class="d-block w-100">
+        <img src="https://images.unsplash.com/photo-1478476868527-002ae3f3e159?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1502&q=80" class="d-block w-100">
         <div class="container">
           <div class="carousel-caption text-left">
             <h1>Example headline.</h1>
             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button" style="border-radius: 10px" >Sign up today</a></p>
           </div>
         </div>
       </div>
       <div class="carousel-item">
-       <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=735&q=80">
+       <img src="https://images.unsplash.com/photo-1593786950861-3b753eb67c60?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1500&q=80">
         <div class="container">
           <div class="carousel-caption">
-            <h1>Another example headline.</h1>
-            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+            <h1 style="color: black; font-weight: 550;">Another example headline.</h1>
+            <p style="color: black">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button" style="border-radius: 10px;">Learn more</a></p>
           </div>
         </div>
       </div>
@@ -67,9 +196,9 @@
         <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=889&q=80">
         <div class="container">
           <div class="carousel-caption text-right">
-            <h1>One more for good measure.</h1>
-            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+            <h1 style="color: white">One more for good measure.</h1>
+            <p style="color: white">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button" style="border-radius: 10px;">Browse gallery</a></p>
           </div>
         </div>
       </div>
@@ -85,15 +214,11 @@
   </div>
 
 
-  <!-- Marketing messaging and featurettes
-  ================================================== -->
-  <!-- Wrap the rest of the page in another container to center all the content. -->
-
   <div class="container marketing">
 
     <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading">Consult Doctor <span class="text-muted">It’ll blow your mind.</span></h2>
+        <h2 class="featurette-heading">Consult Doctors</h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
         <a href="/section1/consultDoc" class=" btn btn-success btn-xs">Get Started</a>
       </div>
@@ -107,7 +232,7 @@
 
     <div class="row featurette">
       <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading">Manage Hospital <span class="text-muted">See for yourself.</span></h2>
+        <h2 class="featurette-heading">Explore Hospitals</h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
                 <a href="#" class=" btn btn-success btn-xs">Get Started</a>
 
@@ -122,7 +247,7 @@
 
     <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading"> Look for hospital<span class="text-muted">Checkmate.</span></h2>
+        <h2 class="featurette-heading"> Manage Hospital</h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
          <a href="#" class=" btn btn-success btn-xs">Get Started</a>
       </div>
@@ -149,11 +274,11 @@
 
     <!-- /END THE FEATURETTES -->
 
-  </div><!-- /.container -->
+  </div>
 
 
   <!-- FOOTER -->
-  <footer class="container">
+  <footer class="footer">
     <p class="float-right"><a href="#">Back to top</a></p>
     <p>&copy; 2017-2020 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
   </footer>
