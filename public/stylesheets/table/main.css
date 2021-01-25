@@ -204,20 +204,6 @@ tbody tr:hover {
 }
 
 .column3 {
-  width: 245px;
-}
-
-.column4 {
-  width: 110px;
-  text-align: right;
-}
-
-.column5 {
-  width: 170px;
-  text-align: right;
-}
-
-.column6 {
   width: 222px;
   text-align: right;
   padding-right: 62px;
@@ -255,24 +241,6 @@ tbody tr:hover {
     left: 30px;
     top: 0;
   }
-  table tbody tr td:nth-child(1):before {
-    content: "Date";
-  }
-  table tbody tr td:nth-child(2):before {
-    content: "Order ID";
-  }
-  table tbody tr td:nth-child(3):before {
-    content: "Name";
-  }
-  table tbody tr td:nth-child(4):before {
-    content: "Price";
-  }
-  table tbody tr td:nth-child(5):before {
-    content: "Quantity";
-  }
-  table tbody tr td:nth-child(6):before {
-    content: "Total";
-  }
   .column4, .column5, .column6 {
     text-align: left;
   }
@@ -282,6 +250,24 @@ tbody tr:hover {
   tbody tr {
     font-size: 14px;
   }
+}
+
+#front {
+  overflow-y: scroll;
+  height: 150px;
+  width: 199%;
+  display: block;
+}
+
+#back {
+  overflow-y: scroll;
+  height: 150px;
+  width: 102%;
+  display: inline-block;
+}
+
+.flipcardback .column1 {
+  width: 525px;
 }
 
 @media (max-width: 576px) {
