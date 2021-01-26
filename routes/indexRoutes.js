@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 
-var sendMail = require("../mail");
+var sendMail = require("../public/mail");
 
 
 

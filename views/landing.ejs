@@ -8,125 +8,30 @@
     <!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- Bootstrap core CSS -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> -->
-    <style>
-      .customNav{
-        background: rgba( 0, 0, 0, 0.30 );
-        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-        backdrop-filter: blur( 11.0px );
-        -webkit-backdrop-filter: blur( 11.0px );
-        border-bottom: 1px solid rgba( 255, 255, 255, 0.4 );
-
-        width: 100%;
-        height: 4.5rem;
-        z-index: 100;
-        top: 0;
-        margin-bottom: 3rem;
-        position: fixed;
-        color: white;
-        padding: 12px;
-      }
-
-      .customNav .nav-items {
-        padding: 12px;
-        cursor: pointer;
-      }
-
-      .customNav .nav-title h3 {
-        line-height: 0.9;
-        padding: 12px;
-        cursor: pointer;
-      }
-
-      .customNav .nav-items h4 {
-        font-weight: 100;
-      }
-
-      .customNav .nav-items a{
-        cursor: pointer;
-        color: white;
-        text-decoration: none;
-        font-weight: 100;
-        font-size: 1.5rem;
-        line-height: 0.9;
-      }
-      .customNav .nav-ham a {
-        cursor: pointer;
-        color: white;
-        text-decoration: none;
-        font-weight: 100;
-        font-size: 1.5rem;
-        line-height: 1;
-        padding: 12px;
-        display: none;
-        
-      }
-
-      @media (max-width: 790px) {
-        .customNav .nav-items {
-          display: none;
-        }
-        .customNav .nav-ham a {
-          margin-left: auto;
-          display: block;
-          position: absolute;
-        }
-      }
-
-      @media screen and (max-width: 600px) {
-      .customNav .nav-ham.responsive {position: relative;}
-      .customNav .nav-ham.responsive a {
-        position: absolute;
-        right: 0;
-        top: 0;
-      }
-      .customNav .nav-ham.responsive a {
-        float: none;
-        display: block;
-        text-align: left;
-      }
-    }
-
-    /* footer css */
-
-    .footer {
-      height: 20rem;
-      background-color: rgba(24, 22, 22, 0.863);
-      position: absolute;
-      width: 100%;
-      margin-top: 4rem;
-      text-align: center;
-    }
-
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-    <!-- Custom styles for this template -->
-    <link href="/stylesheets/landing.css" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/landing.css">
   </head>
   <body>
 
     <script>
-      function myFunction() {
+      function responsiveFunc() {
         var x = document.getElementById("topNav");
         if (x.className === ".customNav .d-flex .flex-row .bd-highlight") {
           x.className += " responsive";
         } else {
           x.className = ".customNav .d-flex .flex-row .bd-highlight";
+        }
+      }
+
+      function navDropdown() {
+        document.getElementById("myDropdown").classList.toggle("show");
+      }
+
+      window.onclick = function(e) {
+        if (!e.target.matches('.dropbtn')) {
+        var myDropdown = document.getElementById("myDropdown");
+          if (myDropdown.classList.contains('show')) {
+            myDropdown.classList.remove('show');
+          }
         }
       }
     </script>
@@ -136,9 +41,18 @@
       <div class="nav-title pr-2 bd-highlight">
         <h3>MedBuddy</h3>
       </div>
-      <div class="pr-2 nav-items">
-        <a href="#">Services</a>
-      </div>
+      <!-- <div class="pr-2 nav-items"> -->
+        <div class="dropdown">
+          <button class="dropbtn" onclick=navDropdown()>Services
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content" id="myDropdown">
+            <a href="#">Search Hospitals</a>
+            <a href="#">Know about Medicines</a>
+            <a href="#">Miscellaneous</a>
+          </div>
+        </div>
+      <!-- </div> -->
       <div class="pr-2 nav-items">
         <a href="#">About</a>
       </div>
@@ -149,11 +63,15 @@
         <a href="#">Explore</a>
       </div>
       <div class="pr-2 bd-highlight nav-items" style="margin-left: auto;">
-        <a class="p-3" href="#">SignUp</a>
+        <a href="#">SignUp</a>
+        <!-- <a href="#">Login</a> -->
+      </div>
+      <div class="pr-2 bd-highlight nav-items">
+        <!-- <span><a class="p-3" href="#">SignUp</a></span> -->
         <a href="#">Login</a>
       </div>
       <div class="pr-2 bd-highlight nav-ham" id="topNav">
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <a href="javascript:void(0);" class="icon" onclick="responsiveFunc()">
           <i class="fa fa-bars"></i>
         </a>
       </div>
@@ -220,11 +138,11 @@
       <div class="col-md-7">
         <h2 class="featurette-heading">Consult Doctors</h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        <a href="/section1/consultDoc" class=" btn btn-success btn-xs">Get Started</a>
+        <a href="/userDocSection/consultDoc" class=" btn btn-success btn-xs">Get Started</a>
       </div>
       <div class="col-md-5">
-       <!-- <img class="sectionImage" src="https://strokebelt-2i09v4zdrcmtpsrxer.stackpathdns.com/wp-content/uploads/2019/09/shutterstock_522261457-1024x682.jpg"> -->
-       <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+       <img class="sectionImage" src="https://images.unsplash.com/photo-1600091474842-83bb9c05a723?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8ZG9jdG9yJTIwY29uc3VsdHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
+       <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="https://images.unsplash.com/photo-1600091474842-83bb9c05a723?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8ZG9jdG9yJTIwY29uc3VsdHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
       </div>
     </div>
 
@@ -238,8 +156,8 @@
 
       </div>
       <div class="col-md-5 order-md-1">
-       <!-- <img class="sectionImage" src="https://strokebelt-2i09v4zdrcmtpsrxer.stackpathdns.com/wp-content/uploads/2019/09/shutterstock_522261457-1024x682.jpg"> -->
-       <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+       <img class="sectionImage" src="https://images.unsplash.com/photo-1512677859289-868722942457?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8aG9zcGl0YWwlMjBiZWRzfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" style="width: 400px; height: 1000">
+       <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
       </div>
     </div>
 
@@ -252,8 +170,8 @@
          <a href="#" class=" btn btn-success btn-xs">Get Started</a>
       </div>
       <div class="col-md-5">
-        <!-- <img class="sectionImage" src="https://strokebelt-2i09v4zdrcmtpsrxer.stackpathdns.com/wp-content/uploads/2019/09/shutterstock_522261457-1024x682.jpg"> -->
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+        <img class="sectionImage" src="https://images.unsplash.com/photo-1523841589119-b55aee0f66e7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80">
+        <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
       </div>
     </div>
 
@@ -267,13 +185,11 @@
 
       </div>
       <div class="col-md-5 order-md-1">
-        <!-- <img class="sectionImage" src="https://strokebelt-2i09v4zdrcmtpsrxer.stackpathdns.com/wp-content/uploads/2019/09/shutterstock_522261457-1024x682.JpcUGGOn"> -->
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+        <img class="sectionImage" src="https://images.unsplash.com/photo-1576091358783-a212ec293ff3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=625&q=80">
+        <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
       </div>
     </div>
-
     <!-- /END THE FEATURETTES -->
-
   </div>
 
 
@@ -284,7 +200,8 @@
   </footer>
 </main>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-      <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"><\/script>')</script><script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"><\/script>')</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
 </html>
 
