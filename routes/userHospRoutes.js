@@ -9,4 +9,8 @@ router.get("/userHospSection/bloodBanks", function(req, res){
   res.render("userHospSection/BloodBanks/index")
 });
 
+router.get("/userHospSection/searchHospitals", function(req, res){
+  res.render("userHospSection/searchHospitals/index")
+});
+
 module.exports = router;
