@@ -1,59 +1,64 @@
-<div>
-  <div class="nav-block">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="/">MedBuddy</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
+<script>
+  function responsiveFunc() {
+    var x = document.getElementById("topNav");
+    if (x.className === ".customNav .d-flex .flex-row .bd-highlight") {
+      x.className += " responsive";
+    } else {
+      x.className = ".customNav .d-flex .flex-row .bd-highlight";
+    }
+  }
+
+  function navDropdown() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  window.onclick = function(e) {
+    if (!e.target.matches('.dropbtn')) {
+    var myDropdown = document.getElementById("myDropdown");
+      if (myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
+      }
+    }
+  }
+</script>
+<!-- Navbar for landing page -->
+
+<div class="customNav d-flex flex-row bd-highlight">
+  <div class="nav-title pr-2 bd-highlight">
+    <h3>MedBuddy</h3>
+  </div>
+  <!-- <div class="pr-2 nav-items"> -->
+    <div class="dropdown nav-items">
+      <button class="dropbtn" onclick=navDropdown()>Services
+        <i class="fa fa-caret-down"></i>
       </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/"
-              >Home <span class="sr-only">(current)</span></a
-            >
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/about"
-              >About <span class="sr-only">(current)</span></a
-            >
-          </li>
-
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-        </ul>
-        <a class="nav-link" href="/userLogin"
-          >Login <span class="sr-only">(current)</span></a
-        >
-        <a class="nav-link" href="/register"
-          >Signup <span class="sr-only">(current)</span></a
-        >
+      <div class="dropdown-content" id="myDropdown">
+        <a href="#">Search Hospitals</a>
+        <a href="#">Know about Medicines</a>
+        <a href="#">Miscellaneous</a>
       </div>
-    </nav>
+    </div>
+  <!-- </div> -->
+  <div class="pr-2 nav-items">
+    <a href="#">About</a>
+  </div>
+  <div class="pr-2 nav-items nav-links">
+    <a href="#">Contact</a>
+  </div>
+  <div class="pr-2 nav-items nav-links">
+    <a href="#">Explore</a>
+  </div>
+  <div class="pr-2 bd-highlight nav-items" style="margin-left: auto;">
+    <a href="#">SignUp</a>
+    <!-- <a href="#">Login</a> -->
+  </div>
+  <div class="pr-2 bd-highlight nav-items">
+    <!-- <span><a class="p-3" href="#">SignUp</a></span> -->
+    <a href="#">Login</a>
+  </div>
+  <div class="pr-2 bd-highlight nav-ham" id="topNav">
+    <a href="javascript:void(0);" class="icon" onclick="responsiveFunc()">
+      <i class="fa fa-bars"></i>
+    </a>
   </div>
 </div>
