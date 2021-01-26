@@ -1,12 +1,12 @@
 var express = require("express");
 var router = express.Router();
 
-router.get("/manageHosp", function (req, res) {
+router.get("/userHospSection/initialPage", function (req, res) {
   res.render("userHospSection/index");
 });
 
-router.get("/prescription", function (req, res) {
-  res.render("userHospSection/index", { str: "prescription" });
+router.get("/userHospSection/bloodBanks", function(req, res){
+  res.render("userHospSection/BloodBanks/index")
 });
 
 module.exports = router;
