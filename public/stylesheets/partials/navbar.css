@@ -1,0 +1,144 @@
+/* NAV and FOOTER CSS */
+.customNav{
+    background: rgba( 0, 0, 0, 0.30 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 11.0px );
+    -webkit-backdrop-filter: blur( 11.0px );
+    border-bottom: 1px solid rgba( 255, 255, 255, 0.4 );
+  
+    width: 100%;
+    height: 4.5rem;
+    z-index: 999;
+    top: 0;
+    margin-bottom: 3rem;
+    position: fixed;
+    color: white;
+    padding: 12px;
+  }
+  
+  .customNav .nav-items {
+    padding: 12px;
+    cursor: pointer;
+  }
+  
+  .customNav .nav-title h3 {
+    line-height: 0.9;
+    padding: 12px;
+    cursor: pointer;
+  }
+  
+  .customNav .nav-items h4 {
+    font-weight: 100;
+  }
+  
+  .customNav .nav-items a{
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    font-weight: 100;
+    font-size: 1.5rem;
+    line-height: 0.9;
+  }
+  .customNav .nav-ham a {
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    font-weight: 100;
+    font-size: 1.5rem;
+    line-height: 1;
+    padding: 12px;
+    display: none;
+    
+  }
+  
+  @media (max-width: 790px) {
+    .customNav .nav-items {
+      display: none;
+    }
+    .customNav .nav-ham a {
+      margin-left: auto;
+      display: block;
+      position: absolute;
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+  .customNav .nav-ham.responsive {position: relative;}
+  .customNav .nav-ham.responsive a {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .customNav .nav-ham.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  }
+  
+  /* footer css */
+  
+  .footer {
+  height: 20rem;
+  background-color: rgba(24, 22, 22, 0.863);
+  position: absolute;
+  width: 100%;
+  margin-top: 4rem;
+  text-align: center;
+  }
+  
+  /* Navbar dropdown css */
+  .dropdown {
+    float: left;
+  }
+  
+  /* Dropdown button */
+  .dropdown .dropbtn {
+    font-size: 1.5rem;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: inherit;
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
+    font-weight: 100;
+    line-height: 0.5;
+  }
+  
+  .nav-items:hover{
+    /* background-color: red; */
+    border-bottom: 1px solid rgb(233, 215, 215);
+    font-weight: 400;
+  }
+  
+  /* Dropdown content (hidden by default) */
+  .dropdown-content {
+    background: rgba( 33, 109, 198, 0.85 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 20px );
+    -webkit-backdrop-filter: blur( 20px );
+    border-radius: 10px;
+  
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    z-index: 100;
+    margin-top: 25px;
+  }
+  
+  .dropdown-content a {
+    float: none;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  .dropdown-content a:hover {
+    background-color: rgb(46, 112, 173);
+  }
+  
+  .show {
+    z-index: 100;
+    display: block;
+  }
