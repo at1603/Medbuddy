@@ -21,10 +21,15 @@
     cursor: pointer;
   }
   
-  .customNav .nav-title h3 {
-    line-height: 0.9;
+  .customNav .nav-title a {
     padding: 12px;
     cursor: pointer;
+
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 1.9;
   }
   
   .customNav .nav-items h4 {
