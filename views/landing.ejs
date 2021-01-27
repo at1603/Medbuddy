@@ -9,79 +9,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/stylesheets/landing.css">
+    <link rel="stylesheet" href="/stylesheets/partials/navbar.css">
   </head>
   <body>
-
-    <script>
-      function responsiveFunc() {
-        var x = document.getElementById("topNav");
-        if (x.className === ".customNav .d-flex .flex-row .bd-highlight") {
-          x.className += " responsive";
-        } else {
-          x.className = ".customNav .d-flex .flex-row .bd-highlight";
-        }
-      }
-
-      function navDropdown() {
-        document.getElementById("myDropdown").classList.toggle("show");
-      }
-
-      window.onclick = function(e) {
-        if (!e.target.matches('.dropbtn')) {
-        var myDropdown = document.getElementById("myDropdown");
-          if (myDropdown.classList.contains('show')) {
-            myDropdown.classList.remove('show');
-          }
-        }
-      }
-    </script>
-    <!-- Navbar for landing page -->
-
-    <div class="customNav d-flex flex-row bd-highlight">
-      <div class="nav-title pr-2 bd-highlight">
-        <h3>MedBuddy</h3>
-      </div>
-      <!-- <div class="pr-2 nav-items"> -->
-        <div class="dropdown">
-          <button class="dropbtn" onclick=navDropdown()>Services
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content" id="myDropdown">
-            <a href="#">Search Hospitals</a>
-            <a href="#">Know about Medicines</a>
-            <a href="#">Miscellaneous</a>
-          </div>
-        </div>
-      <!-- </div> -->
-      <div class="pr-2 nav-items">
-        <a href="#">About</a>
-      </div>
-      <div class="pr-2 nav-items nav-links">
-        <a href="#">Contact</a>
-      </div>
-      <div class="pr-2 nav-items nav-links">
-        <a href="#">Explore</a>
-      </div>
-      <div class="pr-2 bd-highlight nav-items" style="margin-left: auto;">
-        <a href="#">SignUp</a>
-        <!-- <a href="#">Login</a> -->
-      </div>
-      <div class="pr-2 bd-highlight nav-items">
-        <!-- <span><a class="p-3" href="#">SignUp</a></span> -->
-        <a href="#">Login</a>
-      </div>
-      <div class="pr-2 bd-highlight nav-ham" id="topNav">
-        <a href="javascript:void(0);" class="icon" onclick="responsiveFunc()">
-          <i class="fa fa-bars"></i>
-        </a>
-      </div>
-    </div>
-
+    <%-include("./partials/Navbar");-%>
 
     <main role="main">
 
 
-<!-- Carousel Code -->
+    <!-- Carousel Code -->
   <div id="myCarousel" class="carousel slide" data-ride="carousel" >
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -152,7 +88,7 @@
       <div class="col-md-7 order-md-2">
         <h2 class="featurette-heading">Explore Hospitals</h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-                <a href="#" class=" btn btn-success btn-xs">Get Started</a>
+                <a href="/userHospSection/initialPage" class=" btn btn-success btn-xs">Get Started</a>
 
       </div>
       <div class="col-md-5 order-md-1">
