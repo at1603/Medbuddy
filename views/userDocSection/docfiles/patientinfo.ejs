@@ -12,7 +12,8 @@
     <%-include("../../partials/Sidebar");-%>
 
     <div class="content">
-      <div class="patInfo">
+      <div class="flex-container">
+      <div class="flex-child patInfo">
         <p>
           <span>
             Mr./Ms./Mrs.:
@@ -38,6 +39,12 @@
           </span>
         </p>
       </div>
+      <div class="flex-child callBtn">
+        <form id="form1" action="/start_call" method="POST">
+        <button type="submit" class="btn btn-success">Start Appointment</button>
+      </form>
+      </div>
+    </div>
       <hr>
       <div class="history">
       <div class="row">
