@@ -8,7 +8,6 @@ body {
   color: #5a5a5a;
 }
 
-
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
@@ -21,6 +20,17 @@ body {
   bottom: 3rem;
   z-index: 10;
 }
+
+/* images border css */
+
+img{
+  padding:1px;
+  border:1px solid #021a40;
+  max-width: 100%;
+  height: auto;
+  box-shadow: 10px 10px 5px #ccc;
+}
+
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
@@ -36,9 +46,6 @@ body {
 }
 
 
-/* MARKETING CONTENT
--------------------------------------------------- */
-
 /* Center align the text within the three columns below the carousel */
 .marketing .col-lg-4 {
   margin-bottom: 1.5rem;
@@ -52,13 +59,6 @@ body {
   margin-left: .75rem;
 }
 
-/*.sectionImage{
-  width: 300px;
-  height:200px;
-}*/
-
-/* Featurettes
-------------------------- */
 
 .featurette-divider {
   margin: 5rem 0; /* Space out the Bootstrap <hr> more */
@@ -93,3 +93,21 @@ body {
     margin-top: 7rem;
   }
 }
+
+/* ------------- */
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+

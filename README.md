@@ -7,6 +7,6 @@ nodemon
 ```
 
 # Contributors
-Abhinav Tripathi  abhinav16032002@gmail.com  
+Abhinav Tripathi  abhi3pathi01@gmail.com  
 Anmol Sahu  anmolsahu2k@gmail.com  
 Harsh Pandey  harshpandey011@gmail.com  

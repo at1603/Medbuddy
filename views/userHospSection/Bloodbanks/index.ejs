@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../../partials/header"); -%>
+    <link rel="stylesheet" href="/stylesheets/partials/navbar.css">
+    <style>
+        .container{
+            margin-top: 8rem;
+        }
+
+        .registerForm {
+            display: none;
+        }
+
+        .show{
+            display: block;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+    </style>
+<body>
+    <script src="/jsFiles/cities.js"></script>
+    <script>
+        function registerDonor() {
+            document.getElementById("registerForm").classList.toggle("show");
+            var elem = document.getElementById("registerBtn");
+            if (elem.innerHTML=="Register Now!") elem.innerHTML = "Close Form";
+            else elem.innerHTML = "Register Now!";
+        }
+    </script>
+
+    <%- include("../../partials/Navbar"); -%>
+
+    <div class="container">
+        <h2>Search Blood Banks in your city</h2>
+        <form action="#" method="POST">
+            <div class='shadow p-3 mb-1 bg-white rounded mt-5'>
+                <div class="form row">
+                    <div class="form-group col-md-6">
+                        <label for="inputstateofJob">State</label>
+                        <select onchange="print_city('state', this.selectedIndex);" id="searchState" class="form-control"></select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputCityofJob">City</label>
+                        <select id ="state" class="form-control" name="loc"></select>
+                        <script language="javascript">print_state("searchState");</script>
+                    </div>
+                    <button type="submit" class="btn btn-outline-success" style="margin:auto; display: block; width: 30%">Submit!</button>
+                </div>
+            </div>
+        </form>
+
+        <h4>Want to donate blood?</h4> <span><button class="btn btn-xs btn-outline-primary" id="registerBtn" onClick=registerDonor()>Register Now!</button></span>
+        <div class="registerForm" id="registerForm">
+            <form>
+                <div class='shadow p-3 mb-1 bg-white rounded mt-5'>
+                    <h2 style="text-align: center; margin-bottom: 1rem;">Donate Blood</h2>
+                    <div class="form row">
+                        <div class="form-group col-md-6">
+                            <label for="First Name">First Name:</label>
+                            <input type="text" class="form-control" placeholder="Your Name" name="firstName" id="inputFirstName">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Last Name">Last Name:</label>
+                            <input type="text" class="form-control" placeholder="Your Last Name" name="lastName" id="inputLastName">
+                        </div>
+                    </div>
+                    <div class="form row">
+                        <div class="form-group col-md-4">
+                            <label for="inputstateofJob">State</label>
+                            <select onchange="print_city('state', this.selectedIndex);" id="donorState" class="form-control"></select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputCityofJob">City</label>
+                            <select id ="state" class="form-control" name="city"></select>
+                            <script language="javascript">print_state("donorState");</script>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="pincode">Pin Code</label>
+                            <input type="number" class="form-control" name="pinCode" placeholder="Pin Code" id="pinCode" min="0">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="bloodGroup">Blood Group:</label>
+                            <input type="text" class="form-control" placeholder="Blood Group" name="bloodGroup" id="bloodGroup">
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="diseasesDescription">Details of disesases (if any):</label>
+                            <textarea name="diseasesDescription" class="form-control" id="diseasesDescription" cols="30" rows="5" placeholder="Give details if you are suffering from any chronic or acute disesases"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
+                        <label class="form-check-label" for="defaultCheck1">
+                          I will bring proper health related certificates with myself during visit.
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-outline-success mt-3" style="margin:auto; display: block; width: 30%">Submit!</button>
+                </div>
+            </form>
+        </div>
+    
+        <h4></h4>
+    </div>
+
+    <%- include("../../partials/footer"); -%>
+</body>
+</html>

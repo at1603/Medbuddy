@@ -1,0 +1,65 @@
+<script>
+  function responsiveFunc() {
+    var x = document.getElementById("topNav");
+    if (x.className === ".customNav .d-flex .flex-row .bd-highlight") {
+      x.className += " responsive";
+    } else {
+      x.className = ".customNav .d-flex .flex-row .bd-highlight";
+    }
+  }
+
+  function navDropdown() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  window.onclick = function(e) {
+    if (!e.target.matches('.dropbtn')) {
+    var myDropdown = document.getElementById("myDropdown");
+      if (myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
+      }
+    }
+  }
+</script>
+<!-- Navbar for landing page -->
+
+<div class="customNav d-flex flex-row bd-highlight">
+  <div class="nav-title pr-2 bd-highlight">
+    <!-- <h3>MedBuddy</h3> -->
+    <a href="/">MedBuddy</a>
+  </div>
+  <!-- <div class="pr-2 nav-items"> -->
+    <div class="dropdown nav-items">
+      <button class="dropbtn" onclick=navDropdown() style="line-height: 0.7;">Services
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content" id="myDropdown">
+        <a href="#">Search Hospitals</a>
+        <a href="#">Know about Medicines</a>
+        <a href="#">Miscellaneous</a>
+      </div>
+    </div>
+  <!-- </div> -->
+  <div class="pr-2 nav-items">
+    <a href="#">About</a>
+  </div>
+  <div class="pr-2 nav-items nav-links">
+    <a href="#">Contact</a>
+  </div>
+  <div class="pr-2 nav-items nav-links">
+    <a href="#">Explore</a>
+  </div>
+  <div class="pr-2 bd-highlight nav-items" style="margin-left: auto;">
+    <a href="#">SignUp</a>
+    <!-- <a href="#">Login</a> -->
+  </div>
+  <div class="pr-2 bd-highlight nav-items">
+    <!-- <span><a class="p-3" href="#">SignUp</a></span> -->
+    <a href="#">Login</a>
+  </div>
+  <div class="pr-2 bd-highlight nav-ham" id="topNav">
+    <a href="javascript:void(0);" class="icon" onclick="responsiveFunc()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>

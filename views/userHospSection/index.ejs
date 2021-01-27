@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include("../partials/header"); -%>
+    <link rel="stylesheet" href="/stylesheets/partials/navbar.css">
+
+<body>
+    <style>
+        .row{
+            margin: 8rem auto 2em;
+            width: 80%;
+            justify-content: space-between;
+        }
+    </style>
+
+    <%- include("../partials/Navbar"); -%>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card" style="width: 18rem;">
+                <img src="https://images.unsplash.com/photo-1536856136534-bb679c52a9aa?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Ymxvb2QlMjBkb25hdGlvbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><strong>Blood Banks</strong></h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Cras justo odio</li>
+                </ul>
+                <div class="card-body">
+                  <a href="/userHospSection/bloodBanks" class="card-link btn btn-outline-success btn-xs">Wanna Search...</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card" style="width: 18rem;">
+                <img src="https://images.unsplash.com/photo-1592781959774-4f2498f581d7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aGVhcnQlMjBkb25hdGlvbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><strong>Organ Donation</strong></h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Cras justo odio</li>
+                  <li class="list-group-item">Dapibus ac facilisis in</li>
+                </ul>
+                <div class="card-body">
+                  <a href="#" class="card-link btn btn-outline-success btn-xs">Search Donations camps</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card" style="width: 18rem;">
+                <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aG9zcGl0YWx8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><strong>Peek into Hospital</strong></h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Cras justo odio</li>
+                  <li class="list-group-item">Dapibus ac facilisis in</li>
+                </ul>
+                <div class="card-body">
+                  <a href="/userHospSection/searchHospitals" class="card-link btn btn-outline-success btn-xs">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../partials/footer"); -%>
+</body>
+</html>
