@@ -317,3 +317,35 @@ thead, tbody tr {
     padding: inherit;
     margin-top: 26px;
 }
+
+tbody::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+}
+
+tbody::-webkit-scrollbar {
+    width: 4px;
+    background-color: #F5F5F5;
+}
+
+tbody::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #555;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-child {
+    flex: 3;
+}
+
+.flex-child:first-child {
+    margin-right: 20px;
+}
+
+.callBtn {
+    margin: auto;
+    margin-left: 53%;
+}
