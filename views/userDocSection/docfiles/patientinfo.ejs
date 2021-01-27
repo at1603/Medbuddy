@@ -1,120 +1,190 @@
 <!DOCTYPE html>
 <html>
   <%- include("../../partials/header"); -%>
-  <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-  
-
 
     <title>Page Title</title>
   </head>
- <link rel="stylesheet" href="/stylesheets/section1/docfiles/patientInfo.css">
  
   <link rel="stylesheet" type="text/css" href="/stylesheets/section1.css" />
+  <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientInfo.css">
   <body>
     <%-include("../../partials/Navbar"); -%>
     <%-include("../../partials/Sidebar");-%>
-    <div class="content">
-        <div class="card">
 
+    <div class="content">
+      <div class="patInfo">
+        <p>
+          <span>
+            Mr./Ms./Mrs.:
+            <a>  </a>  <!--<%= //rows.name %>-->
+          </span>
+        </p>
+        <p>
+          <span>
+            Age:
+            <a>  </a>  <!--<%= //rows.age %>-->
+          </span>
+        </p>
+        <p>
+          <span>
+            Address:
+            <a>  </a>  <!--<%= //rows.address %>-->
+          </span>
+        </p>
+        <p>
+          <span>
+            Contact:
+            <a> </a>  <!--<%= //rows.contact %>-->
+          </span>
+        </p>
+      </div>
+      <hr>
+      <div class="history">
+      <div class="row">
+
+        <div class="col-sm-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="test">
+                <table>
+                  <thead>
+                    <tr class="table100-head">
+                      <th class="column1">Recommended Test</th>
+                    </tr>
+                  </thead>
+                  <tbody id="back">
+                    <tr>
+                      <td class="column1">X-Ray</td>
+                    </tr>
+                    <tr>
+                      <td class="column1">X-Ray</td>
+                    </tr>
+                    <tr>
+                      <td class="column1">X-Ray</td>
+                    </tr>
+                    <tr>
+                      <td class="column1">X-Ray</td>
+                    </tr>
+                    <tr>
+                      <td class="column1">X-Ray</td>
+                    </tr>
+                    <tr>
+                      <td class="column1">CT-Scan</td>
+                    </tr>
+                    <tr>
+                      <td class="column1">Blood-Test</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="medicine" id="front">
+                <table>
+                  <thead>
+                    <tr class="table100-head">
+                      <th class="column1">Medicine</th>
+                      <th class="column2">Power</th>
+                      <th class="column3">Dosage</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="column1">Norflox</td>
+                      <td class="column2">300MG</td>
+                      <td class="column3">4 Times a Day</td>
+                    </tr>
+                    <tr>
+                      <td class="column1">Norflox</td>
+                      <td class="column2">300MG</td>
+                      <td class="column3">4 Times a Day</td>
+                    </tr>
+                    <tr>
+                      <td class="column1">Norflox</td>
+                      <td class="column2">300MG</td>
+                      <td class="column3">4 Times a Day</td>
+                    </tr> <tr>
+                      <td class="column1">Norflox</td>
+                      <td class="column2">300MG</td>
+                      <td class="column3">4 Times a Day</td>
+                    </tr> <tr>
+                      <td class="column1">Norflox</td>
+                      <td class="column2">300MG</td>
+                      <td class="column3">4 Times a Day</td>
+                    </tr> <tr>
+                      <td class="column1">Norflox</td>
+                      <td class="column2">300MG</td>
+                      <td class="column3">4 Times a Day</td>
+                    </tr> <tr>
+                      <td class="column1">Norflox</td>
+                      <td class="column2">300MG</td>
+                      <td class="column3">4 Times a Day</td>
+                    </tr> <tr>
+                      <td class="column1">Norflox</td>
+                      <td class="column2">300MG</td>
+                      <td class="column3">4 Times a Day</td>
+                    </tr> <tr>
+                      <td class="column1">Norflox</td>
+                      <td class="column2">300MG</td>
+                      <td class="column3">4 Times a Day</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="test">
+                <table>
+                  <thead>
+                    <tr class="table100-head">
+                      <th class="column1">Comments</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   
+                    <tr>
+                      <td class="column1">X-Ray</td>
+                    </tr>
+                    <tr>
+                      <td class="column1">CT-Scan</td>
+                    </tr>
+                    <tr>
+                      <td class="column1">Blood-Test</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr id="historyDivider">
+    </div>
 
     </div>
-   
-       <%-include("../../partials/footer"); -%>
-  </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <%-include("../../partials/footer"); -%>
+    
+</body>
 
 </html>
-
-<!--  
-<div>
-    <form id="form1" action="/start_call" method="POST">
-      <button type="submit">Start Appointment</button>
-    </form>
-  </div>
-
-  <div class="content">
-    <div class="contact1">
-      <div class="container-contact1">
-        <div class="contact1-pic js-tilt" data-tilt>
-          <img src="./css/img-01.png" alt="IMG" />
-        </div>
-
-        <form
-          class="contact1-form validate-form"
-          action="/sendEmail"
-          method="POST"
-        >
-          <span class="contact1-form-title">
-            <strong> Get in touch</strong>
-          </span>
-
-          <div
-            class="wrap-input1 validate-input"
-            data-validate="Name is required"
-          >
-            <input
-              class="input1"
-              type="text"
-              name="name"
-              placeholder="Name"
-              id="name"
-            />
-            <span class="shadow-input1"></span>
-          </div>
-
-          <div
-            class="wrap-input1 validate-input"
-            data-validate="Valid email is required: ex@abc.xyz"
-          >
-            <input
-              class="input1"
-              type="text"
-              name="email"
-              placeholder="Email"
-              id="email"
-            />
-            <span class="shadow-input1"></span>
-          </div>
-
-          <div
-            class="wrap-input1 validate-input"
-            data-validate="Subject is required"
-          >
-            <input
-              class="input1"
-              type="text"
-              name="subject"
-              placeholder="Subject"
-              id="subject"
-            />
-            <span class="shadow-input1"></span>
-          </div>
-
-          <div
-            class="wrap-input1 validate-input"
-            data-validate="Message is required"
-          >
-            <textarea
-              class="input1"
-              name="text"
-              placeholder="Message"
-              id="text"
-            ></textarea>
-            <span class="shadow-input1"></span>
-          </div>
-
-          <div class="container-contact1-form-btn">
-            <button class="contact1-form-btn" type="submit">
-              <span>
-                Send Email
-                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-              </span>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div> -->
