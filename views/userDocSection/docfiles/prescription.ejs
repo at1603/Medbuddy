@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="/stylesheets/prescriptionGenerator.css" />
+<link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/prescriptionGenerator.css" />
 <link rel="stylesheet" type="text/css" href="/stylesheets/section1.css" />
 <html>
   <%- include("../../partials/header"); -%>
@@ -14,25 +14,25 @@
             <p>
               <span>
                 Mr./Ms./Mrs.:
-                <input type="text" placeholder="Name" />
+                <a>  </a>  <!--<%= //rows.name %>-->
               </span>
             </p>
             <p>
               <span>
                 Age:
-                <input type="text" />
+                <a>  </a>  <!--<%= //rows.age %>-->
               </span>
             </p>
             <p>
               <span>
                 Address:
-                <input type="text" />
+                <a>  </a>  <!--<%= //rows.address %>-->
               </span>
             </p>
             <p>
               <span>
                 Contact:
-                <input type="text" />
+                <a> </a>  <!--<%= //rows.contact %>-->
               </span>
             </p>
           </div>
@@ -336,7 +336,7 @@
       </div>
     </div>
 
-    
+    <%-include("../../partials/footer"); -%>
     <script>
       function showPreview() {
         var comment = document.getElementById("comment").value;
@@ -354,6 +354,6 @@
         $(this).css("transform, rotateY(180deg)");
       });
     </script>
-     <%-include("../../partials/footer"); -%>
+    
   </body>
 </html>
