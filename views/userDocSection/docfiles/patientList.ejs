@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <%- include("../../partials/header"); -%>
+
+    <title>Page Title</title>
+  </head>
+ <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientList.css">
+ 
+  <link rel="stylesheet" type="text/css" href="/stylesheets/section1.css" />
+  <body>
+    <%-include("../../partials/Navbar"); -%>
+    <%-include("../../partials/Sidebar");-%>
+    <div class="content">
+        <div class="card">
+          <div id="patientList">
+          <table>
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">S.N</th>
+                <th class="column1">Patient Id</th>
+                <th class="column1">Name</th>
+                <th class="column7"></th>
+
+              </tr>
+            </thead>
+            <tbody id="front">
+              <tr>
+                <td class="column1">1</td>
+                <td class="column1">P1001</td>
+                <td class="column1">4 Times a Day</td>
+                <td class="column7"><a href="/userDocSection/patientList/patientInfo/:id"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
+
+              </tr>
+              <tr>
+                <td class="column1">2</td>
+                <td class="column1">P1002</td>
+                <td class="column1">4 Times a Day</td>
+                <td class="column7"><a href="/userDocSection/patientList/patientInfo/:id"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
+
+              </tr>
+              <tr>
+                <td class="column1">3</td>
+                <td class="column1">P1003</td>
+                <td class="column1">4 Times a Day</td>
+                <td class="column7"><a href="/userDocSection/patientList/patientInfo/:id"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+
+    </div>
+   
+       <%-include("../../partials/footer"); -%>
+  </body>
+
+</html>
+
+<!--  
+<div>
+    <form id="form1" action="/start_call" method="POST">
+      <button type="submit">Start Appointment</button>
+    </form>
+  </div>
+
+  <div class="content">
+    <div class="contact1">
+      <div class="container-contact1">
+        <div class="contact1-pic js-tilt" data-tilt>
+          <img src="./css/img-01.png" alt="IMG" />
+        </div>
+
+        <form
+          class="contact1-form validate-form"
+          action="/sendEmail"
+          method="POST"
+        >
+          <span class="contact1-form-title">
+            <strong> Get in touch</strong>
+          </span>
+
+          <div
+            class="wrap-input1 validate-input"
+            data-validate="Name is required"
+          >
+            <input
+              class="input1"
+              type="text"
+              name="name"
+              placeholder="Name"
+              id="name"
+            />
+            <span class="shadow-input1"></span>
+          </div>
+
+          <div
+            class="wrap-input1 validate-input"
+            data-validate="Valid email is required: ex@abc.xyz"
+          >
+            <input
+              class="input1"
+              type="text"
+              name="email"
+              placeholder="Email"
+              id="email"
+            />
+            <span class="shadow-input1"></span>
+          </div>
+
+          <div
+            class="wrap-input1 validate-input"
+            data-validate="Subject is required"
+          >
+            <input
+              class="input1"
+              type="text"
+              name="subject"
+              placeholder="Subject"
+              id="subject"
+            />
+            <span class="shadow-input1"></span>
+          </div>
+
+          <div
+            class="wrap-input1 validate-input"
+            data-validate="Message is required"
+          >
+            <textarea
+              class="input1"
+              name="text"
+              placeholder="Message"
+              id="text"
+            ></textarea>
+            <span class="shadow-input1"></span>
+          </div>
+
+          <div class="container-contact1-form-btn">
+            <button class="contact1-form-btn" type="submit">
+              <span>
+                Send Email
+                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div> -->
