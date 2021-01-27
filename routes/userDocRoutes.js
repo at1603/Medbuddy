@@ -8,8 +8,12 @@ router.get("/userDocSection/consultDoc", function (req, res) {
 ////+++////
 
 //Doctor routes
-router.get("/userDocSection/patientinfo/:id", function (req, res) {
-  res.render("userDocSection/docfiles/patientinfo");
+router.get("/userDocSection/patientList/:id", function (req, res) {
+  res.render("userDocSection/docfiles/patientList");
+});
+
+router.get("/userDocSection/patientList/patientInfo/:id", function (req, res) {
+  res.render("userDocSection/docfiles/patientInfo");
 });
 
 router.get("/userDocSection/reports/:id", function (req, res) {
@@ -33,7 +37,7 @@ router.post("/sendEmail", (req, res) => {
       if (err) {
         res.status(500).json({ message: "Internal Error" });
       } else {
-        res.redirect("/userDocSection/patientinfo");
+        res.redirect("/userDocSection/patientInfo");
         res.status({ message: "Email sent!!!" });
       }
     }
