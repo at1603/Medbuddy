@@ -1,34 +1,69 @@
-<%- include('../views/partials/header'); %>
-<%- include('../views/partials/navbar'); %>
-<%- include('../views/partials/sidebar'); %>
+<!DOCTYPE html>
+<html>
+  <%- include('../views/partials/header'); %>
 
+  <head>
+    <link rel="stylesheet" href="/stylesheets/videoCall.css" />
 
-  <script>
-    const ROOM_ID = "<%= roomId %>"
-  </script>
+    <title>Video Chat</title>
+  </head>
+  <body>
+    <%- include('../views/partials/navbar'); %> <%-
+    include('../views/partials/sidebar'); %>
+    <div class="content-block">
+      <div id="video-grid"></div>
+      <div class="callHandler">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+          <div class="container-fluid">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item" id="muteButton" onclick="muteUnmute()">
+                  <i class="fa fa-microphone" aria-hidden="true"></i>
+                </li>
+                <li class="nav-item" id="playPauseVideo" onclick="playStop()">
+                  <i class="fa fa-video-camera" aria-hidden="true"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="/userDocSection/patientList/patientInfo/:id">
+                    <i class="fa fa-phone-square" aria-hidden="true"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
 
-  <script defer src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
-  <script src="/socket.io/socket.io.js" defer></script>
-  <script src="/jsFiles/videoScript.js" defer></script>
-  <link rel="stylesheet" href="/stylesheets/videoCall.css">
-  
-  <title>Video Chat</title>
-</head>
-<body>
-  
-  <div class="card" id="video-grid"> </div>
- 
-</div>
-  <div id="btn">
-    <form action="/">
-    <button type="submit" class="btn btn-danger">Disconnect</button>
+      <div>
+        <input
+          type="button"
+          value="Invite"
+          onclick="submitForms();setval(1,ROOM_ID);"
+        />
+      </div>
+    </div>
+    <%- include('../views/partials/footer'); %>
+    <script>
+      const ROOM_ID = "<%= roomId %>";
+    </script>
 
-  </form>
-</div>
-<div>
-  <input type="button" value="Invite" onclick="submitForms();setval(1,ROOM_ID);" />
-</div>
-<script src="/jsFiles/activateVideoLink.js"></script>
-  <%- include('../views/partials/footer'); %>
-  
-
+    <script
+      defer
+      src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"
+    ></script>
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="/jsFiles/videoScript.js" defer></script>
+    <script src="/jsFiles/activateVideoLink.js"></script>
+  </body>
+</html>

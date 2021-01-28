@@ -2,11 +2,13 @@
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
     transition: 0.3s;
-    /* margin: 10%;
-    margin-top: 2%; */
     margin: auto;
     height: fit-content;
     width: fit-content;
+}
+
+.content-block {
+    margin-top: 5% !important;
 }
 
 #patientList {
