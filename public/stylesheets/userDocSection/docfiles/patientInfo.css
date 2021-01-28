@@ -33,6 +33,10 @@ p {
     width: 50%;
 }
 
+.content-block {
+    margin-top: 5% !important;
+}
+
 @font-face {
     font-family: OpenSans-Regular;
     src: url('../fonts/OpenSans/OpenSans-Regular.ttf');
