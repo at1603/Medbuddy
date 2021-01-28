@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <%- include("../../partials/header"); -%>
+
+    <title>Page Title</title>
+  </head>
+ <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientList.css">
+ 
+  <link rel="stylesheet" type="text/css" href="/stylesheets/section1.css" />
+  <body>
+    <%-include("../../partials/Navbar"); -%>
+    <%-include("../../partials/Sidebar");-%>
+    <div class="content">
+        <div class="card">
+          <div id="patientList">
+          <table>
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">S.N</th>
+                <th class="column1">Patient Id</th>
+                <th class="column1">Name</th>
+                <th class="column7"></th>
+
+              </tr>
+            </thead>
+            <tbody id="front">
+              <tr>
+                <td class="column1">1</td>
+                <td class="column1">P1001</td>
+                <td class="column1">4 Times a Day</td>
+                <td class="column7"><a href="/userDocSection/patientList/patientInfo/:id"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
+
+              </tr>
+              <tr>
+                <td class="column1">2</td>
+                <td class="column1">P1002</td>
+                <td class="column1">4 Times a Day</td>
+                <td class="column7"><a href="/userDocSection/patientList/patientInfo/:id"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
+
+              </tr>
+              <tr>
+                <td class="column1">3</td>
+                <td class="column1">P1003</td>
+                <td class="column1">4 Times a Day</td>
+                <td class="column7"><a href="/userDocSection/patientList/patientInfo/:id"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+
+    </div>
+   
+       <%-include("../../partials/footer"); -%>
+  </body>
+
+</html>
+

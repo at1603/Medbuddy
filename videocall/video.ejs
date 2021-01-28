@@ -1,4 +1,7 @@
 <%- include('../views/partials/header'); %>
+<%- include('../views/partials/navbar'); %>
+<%- include('../views/partials/sidebar'); %>
+
 
   <script>
     const ROOM_ID = "<%= roomId %>"
@@ -6,14 +9,16 @@
 
   <script defer src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
   <script src="/socket.io/socket.io.js" defer></script>
-  <script src="/videoScript.js" defer></script>
+  <script src="/jsFiles/videoScript.js" defer></script>
   <link rel="stylesheet" href="/stylesheets/videoCall.css">
   
   <title>Video Chat</title>
 </head>
 <body>
-  <div id="video-grid"> 
-  </div>
+  
+  <div class="card" id="video-grid"> </div>
+ 
+</div>
   <div id="btn">
     <form action="/">
     <button type="submit" class="btn btn-danger">Disconnect</button>
@@ -23,7 +28,7 @@
 <div>
   <input type="button" value="Invite" onclick="submitForms();setval(1,ROOM_ID);" />
 </div>
-<script src="/activateVideoLink.js"></script>
+<script src="/jsFiles/activateVideoLink.js"></script>
   <%- include('../views/partials/footer'); %>
   
 
