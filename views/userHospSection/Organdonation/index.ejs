@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("../../partials/header"); -%>
+    <link rel="stylesheet" href="/stylesheets/partials/navbar.css">
+
+    <style>
+        .row{
+            margin-top: 8rem ;
+        }
+
+        .show{
+            display: block;
+        }
+    </style>
+
+</head>
+<body>
+    <%- include("../../partials/Navbar"); -%>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                    <strong>Sections</strong>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item" onclick="showLiverPage()">Liver</li>
+                    <li class="list-group-item" onclick="showKidneyPage()">Kidney</li>
+                    <li class="list-group-item" onclick="showHeartPage()">Heart</li>
+                    <li class="list-group-item" onclick="showEyesPage()">Eyes</li>
+                    <li class="list-group-item" onclick="showIntestinePage()">Intestines</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h1>Form space</h1>
+                <div>
+                    <div action="#" class="liverForm" id="liverForm">
+                        <button class="btn btn-xs btn-outline-primary">Search for Liver</button>
+                        <button class="btn btn-xs btn-outline-success" onclick=showLiverForm()>Register to donate Liver</button>
+                    </div>
+                    <div action="#" class="kidneyForm" id="kidneyForm">
+                        <button class="btn btn-xs btn-outline-primary">Search for Kidney</button>
+                        <button class="btn btn-xs btn-outline-success" onclick="showKidneyForm()">Register to donate Kidney</button>
+                    </div>
+                    <div action="#" class="heartForm" id="heartForm">
+                        <button class="btn btn-xs btn-outline-primary">Search for Heart</button>
+                        <button class="btn btn-xs btn-outline-success" onclick="showHeartForm()">Register to donate Heart</button>
+                    </div>
+                    <div action="#" class="eyesForm" id="eyesForm">
+                        <button class="btn btn-xs btn-outline-primary">Search for Eyes</button>
+                        <button class="btn btn-xs btn-outline-success" onclick="showEyesForm()">Register to donate Eyes</button>
+                    </div>
+                    <div action="#" class="intestineForm" id="intestineForm">
+                        <button class="btn btn-xs btn-outline-primary">Search for Intestines</button>
+                        <button class="btn btn-xs btn-outline-success" onclick="showIntestineForm()">Register to donate Intestines</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showLiverForm() {
+            document.getElementById("liverForm").classList.toggle("show");
+            var elem = document.getElementById("liverForm");
+            if (elem.innerHTML=="Register to donate Liver") elem.innerHTML = "Close Form";
+            else elem.innerHTML = "Register to donate Liver";
+        };
+        function showKidneyForm() {
+            document.getElementById("kidneyForm").classList.toggle("show");
+            var elem = document.getElementById("registerBtn");
+            if (elem.innerHTML=="Register to donate Kidney") elem.innerHTML = "Close Form";
+            else elem.innerHTML = "Register to donate Kidney";
+        };
+        function showHeartForm() {
+            document.getElementById("heartForm").classList.toggle("show");
+            var elem = document.getElementById("registerBtn");
+            if (elem.innerHTML=="Register to donate Heart") elem.innerHTML = "Close Form";
+            else elem.innerHTML = "Register to donate Heart";
+        };
+        function showEyesForm() {
+            document.getElementById("eyesForm").classList.toggle("show");
+            var elem = document.getElementById("registerBtn");
+            if (elem.innerHTML=="Register to donate Eyes") elem.innerHTML = "Close Form";
+            else elem.innerHTML = "Register to donate Eyes";
+        };
+        function showIntestineForm() {
+            document.getElementById("intentineForm").classList.toggle("show");
+            var elem = document.getElementById("registerBtn");
+            if (elem.innerHTML=="Register to donate Intestines") elem.innerHTML = "Close Form";
+            else elem.innerHTML = "Register to donate Intestines";
+        };
+    </script>
+
+    <%- include("../../partials/footer"); -%>  
+</body>
+</html>
