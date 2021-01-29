@@ -3,30 +3,7 @@
 <head>
     <%- include("../../partials/header"); -%>
     <link rel="stylesheet" href="/stylesheets/partials/navbar.css">
-
-    <style>
-        .row{
-            margin-top: 8rem ;
-        }
-
-        .liverForm, .kidneyForm, .heartForm, .eyesForm, .intestineForm {
-            display: none;
-        }
-        .liverPage, .kidneyPage, .heartPage, .eyesPage, .intestinePage {
-            display: none;
-        }
-
-        #liverSearch {
-            display: none;
-        }
-
-        .showPage{
-            display: block;
-        }
-        .show{
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="/stylesheets/userHospSection/organDonation/organDonation.css">
 
 </head>
 <body>
@@ -65,10 +42,10 @@
                     <div action="#" class="liverPage">
                         <h3>Liver Donation</h3>
                         <button class="btn btn-xs btn-outline-primary" id="liverSearchBtn">Search for Liver Donor</button>
-                        <button class="btn btn-xs btn-outline-success" onclick=showLiverForm() id="registerBtn">Register to donate Liver</button>
+                        <button class="btn btn-xs btn-outline-success" onclick=showLiverForm() id="liverRegisterBtn">Register to donate Liver</button>
                         <div id="liverSearch">
-                        <p>Search By your city</p>
-                            <form action="#">
+                            <form action="#" class="shadow p-3 mb-5 bg-white rounded">
+                                <h3 style="text-align: center;">Search By your city</h3>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="firstName">State:</label>
@@ -81,7 +58,8 @@
                                 </div>
                             </form>
                         </div>
-                        <form action="#" id="liverForm" class="liverForm">
+                        <form action="#" id="liverForm" class="liverForm shadow p-3 mb-5 bg-white rounded">
+                            <h3 style="text-align: center;">Liver Donation Form</h3>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>
@@ -126,9 +104,25 @@
                     </div>
                     <div action="#" class="kidneyPage">
                         <h3>Kidney Donation</h3>
-                        <button class="btn btn-xs btn-outline-primary">Search for Kidney Donor</button>
-                        <button class="btn btn-xs btn-outline-success" onclick="showKidneyForm()">Register to donate Kidney</button>
-                        <form action="#" id="kidneyForm" class="kidneyForm">
+                        <button class="btn btn-xs btn-outline-primary" id="kidneySearchBtn">Search for Kidney Donor</button>
+                        <button class="btn btn-xs btn-outline-success" onclick="showKidneyForm()" id="kidneyRegisterBtn">Register to donate Kidney</button>
+                        <div id="kidneySearch">
+                            <form action="#" class="shadow p-3 mb-5 bg-white rounded">
+                                <h3 style="text-align: center;">Search By your city</h3>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="firstName">State:</label>
+                                        <input type="text" class="form-control" name="state" placeholder="State Name">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="firstName">City:</label>
+                                        <input type="text" class="form-control" name="city" placeholder="City Name">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <form action="#" id="kidneyForm" class="kidneyForm shadow p-3 mb-5 bg-white rounded">
+                            <h3 style="text-align: center;">Kidney Donation Form</h3>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>
@@ -173,9 +167,25 @@
                     </div>
                     <div class="heartPage">
                         <h3>Heart Donation</h3>
-                        <button class="btn btn-xs btn-outline-primary">Search for Heart Donor</button>
-                        <button class="btn btn-xs btn-outline-success" onclick="showHeartForm()">Register to donate Heart</button>
-                        <form action="#" id="heartForm" class="heartForm">
+                        <button class="btn btn-xs btn-outline-primary" id="heartSearchBtn">Search for Heart Donor</button>
+                        <button class="btn btn-xs btn-outline-success" onclick="showHeartForm()" id="heartRegisterBtn">Register to donate Heart</button>
+                        <div id="heartSearch">
+                            <form action="#" class="shadow p-3 mb-5 bg-white rounded">
+                                <h3 style="text-align: center;">Search By your city</h3>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="firstName">State:</label>
+                                        <input type="text" class="form-control" name="state" placeholder="State Name">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="firstName">City:</label>
+                                        <input type="text" class="form-control" name="city" placeholder="City Name">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <form action="#" id="heartForm" class="heartForm shadow p-3 mb-5 bg-white rounded">
+                            <h3 style="text-align: center;">Heart Donation Form</h3>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>
@@ -220,9 +230,25 @@
                     </div>
                     <div action="#" class="eyesPage">
                         <h3>Eyes Donation</h3>
-                        <button class="btn btn-xs btn-outline-primary">Search for Eyes Donor</button>
-                        <button class="btn btn-xs btn-outline-success" onclick="showEyesForm()">Register to donate Eyes</button>
-                        <form action="#" id="eyesForm" class="eyesForm">
+                        <button class="btn btn-xs btn-outline-primary" id="eyesSearchBtn">Search for Eyes Donor</button>
+                        <button class="btn btn-xs btn-outline-success" onclick="showEyesForm()" id="eyesRegisterBtn">Register to donate Eyes</button>
+                        <div id="eyesSearch">
+                            <form action="#" class="shadow p-3 mb-5 bg-white rounded">
+                                <h3 style="text-align: center;">Search By your city</h3>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="firstName">State:</label>
+                                        <input type="text" class="form-control" name="state" placeholder="State Name">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="firstName">City:</label>
+                                        <input type="text" class="form-control" name="city" placeholder="City Name">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <form action="#" id="eyesForm" class="eyesForm shadow p-3 mb-5 bg-white rounded">
+                            <h3 style="text-align: center;">Eyes Donation Form</h3>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>
@@ -267,9 +293,25 @@
                     </div>
                     <div action="#" class="intestinePage">
                         <h3>Intestine Donation</h3>
-                        <button class="btn btn-xs btn-outline-primary">Search for Intestines Donor</button>
-                        <button class="btn btn-xs btn-outline-success" onclick="showIntestineForm()">Register to donate Intestines</button>
-                        <form action="#" id="intestineForm" class="intestineForm">
+                        <button class="btn btn-xs btn-outline-primary" id="intestineSearchBtn">Search for Intestines Donor</button>
+                        <button class="btn btn-xs btn-outline-success" onclick="showIntestineForm()" id="intestineRegisterBtn">Register to donate Intestines</button>
+                        <div id="intestineSearch">
+                            <form action="#" class="shadow p-3 mb-5 bg-white rounded">
+                                <h3 style="text-align: center;">Search By your city</h3>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="firstName">State:</label>
+                                        <input type="text" class="form-control" name="state" placeholder="State Name">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="firstName">City:</label>
+                                        <input type="text" class="form-control" name="city" placeholder="City Name">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <form action="#" id="intestineForm" class="intestineForm shadow p-3 mb-5 bg-white rounded">
+                            <h3 style="text-align: center;">Intestine Donation Form</h3>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>
@@ -317,95 +359,9 @@
         </div>
     </div>
 
-    <script>
-        $("#introPage").on('click', function() {
-            $(".liverPage, .kidneyPage, .heartPage, .eyesPage, .intestinePage").hide();
-            $(".introPage").fadeIn();
-        });
-
-        $("#liverPage").on('click', function() {
-            $("#kidneyPage, #heartPage, #eyesPage, #intestinePage").css({'font-weight': 'normal', 'font-style': 'none'});
-            $('#liverPage').css({'font-weight': 'bold', 'font-style': 'italic'});
-            $(".introPage, .kidneyPage, .heartPage, .eyesPage, .intestinePage").hide();
-            $(".liverPage").fadeIn();
-        });
-
-        $("#kidneyPage").on('click', function() {
-            $("#liverPage, #heartPage, #eyesPage, #intestinePage").css({'font-weight': 'normal', 'font-style': 'none'});
-            $('#kidneyPage').css({'font-weight': 'bold', 'font-style': 'italic'});
-            $(".introPage, .liverPage, .heartPage, .eyesPage, .intestinePage").hide();
-            $(".kidneyPage").fadeIn();
-        });
-
-        $("#heartPage").on('click', function() {
-            $("#liverPage, #kidneyPage, #eyesPage, #intestinePage").css({'font-weight': 'normal', 'font-style': 'none'});
-            $('#heartPage').css({'font-weight': 'bold', 'font-style': 'italic'});
-            $(".introPage, .liverPage, .kidneyPage, .eyesPage, .intestinePage").hide();
-            $(".heartPage").fadeIn();
-        });
-
-        $("#eyesPage").on('click', function() {
-            $("#liverPage, #kidneyPage, #heartPage, #intestinePage").css({'font-weight': 'normal', 'font-style': 'none'});
-            $('#eyesPage').css({'font-weight': 'bold', 'font-style': 'italic'});
-            $(".introPage, .liverPage, .kidneyPage, .heartPage, .intestinePage").hide();
-            $(".eyesPage").fadeIn();
-        });
-
-        $("#intestinePage").on('click', function() {
-            $("#liverPage, #kidneyPage, #heartPage, #eyesPage").css({'font-weight': 'normal', 'font-style': 'none'});
-            $('#intestinePage').css({'font-weight': 'bold', 'font-style': 'italic'});
-            $(".introPage, .liverPage, .kidneyPage, .heartPage, .eyesPage").hide();
-            $(".intestinePage").fadeIn();
-        });
-
-        // ----------register of donnation scripts============
-        function showLiverForm() {
-            $("#liverSearch").hide();
-            document.getElementById("liverForm").classList.toggle("show");
-            var elem = document.getElementById("registerBtn");
-            if (elem.innerHTML=="Register to donate Liver") elem.innerHTML = "Form is open. Fill Details";
-            else elem.innerHTML = "Register to donate Liver";
-            if( document.getElementById("registerBtn").className == "btn btn-xs btn-success")
-                document.getElementById("registerBtn").className = "btn btn-xs btn-outline-success";
-            else
-                {
-                    document.getElementById("registerBtn").className = "btn btn-xs btn-success";
-                }
-        };
-        function showKidneyForm() {
-            document.getElementById("kidneyForm").classList.toggle("show");
-            var elem = document.getElementById("registerBtn");
-            if (elem.innerHTML=="Register to donate Kidney") elem.innerHTML = "Form is open. Fill Details";
-            else elem.innerHTML = "Register to donate Kidney";
-        };
-        function showHeartForm() {
-            document.getElementById("heartForm").classList.toggle("show");
-            var elem = document.getElementById("registerBtn");
-            if (elem.innerHTML=="Register to donate Heart") elem.innerHTML = "Form is open. Fill Details";
-            else elem.innerHTML = "Register to donate Heart";
-        };
-        function showEyesForm() {
-            document.getElementById("eyesForm").classList.toggle("show");
-            var elem = document.getElementById("registerBtn");
-            if (elem.innerHTML=="Register to donate Eyes") elem.innerHTML = "Form is open. Fill Details";
-            else elem.innerHTML = "Register to donate Eyes";
-        };
-        function showIntestineForm() {
-            document.getElementById("intentineForm").classList.toggle("show");
-            var elem = document.getElementById("registerBtn");
-            if (elem.innerHTML=="Register to donate Intestines") elem.innerHTML = "Form is open. Fill Details";
-            else elem.innerHTML = "Register to donate Intestines";
-        };
-
-        // ------------------------------------------------
-
-        // ----------------search for donor scripts-----------------
-
-        $("#liverSearchBtn").on('click', function(){
-            $("#liverSearch").show();
-        });
-    </script>
-
     <%- include("../../partials/footer"); -%>
+
+    <script src="/jsFiles/viewJS/userHospJS/organDonation.js"></script>
+    
 </body>
 </html>
