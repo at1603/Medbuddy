@@ -1,8 +1,6 @@
 var mongoose = require("mongoose");
 
 var hospMngSchema = new mongoose.Schema({
-    bBankCap: Number,  //Blood bank capacity
-    bBankCurrent: Number,
     oxyCap: Number,
     oxyCur: Number,
     AmbCap: Number, //Ambulance capacity
@@ -11,11 +9,11 @@ var hospMngSchema = new mongoose.Schema({
     partOf: {
         id:{
             type:mongoose.Schema.Types.ObjectId,
-            ref:"Hospitals"
+            ref:"Hospital"
         },
         name:String
     },
     
 });
 
-module.exports = mongoose.model("hospManagement", hospMngSchema);
+module.exports = mongoose.model("HospManagement", hospMngSchema);
