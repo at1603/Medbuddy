@@ -1,0 +1,25 @@
+.row{
+    margin-top: 8rem ;
+}
+
+ul, li {
+    cursor: pointer;
+}
+
+.liverForm, .kidneyForm, .heartForm, .eyesForm, .intestineForm {
+    display: none;
+}
+.liverPage, .kidneyPage, .heartPage, .eyesPage, .intestinePage {
+    display: none;
+}
+
+#liverSearch, #kidneySearch, #heartSearch, #eyesSearch, #intestineSearch {
+    display: none;
+}
+
+.showPage{
+    display: block;
+}
+.show{
+    display: block;
+}
