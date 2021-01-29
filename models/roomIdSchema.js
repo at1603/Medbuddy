@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 
 var roomIdSchema = new mongoose.Schema({
 
-    roomId:String
+    roomId:{type: String, default: null}
 
 });
 
