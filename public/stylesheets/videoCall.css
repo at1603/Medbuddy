@@ -1,22 +1,28 @@
 #video-grid {
   position: relative;
-  top: 50%;
   margin: auto;
   width: 50%;
-  border: 3px solid black;
   padding: 10px;
-  -webkit-transform: translateY(-50%);
+  /* -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+  transform: translateY(-50%); */
   margin-top: 250px;
+}
+
+a {
+  color: inherit;
 }
 
 video {
   width: 50%;
   height: 50%;
   object-fit: cover;
-  border: 3px solid black;
   padding: 10px;
+  border: 2px solid #e7e7e7;
+  border-radius: 4px;
+  padding: .5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
+  transition: 0.3s;
 }
 
 #btn {
@@ -28,12 +34,17 @@ video {
   transform: translateY(-20%);
 }
 
-body {
-  background-color: black;
+.content-block {
+  position: relative;
+  bottom: 15%;
 }
 
-.card {
-  border: 2px solid #e7e7e7;
-  border-radius: 4px;
-  padding: .5rem;
+.callHandler {
+  margin: auto;
+  width: fit-content;
+}
+
+li {
+  padding: 16px;
+  font-size: 44px;
 }
