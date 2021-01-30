@@ -6,12 +6,12 @@
   <%- include("../../partials/header"); -%>
   
 
-  <body>
-    <%-include("../../partials/Navbar"); -%>
-    <%-include("../../partials/Sidebar");-%>
+  <body id="body-pd">
+    <%-include("../../partials/altNavbar"); -%>
+    <%-include("../../partials/altSidebar");-%>
       <div class="content-block">
-        <div class="non-preview-area">
-          <div class="patInfo-non-preview">
+        <div class="non-preview-area ">
+          <div class="patInfo-non-preview card">
             <p>
               <span>
                 Mr./Ms./Mrs.:
@@ -37,7 +37,8 @@
               </span>
             </p>
           </div>
-          <div>
+          <div class="card">
+          <div id= "form1" >
             <form action="">
               <div class="form-row">
                 <div class="form-group col-md-4">
@@ -51,7 +52,7 @@
                   </select>
                 </div>
                 <div class="form-group col-md-2">
-                  <label for="dosage-amount">Choose Dosage</label>
+                  <label for="dosage-amount">Dosage</label>
 
                   <select
                     name="dosage-amount"
@@ -80,13 +81,13 @@
                     <option value="month">month</option>
                   </select>
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-2" id="btn1">
                   <button type="button" class="btn btn-success">Add</button>
                 </div>
               </div>
             </form>
           </div>
-          <div>
+          <div id="form2">
             <form action="">
               <div class="form-row">
                 <div class="form-group col-md-9">
@@ -100,13 +101,14 @@
                   </select>
                 </div>
 
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-2" id="btn2">
                   <button type="button" class="btn btn-success">Add</button>
                 </div>
               </div>
             </form>
           </div>
-
+        </div>
+        <div class="card" id="code-area">
           <div class="code-area">
             <textarea
               id="comment"
@@ -115,12 +117,13 @@
             ></textarea>
           </div>
         </div>
+      </div>
         <div class="preview-area">
           <div class="card-outer">
             <br />
             <br />
             <br />
-            <div class="header">
+            <div class="headerPrescription">
               <div class="text">
                 <h1>MedBuddy</h1>
               </div>
@@ -355,6 +358,7 @@
         $(this).css("transform, rotateY(180deg)");
       });
     </script>
-    
+      <script src="/jsFiles/navbar.js"></script>
+
   </body>
 </html>
