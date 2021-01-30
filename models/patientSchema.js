@@ -11,7 +11,18 @@ var patientSchema = new mongoose.Schema({
      prescription: [String],
      curDoc:[String],   //Currently appointed doctors.
      disease: [String],
-     appointmentId: String,
+     appointment: [
+         {
+            docId: {
+               type: mongoose.Schema.Types.ObjectId,
+               ref: "Doctor"
+            },
+            appointId: {
+               type: mongoose.mongoose.Schema.Types.ObjectId,
+               ref: "Appointment"
+            }
+         }
+      ],
 });
 
-module.exports = mongoose.model("Hospitals", patientSchema);
+module.exports = mongoose.model("Patient", patientSchema);
