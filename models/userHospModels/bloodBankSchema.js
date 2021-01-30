@@ -8,8 +8,11 @@ let bloodBankSchema = new mongoose.Schema({
         state: String
     },
     relatedTo: {
-        type: String,
-        default: 'true'
+        hospId: {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Hospital"
+        },
+        default:null
     },
     maxcapacity: Number,
     currcapacity: {
@@ -28,4 +31,4 @@ let bloodBankSchema = new mongoose.Schema({
     price: Number
 });
 
-module.exports = mongoose.model("bloodBank", bloodBankSchema);
+module.exports = mongoose.model("BloodBank", bloodBankSchema);

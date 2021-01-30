@@ -21,4 +21,4 @@ var docSchema = new mongoose.Schema({
      }
 });
 
-module.exports = mongoose.model("doctor", docSchema);
+module.exports = mongoose.model("Doctor", docSchema);

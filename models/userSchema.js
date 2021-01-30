@@ -9,13 +9,15 @@ var userSchema = new mongoose.Schema({
    phone:String,
    email:String,
    avatar:String,
+   address: {
+       street: String,
+       city: String,
+       state: String,
+       zip:String,
+   },
    address:String,
-   state: String,
-   city: String,
-   zip:String,
    role:String,
    gender:String,
-   roomId : {type:String, default:null},
    joinedAt:{type:Date, default:Date.now},
    isAdmin: {type: Boolean, default: false}
 });
