@@ -8,24 +8,12 @@
 
   <%- include("../partials/Navbar"); -%>
   <div class="login-wrapper">
-    <div class="header-text">Login Here</div>
-    <input type="text" placeholder="Your E-mail address">
-    <input type="text" placeholder="password">
-    <input 
-      type="checkbox" 
-      name="" 
-      id="terms" 
-      required 
-      style="
-        display: inline-block; 
-        margin: 0 4px;
-        padding: 0;
-        width: 1rem;"
-    >
-    <p style="display: inline-block;">Agree with <a href="#"> Terms & Conditions</a></p>
-    <button>login</button>
+    <form action="/userLogin" method="POST">
+      <div class="header-text">Login Here</div>
+      <input type="text" name="username" placeholder="username">
+      <input type="password" name="password" placeholder="password">
+      <button>login</button>
+    </form>
   </div>
-
 </body>
-
 </html>
