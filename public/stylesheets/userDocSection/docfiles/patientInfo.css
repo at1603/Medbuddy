@@ -233,6 +233,7 @@ tbody tr:hover {
 .column1 {
     width: fit-content;
     padding-left: 10px;
+    text-align: center;
 }
 
 .column2 {
@@ -319,6 +320,7 @@ thead, tbody tr {
     margin: auto;
     border-top: 2px solid black;
     padding: inherit;
+    margin-left: -13px;
     margin-top: 26px;
 }
 
@@ -352,4 +354,14 @@ tbody::-webkit-scrollbar-thumb {
 .callBtn {
     margin: auto;
     margin-left: 53%;
+}
+
+.col1 {
+    width: 30%;
+    padding: 10px;
+}
+
+.col2 {
+    width: 36.66%;
+    padding: 10px;
 }

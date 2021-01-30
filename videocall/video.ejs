@@ -7,10 +7,11 @@
 
     <title>Video Chat</title>
   </head>
-  <body>
-    <%- include('../views/partials/navbar'); %> <%-
-    include('../views/partials/sidebar'); %>
-    <div class="content-block">
+
+  <body id="body-pd">
+    <%- include('../views/partials/altNavbar'); %> <%-
+    include('../views/partials/altSidebar'); %>
+    <div class="card">
       <div id="video-grid"></div>
       <div class="callHandler">
         <nav class="navbar navbar-expand-sm navbar-light bg-light">
@@ -66,4 +67,5 @@
     <script src="/jsFiles/videoScript.js" defer></script>
     <script src="/jsFiles/activateVideoLink.js"></script>
   </body>
+  <script src="/jsFiles/navbar.js"></script>
 </html>
