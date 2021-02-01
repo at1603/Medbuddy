@@ -1,2 +1,87 @@
-<%- include("../partials/header"); -%> <%- include("../partials/Navbar"); -%>
-<%- include("../partials/Sidebar"); -%> <%- include("../partials/footer"); -%>
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include("../partials/header"); -%>
+    <link rel="stylesheet" href="/stylesheets/partials/navbar.css">
+
+<body>
+    <style>
+        .row{
+            margin: 8rem auto 2em;
+            width: 80%;
+            justify-content: space-evenly;
+        }
+    </style>
+
+    <%- include("../partials/Navbar"); -%>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card" style="width: 15rem;">
+                <img src="https://images.unsplash.com/photo-1536856136534-bb679c52a9aa?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Ymxvb2QlMjBkb25hdGlvbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><strong>Blood Banks</strong></h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Cras justo odio</li>
+                </ul>
+                <div class="card-body">
+                  <a href="/hospHospSection/bloodBanks" class="card-link btn btn-outline-success btn-xs">Open</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card" style="width: 15rem;">
+                <img src="https://images.unsplash.com/photo-1592781959774-4f2498f581d7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aGVhcnQlMjBkb25hdGlvbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><strong>Organ Vault</strong></h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Cras justo odio</li>
+                  <li class="list-group-item">Dapibus ac facilisis in</li>
+                </ul>
+                <div class="card-body">
+                  <a href="/hospHospSection/organVault" class="card-link btn btn-outline-success btn-xs">Open</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card" style="width: 15rem;">
+                <img src="https://www.unicef.org/innovation/sites/unicef.org.innovation/files/styles/hero_desktop/public/UNI41215_3.jpg?itok=EelDHJuv" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><strong>Oxygen Bank</strong></h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Cras justo odio</li>
+                  <li class="list-group-item">Dapibus ac facilisis in</li>
+                </ul>
+                <div class="card-body">
+                  <a href="/hospHospSection/oxygenBank" class="card-link btn btn-outline-success btn-xs">Open</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card" style="width: 15rem;">
+                <img src="https://media.istockphoto.com/photos/motion-blur-ambulance-united-states-picture-id1133586898?k=6&m=1133586898&s=612x612&w=0&h=P-eE88-UwqTYCR-B5XjpxuhR4HGDfr5YDlsvvbwUiH4=" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><strong>Ambulance</strong></h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Cras justo odio</li>
+                  <li class="list-group-item">Dapibus ac facilisis in</li>
+                </ul>
+                <div class="card-body">
+                  <a href="/hospHospSection/ambulance" class="card-link btn btn-outline-success btn-xs">Open</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../partials/footer"); -%>
+</body>
+</html>
