@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var hospitalManagement = require("../models/hospMngSchema");
 
 router.get("/hospHospSection/initialPage", function(req, res) {
     res.render("hospHospSection/index");
@@ -51,7 +52,13 @@ router.get("/hospHospSection/organVault", function(req, res) {
 });
 
 router.get("/hospHospSection/oxygenBank", function(req, res) {
-    res.render("hospHospSection/Oxygenbank/index")
+    hospitalManagement.find({}, function(err, allHospitals) {
+        if (err)
+            console.log(err);
+        else
+            res.render("hospHospSection/Oxygenbank/index", { hospitals: allHospitals });
+    });
+
 });
 
 router.get("/hospHospSection/ambulance", function(req, res) {
