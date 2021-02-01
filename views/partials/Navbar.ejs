@@ -14,8 +14,11 @@
     }
   }
 
-  function navDropdown() {
-    document.getElementById("myDropdown").classList.toggle("show");
+  function navDropdown1() {
+    document.getElementById("services").classList.toggle("show");
+  }
+  function navDropdown2() {
+    document.getElementById("afterLogin").classList.toggle("show");
   }
 
   window.onclick = function (e) {
@@ -36,11 +39,11 @@
   </div>
   <!-- <div class="pr-2 nav-items"> -->
   <div class="dropdown nav-items">
-    <button class="dropbtn" onclick="navDropdown()" style="line-height: 0.7">
+    <button class="dropbtn" onclick="navDropdown1()" style="line-height: 0.7">
       Services
       <i class="fa fa-caret-down"></i>
     </button>
-    <div class="dropdown-content" id="myDropdown">
+    <div class="dropdown-content" id="services">
       <a href="#">Search Hospitals</a>
       <a href="#">Know about Medicines</a>
       <a href="#">Miscellaneous</a>
@@ -56,17 +59,28 @@
   <div class="pr-2 nav-items nav-links">
     <a href="#">Explore</a>
   </div>
-  <div class="pr-2 bd-highlight nav-items" style="margin-left: auto">
-    <a href="#">SignUp</a>
-    <!-- <a href="#">Login</a> -->
-  </div>
-  <div class="pr-2 bd-highlight nav-items">
-    <!-- <span><a class="p-3" href="#">SignUp</a></span> -->
-    <a href="/userLogin">Login</a>
-  </div>
-  <div class="pr-2 bd-highlight nav-ham" id="topNav">
-    <a href="javascript:void(0);" class="icon" onclick="responsiveFunc()">
-      <i class="fa fa-bars"></i>
-    </a>
-  </div>
+  <% if(!currentUser){ %>
+    <div class="pr-2 bd-highlight nav-items" style="margin-left: auto">
+      <a href="/register">SignUp</a>
+    </div>
+    <div class="pr-2 bd-highlight nav-items">
+      <a href="/userLogin">Login</a>
+    </div>
+    <div class="pr-2 bd-highlight nav-ham" id="topNav">
+      <a href="javascript:void(0);" class="icon" onclick="responsiveFunc()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  <% } else { %>
+    <div class="dropdown nav-items" style="margin-left:auto">
+      <button class="dropbtn" onclick="navDropdown2()" style="line-height: 0.5;">
+        Signed In As <%=currentUser.username%><%if(currentUser.isAdmin){%>(admin)<% }%>
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content" id="afterLogin">
+        <a href="#">Search Hospitals</a>
+        <a href="/logout">Log Out</a>
+      </div>
+    </div>
+  <% } %>
 </div>
