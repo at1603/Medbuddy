@@ -13,6 +13,10 @@ router.get("/hospHospSection/organVault", function(req, res) {
     res.render("hospHospSection/Organvault/index")
 });
 
+router.get("/hospHospSection/oxygenBank", function(req, res) {
+    res.render("hospHospSection/Oxygenbank/index")
+});
+
 router.get("/hospHospSection/ambulance", function(req, res) {
     res.render("hospHospSection/Ambulance/index")
 });
