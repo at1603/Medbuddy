@@ -43,7 +43,7 @@ video {
   bottom: 210px;
 }
 
-li {
+.callHandler li {
   padding: 16px;
   font-size: 44px;
 }
@@ -56,4 +56,22 @@ li {
   margin: auto;
   height: 95%;
   width: 90%;
+}
+
+#outerBody {
+  background-color: black
+}
+
+body {
+  background-color: black;
+}
+
+.video-grid>video:nth-child(1) {
+  width: 30%;
+  height: 30%;
+  float: right;
+  position: relative;
+  bottom: -430px;
+  margin-right: 10px;
+  z-index: 1;
 }
