@@ -8,11 +8,9 @@ let bloodBankSchema = new mongoose.Schema({
         state: String
     },
     relatedTo: {
-        hospId: {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Hospital"
-        },
-        default:null
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Hospital",
+        default: null
     },
     maxcapacity: Number,
     currcapacity: {

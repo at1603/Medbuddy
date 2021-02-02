@@ -1,0 +1,56 @@
+.signup-wrapper{
+  background-color: rgba(0,0,0,0.5);
+  margin: 8rem auto;
+  padding: 40px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 550px;
+  color: #fff;
+}
+
+.signup-wrapper ::before{
+  background-image: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1470&q=80');
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  display: block;
+  filter: blur(6px);
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+#goToSetup{
+  margin-bottom: 1rem;
+}
+#setupInfo{
+  display: none;
+}
+
+#personalInfo{
+  display: inline-flexbox;
+}
+
+#submit{
+  display:none;
+}
+
+hr { display: block; height: 1px;
+  border: 0; border-top: 1px solid #ccc;
+  margin: 1em 0; padding: 0; }

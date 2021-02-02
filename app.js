@@ -28,7 +28,9 @@ app.use(express.static(path.join(__dirname + "/public")));
 var indexRoutes = require('./routes/indexRoutes.js'),
     authRoutes = require('./routes/authRoutes'),
     userDocRoutes = require('./routes/userDocRoutes'),
-    userHospRoutes = require('./routes/userHospRoutes'),
+    userHospIndexRoutes = require('./routes/userHospRoutes/indexRoutes'),
+    bloodBankRoutes = require('./routes/userHospRoutes/bloodBankRoutes'),
+    organDonationRoutes = require('./routes/userHospRoutes/organDonationRoutes'),
     hospHospRoutes = require('./routes/hospHospRoutes'),
     miscRoutes = require('./routes/miscRoutes');
     videoCallRoute = require('./videocall/videoRoutes')
@@ -54,20 +56,22 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use(indexRoutes);
-app.use(authRoutes);
-app.use(userDocRoutes);
-app.use(userHospRoutes);
-app.use(hospHospRoutes);
-app.use(miscRoutes);
-app.use(videoCallRoute);
-
 app.use(function (req, res, next) {
-  //res.locals.currentUser = req.user;
+  res.locals.currentUser = req.user;
   res.locals.error = req.flash("error");
   res.locals.success = req.flash("success");
   next();
 });
+
+app.use(indexRoutes);
+app.use(authRoutes);
+app.use(userDocRoutes);
+app.use(userHospIndexRoutes);
+app.use(bloodBankRoutes);
+app.use(organDonationRoutes);
+app.use(hospHospRoutes);
+app.use(miscRoutes);
+app.use(videoCallRoute);
 
 //socket connection
 io.on("connection", (socket) => {

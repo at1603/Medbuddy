@@ -34,18 +34,21 @@ router.get('/register', function(req,res){
 router.post("/register", function(req, res){
     // console.log("post in /register");
     var newUser = new User({
+       firstName: req.body.firstName,
+       lastName: req.body.lastName,
+       address:
+       {
+            street: req.body.streetAddress,
+            city:req.body.city,
+            state: req.body.state,
+            zip:req.body.zip,
+       },
+       gender: req.body.gender,
        username: req.body.username,
-       firstName: req.body.firstname,
-       lastName: req.body.lastname,
-       avatar: req.body.avatar,
-       phone: req.body.phone,
        email: req.body.email,
-       address: req.body.address,
-       state: req.body.state,
-       zip:req.body.zip,
-       city:req.body.city,
+       phone: req.body.contactNumber,
+       avatar: req.body.avatar,
        role:req.body.userRole,
-       gender: req.body.gender
     });
     User.register(newUser, req.body.password, function(err, user){
        if(err){

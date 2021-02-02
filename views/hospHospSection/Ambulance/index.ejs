@@ -1,0 +1,40 @@
+<%-include("../../partials/header");-%>
+<style type="text/css">
+	.container{
+            margin-top: 8rem;
+        }
+</style>
+<%- include("../../partials/Navbar"); -%>
+
+<div class="container">
+	<h2>Ambulance Services</h2>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Hospital</th>
+                  <th>Number Plate</th>
+                  <th>Contact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var i = 0; i < ambulances.length; i++){ %>
+                    <tr>
+                      <td><%= i+1%></td>
+                      <td><%= ambulances[i].hospital_name %></td>
+                      <td><%= ambulances[i].car_id%></td>
+                      <td><%= ambulances[i].contact%></td>
+                    </tr>
+                <% } %>
+              </tbody>
+            </table>
+		</div>
+	</div>
+	<div class="row">
+		<a href="#" class="btn btn-outline-danger" style="margin:auto; display: block; width: 30%">Request</a>
+		<a href="#" class="btn btn-outline-success" style="margin:auto; display: block; width: 30%">Answer</a>
+	</div>
+</div> 
+<%-include("../../partials/footer");-%>
