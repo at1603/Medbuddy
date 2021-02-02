@@ -30,6 +30,12 @@
             var elem = document.getElementById("registerBtn");
             if (elem.innerHTML=="Register Now!") elem.innerHTML = "Close Form";
             else elem.innerHTML = "Register Now!";
+            if( document.getElementById("registerBtn").className == "btn btn-xs btn-primary")
+                document.getElementById("registerBtn").className = "btn btn-xs btn-outline-primary";
+            else
+            {
+                document.getElementById("registerBtn").className = "btn btn-xs btn-primary";
+            }
         }
     </script>
 
@@ -38,18 +44,22 @@
     <div class="container">
         <h2>Search Blood Banks in your city</h2>
         <form action="#" method="POST">
-            <div class='shadow p-3 mb-1 bg-white rounded mt-5'>
-                <div class="form row">
-                    <div class="form-group col-md-6">
+            <div style="box-shadow: 2px 2px 10px 4px rgb(177 177 177 / 40%); margin: 3rem;">
+                <div class="form row" style="justify-content: space-evenly; padding: 0 2rem;position:relative">
+                    <div class="form-group col-md-5" style="margin: 1rem 0 2rem;">
                         <label for="inputstateofJob">State</label>
-                        <select onchange="print_city('state', this.selectedIndex);" id="searchState" class="form-control"></select>
+                        <select onchange="print_city('state', this.selectedIndex);" id="searchState" class="form-control" name="state"></select>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-5" style="margin: 1rem 0 2rem;">
                         <label for="inputCityofJob">City</label>
-                        <select id ="state" class="form-control" name="loc"></select>
+                        <select id ="state" class="form-control" name="city">
+                            <option disabled>Select City</option>
+                        </select>
                         <script language="javascript">print_state("searchState");</script>
                     </div>
-                    <button type="submit" class="btn btn-outline-success" style="margin:auto; display: block; width: 30%">Submit!</button>
+                    <div class="form-group col-md-2" style="margin: 1rem 0 2rem;"> 
+                        <button type="submit" class="btn btn-xs btn-success" style="width: 100%; margin-top: 2rem;">Go!</button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -57,7 +67,7 @@
         <h4>Want to donate blood?</h4> <span><button class="btn btn-xs btn-outline-primary" id="registerBtn" onClick=registerDonor()>Register Now!</button></span>
         <div class="registerForm" id="registerForm">
             <form>
-                <div class='shadow p-3 mb-1 bg-white rounded mt-5'>
+                <div style="box-shadow: 2px 2px 10px 4px rgb(177 177 177 / 40%); margin: 3rem; justify-content: space-evenly; padding: 2rem 2rem">
                     <h2 style="text-align: center; margin-bottom: 1rem;">Donate Blood</h2>
                     <div class="form row">
                         <div class="form-group col-md-6">

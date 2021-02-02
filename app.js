@@ -28,7 +28,9 @@ app.use(express.static(path.join(__dirname + "/public")));
 var indexRoutes = require('./routes/indexRoutes.js'),
     authRoutes = require('./routes/authRoutes'),
     userDocRoutes = require('./routes/userDocRoutes'),
-    userHospRoutes = require('./routes/userHospRoutes'),
+    userHospIndexRoutes = require('./routes/userHospRoutes/indexRoutes'),
+    bloodBankRoutes = require('./routes/userHospRoutes/bloodBankRoutes'),
+    organDonationRoutes = require('./routes/userHospRoutes/organDonationRoutes'),
     hospHospRoutes = require('./routes/hospHospRoutes'),
     miscRoutes = require('./routes/miscRoutes');
     videoCallRoute = require('./videocall/videoRoutes')
@@ -64,7 +66,9 @@ app.use(function (req, res, next) {
 app.use(indexRoutes);
 app.use(authRoutes);
 app.use(userDocRoutes);
-app.use(userHospRoutes);
+app.use(userHospIndexRoutes);
+app.use(bloodBankRoutes);
+app.use(organDonationRoutes);
 app.use(hospHospRoutes);
 app.use(miscRoutes);
 app.use(videoCallRoute);

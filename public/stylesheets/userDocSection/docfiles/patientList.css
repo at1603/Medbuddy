@@ -5,6 +5,7 @@
     margin: auto;
     height: fit-content;
     width: fit-content;
+    overflow-x: auto;
 }
 
 .content-block {

@@ -51,8 +51,12 @@ router.get("/userDocSection/consultDoc/presc", function (req, res) {
 ////+++////
 
 //patient routes
-router.get("/userDocSection/docinfo/:id", function (req, res) {
-  res.render("userDocSection/patientfiles/docinfo");
+
+router.get("/userDocSection/docList/:id", function (req, res) {
+  res.render("userDocSection/patientfiles/docList");
+});
+router.get("/userDocSection/docList/docInfo/:id", function (req, res) {
+  res.render("userDocSection/patientfiles/docInfo");
 });
 
 router.get("/userDocSection/changeDoc/:id", function (req, res) {

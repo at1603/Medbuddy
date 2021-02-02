@@ -22,10 +22,16 @@
   }
 
   window.onclick = function (e) {
-    if (!e.target.matches(".dropbtn")) {
-      var myDropdown = document.getElementById("myDropdown");
-      if (myDropdown.classList.contains("show")) {
-        myDropdown.classList.remove("show");
+    if (!e.target.matches(".dropbtn1") && ( document.getElementById("services").classList.contains("show") )) {
+      var services = document.getElementById("services");
+      if (services.classList.contains("show")) {
+        services.classList.remove("show");
+      }
+    }
+    if (!e.target.matches(".dropbtn2")  && ( document.getElementById("afterLogin").classList.contains("show") )) {
+      var afterLogin = document.getElementById("afterLogin");
+      if (afterLogin.classList.contains("show")) {
+        afterLogin.classList.remove("show");
       }
     }
   };
@@ -39,7 +45,7 @@
   </div>
   <!-- <div class="pr-2 nav-items"> -->
   <div class="dropdown nav-items">
-    <button class="dropbtn" onclick="navDropdown1()" style="line-height: 0.7">
+    <button class="dropbtn1" onclick="navDropdown1()" style="line-height: 0.7">
       Services
       <i class="fa fa-caret-down"></i>
     </button>
@@ -73,7 +79,7 @@
     </div>
   <% } else { %>
     <div class="dropdown nav-items" style="margin-left:auto">
-      <button class="dropbtn" onclick="navDropdown2()" style="line-height: 0.5;">
+      <button class="dropbtn2" onclick="navDropdown2()" style="line-height: 0.5;">
         Signed In As <%=currentUser.username%><%if(currentUser.isAdmin){%>(admin)<% }%>
         <i class="fa fa-caret-down"></i>
       </button>

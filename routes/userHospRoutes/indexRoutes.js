@@ -6,7 +6,7 @@ router.get("/userHospSection/initialPage", function (req, res) {
 });
 
 router.get("/userHospSection/bloodBanks", function(req, res){
-  res.render("userHospSection/BloodBanks/index")
+  res.render("userHospSection/BloodBanks/index", {flag: 0})
 });
 
 router.get("/userHospSection/organDonation", function(req, res){
