@@ -84,7 +84,15 @@
         <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-content" id="afterLogin">
-        <a href="#">Search Hospitals</a>
+        <% if(currentUser.role == "doctor") { %>
+          <a href="/user/doctor/dashboard" >Your Dashboard</a>
+        <% } else if(currentUser.role == "patient"){ %>
+          <a href="/user/patient/dashboard">Your Dashboard</a>
+        <% } else if(currentUser.role == "hospAdmin") { %>
+          <a href="/user/hospAdmin/dashboard">Your Dashboard</a>
+        <% } else {%>
+          <a href="#" disabled>Your Dashboard</a>
+        <% } %>
         <a href="/logout">Log Out</a>
       </div>
     </div>
