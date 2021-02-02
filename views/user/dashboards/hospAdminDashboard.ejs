@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../../partials/header"); -%>
+
+<body>
+    <%- include("../../partials/Navbar"); -%>
+
+    <div class="row" style="margin: 8rem 4rem;">
+        <div class="col-md-2" style="border-right: 1px solid gray; text-align: center; justify-content:center;">
+            <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-182-132174.png" class="img-fluid rounded-circle border" alt="https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-vector-avatar-icon-png-image_695765.jpg" style="width:60%">
+            <h5> <strong><%=currentUser.username%></strong> </h5>
+            <h5><%= currentUser.firstName + " " + currentUser.lastName%></h5>
+            <span><em>Joined <%= moment(currentUser.joinedAt).fromNow()%></em></span>
+        </div>
+        <div class="col-md-10">
+            <h5><u>About your institutions</u></h5>
+            <p><strong>Hospital Name:</strong> </p>
+            <p><strong>Hospital Address:</strong> </p>
+            <p><strong>Quick links: </strong></p>
+        </div>
+    </div>
+    <div class="row" style="margin: 2rem 6rem">
+        <h5>Analytics</h5>
+        <div class="col-md-12" style="width: 60%; justify-content: center;">
+            <canvas id="barChart" width="400" height="100"></canvas>
+        </div>
+        <div class="col-md-12" style="width: 60%; justify-content: center;">
+            <canvas id="barChart" width="400" height="100"></canvas>
+            <canvas id="lineChart" width="400" height="100"></canvas>
+        </div>
+    </div>
+
+    <%- include("../../partials/footer"); -%>
+    <script>
+        var barChartctx = document.getElementById('barChart');
+        var barChart = new Chart(barChartctx, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        new Chart(document.getElementById("lineChart"), {
+            type: 'line',
+            data: {
+                labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+                datasets: [{ 
+                    data: [86,114,106,106,107,111,133,221,783,2478],
+                    label: "Africa",
+                    borderColor: "#3e95cd",
+                    fill: false
+                }, { 
+                    data: [282,350,411,502,635,809,947,1402,3700,5267],
+                    label: "Asia",
+                    borderColor: "#8e5ea2",
+                    fill: false
+                }, { 
+                    data: [168,170,178,190,203,276,408,547,675,734],
+                    label: "Europe",
+                    borderColor: "#3cba9f",
+                    fill: false
+                }, { 
+                    data: [40,20,10,16,24,38,74,167,508,784],
+                    label: "Latin America",
+                    borderColor: "#e8c3b9",
+                    fill: false
+                }, { 
+                    data: [6,3,2,2,7,26,82,172,312,433],
+                    label: "North America",
+                    borderColor: "#c45850",
+                    fill: false
+                }
+                ]
+            },
+            options: {
+                title: {
+                display: true,
+                text: 'World population per region (in millions)'
+                }
+            }
+        });
+        </script>
+</body>
+</html>
