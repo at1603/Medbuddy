@@ -56,7 +56,7 @@ router.get("/hospHospSection/oxygenBank", function(req, res) {
         if (err)
             console.log(err);
         else
-            res.render("hospHospSection/Oxygenbank/index", { hospitals: allHospitals });
+            res.render("hospHospSection/O2bank/index", { hospitals: allHospitals });
     });
 
 });
