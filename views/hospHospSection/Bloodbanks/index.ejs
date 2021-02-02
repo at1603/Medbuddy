@@ -24,6 +24,7 @@
                   <th colspan="8">Current Capacity</th>
                   <th rowspan="2">Price(Rs.)</th>
                   <th rowspan="2">Contact</th>
+                  <th rowspan="2">Action</th>
                 </tr>
                 <tr>
                   <th >O+</th>
@@ -51,16 +52,13 @@
                       <td><%= bloodbanks[i].currcapacity.abneg%></td>
                       <td><%= bloodbanks[i].price%></td>
                       <td><%= bloodbanks[i].contact%></td>
+                      <td><a href="#" class="btn btn-outline-danger">Request</a></td>
 
                     </tr>
                 <% } %>
               </tbody>
             </table>
 		</div>
-	</div>
-	<div class="row">
-		<a href="#" class="btn btn-outline-danger" style="margin:auto; display: block; width: 30%">Request</a>
-		<a href="#" class="btn btn-outline-success" style="margin:auto; display: block; width: 30%">Answer</a>
 	</div>
 </div> 
 <%-include("../../partials/footer");-%>
