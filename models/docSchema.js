@@ -5,7 +5,7 @@ var docSchema = new mongoose.Schema({
     workingAt: {
         id:{
             type:mongoose.Schema.Types.ObjectId,
-            ref:"Hospitals"
+            ref:"Hospital"
         },
         name:String
     },

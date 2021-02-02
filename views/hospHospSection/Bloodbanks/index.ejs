@@ -1,0 +1,66 @@
+<%-include("../../partials/header");-%>
+<style type="text/css">
+	.container{
+            margin-top: 8rem;
+        }
+      table {
+      text-align: center;
+    }
+    .table thead th {
+      vertical-align: middle;
+    }
+</style>
+<%- include("../../partials/Navbar"); -%>
+
+<div class="container">
+	<h2>Bloodbank</h2>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th rowspan="2">#</th>
+                  <th rowspan="2">Hospital</th>
+                  <th colspan="8">Current Capacity</th>
+                  <th rowspan="2">Price(Rs.)</th>
+                  <th rowspan="2">Contact</th>
+                </tr>
+                <tr>
+                  <th >O+</th>
+                  <th >O-</th>
+                  <th >A+</th>
+                  <th >A-</th>
+                  <th >B+</th>
+                  <th >B-</th>
+                  <th >AB+</th>
+                  <th >AB-</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var i = 0; i < bloodbanks.length; i++){ %>
+                    <tr>
+                      <td><%= i+1%></td>
+                      <td><%= bloodbanks[i].hospital_name %></td>
+                      <td><%= bloodbanks[i].currcapacity.opos %></td>
+                      <td><%= bloodbanks[i].currcapacity.oneg%></td>
+                      <td><%= bloodbanks[i].currcapacity.apos%></td>
+                      <td><%= bloodbanks[i].currcapacity.aneg%></td>
+                      <td><%= bloodbanks[i].currcapacity.bpos%></td>
+                      <td><%= bloodbanks[i].currcapacity.bneg%></td>
+                      <td><%= bloodbanks[i].currcapacity.abpos%></td>
+                      <td><%= bloodbanks[i].currcapacity.abneg%></td>
+                      <td><%= bloodbanks[i].price%></td>
+                      <td><%= bloodbanks[i].contact%></td>
+
+                    </tr>
+                <% } %>
+              </tbody>
+            </table>
+		</div>
+	</div>
+	<div class="row">
+		<a href="#" class="btn btn-outline-danger" style="margin:auto; display: block; width: 30%">Request</a>
+		<a href="#" class="btn btn-outline-success" style="margin:auto; display: block; width: 30%">Answer</a>
+	</div>
+</div> 
+<%-include("../../partials/footer");-%>

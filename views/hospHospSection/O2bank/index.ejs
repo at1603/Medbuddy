@@ -1,0 +1,40 @@
+<%-include("../../partials/header");-%>
+<style type="text/css">
+	.container{
+            margin-top: 8rem;
+        }
+</style>
+<%- include("../../partials/Navbar"); -%>
+
+<div class="container">
+	<h2>O2 Cylinder Bank</h2>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Hospital</th>
+                  <th>Available O2 Cylinders</th>
+                  <th>Contact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var i = 0; i < hospitals.length; i++){ %>
+                    <tr>
+                      <td><%= i+1%></td>
+                      <td><%= hospitals[i].partOf.name%></td>
+                      <td><%= hospitals[i].oxyCur%></td>
+                      <td><%= "01923801301"%></td>
+                    </tr>
+                <% } %>
+              </tbody>
+            </table>
+		</div>
+	</div>
+	<div class="row">
+		<a href="#" class="btn btn-outline-danger" style="margin:auto; display: block; width: 30%">Request</a>
+		<a href="#" class="btn btn-outline-success" style="margin:auto; display: block; width: 30%">Answer</a>
+	</div>
+</div> 
+<%-include("../../partials/footer");-%>
