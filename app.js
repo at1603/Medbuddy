@@ -47,6 +47,7 @@ app.use(
   })
 );
 
+app.locals.moment = require('moment');
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"));
