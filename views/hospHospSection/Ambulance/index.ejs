@@ -17,6 +17,7 @@
                   <th>Hospital</th>
                   <th>Number Plate</th>
                   <th>Contact</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -26,15 +27,13 @@
                       <td><%= ambulances[i].hospital_name %></td>
                       <td><%= ambulances[i].car_id%></td>
                       <td><%= ambulances[i].contact%></td>
+                      <td><a href="#" class="btn btn-outline-danger">Request</a></td>
                     </tr>
                 <% } %>
               </tbody>
             </table>
 		</div>
 	</div>
-	<div class="row">
-		<a href="#" class="btn btn-outline-danger" style="margin:auto; display: block; width: 30%">Request</a>
-		<a href="#" class="btn btn-outline-success" style="margin:auto; display: block; width: 30%">Answer</a>
-	</div>
+	
 </div> 
 <%-include("../../partials/footer");-%>
