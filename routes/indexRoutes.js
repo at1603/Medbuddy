@@ -4,7 +4,24 @@ var router = express.Router();
 
 var sendMail = require("../public/jsFiles/mail");
 
+//Dashboard routes
+router.get("/user/doctor/dashboard", function(req, res){
+  res.render("user/dashboards/docDashboard")
+});
 
+router.get("/user/patient/dashboard", function(req, res){
+  res.render("user/dashboards/patientDashboard")
+});
+
+router.get("/user/hospAdmin/dashboard", function(req, res){
+  res.render("user/dashboards/hospAdminDashboard")
+});
+
+//Manage hospital routes
+
+router.get("/hospHospSection/initialPage", function(req, res) {
+  res.render("hospHospSection/index");
+});
 
 //home page route
 router.get("/", function(req, res) {

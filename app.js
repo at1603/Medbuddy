@@ -31,9 +31,10 @@ var indexRoutes = require('./routes/indexRoutes.js'),
     userHospIndexRoutes = require('./routes/userHospRoutes/indexRoutes'),
     bloodBankRoutes = require('./routes/userHospRoutes/bloodBankRoutes'),
     organDonationRoutes = require('./routes/userHospRoutes/organDonationRoutes'),
+    peekintoHospitalRoutes = require('./routes/userHospRoutes/peekIntoHospitalRoutes'),
     hospHospRoutes = require('./routes/hospHospRoutes'),
-    miscRoutes = require('./routes/miscRoutes');
-    videoCallRoute = require('./videocall/videoRoutes')
+    miscRoutes = require('./routes/miscRoutes'),
+    videoCallRoute = require('./videocall/videoRoutes'),
     seedDB = require("./seeds");
 
 // seedDB();
@@ -47,6 +48,7 @@ app.use(
   })
 );
 
+app.locals.moment = require('moment');
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"));
@@ -69,6 +71,7 @@ app.use(userDocRoutes);
 app.use(userHospIndexRoutes);
 app.use(bloodBankRoutes);
 app.use(organDonationRoutes);
+app.use(peekintoHospitalRoutes);
 app.use(hospHospRoutes);
 app.use(miscRoutes);
 app.use(videoCallRoute);
