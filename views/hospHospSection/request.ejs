@@ -1,0 +1,132 @@
+<%- include("../partials/header"); -%>
+    <link rel="stylesheet" href="/stylesheets/partials/navbar.css">
+    <style>
+        .container{
+            margin-top: 8rem;
+        }
+
+        .registerForm {
+            display: none;
+        }
+
+        .show{
+            display: block;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+    </style>
+<%- include("../partials/Navbar"); -%>
+    <script src="/jsFiles/cities.js"></script>
+
+    <body>
+
+        <div class="container">
+            <form>
+                <div style="box-shadow: 2px 2px 10px 4px rgb(177 177 177 / 40%); margin: 3rem; justify-content: space-evenly; padding: 2rem 2rem">
+                    <h2 style="text-align: center; margin-bottom: 1rem;"><%=service%> Request Form</h2>
+                    <h5>Patient Details:</h5>
+
+                    <div class="form row">
+                        <div class="form-group col-md-6">
+                            <label for="First Name">First Name:</label>
+                            <input type="text" class="form-control" placeholder="Your Name" name="firstName" id="inputFirstName">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Last Name">Last Name:</label>
+                            <input type="text" class="form-control" placeholder="Your Last Name" name="lastName" id="inputLastName">
+                        </div>
+                    </div>
+                    <div class="form row">
+                        <div class="form-group col-md-4">
+                            <label for="inputstateofJob">State</label>
+                            <select onchange="print_city('state', this.selectedIndex);" id="donorState" class="form-control"></select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputCityofJob">City</label>
+                            <select id ="state" class="form-control" name="city"></select>
+                            <script language="javascript">print_state("donorState");</script>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="pincode">Pin Code</label>
+                            <input type="number" class="form-control" name="pinCode" placeholder="Pin Code" id="pinCode" min="0">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="bloodGroup">Blood Group:</label>
+                            <input type="text" class="form-control" placeholder="Blood Group" name="bloodGroup" id="bloodGroup">
+                                </div>
+                            </div>
+                             <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="age">Age:</label>
+                            <input type="text" class="form-control" placeholder="Age" name="age" id="age">
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="diseasesDescription">Details of disesases (if any):</label>
+                            <textarea name="diseasesDescription" class="form-control" id="diseasesDescription" cols="30" rows="5" placeholder="Give details if you are suffering from any chronic or acute disesases"></textarea>
+                        </div>
+                    </div>
+                    <%if(service=="Bloodbank"){%>
+                    <div class="form-row">
+                         <div class="form-group">
+                            <label for="units">Units Required:</label>
+                            <input type="number" class="form-control" name="units" placeholder="Units" id="units" min="0">
+                        </div>
+                    </div>
+                    <%}%>
+
+                    <%if(service=="Oxygen Bank"){%>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="qty">Quantity(Cylinders) Required:</label>
+                            <input type="number" class="form-control" name="qty" placeholder="Quantity" id="qty" min="0">
+                        </div>
+                    </div>
+                    <%}%>
+                    <%if(service=="Organ Vault"){%>
+                    <label for="organ">Select Organ(s):</label>
+                    <div class="form-row">
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="liver" name="liver">
+                                <label class="form-check-label" for="liver">Liver</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="kidney" name="kidney">
+                                <label class="form-check-label" for="kidney">Kidney</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="heart" name="heart">
+                                <label class="form-check-label" for="heart">Heart</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="eyes" name="eyes">
+                                <label class="form-check-label" for="eyes">Eyes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="lungs" name="lungs">
+                                <label class="form-check-label" for="lungs">Lungs</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="intestine" value="option1">
+                                <label class="form-check-label" for="intestine">Intestine</label>
+                            </div>
+                    </div>
+                    <%}%>
+                    <button type="submit" class="btn btn-outline-success mt-3" style="margin:auto; display: block; width: 30%">Submit!</button>
+                </div>
+            </form>
+        </div>
+            
+        </body>

@@ -1,25 +1,25 @@
 if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
+    require("dotenv").config();
 }
 var express = require("express"),
-  app = express(),
-  server = require("http").Server(app),
-  io = require("socket.io")(server),
-  { v4: uuidV4 } = require("uuid"),
-  bodyParser = require("body-parser"),
-  passport = require("passport"),
-  LocalStrategy = require("passport-local"),
-  path = require("path"),
-  methodOverride = require("method-override"),
-  mongoose = require("mongoose"),
-  flash = require("connect-flash");
+    app = express(),
+    server = require("http").Server(app),
+    io = require("socket.io")(server),
+    { v4: uuidV4 } = require("uuid"),
+    bodyParser = require("body-parser"),
+    passport = require("passport"),
+    LocalStrategy = require("passport-local"),
+    path = require("path"),
+    methodOverride = require("method-override"),
+    mongoose = require("mongoose"),
+    flash = require("connect-flash");
 
 var User = require("./models/userSchema"),
-  Doctor = require("./models/docSchema");
+    Doctor = require("./models/docSchema");
 
 mongoose.connect("mongodb://localhost:27017/medbuddy", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
@@ -41,11 +41,11 @@ var indexRoutes = require('./routes/indexRoutes.js'),
 
 //Passport Configuration
 app.use(
-  require("express-session")({
-    secret: "This is my secret",
-    resave: false,
-    saveUninitialized: false,
-  })
+    require("express-session")({
+        secret: "This is my secret",
+        resave: false,
+        saveUninitialized: false,
+    })
 );
 
 app.locals.moment = require('moment');
@@ -58,11 +58,11 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use(function (req, res, next) {
-  res.locals.currentUser = req.user;
-  res.locals.error = req.flash("error");
-  res.locals.success = req.flash("success");
-  next();
+app.use(function(req, res, next) {
+    res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
+    next();
 });
 
 app.use(indexRoutes);
@@ -78,16 +78,16 @@ app.use(videoCallRoute);
 
 //socket connection
 io.on("connection", (socket) => {
-  socket.on("join-room", (roomId, userId) => {
-    socket.join(roomId);
-    socket.to(roomId).broadcast.emit("user-connected", userId);
+    socket.on("join-room", (roomId, userId) => {
+        socket.join(roomId);
+        socket.to(roomId).broadcast.emit("user-connected", userId);
 
-    socket.on("disconnect", () => {
-      socket.to(roomId).broadcast.emit("user-disconnected", userId);
+        socket.on("disconnect", () => {
+            socket.to(roomId).broadcast.emit("user-disconnected", userId);
+        });
     });
-  });
 });
 
-server.listen(3000, function () {
-  console.log("server is connected!!");
+server.listen(3000, function() {
+    console.log("server is connected!!");
 });
