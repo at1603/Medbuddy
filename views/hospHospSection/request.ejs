@@ -32,14 +32,25 @@
                     <h5>Patient Details:</h5>
 
                     <div class="form row">
-                        <div class="form-group col-md-6">
-                            <label for="First Name">First Name:</label>
-                            <input type="text" class="form-control" placeholder="Your Name" name="firstName" id="inputFirstName">
+                        <div class="form-group col-md-4">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                <label for="First Name">First Name:</label>
+                                <input type="text" class="form-control" placeholder="Your Name" name="firstName" id="inputFirstName">
+                                </div>
+                                </div>
+                                <div class="form-row">
+                                 <div class="form-group col-md-12">
+                                <label for="Last Name">Last Name:</label>
+                                <input type="text" class="form-control" placeholder="Your Last Name" name="lastName" id="inputLastName">
+                                </div>   
+                                </div>  
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="Last Name">Last Name:</label>
-                            <input type="text" class="form-control" placeholder="Your Last Name" name="lastName" id="inputLastName">
+                       <div class="form-group col-md-8">
+                            <label for="diseasesDescription">Address:</label>
+                            <textarea name="diseasesDescription" class="form-control" id="diseasesDescription" cols="30" rows="5" placeholder="1st line,&#10;2nd line,&#10;3rd line"></textarea>
                         </div>
+                        
                     </div>
                     <div class="form row">
                         <div class="form-group col-md-4">
@@ -77,6 +88,7 @@
                             <textarea name="diseasesDescription" class="form-control" id="diseasesDescription" cols="30" rows="5" placeholder="Give details if you are suffering from any chronic or acute disesases"></textarea>
                         </div>
                     </div>
+                    <!-- Conditional Statements -->
                     <%if(service=="Bloodbank"){%>
                     <div class="form-row">
                          <div class="form-group">
@@ -86,14 +98,7 @@
                     </div>
                     <%}%>
 
-                    <%if(service=="Oxygen Bank"){%>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="qty">Quantity(Cylinders) Required:</label>
-                            <input type="number" class="form-control" name="qty" placeholder="Quantity" id="qty" min="0">
-                        </div>
-                    </div>
-                    <%}%>
+                    
                     <%if(service=="Organ Vault"){%>
                     <label for="organ">Select Organ(s):</label>
                     <div class="form-row">
@@ -119,9 +124,29 @@
                                 <label class="form-check-label" for="lungs">Lungs</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="intestine" value="option1">
+                                <input class="form-check-input" type="checkbox" id="intestine" value="intestine">
                                 <label class="form-check-label" for="intestine">Intestine</label>
                             </div>
+                    </div>
+                    <%}%>
+                    <%if(service=="Oxygen Bank"){%>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="qty">Quantity(Cylinders) Required:</label>
+                            <input type="number" class="form-control" name="qty" placeholder="Quantity" id="qty" min="0">
+                        </div>
+                    </div>
+                    <%}%>
+                    <%if(service=="Ambulance"){%>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="diseasesDescription">Reason for the request:</label>
+                            <textarea name="diseasesDescription" class="form-control" id="diseasesDescription" cols="30" rows="5" placeholder=""></textarea>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="diseasesDescription">Instructions for the ambulance paramedics:</label>
+                            <textarea name="diseasesDescription" class="form-control" id="diseasesDescription" cols="30" rows="5" placeholder=""></textarea>
+                        </div>
                     </div>
                     <%}%>
                     <button type="submit" class="btn btn-outline-success mt-3" style="margin:auto; display: block; width: 30%">Submit!</button>
