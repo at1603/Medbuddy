@@ -7,7 +7,7 @@
 <%- include("../../partials/Navbar"); -%>
 
 <div class="container">
-	<h2>O2 Cylinder Bank</h2>
+	<h2>Organ Vault</h2>
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
@@ -15,22 +15,24 @@
                 <tr>
                   <th>#</th>
                   <th>Hospital</th>
-                  <th>Available O2 Cylinders</th>
+                  <th>Date</th>
+                  <th>Donor Age</th>
+                  <th>Type</th>
                   <th>Contact</th>
                   <th>Action</th>
                 </tr>
               </thead>
-
               <tbody>
-                <!-- For database change 'oxygen' variable to 'hospital'(from hospMngSchema.js) -->
-                <% for(var i = 0; i < oxygen.length; i++){ %>
+                <% for(var i = 0; i < organs.length; i++){ %>
                     <tr>
                       <td><%= i+1%></td>
-                      <td><%= oxygen[i].hospital_name%></td>
-                      <td><%= oxygen[i].oxyCur%></td>
-                      <td><%= oxygen[i].contact%></td>
-                      
-                      <td><a href="/hospHospSection/oxygenBank/request" class="btn btn-outline-danger">Request</a></td>
+                      <td><%= organs[i].hospital_name %></td>
+                      <td><%= organs[i].date%></td>
+                      <td><%= organs[i].donor_age%></td>
+                      <td><%= organs[i].type%></td>
+                      <td><%= organs[i].contact%></td>
+                      <td><a href="/hospHospSection/organVault/request" class="btn btn-outline-danger">Request</a></td>
+
                     </tr>
                 <% } %>
               </tbody>
