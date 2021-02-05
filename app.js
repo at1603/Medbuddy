@@ -1,6 +1,8 @@
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
+
+//All the npm packages
 var express = require("express"),
     app = express(),
     server = require("http").Server(app),
@@ -14,6 +16,7 @@ var express = require("express"),
     mongoose = require("mongoose"),
     flash = require("connect-flash");
 
+//All the models
 var User = require("./models/userSchema"),
     Doctor = require("./models/docSchema");
 
@@ -25,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname + "/public")));
 
+//All the routes
 var indexRoutes = require('./routes/indexRoutes.js'),
     authRoutes = require('./routes/authRoutes'),
     userDocRoutes = require('./routes/userDocRoutes'),
@@ -65,6 +69,7 @@ app.use(function(req, res, next) {
     next();
 });
 
+//Use external route files
 app.use(indexRoutes);
 app.use(authRoutes);
 app.use(userDocRoutes);
@@ -88,6 +93,7 @@ io.on("connection", (socket) => {
     });
 });
 
+//Listen on port 3000
 server.listen(3000, function() {
     console.log("server is connected!!");
 });
