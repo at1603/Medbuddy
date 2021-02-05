@@ -26,6 +26,10 @@ let bloodBankSchema = new mongoose.Schema({
         abpos: Number,
         abneg: Number,
     },
+    handlerId:{
+           type:mongoose.Schema.Types.ObjectId,
+           ref:"HospAdmin"
+     },
     price: Number
 });
 
