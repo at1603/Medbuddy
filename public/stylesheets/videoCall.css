@@ -25,6 +25,7 @@ video {
   transition: 0.3s;
   position: relative;
   bottom: 220px;
+  margin-top: 10%;
 }
 
 #btn {
@@ -59,7 +60,8 @@ video {
 }
 
 #outerBody {
-  background-color: black
+  background-color: black;
+  position: relative;
 }
 
 body {
@@ -69,9 +71,7 @@ body {
 .video-grid>video:nth-child(1) {
   width: 30%;
   height: 30%;
-  float: right;
-  position: relative;
-  bottom: -430px;
-  margin-right: 10px;
+  position: absolute;
+  right: 10px;
   z-index: 1;
 }

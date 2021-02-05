@@ -204,8 +204,7 @@ li {
 }
 
 #brand {
-    position: relative;
-    left: -700px
+    margin-right: auto;
 }
 
 #brandName {
