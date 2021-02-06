@@ -1,4 +1,3 @@
-const { text } = require("body-parser");
 var mongoose = require("mongoose");
 
 var hospSchema = new mongoose.Schema({
@@ -22,7 +21,8 @@ var hospSchema = new mongoose.Schema({
         },
         username:String
     },
-    about: String
+    about: String,
+    hasAdmin: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model("Hospital", hospSchema);
