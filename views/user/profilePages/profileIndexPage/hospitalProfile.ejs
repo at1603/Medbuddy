@@ -4,11 +4,11 @@
 <body>
     <%- include("../../../partials/Navbar"); -%>
 
-    <form action="#" method="POST" class="container" style="margin: 8rem 1rem 2rem 37rem;padding: 2rem;max-width: 600px;box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);border-radius: 42px;">
+    <form action="/dashboards/hospAdmin/hospitalProfile" method="POST" class="container" style="margin: 8rem 1rem 2rem 37rem;padding: 2rem;max-width: 600px;box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);border-radius: 42px;">
         <h3 style="text-align: center;">Create Your Hospital Profile</h3>
         <div class="form-row">
             <div class="form-group col-sm-12">
-                <input type="text" class="form-control" placeholder="Hospital Name">
+                <input type="text" class="form-control" name="hospName" placeholder="Hospital Name">
             </div>
         </div>
         <div class="form-row">
@@ -62,6 +62,7 @@
                 <textarea class="form-control"name="about" id="aboutHosp" cols="30" rows="10" placeholder="Write About your Hospital"></textarea>
             </div>
         </div>
+        <button class="btn btn-xs btn-primary" type="submit">Submit!</button>
     </form>
 
     <%- include("../../../partials/footer"); -%>
