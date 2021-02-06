@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var hospitalManagement = require("../models/hospMngSchema");
+var hospitalAdministration = require("../models/hospAdminSchema");
 var _ = require('lodash');
 
 router.get("/hospHospSection/bloodBank", function(req, res) {
