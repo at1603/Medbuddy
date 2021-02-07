@@ -19,7 +19,7 @@
         }
 
         #createProfile{
-            margin: 1rem 0;
+            margin: 3rem 0;
             font-family: 'Roboto Condensed', sans-serif;
             font-weight: 700;
             text-decoration: none;
@@ -27,7 +27,7 @@
             display: block;
         }
         #updateProfile{
-            margin: 1rem 0;
+            margin: 3rem 0 0.8rem;
             font-family: 'Roboto Condensed', sans-serif;
             font-weight: 700;
             text-decoration: none;
@@ -125,14 +125,17 @@
             <h5 id="name"><%= currentUser.firstName + " " + currentUser.lastName%></h5>
             <span><em>Joined <%= moment(currentUser.joinedAt).fromNow()%></em></span>
 
-            <a href="#" id="createProfile" class="underline-from-center">Create Hospital Profile</a>
-            <a href="#" id="updateProfile" class="underline-from-center">Update Profile</a>
+            <a href="/dashboards/hospAdmin/profileIndex" id="createProfile" class="underline-from-center">Create Hospital Profile</a>
+            <a href="/dashboards/hospAdmin/profileIndex" id="updateProfile" class="underline-from-center">Update Profile</a>
             <a href="/hospHospSection/initialPage" id="mainPageRedirect" class="underline-from-center">Go to Action Page</a>
         </div>
         <div class="col-md-10">
             <h5><u>About your institutions</u></h5>
             <p><strong>Hospital Name:</strong> </p>
             <p><strong>Hospital Address:</strong> </p>
+            <% if(foundHosp){ %>
+            <p><strong>Token No: </strong><%= foundHosp[0]._id%></p>
+            <% } %>
         </div>
     </div>
     <div class="row" style="margin: 2rem 6rem">

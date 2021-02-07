@@ -12,11 +12,6 @@ router.get("/user/doctor/dashboard", function(req, res) {
 router.get("/user/patient/dashboard", function(req, res) {
     res.render("user/dashboards/patientDashboard")
 });
-
-router.get("/user/hospAdmin/dashboard", function(req, res) {
-    res.render("user/dashboards/hospAdminDashboard")
-});
-
 //Manage hospital routes
 
 router.get("/hospHospSection/initialPage", function(req, res) {

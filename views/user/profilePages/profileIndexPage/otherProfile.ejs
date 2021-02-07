@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../../../partials/header"); -%>
+    <style>
+        button.btn-outline-warning{
+            border-radius: 30px !important;
+            color: black;
+        }
+    </style>
+<body>
+    <%- include("../../../partials/Navbar"); -%>
+
+    <div id="#navigation" style="justify-content: space-between;
+        width: 50%;
+        margin: 8rem auto;
+        padding: 10px;">
+        <button class="btn btn-xs btn-outline-warning">Fill BloodBank Info</button>
+        <button class="btn btn-xs btn-outline-warning" >Fill Oxygen Bank Info</button>
+        <button class="btn btn-xs btn-outline-warning" >Fill Ambulance Info</button>
+    </div>
+
+    <%- include("../../../partials/footer"); -%>
+</body>
+</html>

@@ -39,6 +39,7 @@ var indexRoutes = require('./routes/indexRoutes.js'),
     hospHospRoutes = require('./routes/hospHospRoutes'),
     miscRoutes = require('./routes/miscRoutes'),
     videoCallRoute = require('./videocall/videoRoutes'),
+    dashBoardRoutes = require('./routes/dashBoardRoutes'),
     seedDB = require("./seeds");
 
 // seedDB();
@@ -72,12 +73,15 @@ app.use(function(req, res, next) {
 //Use external route files
 app.use(indexRoutes);
 app.use(authRoutes);
+
+app.use(dashBoardRoutes);
 app.use(userDocRoutes);
 app.use(userHospIndexRoutes);
 app.use(bloodBankRoutes);
 app.use(organDonationRoutes);
 app.use(peekintoHospitalRoutes);
 app.use(hospHospRoutes);
+
 app.use(miscRoutes);
 app.use(videoCallRoute);
 
