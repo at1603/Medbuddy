@@ -106,11 +106,36 @@ router.get("/hospHospSection/ambulance", function(req, res) {
         contact: "1012983091"
     }];
 
-    res.render("hospHospSection/Ambulance/index", { ambulances: ambulances })
+    res.render("hospHospSection/Ambulance/index", { ambulances: ambulances });
 });
 
+//All request form routes
 router.get("/hospHospSection/:service/request", function(req, res) {
     res.render("hospHospSection/request", { service: _.startCase(req.params.service) });
-})
+});
 
+
+//All answer routes
+router.get("/hospHospSection/:service/answer", function(req, res) {
+    let requests = [{
+        hospitalName: "XYZ",
+        date: "2021-02-01",
+        donorAge: 23,
+        bloodGroup: "A+",
+        contact: "6546542332"
+    }, {
+        hospitalName: "ABC",
+        date: "2021-01-28",
+        donorAge: 43,
+        bloodGroup: "AB-",
+        contact: "65465654"
+    }, {
+        hospitalName: "XYZ",
+        date: "2021-01-30",
+        donorAge: 35,
+        bloodGroup: "B+",
+        contact: "546546896"
+    }]
+    res.render("hospHospSection/answer", { service: _.startCase(req.params.service), requests: requests });
+});
 module.exports = router;
