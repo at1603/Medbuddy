@@ -30,6 +30,10 @@ let bloodBankSchema = new mongoose.Schema({
            type:mongoose.Schema.Types.ObjectId,
            ref:"HospAdmin"
      },
+    contact: {
+        email: String,
+        phone: Number
+    },
     price: Number
 });
 
