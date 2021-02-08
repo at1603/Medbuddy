@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../../../partials/header"); -%>
+<body>
+    <%- include("../../../partials/Navbar"); -%>
+
+    <form action="/dashboards/hospAdmin/hospitalProfile" method="POST" class="container" style="margin: 8rem 1rem 2rem 37rem;padding: 2rem;max-width: 600px;box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);border-radius: 42px;">
+        <h3 style="text-align: center;">Create Your Hospital Profile</h3>
+        <div class="form-row">
+            <div class="form-group col-sm-12">
+                <input type="text" class="form-control" name="hospName" placeholder="Hospital Name">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <select name="type" class="form-control" id="hospType">
+                    <option selected disabled>Type of Hospital</option>
+                    <option value="Private">Private</option>
+                    <option value="Public">Public</option>
+                    <option value="Government Aided">Government Aided</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <select name="speciality" class="form-control" id="speciality">
+                    <option selected disabled>Center of Excellence</option>
+                    <option value="Multispeciality">Multispeciality</option>
+                    <option value="Oncology">Oncology</option>
+                    <option value="Opthamology">Opthamology</option>
+                </select>
+            </div>
+        </div>
+
+        <h5>Hospital Address: </h5>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <input type="text" id="streetAddress" class="form-control" name="street" placeholder="Street Address">
+            </div>
+            <div class="form-group col-md-5">
+                <input type="text" id="cityAddress" class="form-control" name="city" placeholder="City">
+            </div>
+            <div class="form-group col-md-5">
+                <input type="text" id="cityAddress" class="form-control" name="state" placeholder="State">
+            </div>
+            <div class="form-group col-md-2">
+                <input type="text" id="zipAddress" class="form-control" name="zip" placeholder="Pin Code">
+            </div>
+        </div>
+
+        <h5>Contact Info: </h5>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input type="email" class="form-control" name="email" id="emailInput" placeholder="Email">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="number" class="form-control" name="phone" id="phoneInput" placeholder="Contact Number">
+            </div>
+        </div>
+
+        <h5>About the Hospital: </h5>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <textarea class="form-control"name="about" id="aboutHosp" cols="30" rows="10" placeholder="Write About your Hospital"></textarea>
+            </div>
+        </div>
+        <button class="btn btn-xs btn-primary" type="submit">Submit!</button>
+    </form>
+
+    <%- include("../../../partials/footer"); -%>
+</body>
+</html>

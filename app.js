@@ -29,6 +29,7 @@ app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname + "/public")));
 
 //All the routes
+
 var indexRoutes = require("./routes/indexRoutes.js"),
   authRoutes = require("./routes/authRoutes"),
   dashBoardRoutes = require("./routes/dashBoardRoutes"),
@@ -41,6 +42,7 @@ var indexRoutes = require("./routes/indexRoutes.js"),
   miscRoutes = require("./routes/miscRoutes"),
   videoCallRoute = require("./videocall/videoRoutes"),
   seedDB = require("./seeds");
+
 
 // seedDB();
 
@@ -73,6 +75,8 @@ app.use(function (req, res, next) {
 //Use external route files
 app.use(indexRoutes);
 app.use(authRoutes);
+
+app.use(dashBoardRoutes);
 app.use(userDocRoutes);
 app.use(userHospIndexRoutes);
 app.use(dashBoardRoutes);
@@ -80,6 +84,7 @@ app.use(bloodBankRoutes);
 app.use(organDonationRoutes);
 app.use(peekintoHospitalRoutes);
 app.use(hospHospRoutes);
+
 app.use(miscRoutes);
 app.use(videoCallRoute);
 

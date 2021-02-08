@@ -2,14 +2,12 @@ var mongoose = require("mongoose");
 
 var hospAdminSchema = new mongoose.Schema({
     oxyCur: Number,
-    AmbCur: Number, //Ambulance availability
+    ambCur: Number, //Ambulance availability
     numBeds: Number,
     partOf: {
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Hospital"
-        },
-        name: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Hospital",
+        default: null
     },
     handler:{
         id:{
@@ -17,7 +15,11 @@ var hospAdminSchema = new mongoose.Schema({
            ref:"User"
         },
         username:String
-     }
+    },
+    adminContact: {
+        email: String,
+        phone: Number
+    }
 });
 
 module.exports = mongoose.model("HospAdmin", hospAdminSchema);

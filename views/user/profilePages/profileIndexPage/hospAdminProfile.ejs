@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../../../partials/header"); -%>
+
+    <style>
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0; 
+        }
+    </style>
+
+<body>
+    <%- include("../../../partials/Navbar"); -%>
+
+    <form action="/dashboards/hospAdmin/hospAdminProfile" method="POST" class="container" style="margin: 8rem 1rem 2rem 37rem;padding: 2rem;max-width: 600px;box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);border-radius: 42px;">
+        <h3 style="text-align: center;">Create Hospital Administrator Profile</h3>
+        <div class="form-row">
+            <div class="form-group col-sm-12">
+                <input type="text" class="form-control" name="hospId" placeholder="Enter Hospital Token Number">
+            </div>
+        </div>
+
+        <h5>Contact Info: </h5>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input type="email" class="form-control" name="email" id="emailInput" placeholder="Email">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="number" class="form-control" name="phone" id="phoneInput" placeholder="Contact Number">
+            </div>
+        </div>
+
+        <h5>Other Details: </h5>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <input type="number" class="form-control" name="oxyCur" id="oxygenInput" placeholder="Oxygen Stock">
+            </div>
+            <div class="form-group col-md-4">
+                <input type="number" class="form-control" name="ambCur" id="ambulanceInput" placeholder="Available Ambulance">
+            </div>
+            <div class="form-group col-md-4">
+                <input type="number" class="form-control" name="numBeds" id="bedsInput" placeholder="Available Beds">
+            </div>
+        </div>
+        <button class="btn btn-xs btn-primary" type="submit">Submit!</button>
+    </form>
+
+    <%- include("../../../partials/footer"); -%>
+</body>
+</html>

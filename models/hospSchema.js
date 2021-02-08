@@ -8,7 +8,11 @@ var hospSchema = new mongoose.Schema({
         street: String,
         city: String,
         state: String,
-        zip: String
+        zip: Number
+    },
+    contact: {
+        email: String, 
+        phone: [Number]
     },
     handler:{
         id:{
@@ -16,7 +20,9 @@ var hospSchema = new mongoose.Schema({
            ref:"User"
         },
         username:String
-     }
+    },
+    about: String,
+    hasAdmin: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model("Hospital", hospSchema);

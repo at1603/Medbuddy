@@ -3,11 +3,9 @@ var mongoose = require("mongoose");
 var docSchema = new mongoose.Schema({
     speciality: String,
     workingAt: {
-        id:{
             type:mongoose.Schema.Types.ObjectId,
-            ref:"Hospital"
-        },
-        name:String
+            ref:"Hospital",
+            default:null
     },
     qual: [String],
     experience: Number,
