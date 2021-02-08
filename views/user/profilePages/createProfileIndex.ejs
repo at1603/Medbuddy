@@ -17,7 +17,11 @@
                     <li class="list-group-item">Cras justo odio</li>
                     </ul>
                     <div class="card-body">
-                    <a href="/dashboards/hospAdmin/hospitalProfile" class="card-link btn btn-outline-success btn-xs">Get Started</a>
+                        <% if(foundHosp){%>
+                            <i class="fas fa-check-circle"></i><span> <strong> Submitted</strong></span>
+                        <% } else { %> 
+                            <a href="/dashboards/hospAdmin/hospitalProfile" class="card-link btn btn-outline-success btn-xs">Get Started</a>
+                        <% } %>
                     </div>
                 </div>
             </div>
@@ -32,9 +36,13 @@
                     <li class="list-group-item">Cras justo odio</li>
                     </ul>
                     <div class="card-body">
-                    <a href="/dashboards/hospAdmin/hospAdminProfile" class="card-link btn btn-outline-success btn-xs">Get Started</a>
+                        <% if(foundAdmin){%>
+                            <i class="fas fa-check-circle"></i><span> <strong> Submitted</strong></span>
+                        <% } else { %> 
+                            <a href="/dashboards/hospAdmin/hospAdminProfile" class="card-link btn btn-outline-success btn-xs">Get Started</a>
+                        <% } %> 
                     </div>
-                </div>cv
+                </div>
             </div>
         </div>
         <div class="row" style="margin: 2rem auto; justify-content: center;">
