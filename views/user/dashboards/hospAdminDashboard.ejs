@@ -19,7 +19,7 @@
         }
 
         #createProfile{
-            margin: 3rem 0;
+            margin: 3rem 0 0.5rem;
             font-family: 'Roboto Condensed', sans-serif;
             font-weight: 700;
             text-decoration: none;
@@ -27,7 +27,7 @@
             display: block;
         }
         #updateProfile{
-            margin: 3rem 0 0.8rem;
+            margin: 1rem 0 0.8rem;
             font-family: 'Roboto Condensed', sans-serif;
             font-weight: 700;
             text-decoration: none;
@@ -135,15 +135,47 @@
             <a href="/dashboards/hospAdmin/profileIndex" id="updateProfile" class="underline-from-center">Update Profile</a>
             <a href="/hospHospSection/initialPage" id="mainPageRedirect" class="underline-from-center">Go to Action Page</a>
         </div>
+
         <div class="col-md-10">
-            <h5><u>About your institutions</u></h5>
-            <p><strong>Hospital Name:</strong> </p>
-            <p><strong>Hospital Address:</strong> </p>
-            <% if(foundHosp.length>0){ %>
+            <% if(foundHosp.length > 0){ %>
+                <h5><u>About your institutions</u></h5>
+                <p><strong>Hospital Name:</strong> <%=foundHosp[0].name%> </p>
+                <p><strong>Hospital Address:</strong> <%= foundHosp[0].address.street + ", " + foundHosp[0].address.city + ", " + foundHosp[0].address.state + ", " + foundHosp[0].address.zip %> </p>
+                <div class="row">
+                    <div class="col-md-4">
+                        <p><strong>Email: </strong><%=foundHosp[0].contact.email%></p>
+                    </div>
+                    <div class="col-md-4">
+                        <p><strong> TEst Phone Number: </strong><%=foundHosp[0].contact.phone%></p>
+                    </div>
+                </div>
+            <% } else { %>
+                <p><strong>No Hospital Registered to Current user!</strong></p>
+            <% } %>
+
+            <% if(foundAdmin.length > 0){ %>
+            <h5><u>Administrator Information: </u></h5>
+            <p><strong>Admninstrator Name: </strong> <%= currentUser.firstName + " " + currentUser.lastName%></p>
+            <div class="row">
+                <div class="col-md-4">
+                    <p><strong>Administrator Email: </strong> <%= foundAdmin[0].adminContact.phone%></p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Administrator Contact No.: </strong> <%= foundAdmin[0].adminContact.phone%></p>
+                </div>
+            </div>
+            <% } else { %>
+                <p><strong>No Admin is Registered   !</strong></p>
+            <% } %>
+            <h5><u>Other Details: </u></h5>
+            <% if(foundHosp.length > 0){ %>
             <p><strong>Token No: </strong><%= foundHosp[0]._id%></p>
             <% } %>
         </div>
     </div>
+
+
+    <!-- ----------Analytics Part---------------- -->
     <div class="row" style="margin: 2rem 6rem">
         <h5>Analytics</h5>
 
@@ -153,7 +185,6 @@
         <div class="chart-container" style=" margin-left: 50vw; position: absolute; height:40vh; width:40vw">
             <canvas id="lineChart"></canvas>
         </div>
-        
     </div>
 
     <%- include("../../partials/footer"); -%>
