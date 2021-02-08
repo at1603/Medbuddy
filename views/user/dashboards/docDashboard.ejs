@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link rel="stylesheet" href="/stylesheets/landing.css" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  />
+  <%- include("../../partials/header"); -%>
+  <!-- <link rel="stylesheet" href="/stylesheets/partials/navbar.css" /> -->
+  <link rel="stylesheet" href="/stylesheets/dashboard.css" />
+  <script src="https://cdn2.hubspot.net/hubfs/476360/utils.js"></script>
+
+  <body id="body-pd">
+    <%-include("../../partials/altNavbar");-%>
+    <%-include("../../partials/altSidebar");-%>
+    <main>
+      <div class="div1 card">
+        <div class="clearfix">
+          <div class="card-icon shadow-primary bg-blue">
+            <i class="material-icons align-middle">local_activity</i>
+          </div>
+          <div class="card-right">
+            <div>
+              <h5 class="pull-right">Earning</h5>
+            </div>
+            <div class="m-r-10 m-l-10">
+              <h3 class="font-weight-bold pull-right mb-0">$18,000</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-chart">
+          <div class="chartjs-size-monitor">
+            <div class="chartjs-size-monitor-expand"></div>
+            <div class="chartjs-size-monitor-shrink"></div>
+          </div>
+          <canvas
+            id="div1"
+            basechart=""
+            class="chartjs-render-monitor"
+            width="432"
+            height="216"
+            style="display: block; width: 432px; height: 216px"
+          ></canvas>
+        </div>
+      </div>
+      <div class="div2 card">
+        <div class="clearfix">
+          <div
+            class="card-icon shadow-primary bg-green"
+            style="background: #228b22ba"
+          >
+            <i class="material-icons align-middle">person_add</i>
+          </div>
+          <div class="card-right">
+            <div>
+              <h5 class="pull-right">New Patients</h5>
+            </div>
+            <div class="m-r-10 m-l-10">
+              <h3 class="font-weight-bold pull-right mb-0">116</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-chart">
+          <div class="chartjs-size-monitor">
+            <div class="chartjs-size-monitor-expand"></div>
+            <div class="chartjs-size-monitor-shrink"></div>
+          </div>
+          <canvas
+            id="div2"
+            basechart=""
+            class="chartjs-render-monitor"
+            width="432"
+            height="216"
+            style="display: block; width: 432px; height: 216px"
+          ></canvas>
+        </div>
+      </div>
+      <div class="div3 card">
+        <div class="clearfix">
+          <div
+            class="card-icon shadow-primary bg-orange"
+            style="background: orange"
+          >
+            <i class="material-icons align-middle">content_cut</i>
+          </div>
+          <div class="card-right">
+            <div>
+              <h5 class="pull-right">Operations</h5>
+            </div>
+            <div class="m-r-10 m-l-10">
+              <h3 class="font-weight-bold pull-right mb-0">24</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-chart">
+          <div class="chartjs-size-monitor">
+            <div class="chartjs-size-monitor-expand"></div>
+            <div class="chartjs-size-monitor-shrink"></div>
+          </div>
+          <canvas
+            id="div3"
+            basechart=""
+            class="chartjs-render-monitor"
+            width="432"
+            height="216"
+            style="display: block; width: 432px; height: 216px"
+          ></canvas>
+        </div>
+      </div>
+      <div class="div4 card">
+        <div class="clearfix">
+          <div
+            class="card-icon shadow-primary bg-purple"
+            style="background: #8309d0b8"
+          >
+            <i class="material-icons align-middle">face</i>
+          </div>
+          <div class="card-right">
+            <div>
+              <h5 class="pull-right">Appointments</h5>
+            </div>
+            <div class="m-r-10 m-l-10">
+              <h3 class="font-weight-bold pull-right mb-0">36</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-chart">
+          <div class="chartjs-size-monitor">
+            <div class="chartjs-size-monitor-expand"></div>
+            <div class="chartjs-size-monitor-shrink"></div>
+          </div>
+          <canvas
+            id="div4"
+            basechart=""
+            class="chartjs-render-monitor"
+            width="432"
+            height="216"
+            style="display: block; width: 432px; height: 216px"
+          ></canvas>
+        </div>
+      </div>
+      <div class="div5 card">
+        
+          <canvas  id="div5" width="883.5" height="450"  style="background-color:rgba(255,255,255,1.00);border-radius:0px;width:883.5px;height:450px;padding-left:0px;padding-right:0px;padding-top:0px;padding-bottom:0px"></canvas>
+
+        
+      </div>
+      <div class="div6 card">
+        <canvas id="div6" width="883.5" height="450" style="width: 883.5px;height: 450px;" class="chartjs-render-monitor"></canvas>
+      </div>
+      <!-- <div class="div7 card">div7</div> -->
+      <div class="div8 card">
+        <div id="div8">
+          <table>
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">S.N</th>
+                <th class="column1">Patient Name</th>
+                <th class="column1">Date</th>
+                <th class="column1">Disease</th>
+                <th class="column7">Action</th>
+              </tr>
+            </thead>
+            <tbody id="front">
+              <tr>
+                <td class="column1">1</td>
+                <td class="column1">Mark</td>
+                <td class="column1">20/05/2021</td>
+                <td class="column1">Cancer</td>
+
+                <td><form method="POST" id="delete_form"><a id="dlt_icon" return false;" href="javascript:{}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                </svg></a></form></td>
+              </tr>
+              <tr>
+                <td class="column1">1</td>
+                <td class="column1">Mark</td>
+                <td class="column1">20/05/2021</td>
+                <td class="column1">Cancer</td>
+
+                <td><form method="POST" id="delete_form"><a id="dlt_icon" return false;" href="javascript:{}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                </svg></a></form></td>
+              </tr>
+              <tr>
+                <td class="column1">1</td>
+                <td class="column1">Mark</td>
+                <td class="column1">20/05/2021</td>
+                <td class="column1">Cancer</td>
+
+                <td><form method="POST" id="delete_form"><a id="dlt_icon" return false;" href="javascript:{}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                </svg></a></form></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    <%-include("../../partials/footer");-%>
+    <script src="/jsFiles/chartJs/div1.js"></script>
+    <script src="/jsFiles/chartJs/div2.js"></script>
+    <script src="/jsFiles/chartJs/div3.js"></script>
+    <script src="/jsFiles/chartJs/div4.js"></script>
+    <script src="/jsFiles/chartJs/div5.js"></script>
+    <script src="/jsFiles/chartJs/div6.js"></script>
+
+
+  </body>
+</html>
