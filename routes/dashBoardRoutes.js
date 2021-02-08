@@ -17,15 +17,32 @@ router.get("/user/hospAdmin/dashboard", function(req, res) {
         if(err){
             console.log(err);
         }else{
-            if(foundHosp)
-                res.render("user/dashboards/hospAdminDashboard", {foundHosp: foundHosp});
+            HospitalAdmin.find().where('handler.id').equals(req.user._id).exec(function(err, foundAdmin){
+                if(err){
+                    console.log(err);
+                } else{
+                    res.render("user/dashboards/hospAdminDashboard", {foundHosp: foundHosp, foundAdmin: foundAdmin});
+                }
+            });
         }
-    })
+    });
 });
 
 
 router.get("/dashboards/hospAdmin/profileIndex", function(req, res){
-    res.render("user/profilePages/profileIndex")
+    Hospital.find().where('handler.id').equals(req.user._id).exec(function(err, foundHosp){
+        if(err){
+            console.log(err);
+        }else{
+            HospitalAdmin.find().where('handler.id').equals(req.user._id).exec(function(err, foundAdmin){
+                if(err){
+                    console.log(err);
+                } else{
+                    res.render("user/profilePages/createProfileIndex", {foundHosp: foundHosp, foundAdmin: foundAdmin});
+                }
+            });
+        }
+    });
 });
 
 router.get("/dashboards/hospAdmin/hospitalProfile", function(req, res){
@@ -154,11 +171,13 @@ router.post("/dashboards/hospAdmin/otheProfile/oxyAmbForm", function(req, res){
         //Schema pending.
     }
 });
-
-
 // -----X----Hospital Admin BloodBank, Ambulance, other routes ------X-------- //
 
 
+//-----------------Hospital Admin Update Routes-------------------//
+
+
+//----------X------Hospital Admin Update Routes----------X--------//
 //-----X----Hospital Admin Routes-------X------//
 
 
