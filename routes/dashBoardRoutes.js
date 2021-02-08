@@ -85,7 +85,7 @@ router.post("/dashboards/hospAdmin/hospitalProfile", function(req, res){
             state: req.body.state,
             zip: req.body.zip
         },
-        about: req.body.aboutHosp
+        about: req.body.about
     };
 
     Hospital.create(newHosp, function(err, newHospital){
@@ -181,10 +181,92 @@ router.post("/dashboards/hospAdmin/otheProfile/oxyAmbForm", function(req, res){
 // -----X----Hospital Admin BloodBank, Ambulance, other routes ------X-------- //
 
 
-//-----------------Hospital Admin Update Routes-------------------//
+//-----------------Hospital, Other Profiles Update Routes-------------------//
 
+router.get("/dashboards/hospAdmin/updateProfileIndex", function(req, res){
+    Hospital.find().where('handler.id').equals(req.user._id).exec(function(err, foundHosp){
+        if(err){
+            console.log(err);
+        }else{
+            HospitalAdmin.find().where('handler.id').equals(req.user._id).exec(function(err, foundAdmin){
+                if(err){
+                    console.log(err);
+                } else{
+                    res.render("user/profilePages/updateProfileIndex", {foundHosp: foundHosp, foundAdmin: foundAdmin});
+                }
+            });
+        }
+    });
+});
 
-//----------X------Hospital Admin Update Routes----------X--------//
+//--------------------------Hospital Update Routes ---------------------//
+router.get("/dashboards/hospAdmin/updateHospitalProfile", function(req, res){
+    Hospital.find().where('handler.id').equals(req.user._id).exec(function(err, foundHosp){
+        if(err){
+            console.log(err);
+        } else{
+            res.render("user/profilePages/updateProfilePages/updateHosp", {foundHosp: foundHosp});
+        }
+    });
+})
+
+router.put("/dashboards/hospAdmin/updateHospitalProfile/:id", function(req, res){
+    Hospital.findByIdAndUpdate(req.params.id, req.body.hosp, function(err, updateHospital){
+        if(err){
+            // req.flash("error", "Policy not found!")
+            console.log(err);
+            res.redirect("/dashboards/hospAdmin/updateHospitalProfile");
+        }else{
+            // req.flash("error", "Policy details succesfully updated!")
+            res.redirect("/dashboards/hospAdmin/updateProfileIndex");
+        }
+     });
+});
+//------------X-------------Hospital Update Routes ---------X-----------//
+//--------------------------Other Profiles Update Routes ---------------------//
+
+router.get("/dashboards/hospAdmin/updateOtherProfile", function(req, res){
+    Hospital.find().where('handler.id').equals(req.user._id).exec(function(err, foundHosp){
+        if(err){
+            console.log(err);
+        } else{
+            BloodBank.find().where('handler.id').equals(req.user.id).exec(function(err, foundBloodBank){
+                res.render("user/profilePages/updateProfilePages/updateHosp", {foundHosp: foundHosp, foundBloodBank,foundBloodBank});
+            });
+        }
+    });
+});
+
+router.put("/dashboards/hospAdmin/updateOtherProfile/bloodBank/:id", function(req, res){
+    BloodBank.findByIdAndUpdate(req.params.id, req.body.bloodBank, function(err, updateBloodBank){
+        if(err){
+            // req.flash("error", "Policy not found!")
+            console.log(err);
+            res.redirect("//dashboards/hospAdmin/updateHospitalProfile");
+        }else{
+            // req.flash("error", "Policy details succesfully updated!")
+            res.redirect("//dashboards/hospAdmin/updateHospitalProfile");
+        }
+     });
+});
+
+//Schema needed.
+
+// router.put("/dashboards/hospAdmin/updateOtherProfile/oxygenAmb/:id", function(req, res){
+//     OxyAmb.findByIdAndUpdate(req.params.id, req.body.oxyAmb, function(err, updateOxyAmb){
+//         if(err){
+//             // req.flash("error", "Policy not found!")
+//             console.log(err);
+//             res.redirect("//dashboards/hospAdmin/updateHospitalProfile");
+//         }else{
+//             // req.flash("error", "Policy details succesfully updated!")
+//             res.redirect("//dashboards/hospAdmin/updateHospitalProfile");
+//         }
+//      });
+// });
+
+//-------------X------------Other Profiles Update Routes ----------X----------//
+//----------X------Hospital, Other Profiles Update Routes----------X--------//
 //-----X----Hospital Admin Routes-------X------//
 
 module.exports = router;
