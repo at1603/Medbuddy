@@ -1,5 +1,6 @@
 let express = require('express');
 const HospitalAdmin = require('../models/hospAdminSchema');
+const BloodBank = require('../models/userHospModels/bloodBankSchema')
 Hospital = require("../models/hospSchema")
 
 var router = express.Router();
@@ -105,6 +106,57 @@ router.post("/dashboards/hospAdmin/hospAdminProfile", function(req, res){
         }
     });
 });
+
+// ---------Hospital Admin BloodBank, Ambulance, other routes -------------- //
+
+router.post("/dashboards/hospAdmin/otheProfile/bloodbank", function(req, res){
+    let newBloodbank = {
+        name: req.body.name,
+        address: {
+            street: req.body.street,
+            city: req.body.city,
+            state: req.body.state
+        },
+        relatedTo: req.body.hospId,
+        maxcapacity: req.body.maxcapacity,
+        currcapacity: {
+            opos: req.body.opos,
+            oneg: req.body.oneg,
+    
+            apos: req.body.apos,
+            aneg: req.body.aneg,
+    
+            bpos: req.body.bpos,
+            bneg: req.body.bneg,
+    
+            abpos: req.body.abpos,
+            abneg: req.body.abneg,
+        },
+        handlerId:req.user._id,
+        contact: {
+            email: req.body.email,
+            phone: req.body.phone
+        },
+        price: req.body.price
+    };
+
+    BloodBank.create(newBloodbank, function(err, createdBloodbank){
+        if(err){
+            console.log(err);
+        } else{
+            res.redirect('/dashboards/hospAdmin/profileIndex');
+        }
+    });
+});
+
+router.post("/dashboards/hospAdmin/otheProfile/oxyAmbForm", function(req, res){
+    let newData = {
+        //Schema pending.
+    }
+});
+
+
+// -----X----Hospital Admin BloodBank, Ambulance, other routes ------X-------- //
 
 
 //-----X----Hospital Admin Routes-------X------//

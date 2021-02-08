@@ -114,6 +114,12 @@
             left: 0;
             right: 0;
         }
+
+        /* #barChart{
+            width: 30% !important;
+            height: 30%;
+            display: block;
+        } */
     </style>
 <body>
     <%- include("../../partials/Navbar"); -%>
@@ -140,13 +146,14 @@
     </div>
     <div class="row" style="margin: 2rem 6rem">
         <h5>Analytics</h5>
-        <div class="col-md-12" style="width: 60%; justify-content: center;">
-            <canvas id="barChart" width="400" height="100"></canvas>
+
+        <div class="chart-container" style="position: absolute; height:40vh; width:40vw">
+            <canvas id="barChart"></canvas>
         </div>
-        <div class="col-md-12" style="width: 60%; justify-content: center;">
-            <canvas id="barChart" width="400" height="100"></canvas>
-            <canvas id="lineChart" width="400" height="100"></canvas>
+        <div class="chart-container" style=" margin-left: 50vw; position: absolute; height:40vh; width:40vw">
+            <canvas id="lineChart"></canvas>
         </div>
+        
     </div>
 
     <%- include("../../partials/footer"); -%>
@@ -175,10 +182,11 @@
                         'rgba(153, 102, 255, 1)',
                         'rgba(255, 159, 64, 1)'
                     ],
-                    borderWidth: 1
+                    borderWidth: 1,
                 }]
             },
             options: {
+                maintainAspectRatio: false,
                 scales: {
                     yAxes: [{
                         ticks: {
