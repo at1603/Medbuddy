@@ -1,3 +1,4 @@
+
 let express = require('express');
 const HospitalAdmin = require('../models/hospAdminSchema');
 const BloodBank = require('../models/userHospModels/bloodBankSchema')
@@ -6,9 +7,15 @@ Hospital = require("../models/hospSchema")
 var router = express.Router();
 
 //----------Patient Routes--------------//
+router.get("/userDocSection/consultDocs", function (req, res) {
+  res.render("user/dashboards/patientDashboard.ejs");
+});
 //----X-----Patient Routes-------X------//
 
 //----------Doctor Routes--------------//
+router.get("/userDocSection/checkPatients", function (req, res) {
+  res.render("user/dashboards/docDashboard.ejs");
+});
 //----X-----Doctor Routes--------x-----//
 
 //----------Hospital Admin Routes--------------//
@@ -179,6 +186,5 @@ router.post("/dashboards/hospAdmin/otheProfile/oxyAmbForm", function(req, res){
 
 //----------X------Hospital Admin Update Routes----------X--------//
 //-----X----Hospital Admin Routes-------X------//
-
 
 module.exports = router;
