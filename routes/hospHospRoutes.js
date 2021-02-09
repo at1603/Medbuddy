@@ -1,47 +1,33 @@
-var express = require("express");
-var router = express.Router();
-var hospitalAdministration = require("../models/hospAdminSchema");
-var _ = require('lodash');
+const express = require("express");
+const router = express.Router();
+const HospAdmin = require("../models/hospAdminSchema");
+const BloodBank = require("../models/userHospModels/bloodBankSchema");
+const Hospital = require("../models/hospSchema");
+const bloodReqSchema = require("../models/hospModels/requestSchemas/bloodReqSchema");
+const oxygenReqSchema = require("../models/hospModels/requestSchemas/oxygenReqSchema");
+const organReqSchema = require("../models/hospModels/requestSchemas/organReqSchema");
+const ambulanceReqSchema = require("../models/hospModels/requestSchemas/ambulanceReqSchema");
+const _ = require('lodash');
 
 router.get("/hospHospSection/bloodBank", function(req, res) {
-    var bloodbanks = [{
-            hospital_name: "XYZ",
-            currcapacity: {
-                opos: 3,
-                oneg: 4,
-
-                apos: 3,
-                aneg: 6,
-
-                bpos: 8,
-                bneg: 3,
-
-                abpos: 2,
-                abneg: 7,
-            },
-            price: 4132,
-            contact: "01938102839"
-        }, {
-            hospital_name: "XYZ",
-            currcapacity: {
-                opos: 3,
-                oneg: 4,
-
-                apos: 3,
-                aneg: 6,
-
-                bpos: 8,
-                bneg: 3,
-
-                abpos: 2,
-                abneg: 7,
-            },
-            price: 4132,
-            contact: "918239128379"
+    BloodBank.find(function(err, bloodbanks) {
+        if (err)
+            console.log(err);
+        else {
+            console.log("All the bloodbanks");
+            let hospitals = [];
+            for (let i = 0; i < bloodbanks.length; i++) {
+                Hospital.findById(bloodbanks[i].relatedTo, function(err, foundHospital) {
+                    if (err)
+                        console.log(err);
+                    else {
+                        hospitals.push(foundHospital);
+                        res.render("hospHospSection/Bloodbanks/index", { bloodbanks: bloodbanks, hospitals: hospitals });
+                    }
+                });
+            }
         }
-
-    ];
-    res.render("hospHospSection/Bloodbanks/index", { bloodbanks: bloodbanks })
+    });
 });
 
 router.get("/hospHospSection/organVault", function(req, res) {
@@ -68,49 +54,75 @@ router.get("/hospHospSection/organVault", function(req, res) {
 });
 
 router.get("/hospHospSection/oxygenBank", function(req, res) {
-    // hospitalManagement.find({}, function(err, allHospitals) {
-    //     if (err)
-    //         console.log(err);
-    //     else
-    //         res.render("hospHospSection/O2bank/index", { hospitals: allHospitals });
-    // });
-    var oxygen = [{
-        hospital_name: "XYZ",
-        oxyCur: 12,
-        contact: "65465423321"
-    }, {
-        hospital_name: "ABC",
-        oxyCur: 45,
-        contact: "65465654"
-    }, {
-        hospital_name: "PQR",
-        oxyCur: 29,
-        contact: "546546896"
-    }];
-    res.render("hospHospSection/O2bank/index", { oxygen: oxygen })
+    // var oxygen = [{
+    //     hospital_name: "XYZ",
+    //     oxyCur: 12,
+    //     contact: "65465423321"
+    // }, {
+    //     hospital_name: "ABC",
+    //     oxyCur: 45,
+    //     contact: "65465654"
+    // }, {
+    //     hospital_name: "PQR",
+    //     oxyCur: 29,
+    //     contact: "546546896"
+    // }];
+    HospAdmin.find(function(err, hospitalAdmins) {
+        if (err)
+            console.log(err);
+        else {
+            let hospitals = [];
+            for (let i = 0; i < hospitalAdmins.length; i++) {
+                Hospital.findById(hospitalAdmins[i].partOf, function(err, foundHospital) {
+                    if (err)
+                        console.log(err);
+                    else {
+                        hospitals.push(foundHospital);
+                        res.render("hospHospSection/O2bank/index", { hospitalAdmins: hospitalAdmins, hospitals: hospitals });
+                    }
+                });
+            }
+        }
+    });
 
 });
 
 router.get("/hospHospSection/ambulance", function(req, res) {
-    var ambulances = [{
-        hospital_name: "XYZ",
-        car_id: "UP78DG3821",
-        contact: "1012983091"
-    }, {
-        hospital_name: "ABC",
-        car_id: "UP78BH1021",
-        contact: "1012983091"
-    }, {
-        hospital_name: "XYZ",
-        car_id: "UP72OP3912",
-        contact: "1012983091"
-    }];
+    // var ambulances = [{
+    //     hospital_name: "XYZ",
+    //     car_id: "UP78DG3821",
+    //     contact: "1012983091"
+    // }, {
+    //     hospital_name: "ABC",
+    //     car_id: "UP78BH1021",
+    //     contact: "1012983091"
+    // }, {
+    //     hospital_name: "XYZ",
+    //     car_id: "UP72OP3912",
+    //     contact: "1012983091"
+    // }];
+    HospAdmin.find(function(err, hospitalAdmins) {
+        if (err)
+            console.log(err);
+        else {
+            let hospitals = [];
+            for (let i = 0; i < hospitalAdmins.length; i++) {
+                Hospital.findById(hospitalAdmins[i].partOf, function(err, foundHospital) {
+                    if (err)
+                        console.log(err);
+                    else {
+                        hospitals.push(foundHospital);
+                        res.render("hospHospSection/Ambulance/index", { hospitalAdmins: hospitalAdmins, hospitals: hospitals });
+                    }
+                });
+            }
+        }
+    });
 
-    res.render("hospHospSection/Ambulance/index", { ambulances: ambulances });
 });
 
 //All request form routes
-router.get("/hospHospSection/:service/request", function(req, res) {
+router.get("/hospHospSection/:service/specificRequest", function(req, res) {
     res.render("hospHospSection/request", { service: _.startCase(req.params.service) });
 });
 
@@ -136,6 +148,87 @@ router.get("/hospHospSection/:service/answer", function(req, res) {
         bloodGroup: "B+",
         contact: "546546896"
     }]
-    res.render("hospHospSection/answer", { service: _.startCase(req.params.service), requests: requests });
+    // bloodReqSchema.find(function(err, bloodReq) {
+
+    // })
+    res.render("hospHospSection/Bloodbanks/answer", { service: _.startCase(req.params.service), requests: requests });
+});
+
+router.post("/hospHospSection/:service/requests", function(req, res) {
+    if (req.params.service == "bloodbank") {
+        bloodReqSchema.create({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            address: req.body.address,
+            city: req.body.city,
+            state: req.body.state,
+            pinCode: req.body.pinCode,
+            bloodGroup: req.body.bloodGroup,
+            disease: req.body.diseaseDescription,
+            age: req.body.age,
+            units: req.body.units
+        }, function(err, bloodReq) {
+            if (err)
+                console.log(err)
+            else
+                console.log(bloodReq);
+        });
+    } else if (req.params.service == "oxygenbank") {
+        oxygenReqSchema.create({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            address: req.body.address,
+            city: req.body.city,
+            state: req.body.state,
+            pinCode: req.body.pinCode,
+            bloodGroup: req.body.bloodGroup,
+            disease: req.body.diseaseDescription,
+            age: req.body.age,
+            qty: req.body.qty
+        }, function(err, oxygenReq) {
+            if (err)
+                console.log(err)
+            else
+                console.log(oxygenReq);
+        });
+    } else if (req.params.service == "organvault") {
+        organReqSchema.create({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            address: req.body.address,
+            city: req.body.city,
+            state: req.body.state,
+            pinCode: req.body.pinCode,
+            bloodGroup: req.body.bloodGroup,
+            disease: req.body.diseaseDescription,
+            age: req.body.age,
+            organs: req.body.organs
+        }, function(err, organReq) {
+            if (err)
+                console.log(err)
+            else
+                console.log(organReq);
+        });
+    } else if (req.params.service == "ambulance") {
+        ambulanceReqSchema.create({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            address: req.body.address,
+            city: req.body.city,
+            state: req.body.state,
+            pinCode: req.body.pinCode,
+            bloodGroup: req.body.bloodGroup,
+            disease: req.body.diseaseDescription,
+            age: req.body.age,
+            reason: req.body.reason,
+            instructions: req.body.instructions
+        }, function(err, ambulanceReq) {
+            if (err)
+                console.log(err)
+            else
+                console.log(ambulanceReq);
+        });
+    }
+    res.redirect("/hospHospSection/initialPage");
 });
 module.exports = router;
