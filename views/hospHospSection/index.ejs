@@ -70,7 +70,7 @@
   <!-- ------X----SideBar Code --------X------- -->
 
     <div class="row">
-      <div class="col-sm-5">
+      <div class="col-sm-5"  data-aos="fade-right">
           <div class="card" style="width: 18rem;border-radius: 25px;box-shadow: 1px 1px 20px 0px rgb(0 0 0 / 50%);">
               <img src="https://images.unsplash.com/photo-1536856136534-bb679c52a9aa?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Ymxvb2QlMjBkb25hdGlvbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="..."
                 style="
@@ -90,7 +90,7 @@
               </div>
           </div>
       </div>
-      <div class="col-sm-5">
+      <div class="col-sm-5"  data-aos="fade-left">
           <div class="card" style="width: 18rem;border-radius: 25px;box-shadow: 1px 1px 20px 0px rgb(0 0 0 / 50%);">
               <img src="https://images.unsplash.com/photo-1592781959774-4f2498f581d7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aGVhcnQlMjBkb25hdGlvbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="..."
                 style="
@@ -112,7 +112,7 @@
       </div>
     </div>
     <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-5"  data-aos="fade-right">
             <div class="card" style="width: 18rem;border-radius: 25px;box-shadow: 1px 1px 20px 0px rgb(0 0 0 / 50%);">
                 <img src="https://www.unicef.org/innovation/sites/unicef.org.innovation/files/styles/hero_desktop/public/UNI41215_3.jpg?itok=EelDHJuv" alt="..."
                   style="
@@ -132,7 +132,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-5" data-aos="fade-left">
             <div class="card" style="width: 18rem;border-radius: 25px;box-shadow: 1px 1px 20px 0px rgb(0 0 0 / 50%);">
                 <img src="https://media.istockphoto.com/photos/motion-blur-ambulance-united-states-picture-id1133586898?k=6&m=1133586898&s=612x612&w=0&h=P-eE88-UwqTYCR-B5XjpxuhR4HGDfr5YDlsvvbwUiH4=" class="card-img-top" alt="..."
                   style="
@@ -155,5 +155,10 @@
       </div>
 
     <%- include("../partials/footer"); -%>
+    <script>
+      AOS.init({
+      duration: 1200,
+      });
+    </script>
 </body>
 </html>
