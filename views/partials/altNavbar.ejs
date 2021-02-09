@@ -11,10 +11,34 @@
     </ul>
   </div>
   <div id="notification">
-    <ul>
+    <ul style="display: inline-flex;">
+      <% if(!currentUser){ %>
       <li>
-        <a href=""><i class="fa fa-bell" aria-hidden="true"></i></a>
+        <div class="pr-2 bd-highlight nav-items" style="margin-left: auto">
+          <a href="/register">SignUp</a>
+        </div>
+        <div class="pr-2 bd-highlight nav-items">
+          <a href="/userLogin">Login</a>
+        </div>
+        <div class="pr-2 bd-highlight nav-ham" id="topNav">
+          <a href="javascript:void(0);" class="icon" onclick="responsiveFunc()">
+            <i class="fa fa-bars"></i>
+          </a>
+        </div>
       </li>
+      <% } else { %>
+        <li style="margin-right: 1rem;">
+          <a href=""><i class="fa fa-bell" aria-hidden="true"></i></a>
+         </li>
+        <div style="margin-right: 1rem">
+          Signed In As <em> <%= currentUser.username%><%if(currentUser.isAdmin){%>(admin)<% }%></em>
+        </div>
+        <li>
+          <a href="/logout">
+            <i class="fas fa-sign-out-alt fa-lg"></i>
+          </a>
+        </li>
+      <% } %>
     </ul>
   </div>
   <div class="header__img">
