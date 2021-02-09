@@ -114,12 +114,6 @@
             left: 0;
             right: 0;
         }
-
-        /* #barChart{
-            width: 30% !important;
-            height: 30%;
-            display: block;
-        } */
     </style>
 <body>
     <%- include("../../partials/Navbar"); -%>
@@ -132,7 +126,7 @@
             <span><em>Joined <%= moment(currentUser.joinedAt).fromNow()%></em></span>
 
             <a href="/dashboards/hospAdmin/profileIndex" id="createProfile" class="underline-from-center">Create Hospital Profile</a>
-            <a href="/dashboards/hospAdmin/profileIndex" id="updateProfile" class="underline-from-center">Update Profile</a>
+            <a href="/dashboards/hospAdmin/updateProfileIndex" id="updateProfile" class="underline-from-center">Update Profile</a>
             <a href="/hospHospSection/initialPage" id="mainPageRedirect" class="underline-from-center">Go to Action Page</a>
         </div>
 
@@ -146,7 +140,7 @@
                         <p><strong>Email: </strong><%=foundHosp[0].contact.email%></p>
                     </div>
                     <div class="col-md-4">
-                        <p><strong> TEst Phone Number: </strong><%=foundHosp[0].contact.phone%></p>
+                        <p><strong>Phone Number: </strong><%=foundHosp[0].contact.phone%></p>
                     </div>
                 </div>
             <% } else { %>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../../../partials/header"); -%>
+    <style>
+        button.btn-outline-success, .btn-success{
+            border-radius: 30px !important;
+        }
+
+        form{
+            width: 200px;
+            border: solid #ccc 1px;
+            padding: 10px;
+        }
+
+        #oxygenBankDetails {
+            display: none;
+        }
+    </style>
+<body>
+    <%- include("../../../partials/Navbar"); -%>
+
+    <div id="#navigation" style="justify-content: space-between;
+        width: 50%;
+        margin: 8rem auto;
+        padding: 10px;">
+        <button class="btn btn-xs btn-outline-success" id="bloodBankBtn"> BloodBank Info</button>
+        <button class="btn btn-xs btn-outline-success" id="oxyBankBtn"> Oxygen Bank and Ambulance Info</button>
+        <button class="btn btn-xs btn-outline-success" id="ambInfoBtn"> Miscellaneous Info</button>
+    </div>
+
+    <!-- ------------------- Blood Bank Form ----------------- -->
+    <form action="/dashboards/hospAdmin/otheProfile/bloodbank" id="form1" method="POST" class="container" style="margin: 5rem 1rem 2rem 20rem;padding: 2rem;max-width: 600px;box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);border-radius: 42px;">
+        <h3 style="text-align: center;">Blood Bank Details Form</h3>
+
+        <div class="form-row">
+            <div class="form-group col-sm-12">
+                <input type="text" class="form-control" name="name" placeholder="Name of Blood Bank">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-12">
+                <input type="text" class="form-control" name="hospId" placeholder="Enter Hospital Token Number(if any)">
+            </div>
+        </div>
+
+        <h5>Blood Bank Address: </h5>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <input type="text" id="streetAddress" class="form-control" name="street" placeholder="Street Address">
+            </div>
+            <div class="form-group col-md-5">
+                <input type="text" id="cityAddress" class="form-control" name="city" placeholder="City">
+            </div>
+            <div class="form-group col-md-5">
+                <input type="text" id="cityAddress" class="form-control" name="state" placeholder="State">
+            </div>
+            <div class="form-group col-md-2">
+                <input type="text" id="zipAddress" class="form-control" name="zip" placeholder="Pin Code">
+            </div>
+        </div>
+
+        <h5>Contact Info: </h5>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input type="email" class="form-control" name="email" id="emailInput" placeholder="Email">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="number" class="form-control" name="phone" id="phoneInput" placeholder="Contact Number">
+            </div>
+        </div>
+
+        <h5>Blood Vault Details: </h5>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input type="number" class="form-control" name="maxcapacity" id="maxcapacityInput" placeholder="Max. capacity of blood bank.">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="number" class="form-control" name="price" id="priceInput" placeholder="1 Unit Price">
+            </div>
+            <p><strong>Blood Bank Current Capacity (Blood Group Wise): </strong></p>
+            <div class="form-group col-md-6">
+                <input type="number" class="form-control" name="opos" id="oposInput" placeholder="O+ Stock">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="number" class="form-control" name="oneg" id="onegInput" placeholder="O- Stock">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="number" class="form-control" name="apos" id="aposInput" placeholder="A+ Stock">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="number" class="form-control" name="aneg" id="anegInput" placeholder="A- Stock">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="number" class="form-control" name="bpos" id="bposInput" placeholder="B+ Stock">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="number" class="form-control" name="bneg" id="bnegInput" placeholder="B- Stock">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="number" class="form-control" name="abpos" id="abposInput" placeholder="AB+ Stock">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="number" class="form-control" name="abneg" id="abnegInput" placeholder="AB- Stock">
+            </div>
+        </div>
+        <button class="btn btn-xs btn-primary" type="submit">Submit!</button>
+    </form>
+
+    <!-- ----------------X--------Blood Bank Form -----------------X------- -->
+
+    <!-- -------------------------Oxygen Form ------------------------- -->
+
+    <form action="#" id="form2" method="POST" class="container" style="margin: 5rem 1rem 2rem 20rem;padding: 2rem;max-width: 600px;box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);border-radius: 42px;">
+        <h3 style="text-align: center;">Oxygen Bank and Ambulance Form</h3>
+
+        <div class="form-row">
+            <div class="form-group col-sm-12">
+                <input type="text" class="form-control" name="name" placeholder="Name of Institution">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-12">
+                <input type="text" class="form-control" name="hospId" placeholder="Enter Hospital Token Number(if any)">
+            </div>
+        </div>
+        
+        <div class="form-check">
+            <input class="form-check-input" name="hasOxygenBank" type="checkbox" value="" id="oxygenBankCheckbox">
+            <label class="form-check-label" for="hasOxygenBank">
+              My Institution has oxygen bank.
+            </label>
+          </div>
+
+        <!-- ---------oxygen vault details--------- -->
+        <div id="oxygenBankDetails">
+            <h5>Oxygen Bank Address: </h5>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <input type="text" id="streetAddress" class="form-control" name="street" placeholder="Street Address">
+                </div>
+                <div class="form-group col-md-5">
+                    <input type="text" id="cityAddress" class="form-control" name="city" placeholder="City">
+                </div>
+                <div class="form-group col-md-5">
+                    <input type="text" id="cityAddress" class="form-control" name="state" placeholder="State">
+                </div>
+                <div class="form-group col-md-2">
+                    <input type="text" id="zipAddress" class="form-control" name="zip" placeholder="Pin Code">
+                </div>
+            </div>
+
+            <h5>Contact Info: </h5>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="email" class="form-control" name="email" id="emailInput" placeholder="Email">
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="number" class="form-control" name="phone" id="phoneInput" placeholder="Contact Number">
+                </div>
+            </div>
+
+            <h5>Ocygen Vault Details: </h5>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="number" class="form-control" name="maxcapacity" id="maxcapacityInput" placeholder="Max. capacity of Oxygen Bank">
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="number" class="form-control" name="maxcapacity" id="maxcapacityInput" placeholder="Current capacity of Oxygen Bank">
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-xs btn-primary" type="submit">Submit!</button>
+    </form>
+
+    <!-- ----------------X--------Oxygen Form -----------------X------- -->
+
+
+
+    <form id="form3" style="display: none">
+    <input type="text" placeholder="form 3">
+    <button>form 3</button>
+    </form>
+
+    <%- include("../../../partials/footer"); -%>
+
+    <script>
+        oxygenBankCheckbox
+        $('#oxygenBankCheckbox').on('click', function(){
+            $("#oxygenBankDetails").toggle();
+        });
+
+        document.getElementById('bloodBankBtn').addEventListener('click', () => {
+        document.getElementById('form2').style.display = 'none';
+        document.getElementById('form3').style.display = 'none';
+        document.getElementById('form1').style.display = 'block';
+        var elem = document.getElementById("bloodBankBtn");
+        if (elem.innerHTML==" BloodBank Info") elem.innerHTML = "Form is open.  Details";
+        else elem.innerHTML = " BloodBank Info";
+        if( document.getElementById("bloodBankBtn").className == "btn btn-xs btn-success")
+            document.getElementById("bloodBankBtn").className = "btn btn-xs btn-outline-success";
+        else
+            {
+                var elem1 = document.getElementById("oxyBankBtn");
+                elem1.innerHTML = " Oxygen Bank and Ambulance Info";
+                var elem2 = document.getElementById("ambInfoBtn");
+                elem2.innerHTML = " Miscellaneous Info";
+                document.getElementById("oxyBankBtn").className = "btn btn-xs btn-outline-success";
+                document.getElementById("ambInfoBtn").className = "btn btn-xs btn-outline-success";
+                document.getElementById("bloodBankBtn").className = "btn btn-xs btn-success";
+            }
+      })
+      document.getElementById('oxyBankBtn').addEventListener('click', () => {
+        document.getElementById('form1').style.display = 'none';
+        document.getElementById('form3').style.display = 'none';
+        document.getElementById('form2').style.display = 'block';
+        var elem = document.getElementById("oxyBankBtn");
+        if (elem.innerHTML==" Oxygen Bank and Ambulance Info") elem.innerHTML = "Form is open.  Details";
+        else elem.innerHTML = " Oxygen Bank and Ambulance Info";
+        if( document.getElementById("oxyBankBtn").className == "btn btn-xs btn-success")
+            document.getElementById("oxyBankBtn").className = "btn btn-xs btn-outline-success";
+        else
+            {
+                var elem1 = document.getElementById("bloodBankBtn");
+                elem1.innerHTML = " BloodBank Info";
+                var elem2 = document.getElementById("ambInfoBtn");
+                elem2.innerHTML = " Miscellaneous Info";
+                document.getElementById("bloodBankBtn").className = "btn btn-xs btn-outline-success";
+                document.getElementById("ambInfoBtn").className = "btn btn-xs btn-outline-success";
+                document.getElementById("oxyBankBtn").className = "btn btn-xs btn-success";
+            }
+      })
+      document.getElementById('ambInfoBtn').addEventListener('click', () => {
+        document.getElementById('form2').style.display = 'none';
+        document.getElementById('form1').style.display = 'none';
+        document.getElementById('form3').style.display = 'block';
+        var elem = document.getElementById("ambInfoBtn");
+        if (elem.innerHTML==" Miscellaneous Info") elem.innerHTML = "Form is open.  Details";
+        else elem.innerHTML = " Miscellaneous Info";
+        if( document.getElementById("ambInfoBtn").className == "btn btn-xs btn-success")
+            document.getElementById("ambInfoBtn").className = "btn btn-xs btn-outline-success";
+        else
+            {
+                var elem1 = document.getElementById("bloodBankBtn");
+                elem1.innerHTML = " BloodBank Info";
+                var elem2 = document.getElementById("oxyBankBtn");
+                elem2.innerHTML = " Oxygen Bank and Ambulance Info";
+                document.getElementById("bloodBankBtn").className = "btn btn-xs btn-outline-success";
+                document.getElementById("oxyBankBtn").className = "btn btn-xs btn-outline-success";
+                document.getElementById("ambInfoBtn").className = "btn btn-xs btn-success";
+            }
+      })
+    </script>
+
+</body>
+</html>
