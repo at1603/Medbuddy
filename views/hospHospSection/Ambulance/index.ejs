@@ -15,19 +15,19 @@
                 <tr>
                   <th>#</th>
                   <th>Hospital</th>
-                  <th>Number Plate</th>
+                  <th>Total ambulances<!-- Number Plate --></th>
                   <th>Contact</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <% for(var i = 0; i < ambulances.length; i++){ %>
+                <% for(var i = 0; i < hospitalAdmins.length; i++){ %>
                     <tr>
                       <td><%= i+1%></td>
-                      <td><%= ambulances[i].hospital_name %></td>
-                      <td><%= ambulances[i].car_id%></td>
-                      <td><%= ambulances[i].contact%></td>
-                      <td><a href="/hospHospSection/ambulance/request" class="btn btn-outline-danger">Request</a></td>
+                      <td><%= hospitals[i].name %></td>
+                      <td><%= hospitalAdmins[i].ambCur%></td>
+                      <td><%= hospitalAdmins[i].adminContact%></td>
+                      <td><a href="/hospHospSection/ambulance/specificRequest" class="btn btn-outline-danger">Request</a></td>
                     </tr>
                 <% } %>
               </tbody>
