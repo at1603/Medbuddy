@@ -1,13 +1,20 @@
 let mongoose = require('mongoose')
 
 let organReqSchema = new mongoose.Schema({
-    donarId: String,
+    hospId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Hospital"
+    },
+    firstName: String,
+    lastName: String,
+    address: String,
+    city: String,
+    state: String,
+    pinCode: String,
+    bloodGroup: String,
+    disease: String,
     age: Number,
-    email: String,
-    domicile: {
-        city: String,
-        state: String
-    }
+    organs: Array
 });
 
 module.exports = mongoose.model('organReqSchema', organReqSchema)

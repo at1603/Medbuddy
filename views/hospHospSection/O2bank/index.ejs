@@ -22,15 +22,14 @@
               </thead>
 
               <tbody>
-                <!-- For database change 'oxygen' variable to 'hospital'(from hospMngSchema.js) -->
-                <% for(var i = 0; i < oxygen.length; i++){ %>
+                <% for(var i = 0; i < hospitalAdmins.length; i++){ %>
                     <tr>
                       <td><%= i+1%></td>
-                      <td><%= oxygen[i].hospital_name%></td>
-                      <td><%= oxygen[i].oxyCur%></td>
-                      <td><%= oxygen[i].contact%></td>
+                      <td><%= hospitals[i].name%></td>
+                      <td><%= hospitalAdmins[i].oxyCur%></td>
+                      <td><%= hospitalAdmins[i].adminContact%></td>
                       
-                      <td><a href="/hospHospSection/oxygenBank/request" class="btn btn-outline-danger">Request</a></td>
+                      <td><a href="/hospHospSection/oxygenBank/specificRequest" class="btn btn-outline-danger">Request</a></td>
                     </tr>
                 <% } %>
               </tbody>
