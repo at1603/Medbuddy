@@ -26,7 +26,7 @@
     <body>
 
         <div class="container">
-            <form>
+            <form action='<%="/hospHospSection/"+service.toLowerCase().replace(/ /g, '')+"/requests" %>' method="post">
                 <div style="box-shadow: 2px 2px 10px 4px rgb(177 177 177 / 40%); margin: 3rem; justify-content: space-evenly; padding: 2rem 2rem">
                     <h2 style="text-align: center; margin-bottom: 1rem;"><%=service%> Request Form</h2>
                     <h5>Patient Details:</h5>
@@ -47,15 +47,15 @@
                                 </div>  
                         </div>
                        <div class="form-group col-md-8">
-                            <label for="diseasesDescription">Address:</label>
-                            <textarea name="diseasesDescription" class="form-control" id="diseasesDescription" cols="30" rows="5" placeholder="1st line,&#10;2nd line,&#10;3rd line"></textarea>
+                            <label for="address">Address:</label>
+                            <textarea name="address" class="form-control" id="address" cols="30" rows="5" placeholder="1st line,&#10;2nd line,&#10;3rd line"></textarea>
                         </div>
                         
                     </div>
                     <div class="form row">
                         <div class="form-group col-md-4">
                             <label for="inputstateofJob">State</label>
-                            <select onchange="print_city('state', this.selectedIndex);" id="donorState" class="form-control"></select>
+                            <select onchange="print_city('state', this.selectedIndex);" id="donorState" class="form-control" name="state"></select>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputCityofJob">City</label>
@@ -104,27 +104,27 @@
                     <div class="form-row">
 
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="liver" name="liver">
+                                <input class="form-check-input" type="checkbox" id="liver" name="organs[]" value="liver">
                                 <label class="form-check-label" for="liver">Liver</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="kidney" name="kidney">
+                                <input class="form-check-input" type="checkbox" id="kidney" name="organs[]" value="kidney">
                                 <label class="form-check-label" for="kidney">Kidney</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="heart" name="heart">
+                                <input class="form-check-input" type="checkbox" id="heart" name="organs[]" value="heart">
                                 <label class="form-check-label" for="heart">Heart</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="eyes" name="eyes">
+                                <input class="form-check-input" type="checkbox" id="eyes" name="organs[]" value="eyes">
                                 <label class="form-check-label" for="eyes">Eyes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="lungs" name="lungs">
+                                <input class="form-check-input" type="checkbox" id="lungs" name="organs[]" value="lungs">
                                 <label class="form-check-label" for="lungs">Lungs</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="intestine" value="intestine">
+                                <input class="form-check-input" type="checkbox" id="intestine" name="organs[]" value="intestine">
                                 <label class="form-check-label" for="intestine">Intestine</label>
                             </div>
                     </div>
@@ -140,12 +140,12 @@
                     <%if(service=="Ambulance"){%>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="diseasesDescription">Reason for the request:</label>
-                            <textarea name="diseasesDescription" class="form-control" id="diseasesDescription" cols="30" rows="5" placeholder=""></textarea>
+                            <label for="reason">Reason for the request:</label>
+                            <textarea name="reason" class="form-control" id="reason" cols="30" rows="5" placeholder=""></textarea>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="diseasesDescription">Instructions for the ambulance paramedics:</label>
-                            <textarea name="diseasesDescription" class="form-control" id="diseasesDescription" cols="30" rows="5" placeholder=""></textarea>
+                            <label for="instructions">Instructions for the ambulance paramedics:</label>
+                            <textarea name="instructions" class="form-control" id="instructions" cols="30" rows="5" placeholder=""></textarea>
                         </div>
                     </div>
                     <%}%>
