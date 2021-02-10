@@ -4,8 +4,9 @@
 
     <%- include("../partials/header"); -%>
     <link rel="stylesheet" href="/stylesheets/partials/navbar.css">
+    <link rel="stylesheet" href="/stylesheets/partials/altNavSidebar.css">
 
-<body>
+<body id="body-pd">
     <style>
         .row{
             margin: 8rem auto 2em;
@@ -14,12 +15,17 @@
         }
     </style>
 
-    <%- include("../partials/Navbar"); -%>
+    <%- include("../partials/altNavbar"); -%>
+    <%- include("../partials/altSidebar"); -%>
 
     <div class="row">
-        <div class="col-sm-4">
-            <div class="card" style="width: 18rem;">
-                <img src="https://images.unsplash.com/photo-1536856136534-bb679c52a9aa?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Ymxvb2QlMjBkb25hdGlvbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
+        <div class="col-sm-4"  data-aos="fade-down">
+            <div class="card" style="width: 18rem;border-radius: 25px;box-shadow: 1px 1px 20px 0px rgb(0 0 0 / 30%);">
+                <img src="https://images.unsplash.com/photo-1536856136534-bb679c52a9aa?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Ymxvb2QlMjBkb25hdGlvbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="..."
+                  style="
+                  border-top-left-radius: 20px;
+                  border-top-right-radius: 20px;
+                  ">
                 <div class="card-body">
                   <h5 class="card-title"><strong>Blood Banks</strong></h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -28,44 +34,55 @@
                   <li class="list-group-item">Cras justo odio</li>
                 </ul>
                 <div class="card-body">
-                  <a href="/userHospSection/bloodBanks" class="card-link btn btn-outline-success btn-xs">Wanna Search...</a>
+                  <a href="/userHospSection/bloodBanks" style="border-radius: 25px;" class="card-link btn btn-outline-success btn-xs">Wanna Search... <i class="fas fa-search-plus fa-lg"></i></a>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
-            <div class="card" style="width: 18rem;">
-                <img src="https://images.unsplash.com/photo-1592781959774-4f2498f581d7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aGVhcnQlMjBkb25hdGlvbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
+        <div class="col-sm-4"  data-aos="fade-up">
+            <div class="card" style="width: 18rem;border-radius: 25px;box-shadow: 1px 1px 20px 0px rgb(0 0 0 / 30%);">
+                <img src="https://images.unsplash.com/photo-1592781959774-4f2498f581d7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aGVhcnQlMjBkb25hdGlvbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="..."
+                  style="
+                  border-top-left-radius: 20px;
+                  border-top-right-radius: 20px;
+                  ">
                 <div class="card-body">
                   <h5 class="card-title"><strong>Organ Donation</strong></h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">Cras justo odio</li>
-                  <li class="list-group-item">Dapibus ac facilisis in</li>
                 </ul>
                 <div class="card-body">
-                  <a href="/userHospSection/organDonation" class="card-link btn btn-outline-success btn-xs">Get Started</a>
+                  <a href="/userHospSection/organDonation" style="border-radius: 25px;" class="card-link btn btn-outline-success btn-xs">Get Started  <i class="fas fa-lungs"></i></a>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card" style="width: 18rem;">
-                <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aG9zcGl0YWx8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
+        <div class="col-sm-4"  data-aos="fade-down">
+            <div class="card" style="width: 18rem;border-radius: 25px;box-shadow: 1px 1px 20px 0px rgb(0 0 0 / 30%);">
+                <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aG9zcGl0YWx8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="..."
+                  style="
+                  border-top-left-radius: 20px;
+                  border-top-right-radius: 20px;
+                  ">
                 <div class="card-body">
                   <h5 class="card-title"><strong>Peek into Hospital</strong></h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">Cras justo odio</li>
-                  <li class="list-group-item">Dapibus ac facilisis in</li>
                 </ul>
                 <div class="card-body">
-                  <a href="/userHospSection/searchHospitals" class="card-link btn btn-outline-success btn-xs">Get Started</a>
+                  <a href="/userHospSection/searchHospitals" style="border-radius: 25px;" class="card-link btn btn-outline-success btn-xs">Get Started  <i class="far fa-hospital"></i></a>
                 </div>
             </div>
         </div>
     </div>
 
     <%- include("../partials/footer"); -%>
+    <script>
+      AOS.init({
+      duration: 900,
+      });
+    </script>
 </body>
 </html>
