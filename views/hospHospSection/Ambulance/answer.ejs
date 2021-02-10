@@ -1,6 +1,6 @@
 <%-include("../../partials/header");-%>
 <style type="text/css">
-	.container{
+  .container{
             margin-top: 8rem;
         }
   .hiddenRow {
@@ -22,18 +22,18 @@ h4{
 <%- include("../../partials/Navbar"); -%>
 
 <div class="container">
-	<h2>Bloodbank Answer Window</h2>
-	<div class="row">
-		<div class="col-md-12">
-			<table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+  <h2>Oxygen Bank Answer Window</h2>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <!-- For bloodbank request -->
+                  <!-- For oxygenBank request -->
                   <th>#</th>
                   <th>Hospital</th>
                   <th>Date</th>
-                  <th>Blood Group</th>
-                  <th>Units Required</th>
+                  <th>Reason</th>
+                  <th>Instructions</th>
                   <th>Contact</th>
                   <th>Action</th>
                 </tr>
@@ -44,11 +44,11 @@ h4{
                       <td id="element" data-placement="top" data-toggle="popover" data-content="Click to expand"><%= i+1%></td>
                       <td><%=// requests[i].hospitalName %></td>
                       <td><%= requests[i].date%></td>
-                      <td><%= requests[i].bloodGroup%></td>
-                      <td><%= requests[i].units%></td>
+                      <td><%= requests[i].reason%></td>
+                      <td><%= requests[i].instructions%></td>
                       <td><%= //requests[i].contact%></td>
-                      <td><a href="/hospHospSection/bloodBank/approve" class="btn btn-outline-success">Approve</a>
-                        <a href="/hospHospSection/bloodBank/reject" class="btn btn-outline-danger">Reject</a>
+                      <td><a href="/hospHospSection/oxygenBank/approve" class="btn btn-outline-success">Approve</a>
+                        <a href="/hospHospSection/oxygenBank/reject" class="btn btn-outline-danger">Reject</a>
                       </td>
 
                     </tr>
@@ -72,6 +72,7 @@ h4{
                                   <p><strong>Age:</strong> <%=requests[i].age%></p>
                                 </div>
                                 <div class="col-sm-3">
+                                    <p><strong>Blood Group:</strong> <%=requests[i].bloodGroup%></p>
                                     <p><strong>Address:</strong> <%=requests[i].address%></p>
                                     <p><strong>Disease History:</strong> <%=requests[i].disease%></p>
 
@@ -84,8 +85,8 @@ h4{
                 <% } %>
               </tbody>
             </table>
-		</div>
-	</div>
+    </div>
+  </div>
 </div>    
 <script>
      setTimeout(function (){

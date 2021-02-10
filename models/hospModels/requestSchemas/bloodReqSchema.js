@@ -14,7 +14,8 @@ let bloodReqSchema = new mongoose.Schema({
     bloodGroup: String,
     disease: String,
     age: Number,
-    units: Number
+    units: Number,
+    date: String
 });
 
 

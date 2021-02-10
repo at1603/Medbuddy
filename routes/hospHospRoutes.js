@@ -127,34 +127,76 @@ router.get("/hospHospSection/:service/specificRequest", function(req, res) {
 });
 
 
-//All answer routes
-router.get("/hospHospSection/:service/answer", function(req, res) {
-    let requests = [{
-        hospitalName: "XYZ",
-        date: "2021-02-01",
-        donorAge: 23,
-        bloodGroup: "A+",
-        contact: "6546542332"
-    }, {
-        hospitalName: "ABC",
-        date: "2021-01-28",
-        donorAge: 43,
-        bloodGroup: "AB-",
-        contact: "65465654"
-    }, {
-        hospitalName: "XYZ",
-        date: "2021-01-30",
-        donorAge: 35,
-        bloodGroup: "B+",
-        contact: "546546896"
-    }]
-    // bloodReqSchema.find(function(err, bloodReq) {
+//4 Answer Page routes
+router.get("/hospHospSection/bloodBank/answer", function(req, res) {
+    // let requests = [{
+    //     hospitalName: "XYZ",
+    //     date: "2021-02-01",
+    //     donorAge: 23,
+    //     bloodGroup: "A+",
+    //     contact: "6546542332"
+    // }, {
+    //     hospitalName: "ABC",
+    //     date: "2021-01-28",
+    //     donorAge: 43,
+    //     bloodGroup: "AB-",
+    //     contact: "65465654"
+    // }, {
+    //     hospitalName: "XYZ",
+    //     date: "2021-01-30",
+    //     donorAge: 35,
+    //     bloodGroup: "B+",
+    //     contact: "546546896"
+    // }]
+    bloodReqSchema.find(function(err, allBloodReq) {
+        if (err)
+            console.log(err);
+        else {
+            res.render("hospHospSection/Bloodbanks/answer", { requests: allBloodReq });
+        }
 
-    // })
-    res.render("hospHospSection/Bloodbanks/answer", { service: _.startCase(req.params.service), requests: requests });
+    });
+});
+
+router.get("/hospHospSection/organVault/answer", function(req, res) {
+    organReqSchema.find(function(err, allOrganReq) {
+        if (err)
+            console.log(err);
+        else
+            res.render("hospHospSection/Organvault/answer", { requests: allOrganReq });
+
+    });
+});
+
+
+router.get("/hospHospSection/oxygenBank/answer", function(req, res) {
+    oxygenReqSchema.find(function(err, allOxygenReq) {
+        if (err)
+            console.log(err);
+        else
+            res.render("hospHospSection/O2bank/answer", { requests: allOxygenReq });
+
+    });
+});
+
+router.get("/hospHospSection/ambulance/answer", function(req, res) {
+    ambulanceReqSchema.find(function(err, allAmbulanceReq) {
+        if (err)
+            console.log(err);
+        else
+            res.render("hospHospSection/Ambulance/answer", { requests: allAmbulanceReq });
+
+    });
 });
 
 router.post("/hospHospSection/:service/requests", function(req, res) {
+    //----------------Get today date----------------------
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = dd + '/' + mm + '/' + yyyy;
+    // --------------------------------------
     if (req.params.service == "bloodbank") {
         bloodReqSchema.create({
             firstName: req.body.firstName,
@@ -166,7 +208,8 @@ router.post("/hospHospSection/:service/requests", function(req, res) {
             bloodGroup: req.body.bloodGroup,
             disease: req.body.diseaseDescription,
             age: req.body.age,
-            units: req.body.units
+            units: req.body.units,
+            date: today
         }, function(err, bloodReq) {
             if (err)
                 console.log(err)
@@ -184,7 +227,8 @@ router.post("/hospHospSection/:service/requests", function(req, res) {
             bloodGroup: req.body.bloodGroup,
             disease: req.body.diseaseDescription,
             age: req.body.age,
-            qty: req.body.qty
+            qty: req.body.qty,
+            date: today
         }, function(err, oxygenReq) {
             if (err)
                 console.log(err)
@@ -202,7 +246,8 @@ router.post("/hospHospSection/:service/requests", function(req, res) {
             bloodGroup: req.body.bloodGroup,
             disease: req.body.diseaseDescription,
             age: req.body.age,
-            organs: req.body.organs
+            organs: req.body.organs,
+            date: today
         }, function(err, organReq) {
             if (err)
                 console.log(err)
@@ -221,7 +266,8 @@ router.post("/hospHospSection/:service/requests", function(req, res) {
             disease: req.body.diseaseDescription,
             age: req.body.age,
             reason: req.body.reason,
-            instructions: req.body.instructions
+            instructions: req.body.instructions,
+            date: today
         }, function(err, ambulanceReq) {
             if (err)
                 console.log(err)

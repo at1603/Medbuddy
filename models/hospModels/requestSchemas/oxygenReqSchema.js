@@ -14,7 +14,8 @@ let oxygenReqSchema = new mongoose.Schema({
     bloodGroup: String,
     disease: String,
     age: Number,
-    qty: Number
+    qty: Number,
+    date: String
 });
 
 module.exports = mongoose.model('oxygenReqSchema', oxygenReqSchema);

@@ -14,7 +14,8 @@ let organReqSchema = new mongoose.Schema({
     bloodGroup: String,
     disease: String,
     age: Number,
-    organs: Array
+    organs: Array,
+    date: String
 });
 
 module.exports = mongoose.model('organReqSchema', organReqSchema)
