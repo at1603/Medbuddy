@@ -1,12 +1,15 @@
 var express = require("express");
 var router = express.Router();
 
+const Doctor = require('../models/docSchema');
+
 ////+++////
 
 //Doctor routes
-router.get("/userDocSection/profile", function (req, res) {
+router.get("/userDocSection/createProfile", function (req, res) {
   res.render("userDocSection/docfiles/profile");
 });
+
 router.get("/userDocSection/patientList/:id", function (req, res) {
   res.render("userDocSection/docfiles/patientList");
 });
@@ -45,6 +48,35 @@ router.post("/sendEmail", (req, res) => {
 
 router.get("/userDocSection/consultDoc/presc", function (req, res) {
   res.render("userDocSection/docfiles/prescription");
+});
+
+
+// -------------Doctor Profile Post Routes ------------------//
+
+router.post("/userDocSection/createProfile", function(req, res){
+  let  newDocPro = {
+    speciality: req.body.speciality,
+    workingAt: req.body.workingAt,
+    workAtHosp: req.body.workAtHosp,
+    timing: {
+       timingFrom: req.body.timingFrom,
+       timingTo: req.body.timingTo
+    },
+    qual: req.body.qual,
+    experience: req.body.experience,
+    handler:{
+        id:req.user._id,
+        username:req.user.username
+     }
+  };
+
+  Doctor.create(newDocPro, function(err, newProfessionalDoc){
+    if(err){
+      console.log(err);
+    }else{
+      res.redirect("/userDocSection/checkPatients");
+    }
+  })
 });
 
 ////+++////
