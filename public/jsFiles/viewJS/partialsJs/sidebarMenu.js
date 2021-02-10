@@ -7,7 +7,7 @@ function sidebarMenuSelector() {
   if (rows.userType == "doctor") {
     patient.style.display = "none";
   } else {
-    // doctor.style.display = "none";
+    doctor.style.display = "none";
   }
 }
 
