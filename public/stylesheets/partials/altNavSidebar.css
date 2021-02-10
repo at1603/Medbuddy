@@ -208,3 +208,6 @@ li {
     font-weight: bold;
     color: black
 }
+.icon{
+    display: none;
+}
