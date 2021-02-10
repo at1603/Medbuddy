@@ -23,6 +23,9 @@
 
     </style>
 <body>
+    <%- include("../../partials/altNavbar"); -%>
+    <%- include("../../partials/altSidebar"); -%>
+
     <script src="/jsFiles/cities.js"></script>
     <script>
         function registerDonor() {
@@ -39,78 +42,76 @@
         }
     </script>
 
-    <%- include("../../partials/Navbar"); -%>
-
     <div class="container">
         <h2>Search Blood Banks in your city</h2>
         <form action="#" method="POST">
-            <div style="box-shadow: 2px 2px 10px 4px rgb(177 177 177 / 40%); margin: 3rem;">
+            <div style="box-shadow: 2px 2px 10px 4px rgb(177 177 177 / 40%); margin: 3rem; border-radius: 25px;">
                 <div class="form row" style="justify-content: space-evenly; padding: 0 2rem;position:relative">
-                    <div class="form-group col-md-5" style="margin: 1rem 0 2rem;">
+                    <div class="form-group col-md-5" style="margin: 1rem 0 2rem;border-radius: 25px;">
                         <label for="inputstateofJob">State</label>
-                        <select onchange="print_city('state', this.selectedIndex);" id="searchState" class="form-control" name="state"></select>
+                        <select style="border-radius: 25px;" onchange="print_city('state', this.selectedIndex);" id="searchState" class="form-control" name="state"></select>
                     </div>
-                    <div class="form-group col-md-5" style="margin: 1rem 0 2rem;">
+                    <div class="form-group col-md-5" style="margin: 1rem 0 2rem;border-radius: 25px;">
                         <label for="inputCityofJob">City</label>
-                        <select id ="state" class="form-control" name="city">
+                        <select id ="state" class="form-control" name="city" style="border-radius: 25px;">
                             <option disabled>Select City</option>
                         </select>
                         <script language="javascript">print_state("searchState");</script>
                     </div>
-                    <div class="form-group col-md-2" style="margin: 1rem 0 2rem;"> 
-                        <button type="submit" class="btn btn-xs btn-success" style="width: 100%; margin-top: 2rem;">Go!</button>
+                    <div class="form-group col-md-2" style="margin: 1rem 0 2rem;border-radius: 25px;"> 
+                        <button type="submit" class="btn btn-xs btn-success" style="border-radius: 25px;width: 100%; margin-top: 2rem;">Go!</button>
                     </div>
                 </div>
             </div>
         </form>
 
-        <h4>Want to donate blood?</h4> <span><button class="btn btn-xs btn-outline-primary" id="registerBtn" onClick=registerDonor()>Register Now!</button></span>
+        <h4>Want to donate blood?</h4> <span><button class="btn btn-xs btn-outline-primary" id="registerBtn" onClick=registerDonor() style="border-radius: 25px;">Register Now!</button></span>
         <div class="registerForm" id="registerForm">
             <form>
-                <div style="box-shadow: 2px 2px 10px 4px rgb(177 177 177 / 40%); margin: 3rem; justify-content: space-evenly; padding: 2rem 2rem">
+                <div style="border-radius: 25px; box-shadow: 2px 2px 10px 4px rgb(177 177 177 / 40%); margin: 3rem; justify-content: space-evenly; padding: 2rem 2rem">
                     <h2 style="text-align: center; margin-bottom: 1rem;">Donate Blood</h2>
                     <div class="form row">
                         <div class="form-group col-md-6">
                             <label for="First Name">First Name:</label>
-                            <input type="text" class="form-control" placeholder="Your Name" name="firstName" id="inputFirstName">
+                            <input style="border-radius: 25px;" type="text" class="form-control" placeholder="Your Name" name="firstName" id="inputFirstName">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="Last Name">Last Name:</label>
-                            <input type="text" class="form-control" placeholder="Your Last Name" name="lastName" id="inputLastName">
+                            <input style="border-radius: 25px;" type="text" class="form-control" placeholder="Your Last Name" name="lastName" id="inputLastName">
                         </div>
                     </div>
                     <div class="form row">
                         <div class="form-group col-md-4">
                             <label for="inputstateofJob">State</label>
-                            <select onchange="print_city('state', this.selectedIndex);" id="donorState" class="form-control"></select>
+                            <select style="border-radius: 25px;" onchange="print_city('state', this.selectedIndex);" id="donorState" class="form-control"></select>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputCityofJob">City</label>
-                            <select id ="state" class="form-control" name="city"></select>
+                            <select style="border-radius: 25px;" id ="state" class="form-control" name="city"></select>
                             <script language="javascript">print_state("donorState");</script>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="pincode">Pin Code</label>
-                            <input type="number" class="form-control" name="pinCode" placeholder="Pin Code" id="pinCode" min="0">
+                            <input style="border-radius: 25px;" type="number" class="form-control" name="pinCode" placeholder="Pin Code" id="pinCode" min="0">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="bloodGroup">Blood Group:</label>
-                            <input type="text" class="form-control" placeholder="Blood Group" name="bloodGroup" id="bloodGroup">
+                            <input style="border-radius: 25px;" type="text" class="form-control" placeholder="Blood Group" name="bloodGroup" id="bloodGroup">
                         </div>
                         <div class="form-group col-md-8">
                             <label for="diseasesDescription">Details of disesases (if any):</label>
-                            <textarea name="diseasesDescription" class="form-control" id="diseasesDescription" cols="30" rows="5" placeholder="Give details if you are suffering from any chronic or acute disesases"></textarea>
+                            <textarea style="border-radius: 25px;" name="diseasesDescription" class="form-control" id="diseasesDescription" cols="30" rows="5" placeholder="Give details if you are suffering from any chronic or acute disesases"></textarea>
                         </div>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
+                        <input style="border-radius: 25px;" class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
                         <label class="form-check-label" for="defaultCheck1">
                           I will bring proper health related certificates with myself during visit.
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-outline-success mt-3" style="margin:auto; display: block; width: 30%">Submit!</button>
+                    <button style="border-radius: 25px;" type="submit" class="btn btn-outline-success mt-3" style="margin:auto; display: block; width: 30%">Submit!</button>
                 </div>
             </form>
         </div>
