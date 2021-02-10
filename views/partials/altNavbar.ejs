@@ -6,26 +6,28 @@
   <div id="brand">
     <ul>
       <li>
-        <a href="" id="brandName">MedBuddy</a>
+        <a href="/" id="brandName">MedBuddy</a>
       </li>
     </ul>
   </div>
   <div id="notification">
     <ul style="display: inline-flex;">
       <% if(!currentUser){ %>
-      <li>
-        <div class="pr-2 bd-highlight nav-items" style="margin-left: auto">
-          <a href="/register">SignUp</a>
-        </div>
-        <div class="pr-2 bd-highlight nav-items">
-          <a href="/userLogin">Login</a>
-        </div>
-        <div class="pr-2 bd-highlight nav-ham" id="topNav">
-          <a href="javascript:void(0);" class="icon" onclick="responsiveFunc()">
-            <i class="fa fa-bars"></i>
-          </a>
-        </div>
-      </li>
+      <div style="display: inline-flex;">
+        <li>
+          <div class="pr-2 bd-highlight nav-items" style="display: inline;">
+            <a href="/register" style="text-decoration: none;">SignUp</a>
+          </div>
+          <div class="pr-2 bd-highlight nav-items" style="display: inline;">
+            <a href="/userLogin" style="text-decoration: none;">Login</a>
+          </div>
+          <div class="pr-2 bd-highlight nav-ham" id="topNav">
+            <a href="javascript:void(0);" class="icon" onclick="responsiveFunc()">
+              <i class="fa fa-bars"></i>
+            </a>
+          </div>
+        </li>
+      </div>
       <% } else { %>
         <li style="margin-right: 1rem;">
           <a href=""><i class="fa fa-bell" aria-hidden="true"></i></a>

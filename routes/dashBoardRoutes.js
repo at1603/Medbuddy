@@ -20,21 +20,6 @@ router.get("/userDocSection/checkPatients", function (req, res) {
 
 //----------Hospital Admin Routes--------------//
 
-router.get("/user/hospAdmin/altdashboard", function(req, res) {
-    Hospital.find().where('handler.id').equals(req.user._id).exec(function(err, foundHosp){
-        if(err){
-            console.log(err);
-        }else{
-            HospitalAdmin.find().where('handler.id').equals(req.user._id).exec(function(err, foundAdmin){
-                if(err){
-                    console.log(err);
-                } else{
-                    res.render("user/dashboards/althospAdminDashboard", {foundHosp: foundHosp, foundAdmin: foundAdmin});
-                }
-            });
-        }
-    });
-});
 router.get("/user/hospAdmin/dashboard", function(req, res) {
     Hospital.find().where('handler.id').equals(req.user._id).exec(function(err, foundHosp){
         if(err){

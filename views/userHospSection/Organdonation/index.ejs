@@ -4,14 +4,20 @@
     <%- include("../../partials/header"); -%>
     <link rel="stylesheet" href="/stylesheets/partials/navbar.css">
     <link rel="stylesheet" href="/stylesheets/userHospSection/organDonation/organDonation.css">
+    <style type="text/css">
+        input, textarea {
+            border-radius:5px;
+        }
+        </style>
 
 </head>
-<body>
-    <%- include("../../partials/Navbar"); -%>
+<body id="body-pd">
+    <%- include("../../partials/altNavbar"); -%>
+    <%- include("../../partials/altSidebar"); -%>
     
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card">
                     <div class="card-header">
                     <strong id="introPage">Sections</strong>
@@ -41,43 +47,43 @@
                     </div>
                     <div action="#" class="liverPage">
                         <h3>Liver Donation</h3>
-                        <button class="btn btn-xs btn-outline-primary" id="liverSearchBtn">Search for Liver Donor</button>
-                        <button class="btn btn-xs btn-outline-success" onclick=showLiverForm() id="liverRegisterBtn">Register to donate Liver</button>
-                        <div id="liverSearch">
-                            <form action="#" class="shadow p-3 mb-5 bg-white rounded">
+                        <button style="border-radius:25px;"  class="btn btn-xs btn-outline-primary" id="liverSearchBtn">Search for Liver Donor</button>
+                        <button style="border-radius:25px;"  class="btn btn-xs btn-outline-success" onclick=showLiverForm() id="liverRegisterBtn">Register to donate Liver</button>
+                        <div id="liverSearch" style="margin-top: 3rem;">
+                            <form style="border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" class=" p-3 mb-5  border-radius: 25px">
                                 <h3 style="text-align: center;">Search By your city</h3>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="firstName">State:</label>
-                                        <input type="text" class="form-control" name="state" placeholder="State Name">
+                                        <input style="border-radius:25px;"  type="text" class="form-control" name="state" placeholder="State Name">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="firstName">City:</label>
-                                        <input type="text" class="form-control" name="city" placeholder="City Name">
+                                        <input style="border-radius:25px;"  type="text" class="form-control" name="city" placeholder="City Name">
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <form action="#" id="liverForm" class="liverForm shadow p-3 mb-5 bg-white rounded">
+                        <form style="margin-top: 3rem; width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" id="liverForm" class="liverForm  p-3 mb-5 ">
                             <h3 style="text-align: center;">Liver Donation Form</h3>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>
-                                <input type="email" class="form-control" id="inputEmail4">
+                                <input style="border-radius:25px;"  type="email" class="form-control" id="inputEmail4">
                                 </div>
                                 <div class="form-group col-md-6">
                                 <label for="inputPassword4">Password</label>
-                                <input type="password" class="form-control" id="inputPassword4">
+                                <input style="border-radius:25px;"  type="password" class="form-control" id="inputPassword4">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputAddress">Address</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label for="inputCity">City</label>
-                                <input type="text" class="form-control" id="inputCity">
+                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputCity">
                                 </div>
                                 <div class="form-group col-md-4">
                                 <label for="inputState">State</label>
@@ -88,59 +94,59 @@
                                 </div>
                                 <div class="form-group col-md-2">
                                 <label for="inputZip">Zip</label>
-                                <input type="text" class="form-control" id="inputZip">
+                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputZip">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <input style="border-radius:25px;"  class="form-check-input" type="checkbox" >
                                 <label class="form-check-label" for="gridCheck">
                                     Check me out
                                 </label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Sign in</button>
+                            <button style="border-radius:25px;"  type="submit" class="btn btn-primary">Sign in</button>
                         </form>
                     </div>
                     <div action="#" class="kidneyPage">
                         <h3>Kidney Donation</h3>
-                        <button class="btn btn-xs btn-outline-primary" id="kidneySearchBtn">Search for Kidney Donor</button>
-                        <button class="btn btn-xs btn-outline-success" onclick="showKidneyForm()" id="kidneyRegisterBtn">Register to donate Kidney</button>
-                        <div id="kidneySearch">
-                            <form action="#" class="shadow p-3 mb-5 bg-white rounded">
+                        <button style="border-radius:25px;"  class="btn btn-xs btn-outline-primary" id="kidneySearchBtn">Search for Kidney Donor</button>
+                        <button style="border-radius:25px;"  class="btn btn-xs btn-outline-success" onclick="showKidneyForm()" id="kidneyRegisterBtn">Register to donate Kidney</button>
+                        <div id="kidneySearch" style="margin-top: 3rem;">
+                            <form style="border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" class=" p-3 mb-5 ">
                                 <h3 style="text-align: center;">Search By your city</h3>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="firstName">State:</label>
-                                        <input type="text" class="form-control" name="state" placeholder="State Name">
+                                        <input style="border-radius:25px;"  type="text" class="form-control" name="state" placeholder="State Name">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="firstName">City:</label>
-                                        <input type="text" class="form-control" name="city" placeholder="City Name">
+                                        <input style="border-radius:25px;"  type="text" class="form-control" name="city" placeholder="City Name">
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <form action="#" id="kidneyForm" class="kidneyForm shadow p-3 mb-5 bg-white rounded">
+                        <form style="margin-top: 3rem; width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" id="kidneyForm" class="kidneyForm  p-3 mb-5 ">
                             <h3 style="text-align: center;">Kidney Donation Form</h3>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>
-                                <input type="email" class="form-control" id="inputEmail4">
+                                <input style="border-radius:25px;"  type="email" class="form-control" id="inputEmail4">
                                 </div>
                                 <div class="form-group col-md-6">
                                 <label for="inputPassword4">Password</label>
-                                <input type="password" class="form-control" id="inputPassword4">
+                                <input style="border-radius:25px;"  type="password" class="form-control" id="inputPassword4">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputAddress">Address</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label for="inputCity">City</label>
-                                <input type="text" class="form-control" id="inputCity">
+                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputCity">
                                 </div>
                                 <div class="form-group col-md-4">
                                 <label for="inputState">State</label>
@@ -151,59 +157,59 @@
                                 </div>
                                 <div class="form-group col-md-2">
                                 <label for="inputZip">Zip</label>
-                                <input type="text" class="form-control" id="inputZip">
+                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputZip">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <input style="border-radius:25px;"  class="form-check-input" type="checkbox" >
                                 <label class="form-check-label" for="gridCheck">
                                     Check me out
                                 </label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Sign in</button>
+                            <button style="border-radius:25px;"  type="submit" class="btn btn-primary">Sign in</button>
                         </form>
                     </div>
                     <div class="heartPage">
                         <h3>Heart Donation</h3>
-                        <button class="btn btn-xs btn-outline-primary" id="heartSearchBtn">Search for Heart Donor</button>
-                        <button class="btn btn-xs btn-outline-success" onclick="showHeartForm()" id="heartRegisterBtn">Register to donate Heart</button>
-                        <div id="heartSearch">
-                            <form action="#" class="shadow p-3 mb-5 bg-white rounded">
+                        <button style="border-radius:25px;"  class="btn btn-xs btn-outline-primary" id="heartSearchBtn">Search for Heart Donor</button>
+                        <button style="border-radius:25px;"  class="btn btn-xs btn-outline-success" onclick="showHeartForm()" id="heartRegisterBtn">Register to donate Heart</button>
+                        <div id="heartSearch" style="margin-top: 3rem;">
+                            <form style="border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" class=" p-3 mb-5 ">
                                 <h3 style="text-align: center;">Search By your city</h3>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="firstName">State:</label>
-                                        <input type="text" class="form-control" name="state" placeholder="State Name">
+                                        <input style="border-radius:25px;"  type="text" class="form-control" name="state" placeholder="State Name">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="firstName">City:</label>
-                                        <input type="text" class="form-control" name="city" placeholder="City Name">
+                                        <input style="border-radius:25px;"  type="text" class="form-control" name="city" placeholder="City Name">
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <form action="#" id="heartForm" class="heartForm shadow p-3 mb-5 bg-white rounded">
+                        <form style="margin-top: 3rem; width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" id="heartForm" class="heartForm  p-3 mb-5 ">
                             <h3 style="text-align: center;">Heart Donation Form</h3>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>
-                                <input type="email" class="form-control" id="inputEmail4">
+                                <input style="border-radius:25px;"  type="email" class="form-control" id="inputEmail4">
                                 </div>
                                 <div class="form-group col-md-6">
                                 <label for="inputPassword4">Password</label>
-                                <input type="password" class="form-control" id="inputPassword4">
+                                <input style="border-radius:25px;"  type="password" class="form-control" id="inputPassword4">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputAddress">Address</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label for="inputCity">City</label>
-                                <input type="text" class="form-control" id="inputCity">
+                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputCity">
                                 </div>
                                 <div class="form-group col-md-4">
                                 <label for="inputState">State</label>
@@ -214,59 +220,59 @@
                                 </div>
                                 <div class="form-group col-md-2">
                                 <label for="inputZip">Zip</label>
-                                <input type="text" class="form-control" id="inputZip">
+                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputZip">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <input style="border-radius:25px;"  class="form-check-input" type="checkbox" >
                                 <label class="form-check-label" for="gridCheck">
                                     Check me out
                                 </label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Sign in</button>
+                            <button style="border-radius:25px;"  type="submit" class="btn btn-primary">Sign in</button>
                         </form>
                     </div>
                     <div action="#" class="eyesPage">
                         <h3>Eyes Donation</h3>
-                        <button class="btn btn-xs btn-outline-primary" id="eyesSearchBtn">Search for Eyes Donor</button>
-                        <button class="btn btn-xs btn-outline-success" onclick="showEyesForm()" id="eyesRegisterBtn">Register to donate Eyes</button>
-                        <div id="eyesSearch">
-                            <form action="#" class="shadow p-3 mb-5 bg-white rounded">
+                        <button style="border-radius:25px;"  class="btn btn-xs btn-outline-primary" id="eyesSearchBtn">Search for Eyes Donor</button>
+                        <button style="border-radius:25px;"  class="btn btn-xs btn-outline-success" onclick="showEyesForm()" id="eyesRegisterBtn">Register to donate Eyes</button>
+                        <div id="eyesSearch" style="margin-top: 3rem;">
+                            <form style="border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" class=" p-3 mb-5 ">
                                 <h3 style="text-align: center;">Search By your city</h3>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="firstName">State:</label>
-                                        <input type="text" class="form-control" name="state" placeholder="State Name">
+                                        <input style="border-radius:25px;"  type="text" class="form-control" name="state" placeholder="State Name">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="firstName">City:</label>
-                                        <input type="text" class="form-control" name="city" placeholder="City Name">
+                                        <input style="border-radius:25px;"  type="text" class="form-control" name="city" placeholder="City Name">
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <form action="#" id="eyesForm" class="eyesForm shadow p-3 mb-5 bg-white rounded">
+                        <form style="margin-top: 3rem; width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" id="eyesForm" class="eyesForm  p-3 mb-5 ">
                             <h3 style="text-align: center;">Eyes Donation Form</h3>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>
-                                <input type="email" class="form-control" id="inputEmail4">
+                                <input style="border-radius:25px;"  type="email" class="form-control" id="inputEmail4">
                                 </div>
                                 <div class="form-group col-md-6">
                                 <label for="inputPassword4">Password</label>
-                                <input type="password" class="form-control" id="inputPassword4">
+                                <input style="border-radius:25px;"  type="password" class="form-control" id="inputPassword4">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputAddress">Address</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label for="inputCity">City</label>
-                                <input type="text" class="form-control" id="inputCity">
+                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputCity">
                                 </div>
                                 <div class="form-group col-md-4">
                                 <label for="inputState">State</label>
@@ -277,59 +283,59 @@
                                 </div>
                                 <div class="form-group col-md-2">
                                 <label for="inputZip">Zip</label>
-                                <input type="text" class="form-control" id="inputZip">
+                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputZip">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <input style="border-radius:25px;"  class="form-check-input" type="checkbox" >
                                 <label class="form-check-label" for="gridCheck">
                                     Check me out
                                 </label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Sign in</button>
+                            <button style="border-radius:25px;"  type="submit" class="btn btn-primary">Sign in</button>
                         </form>
                     </div>
                     <div action="#" class="intestinePage">
                         <h3>Intestine Donation</h3>
-                        <button class="btn btn-xs btn-outline-primary" id="intestineSearchBtn">Search for Intestines Donor</button>
-                        <button class="btn btn-xs btn-outline-success" onclick="showIntestineForm()" id="intestineRegisterBtn">Register to donate Intestines</button>
-                        <div id="intestineSearch">
-                            <form action="#" class="shadow p-3 mb-5 bg-white rounded">
+                        <button style="border-radius:25px;"  class="btn btn-xs btn-outline-primary" id="intestineSearchBtn">Search for Intestines Donor</button>
+                        <button style="border-radius:25px;"  class="btn btn-xs btn-outline-success" onclick="showIntestineForm()" id="intestineRegisterBtn">Register to donate Intestines</button>
+                        <div id="intestineSearch" style="margin-top: 3rem;">
+                            <form style="border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" class=" p-3 mb-5 ">
                                 <h3 style="text-align: center;">Search By your city</h3>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="firstName">State:</label>
-                                        <input type="text" class="form-control" name="state" placeholder="State Name">
+                                        <input style="border-radius:25px;"  type="text" class="form-control" name="state" placeholder="State Name">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="firstName">City:</label>
-                                        <input type="text" class="form-control" name="city" placeholder="City Name">
+                                        <input style="border-radius:25px;"  type="text" class="form-control" name="city" placeholder="City Name">
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <form action="#" id="intestineForm" class="intestineForm shadow p-3 mb-5 bg-white rounded">
+                        <form style="margin-top: 3rem; margin-top: 3rem;width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" id="intestineForm" class="intestineForm  p-3 mb-5 ">
                             <h3 style="text-align: center;">Intestine Donation Form</h3>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>
-                                <input type="email" class="form-control" id="inputEmail4">
+                                <input style="border-radius:25px;"  type="email" class="form-control" id="inputEmail4">
                                 </div>
                                 <div class="form-group col-md-6">
                                 <label for="inputPassword4">Password</label>
-                                <input type="password" class="form-control" id="inputPassword4">
+                                <input style="border-radius:25px;"  type="password" class="form-control" id="inputPassword4">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputAddress">Address</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label for="inputCity">City</label>
-                                <input type="text" class="form-control" id="inputCity">
+                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputCity">
                                 </div>
                                 <div class="form-group col-md-4">
                                 <label for="inputState">State</label>
@@ -340,18 +346,18 @@
                                 </div>
                                 <div class="form-group col-md-2">
                                 <label for="inputZip">Zip</label>
-                                <input type="text" class="form-control" id="inputZip">
+                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputZip">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <input style="border-radius:25px;"  class="form-check-input" type="checkbox" >
                                 <label class="form-check-label" for="gridCheck">
                                     Check me out
                                 </label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Sign in</button>
+                            <button style="border-radius:25px;"  type="submit" class="btn btn-primary">Sign in</button>
                         </form>
                     </div>
                 </div>
@@ -360,6 +366,11 @@
     </div>
 
     <%- include("../../partials/footer"); -%>
+    <script>
+        AOS.init({
+        duration: 900,
+      });
+    </script>
 
     <script src="/jsFiles/viewJS/userHospJS/organDonation.js"></script>
     
