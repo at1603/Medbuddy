@@ -1,0 +1,9 @@
+form{
+    border-radius: 25px;
+    box-shadow: 0 0 5px rgb(0 0 0 / 20%);
+    padding: 1rem 0.5rem 0 0.5rem;
+}
+
+form > input,select {
+    border-radius: 25px !important;
+}
