@@ -5,21 +5,26 @@
     <%- include("../../partials/header"); -%>
     <link rel="stylesheet" href="/stylesheets/partials/navbar.css">
 
-<body>
     <style>
-        .row{
-            margin: 8rem auto 2em;
-            width: 80%;
-            justify-content: space-between;
-        }
+      .row{
+          margin: 8rem auto 2em;
+          width: 80%;
+          justify-content: space-between;
+      }
     </style>
+<body>
 
-    <%- include("../../partials/Navbar"); -%>
+<%- include("../../partials/altNavbar"); -%>
+<%- include("../../partials/altSidebar"); -%>
 
     <div class="row">
-        <div class="col-md-6">
-            <div class="card" style="width: 25rem;">
-                <img src="https://images.unsplash.com/photo-1519494080410-f9aa76cb4283?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mjl8fGhvc3BpdGFsfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
+        <div class="col-md-6" data-aos="fade-up-right">
+            <div class="card" style="width: 20rem;border-radius: 25px;box-shadow: 1px 1px 20px 0px rgb(0 0 0 / 30%);">
+                <img src="https://images.unsplash.com/photo-1519494080410-f9aa76cb4283?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mjl8fGhvc3BpdGFsfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="..."
+                  style="
+                  border-top-left-radius: 20px;
+                  border-top-right-radius: 20px;
+                  ">
                 <div class="card-body">
                   <h5 class="card-title"><strong>Look For Beds</strong></h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -28,28 +33,37 @@
                   <li class="list-group-item">Cras justo odio</li>
                 </ul>
                 <div class="card-body">
-                  <a href="/userHospitalSection/searchHospitals/findBeds" class="card-link btn btn-outline-success btn-xs">Let's Go</a>
+                  <a href="/userHospitalSection/searchHospitals/findBeds" class="card-link btn btn-outline-success btn-xs"  style="border-radius: 25px;">Let's Go  <i class="fas fa-search" style="margin-left: 0.5rem;"></i></a>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card" style="width: 25rem;">
-                <img src="https://images.unsplash.com/photo-1581585004042-bca38021ce1e?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTcwfHxob3NwaXRhbHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
+        <div class="col-md-6"  data-aos="fade-up-left">
+            <div class="card" style="width: 20rem;border-radius: 25px;box-shadow: 1px 1px 20px 0px rgb(0 0 0 / 30%);">
+                <img src="https://images.unsplash.com/photo-1581585004042-bca38021ce1e?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTcwfHxob3NwaXRhbHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="..."
+                  style="
+                  border-top-left-radius: 20px;
+                  border-top-right-radius: 20px;
+                  ">
                 <div class="card-body">
                   <h5 class="card-title"><strong>Search by Speciality</strong></h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Cras justo odio</li>
-                  <li class="list-group-item">Dapibus ac facilisis in</li>
+                  <li class="list-group-item">Cras justo odio</li>  
                 </ul>
                 <div class="card-body">
-                  <a href="#" class="card-link btn btn-outline-success btn-xs">Find Hospitals</a>
+                  <a href="#" class="card-link btn btn-outline-success btn-xs" style="border-radius: 25px;">Find Hospitals  <i class="fas fa-search-location" style="margin-left: 0.5rem;"></i></a>
                 </div>
             </div>
         </div>
     </div>
 
     <%- include("../../partials/footer"); -%>
+
+    <script>
+      AOS.init({
+        duration: 700
+      })
+    </script>
 </body>
 </html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../../partials/header"); -%>
+<body id="body-pd">
+    <%-include("../../partials/altNavbar");-%>
+    <%- include("../../partials/altAdminSideNavbar"); -%>
+
+
+    <div class="container" style="justify-content: center; margin: 8rem auto 0;">
+        <div class="row">
+            <div class="col-sm-5" style="margin-left: 4rem;" data-aos="fade-right">
+                <div class="card" style="width: 18rem;border-radius: 25px;box-shadow: 1px 1px 20px 0px rgb(0 0 0 / 50%);">
+                    <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aG9zcGl0YWx8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="..."
+                        style="
+                        border-top-left-radius: 20px;
+                        border-top-right-radius: 20px;
+                        ">
+                    <div class="card-body">
+                    <h5 class="card-title"><strong>Hospital Profile</strong></h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Cras justo odio</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="/dashboards/hospAdmin/updateOtherProfile" class="card-link btn btn-outline-success btn-xs" style="border-radius: 20px;">Update Hospital Profile  <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="col-sm-5">
+                <div class="card" style="width: 18rem;">
+                    <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aG9zcGl0YWx8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title"><strong>Hospital Admin Profile</strong></h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Cras justo odio</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="/dashboards/hospAdmin/hospAdminProfile" class="card-link btn btn-outline-success btn-xs">Get Started</a>
+                    </div>
+                </div>
+            </div> -->
+            <div class="form-group col-md-5" data-aos="fade-left">
+                <div class="card" style="width: 18rem;border-radius: 25px;box-shadow: 1px 1px 20px 0px rgb(0 0 0 / 50%);">
+                    <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aG9zcGl0YWx8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="..."
+                        style="
+                        border-top-left-radius: 20px;
+                        border-top-right-radius: 20px;
+                        ">
+                    <div class="card-body">
+                    <h5 class="card-title"><strong>Other Profiles</strong></h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Cras justo odio</li>
+                    </ul>
+                    <div class="card-body">
+                    <a href="/dashboards/hospAdmin/updateOtherProfile" class="card-link btn btn-outline-success btn-xs" style="border-radius: 20px;">Update Other Profiles  <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../../partials/footer"); -%>
+    <script>
+        AOS.init({
+        duration: 1200,
+        });
+    </script>
+</body>
+</html>

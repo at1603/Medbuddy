@@ -1,152 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include("../../partials/header"); -%>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
-        
-        #username{
-            margin-top: 5px;
-            font-weight: 300;
-        }
+  <link rel="stylesheet" href="/stylesheets/landing.css" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  />
+  <%- include("../../partials/header"); -%>
+  <!-- <link rel="stylesheet" href="/stylesheets/partials/navbar.css" /> -->
+  <link rel="stylesheet" href="/stylesheets/dashboard.css" />
+  <script src="https://cdn2.hubspot.net/hubfs/476360/utils.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+    
+    #username{
+        margin-top: 5px;
+        font-weight: 300;
+    }
 
-        #name{
-            margin: 0.8rem 0 0.5rem;
-            font-family: 'Oxygen', sans-serif;
-            font-weight: 700;
-            color: rgb(2, 24, 10) ;
-            display: block;
-        }
+    #name{
+        margin: 0.8rem 0 0.5rem;
+        font-family: 'Oxygen', sans-serif;
+        font-weight: 700;
+        color: rgb(2, 24, 10) ;
+        display: block;
+    }
 
-        #createProfile{
-            margin: 3rem 0 0.5rem;
-            font-family: 'Roboto Condensed', sans-serif;
-            font-weight: 700;
-            text-decoration: none;
-            color: rgb(10, 139, 60) ;
-            display: block;
-        }
-        #updateProfile{
-            margin: 1rem 0 0.8rem;
-            font-family: 'Roboto Condensed', sans-serif;
-            font-weight: 700;
-            text-decoration: none;
-            color: rgb(23, 124, 131) ;
-            display: block;
-        }
-        #mainPageRedirect{
-            margin: 1rem 0;
-            font-family: 'Roboto Condensed', sans-serif;
-            font-weight: 700;
-            text-decoration: none;
-            color: rgb(179, 7, 7) ;
-            display: block;
-        }
+    #createProfile{
+        margin: 3rem 0 0.5rem;
+        font-family: 'Roboto Condensed', sans-serif;
+        font-weight: 700;
+        text-decoration: none;
+        color: rgb(10, 139, 60) ;
+        display: block;
+    }
+    #updateProfile{
+        margin: 1rem 0 0.8rem;
+        font-family: 'Roboto Condensed', sans-serif;
+        font-weight: 700;
+        text-decoration: none;
+        color: rgb(23, 124, 131) ;
+        display: block;
+    }
+    #mainPageRedirect{
+        margin: 1rem 0;
+        font-family: 'Roboto Condensed', sans-serif;
+        font-weight: 700;
+        text-decoration: none;
+        color: rgb(179, 7, 7) ;
+        display: block;
+    }
 
-        .underline-from-center {
-            -webkit-transform: translateZ(0);
-            transform: translateZ(0);
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            -moz-osx-font-smoothing: grayscale;
-            position: relative;
-            overflow: hidden;
-        }
-        #mainPageRedirect.underline-from-center:before {
-            content: "";
-            position: absolute;
-            z-index: -1;
-            left: 50%;
-            right: 50%;
-            bottom: 0;
-            background: rgb(179, 7, 7) ;
-            height: 2px;
-            -webkit-transition-property: left right;
-            transition-property: left right;
-            -webkit-transition-duration: 0.3s;
-            transition-duration: 0.3s;
-            -webkit-transition-timing-function: ease-out;
-            transition-timing-function: ease-out;
-        }
+    .underline-from-center {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -moz-osx-font-smoothing: grayscale;
+        position: relative;
+        overflow: hidden;
+    }
+    #mainPageRedirect.underline-from-center:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 50%;
+        right: 50%;
+        bottom: 0;
+        background: rgb(179, 7, 7) ;
+        height: 2px;
+        -webkit-transition-property: left right;
+        transition-property: left right;
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-timing-function: ease-out;
+        transition-timing-function: ease-out;
+    }
 
-        #updateProfile.underline-from-center:before {
-            content: "";
-            position: absolute;
-            z-index: -1;
-            left: 50%;
-            right: 50%;
-            bottom: 0;
-            background: rgb(23, 124, 131) ;
-            height: 2px;
-            -webkit-transition-property: left right;
-            transition-property: left right;
-            -webkit-transition-duration: 0.3s;
-            transition-duration: 0.3s;
-            -webkit-transition-timing-function: ease-out;
-            transition-timing-function: ease-out;
-        }
-        #createProfile.underline-from-center:before {
-            content: "";
-            position: absolute;
-            z-index: -1;
-            left: 50%;
-            right: 50%;
-            bottom: 0;
-            background: rgb(10, 139, 60) ;
-            height: 2px;
-            -webkit-transition-property: left right;
-            transition-property: left right;
-            -webkit-transition-duration: 0.3s;
-            transition-duration: 0.3s;
-            -webkit-transition-timing-function: ease-out;
-            transition-timing-function: ease-out;
-        }
+    #updateProfile.underline-from-center:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 50%;
+        right: 50%;
+        bottom: 0;
+        background: rgb(23, 124, 131) ;
+        height: 2px;
+        -webkit-transition-property: left right;
+        transition-property: left right;
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-timing-function: ease-out;
+        transition-timing-function: ease-out;
+    }
+    #createProfile.underline-from-center:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 50%;
+        right: 50%;
+        bottom: 0;
+        background: rgb(10, 139, 60) ;
+        height: 2px;
+        -webkit-transition-property: left right;
+        transition-property: left right;
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-timing-function: ease-out;
+        transition-timing-function: ease-out;
+    }
 
-        #mainPageRedirect.underline-from-center:hover:before {
-            left: 1rem;
-            right: 1rem;
-        }
-        #updateProfile.underline-from-center:hover:before {
-            left: 20px;
-            right: 20px;
-        }
-        #createProfile.underline-from-center:hover:before {
-            left: 0;
-            right: 0;
-        }
+    #mainPageRedirect.underline-from-center:hover:before {
+        left: 1rem;
+        right: 1rem;
+    }
+    #updateProfile.underline-from-center:hover:before {
+        left: 20px;
+        right: 20px;
+    }
+    #createProfile.underline-from-center:hover:before {
+        left: 0;
+        right: 0;
+    }
+</style>
 
-        /* #barChart{
-            width: 30% !important;
-            height: 30%;
-            display: block;
-        } */
-    </style>
-<body>
-    <%- include("../../partials/Navbar"); -%>
+  <body id="body-pd">
+    <%-include("../../partials/altNavbar");-%>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+          <div>
+            <a href="#" class="nav__logo">
+              <i class="bx bx-layer nav__logo-icon"></i>
+              <span class="nav__logo-name">MedBuddy</span>
+            </a>
+      
+            <div class="nav__list" id="patientMenu">
+              <a href="#" class="nav__link active">
+                <i class="bx bx-grid-alt nav__icon"></i>
+                <span class="nav__name">Dashboard</span>
+              </a>
+      
+              <a href="/userDocSection/docList/:id" class="nav__link">
+                <i class="bx bx-user nav__icon"></i>
+                <span class="nav__name">Doctors</span>
+              </a>
+      
+              <a href="#" class="nav__link">
+                <i class="bx bx-message-square-detail nav__icon"></i>
+                <span class="nav__name">Messages</span>
+              </a>
+      
+              <a href="/dashboards/hospAdmin/profileIndex" class="nav__link">
+                <i class="fas fa-database"></i>
+                <span class="nav__name">Create Database</span>
+              </a>
+              <a href="/dashboards/hospAdmin/updateProfileIndex" class="nav__link">
+                <i class="far fa-edit"></i>
+                <span class="nav__name">Update Database</span>
+              </a>
+              <a href="/hospHospSection/initialPage" class="nav__link">
+                <i class="bx bx-bookmark nav__icon"></i>
+                <span class="nav__name">Action Page</span>
+              </a>
+      
+              <a href="#" class="nav__link">
+                <i class="bx bx-folder nav__icon"></i>
+                <span class="nav__name">History</span>
+              </a>
+      
+              <a href="#" class="nav__link">
+                <i class="bx bx-bar-chart-alt-2 nav__icon"></i>
+                <span class="nav__name">Analytics</span>
+              </a>
+            </div>
+        </div>
+      
+          <!-- <a href="#" class="nav__link">
+            <i class="bx bx-log-out nav__icon"></i>
+          </a> -->
+        </nav>
+      </div>      
 
     <div class="row" style="margin: 8rem 4rem;">
-        <div class="col-md-2" style="border-right: 1px solid gray; text-align: center; justify-content:center;">
-            <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-182-132174.png" class="img-fluid rounded-circle border" alt="https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-vector-avatar-icon-png-image_695765.jpg" style="width:60%; box-shadow: 6px 5px 18px 0px rgba(0,0,0,0.33);" >
-            <h5 id="username"><%=currentUser.username%></h5>
-            <h5 id="name"><%= currentUser.firstName + " " + currentUser.lastName%></h5>
-            <span><em>Joined <%= moment(currentUser.joinedAt).fromNow()%></em></span>
-
-            <a href="/dashboards/hospAdmin/profileIndex" id="createProfile" class="underline-from-center">Create Hospital Profile</a>
-            <a href="/dashboards/hospAdmin/profileIndex" id="updateProfile" class="underline-from-center">Update Profile</a>
-            <a href="/hospHospSection/initialPage" id="mainPageRedirect" class="underline-from-center">Go to Action Page</a>
-        </div>
-
         <div class="col-md-10">
             <% if(foundHosp.length > 0){ %>
-                <h5><u>About your institutions</u></h5>
-                <p><strong>Hospital Name:</strong> <%=foundHosp[0].name%> </p>
-                <p><strong>Hospital Address:</strong> <%= foundHosp[0].address.street + ", " + foundHosp[0].address.city + ", " + foundHosp[0].address.state + ", " + foundHosp[0].address.zip %> </p>
-                <div class="row">
-                    <div class="col-md-4">
-                        <p><strong>Email: </strong><%=foundHosp[0].contact.email%></p>
-                    </div>
-                    <div class="col-md-4">
-                        <p><strong> TEst Phone Number: </strong><%=foundHosp[0].contact.phone%></p>
+                <h5><u><b>About your institutions</b></u></h5>
+                <div style="line-height: 1.9rem;">
+                    <p><strong>Hospital Name:</strong> <%=foundHosp[0].name%> </p>
+                    <p><strong>Hospital Address:</strong> <%= foundHosp[0].address.street + ", " + foundHosp[0].address.city + ", " + foundHosp[0].address.state + ", " + foundHosp[0].address.zip %> </p>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <p><strong>Email: </strong><%=foundHosp[0].contact.email%></p>
+                        </div>
+                        <div class="col-md-5">
+                            <p><strong>Phone Number: </strong><%=foundHosp[0].contact.phone%></p>
+                        </div>
                     </div>
                 </div>
             <% } else { %>
@@ -154,119 +202,232 @@
             <% } %>
 
             <% if(foundAdmin.length > 0){ %>
-            <h5><u>Administrator Information: </u></h5>
-            <p><strong>Admninstrator Name: </strong> <%= currentUser.firstName + " " + currentUser.lastName%></p>
-            <div class="row">
-                <div class="col-md-4">
-                    <p><strong>Administrator Email: </strong> <%= foundAdmin[0].adminContact.phone%></p>
+            <h5 style="margin-top: 1rem"><u><strong>Administrator Information: </strong></u></h5>
+            <div style="line-height: 1.9;">
+                <p><strong>Admninstrator Name: </strong> <%= currentUser.firstName + " " + currentUser.lastName%></p>
+                <div class="row">
+                    <div class="col-md-5">
+                        <p><strong>Administrator Email: </strong> <%= foundAdmin[0].adminContact.phone%></p>
+                    </div>
+                    <div class="col-md-5">
+                        <p><strong>Administrator Contact No.: </strong> <%= foundAdmin[0].adminContact.phone%></p>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <p><strong>Administrator Contact No.: </strong> <%= foundAdmin[0].adminContact.phone%></p>
-                </div>
-            </div>
+            </div>  
             <% } else { %>
                 <p><strong>No Admin is Registered   !</strong></p>
             <% } %>
-            <h5><u>Other Details: </u></h5>
+            <h5 style="margin-top: 1rem"><u><Strong>Other Details: </Strong></u></h5>
             <% if(foundHosp.length > 0){ %>
-            <p><strong>Token No: </strong><%= foundHosp[0]._id%></p>
+            <p><strong>Hospital Token No: </strong><%= foundHosp[0]._id%></p>
             <% } %>
         </div>
-    </div>
-
-
-    <!-- ----------Analytics Part---------------- -->
-    <div class="row" style="margin: 2rem 6rem">
-        <h5>Analytics</h5>
-
-        <div class="chart-container" style="position: absolute; height:40vh; width:40vw">
-            <canvas id="barChart"></canvas>
-        </div>
-        <div class="chart-container" style=" margin-left: 50vw; position: absolute; height:40vh; width:40vw">
-            <canvas id="lineChart"></canvas>
+        <div class="col-md-2"  data-aos="fade-left" style="border-radius: 25px;text-align: center;justify-content:center;box-shadow: 0 0 20px 0px rgb(0 0 0 / 20%);">
+            <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-182-132174.png" class="img-fluid rounded-circle border" alt="https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-vector-avatar-icon-png-image_695765.jpg" style="margin-top: 2rem; width:60%; box-shadow: 6px 5px 18px 0px rgba(0,0,0,0.33);" >
+            <h5 id="username"><%=currentUser.username%></h5>
+            <h5 id="name"><%= currentUser.firstName + " " + currentUser.lastName%></h5>
+            <span><em>Joined <%= moment(currentUser.joinedAt).fromNow()%></em></span>
         </div>
     </div>
 
-    <%- include("../../partials/footer"); -%>
+        <h4 style="text-align: center; margin: 0 auto 1.5rem"><Strong><i class="fas fa-chart-line"></i>   Analytics</Strong> </h4>
+    <main data-aos="fade-up">
+
+      <div class="div1 card">
+        <div class="clearfix">
+          <div class="card-icon shadow-primary bg-blue">
+            <i class="material-icons align-middle">local_activity</i>
+          </div>
+          <div class="card-right">
+            <div>
+              <h5 class="pull-right">Earning</h5>
+            </div>
+            <div class="m-r-10 m-l-10">
+              <h3 class="font-weight-bold pull-right mb-0">$18,000</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-chart">
+          <div class="chartjs-size-monitor">
+            <div class="chartjs-size-monitor-expand"></div>
+            <div class="chartjs-size-monitor-shrink"></div>
+          </div>
+          <canvas
+            id="div1"
+            basechart=""
+            class="chartjs-render-monitor"
+            width="432"
+            height="216"
+            style="display: block; width: 432px; height: 216px"
+          ></canvas>
+        </div>
+      </div>
+      <div class="div2 card">
+        <div class="clearfix">
+          <div
+            class="card-icon shadow-primary bg-green"
+            style="background: #228b22ba"
+          >
+            <i class="material-icons align-middle">person_add</i>
+          </div>
+          <div class="card-right">
+            <div>
+              <h5 class="pull-right">New Patients</h5>
+            </div>
+            <div class="m-r-10 m-l-10">
+              <h3 class="font-weight-bold pull-right mb-0">116</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-chart">
+          <div class="chartjs-size-monitor">
+            <div class="chartjs-size-monitor-expand"></div>
+            <div class="chartjs-size-monitor-shrink"></div>
+          </div>
+          <canvas
+            id="div2"
+            basechart=""
+            class="chartjs-render-monitor"
+            width="432"
+            height="216"
+            style="display: block; width: 432px; height: 216px"
+          ></canvas>
+        </div>
+      </div>
+      <div class="div3 card">
+        <div class="clearfix">
+          <div
+            class="card-icon shadow-primary bg-orange"
+            style="background: orange"
+          >
+            <i class="material-icons align-middle">content_cut</i>
+          </div>
+          <div class="card-right">
+            <div>
+              <h5 class="pull-right">Operations</h5>
+            </div>
+            <div class="m-r-10 m-l-10">
+              <h3 class="font-weight-bold pull-right mb-0">24</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-chart">
+          <div class="chartjs-size-monitor">
+            <div class="chartjs-size-monitor-expand"></div>
+            <div class="chartjs-size-monitor-shrink"></div>
+          </div>
+          <canvas
+            id="div3"
+            basechart=""
+            class="chartjs-render-monitor"
+            width="432"
+            height="216"
+            style="display: block; width: 432px; height: 216px"
+          ></canvas>
+        </div>
+      </div>
+      <div class="div4 card">
+        <div class="clearfix">
+          <div
+            class="card-icon shadow-primary bg-purple"
+            style="background: #8309d0b8"
+          >
+            <i class="material-icons align-middle">face</i>
+          </div>
+          <div class="card-right">
+            <div>
+              <h5 class="pull-right">Appointments</h5>
+            </div>
+            <div class="m-r-10 m-l-10">
+              <h3 class="font-weight-bold pull-right mb-0">36</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-chart">
+          <div class="chartjs-size-monitor">
+            <div class="chartjs-size-monitor-expand"></div>
+            <div class="chartjs-size-monitor-shrink"></div>
+          </div>
+          <canvas
+            id="div4"
+            basechart=""
+            class="chartjs-render-monitor"
+            width="432"
+            height="216"
+            style="display: block; width: 432px; height: 216px"
+          ></canvas>
+        </div>
+      </div>
+      <div class="div5 card">
+        
+          <canvas  id="div5" width="883.5" height="450"  style="background-color:rgba(255,255,255,1.00);border-radius:0px;width:883.5px;height:450px;padding-left:0px;padding-right:0px;padding-top:0px;padding-bottom:0px"></canvas>
+
+        
+      </div>
+      <div class="div6 card">
+        <canvas id="div6" width="883.5" height="450" style="width: 883.5px;height: 450px;" class="chartjs-render-monitor"></canvas>
+      </div>
+      <!-- <div class="div7 card">div7</div> -->
+      <div class="div8 card">
+        <div id="div8">
+          <table>
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">S.N</th>
+                <th class="column1">Patient Name</th>
+                <th class="column1">Date</th>
+                <th class="column1">Disease</th>
+                <th class="column7">Action</th>
+              </tr>
+            </thead>
+            <tbody id="front">
+              <tr>
+                <td class="column1">1</td>
+                <td class="column1">Mark</td>
+                <td class="column1">20/05/2021</td>
+                <td class="column1">Cancer</td>
+
+                <td><form method="POST" id="delete_form"><a id="dlt_icon" return false;" href="javascript:{}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                </svg></a></form></td>
+              </tr>
+              <tr>
+                <td class="column1">1</td>
+                <td class="column1">Mark</td>
+                <td class="column1">20/05/2021</td>
+                <td class="column1">Cancer</td>
+
+                <td><form method="POST" id="delete_form"><a id="dlt_icon" return false;" href="javascript:{}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                </svg></a></form></td>
+              </tr>
+              <tr>
+                <td class="column1">1</td>
+                <td class="column1">Mark</td>
+                <td class="column1">20/05/2021</td>
+                <td class="column1">Cancer</td>
+
+                <td><form method="POST" id="delete_form"><a id="dlt_icon" return false;" href="javascript:{}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                </svg></a></form></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    <%-include("../../partials/footer");-%>
+    <script src="/jsFiles/chartJs/div1.js"></script>
+    <script src="/jsFiles/chartJs/div2.js"></script>
+    <script src="/jsFiles/chartJs/div3.js"></script>
+    <script src="/jsFiles/chartJs/div4.js"></script>
+    <script src="/jsFiles/chartJs/div5.js"></script>
+    <script src="/jsFiles/chartJs/div6.js"></script>
     <script>
-        var barChartctx = document.getElementById('barChart');
-        var barChart = new Chart(barChartctx, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1,
-                }]
-            },
-            options: {
-                maintainAspectRatio: false,
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
+      AOS.init({
+        duration: 1200,
+      });
+    </script>
 
-        new Chart(document.getElementById("lineChart"), {
-            type: 'line',
-            data: {
-                labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
-                datasets: [{ 
-                    data: [86,114,106,106,107,111,133,221,783,2478],
-                    label: "Africa",
-                    borderColor: "#3e95cd",
-                    fill: false
-                }, { 
-                    data: [282,350,411,502,635,809,947,1402,3700,5267],
-                    label: "Asia",
-                    borderColor: "#8e5ea2",
-                    fill: false
-                }, { 
-                    data: [168,170,178,190,203,276,408,547,675,734],
-                    label: "Europe",
-                    borderColor: "#3cba9f",
-                    fill: false
-                }, { 
-                    data: [40,20,10,16,24,38,74,167,508,784],
-                    label: "Latin America",
-                    borderColor: "#e8c3b9",
-                    fill: false
-                }, { 
-                    data: [6,3,2,2,7,26,82,172,312,433],
-                    label: "North America",
-                    borderColor: "#c45850",
-                    fill: false
-                }
-                ]
-            },
-            options: {
-                title: {
-                display: true,
-                text: 'World population per region (in millions)'
-                }
-            }
-        });
-        </script>
-</body>
+  </body>
 </html>
