@@ -6,7 +6,9 @@ Hospital = require("../models/hospSchema");
 var router = express.Router();
 
 //----------Patient Routes--------------//
+
 router.get("/userDocSection/consultDoc", function (req, res) {
+
   res.render("user/dashboards/patientDashboard.ejs");
 });
 //----X-----Patient Routes-------X------//
@@ -18,7 +20,7 @@ router.get("/userDocSection/checkPatients", function (req, res) {
 //----X-----Doctor Routes--------x-----//
 
 //----------Hospital Admin Routes--------------//
-<<<<<<< HEAD
+
 router.get("/user/hospAdmin/dashboard", function (req, res) {
   Hospital.find()
     .where("handler.id")
@@ -41,22 +43,7 @@ router.get("/user/hospAdmin/dashboard", function (req, res) {
             }
           });
       }
-=======
 
-router.get("/user/hospAdmin/dashboard", function(req, res) {
-    Hospital.find().where('handler.id').equals(req.user._id).exec(function(err, foundHosp){
-        if(err){
-            console.log(err);
-        }else{
-            HospitalAdmin.find().where('handler.id').equals(req.user._id).exec(function(err, foundAdmin){
-                if(err){
-                    console.log(err);
-                } else{
-                    res.render("user/dashboards/hospAdminDashboard", {foundHosp: foundHosp, foundAdmin: foundAdmin});
-                }
-            });
-        }
->>>>>>> 5edaad277019f577bb64cbfa9534596aba733dac
     });
 });
 
@@ -99,7 +86,7 @@ router.get("/dashboards/hospAdmin/otheProfile", function (req, res) {
 
 ////```````````Hospital Info post request`````````````///////
 
-<<<<<<< HEAD
+
 router.post("/dashboards/hospAdmin/hospitalProfile", function (req, res) {
   let newHosp = {
     name: req.body.hospName,
@@ -129,37 +116,7 @@ router.post("/dashboards/hospAdmin/hospitalProfile", function (req, res) {
       res.redirect("/dashboards/hospAdmin/profileIndex");
     }
   });
-=======
-router.post("/dashboards/hospAdmin/hospitalProfile", function(req, res){
-    let newHosp = {
-        name: req.body.hospName,
-        type: req.body.type,
-        speciality: req.body.speciality,
-        contact: {
-            email: req.body.email,
-            phone: req.body.phone
-        },
-        handler: {
-            id: req.user._id,
-            username: req.user.username
-        },
-        address: {
-            street: req.body.street,
-            city: req.body.city,
-            state: req.body.state,
-            zip: req.body.zip
-        },
-        about: req.body.about
-    };
 
-    Hospital.create(newHosp, function(err, newHospital){
-        if(err){
-            console.log(err);
-        } else{
-            res.redirect('/dashboards/hospAdmin/profileIndex');
-        }
-    });
->>>>>>> 5edaad277019f577bb64cbfa9534596aba733dac
 });
 
 ////``````````````Hospital Admin Post request```````````````/////
@@ -248,11 +205,7 @@ router.post(
 );
 // -----X----Hospital Admin BloodBank, Ambulance, other routes ------X-------- //
 
-<<<<<<< HEAD
-//-----------------Hospital Admin Update Routes-------------------//
 
-//----------X------Hospital Admin Update Routes----------X--------//
-=======
 
 //-----------------Hospital, Other Profiles Update Routes-------------------//
 
@@ -340,7 +293,7 @@ router.put("/dashboards/hospAdmin/updateOtherProfile/bloodBank/:id", function(re
 
 //-------------X------------Other Profiles Update Routes ----------X----------//
 //----------X------Hospital, Other Profiles Update Routes----------X--------//
->>>>>>> 5edaad277019f577bb64cbfa9534596aba733dac
+
 //-----X----Hospital Admin Routes-------X------//
 
 module.exports = router;
