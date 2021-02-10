@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../../../partials/header"); -%>
+<body>
+    <%- include("../../../partials/Navbar"); -%>
+
+    <form action="/dashboards/hospAdmin/updateHospitalProfile/<%=foundHosp[0]._id%>?_method=PUT" method="POST" class="container" style="margin: 8rem 1rem 2rem 37rem;padding: 2rem;max-width: 600px;box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);border-radius: 42px;">
+        <h3 style="text-align: center;">Create Your Hospital Profile</h3>
+        <div class="form-row">
+            <div class="form-group col-sm-12">
+                <input type="text" class="form-control" name="hosp[hospName]" value="<%= foundHosp[0].name %>">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <select name="hosp[type]" class="form-control" id="hospType">
+                    <option disabled>Type of Hospital</option>
+                    <option value="Private" <%= foundHosp[0].type === "Private" ? "selected":"" %>>Private</option>
+                    <option value="Public" <%= foundHosp[0].type === "Public" ? "selected":"" %>>Public</option>
+                    <option value="Government Aided"<%= foundHosp[0].type === "Government Aided" ? "selected":"" %>>Government Aided</option>
+                </select>
+            </div>
+            <%=console.log(foundHosp[0]._id)%>
+            <div class="form-group col-md-6">
+                <select name="hosp[speciality]" class="form-control" id="speciality">
+                    <option disabled>Center of Excellence</option>
+                    <option value="Multispeciality" <%= foundHosp[0].speciality == 'Multispeciality' ?'selected':'' %>>Multispeciality</option>
+                    <option value="Oncology" <%= foundHosp[0].speciality == 'Oncology' ?'selected':'' %>>Oncology</option>
+                    <option value="Opthamology" <%= foundHosp[0].speciality == 'Opthamology' ?'selected':'' %>>Opthamology</option>
+                </select>
+            </div>
+        </div>
+
+        <h5>Hospital Address: </h5>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <input type="text" id="streetAddress" class="form-control" name="hosp[street]" value="<%= foundHosp[0].address.street %>">
+            </div>
+            <div class="form-group col-md-5">
+                <input type="text" id="cityAddress" class="form-control" name="hosp[city]" value="<%= foundHosp[0].address.city %>">
+            </div>
+            <div class="form-group col-md-5">
+                <input type="text" id="cityAddress" class="form-control" name="hosp[state]" value="<%= foundHosp[0].address.state %>">
+            </div>
+            <div class="form-group col-md-2">
+                <input type="text" id="zipAddress" class="form-control" name="hosp[zip]" value="<%= foundHosp[0].address.zip %>">
+            </div>
+        </div>
+
+        <h5>Contact Info: </h5>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input type="email" class="form-control" name="hosp[email]" id="emailInput" value="<%= foundHosp[0].contact.email %>">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="number" class="form-control" name="hosp[phone]" id="phoneInput" value="<%= foundHosp[0].contact.phone %>">
+            </div>
+        </div>
+
+        <h5>About the Hospital: </h5>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <textarea class="form-control"name="hosp[about]" id="aboutHosp" cols="30" rows="10"><%= foundHosp[0].about %>"</textarea>
+            </div>
+        </div>
+        <button class="btn btn-xs btn-primary" type="submit">Submit!</button>
+    </form>
+
+    <%- include("../../../partials/footer"); -%>
+</body>
+</html>

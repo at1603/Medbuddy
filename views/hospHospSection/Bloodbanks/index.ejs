@@ -41,7 +41,7 @@
                 <% for(var i = 0; i < bloodbanks.length; i++){ %>
                     <tr>
                       <td><%= i+1%></td>
-                      <td><%= bloodbanks[i].hospital_name %></td>
+                      <td><%= hospitals[i].name %></td>
                       <td><%= bloodbanks[i].currcapacity.opos %></td>
                       <td><%= bloodbanks[i].currcapacity.oneg%></td>
                       <td><%= bloodbanks[i].currcapacity.apos%></td>
@@ -52,7 +52,7 @@
                       <td><%= bloodbanks[i].currcapacity.abneg%></td>
                       <td><%= bloodbanks[i].price%></td>
                       <td><%= bloodbanks[i].contact%></td>
-                      <td><a href="/hospHospSection/bloodbank/request" class="btn btn-outline-danger">Request</a></td>
+                      <td><a href="/hospHospSection/bloodbank/specificRequest" class="btn btn-outline-danger">Request</a></td>
 
                     </tr>
                 <% } %>

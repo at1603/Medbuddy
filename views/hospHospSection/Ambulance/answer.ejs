@@ -1,0 +1,101 @@
+<%-include("../../partials/header");-%>
+<style type="text/css">
+  .container{
+            margin-top: 8rem;
+        }
+  .hiddenRow {
+    padding: 0 !important;
+}
+.accordion-body{
+  width: 50%;
+  margin: 100px auto;
+  text-align: left;
+}
+#image{
+  float:left;
+  margin:15px 30px 15px 15px;
+}
+h4{
+  margin-bottom: 20px;
+}
+</style>
+<%- include("../../partials/Navbar"); -%>
+
+<div class="container">
+  <h2>Oxygen Bank Answer Window</h2>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <!-- For oxygenBank request -->
+                  <th>#</th>
+                  <th>Hospital</th>
+                  <th>Date</th>
+                  <th>Reason</th>
+                  <th>Instructions</th>
+                  <th>Contact</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var i = 0; i < requests.length; i++){ %>
+                    <tr data-toggle="collapse" data-target="#row<%=i%>" class="accordion-toggle">
+                      <td id="element" data-placement="top" data-toggle="popover" data-content="Click to expand"><%= i+1%></td>
+                      <td><%=// requests[i].hospitalName %></td>
+                      <td><%= requests[i].date%></td>
+                      <td><%= requests[i].reason%></td>
+                      <td><%= requests[i].instructions%></td>
+                      <td><%= //requests[i].contact%></td>
+                      <td><a href="/hospHospSection/oxygenBank/approve" class="btn btn-outline-success">Approve</a>
+                        <a href="/hospHospSection/oxygenBank/reject" class="btn btn-outline-danger">Reject</a>
+                      </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="12" class="hiddenRow">
+                          <div class="accordian-body collapse" id="row<%=i%>">
+                              <img id="image" src="https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/thumbnails/image/Placeholder_person.png" width="150px">
+                              <h4 >Patient Details</h4>
+                              <div class="row">
+
+                                <div class="col-sm-3">
+                                  
+                                  <p><strong>First Name:</strong> <%=requests[i].firstName%></p>
+                                  <p><strong>Last Name:</strong> <%=requests[i].lastName%></p>
+                                  <p><strong>City:</strong> <%=requests[i].city%></p>
+                                  
+                                </div>
+                                <div class="col-sm-3">
+                                  <p><strong>State:</strong> <%=requests[i].state%></p>
+                                  <p><strong>Pin Code:</strong> <%=requests[i].pinCode%></p>
+                                  <p><strong>Age:</strong> <%=requests[i].age%></p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <p><strong>Blood Group:</strong> <%=requests[i].bloodGroup%></p>
+                                    <p><strong>Address:</strong> <%=requests[i].address%></p>
+                                    <p><strong>Disease History:</strong> <%=requests[i].disease%></p>
+
+                                </div>
+                              </div>
+                              
+                          </div> 
+                      </td>
+                    </tr>
+                <% } %>
+              </tbody>
+            </table>
+    </div>
+  </div>
+</div>    
+<script>
+     setTimeout(function (){
+      $('#element').popover('show');
+},1000);
+     setTimeout(function(){
+      $('#element').popover('hide');
+      $('#element').popover('disable');
+    },4000);
+  </script>  
+
+<%-include("../../partials/footer");-%>
