@@ -1,65 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include("../../partials/header"); -%>
-<body>
-    <%- include("../../partials/altNavbar"); -%>
-    <!-- -----------SideBar Code ---------------- -->
-    <div class="l-navbar" id="nav-bar">
-        <nav class="nav">
-            <div>
-                <a href="#" class="nav__logo">
-                <i class="bx bx-layer nav__logo-icon"></i>
-                <span class="nav__logo-name">MedBuddy</span>
-                </a>
-        
-                <div class="nav__list" id="patientMenu">
-                <a href="#" class="nav__link active">
-                    <i class="bx bx-grid-alt nav__icon"></i>
-                    <span class="nav__name">Dashboard</span>
-                </a>
-        
-                <a href="/userDocSection/docList/:id" class="nav__link">
-                    <i class="bx bx-user nav__icon"></i>
-                    <span class="nav__name">Doctors</span>
-                </a>
-        
-                <a href="#" class="nav__link">
-                    <i class="bx bx-message-square-detail nav__icon"></i>
-                    <span class="nav__name">Messages</span>
-                </a>
-        
-                <a href="/dashboards/hospAdmin/profileIndex" class="nav__link">
-                    <i class="fas fa-database"></i>
-                    <span class="nav__name">Create Database</span>
-                </a>
-                <a href="/dashboards/hospAdmin/updateProfileIndex" class="nav__link">
-                    <i class="far fa-edit"></i>
-                    <span class="nav__name">Update Database</span>
-                </a>
-                <a href="/hospHospSection/initialPage" class="nav__link">
-                    <i class="bx bx-bookmark nav__icon"></i>
-                    <span class="nav__name">Action Page</span>
-                </a>
-        
-                <a href="#" class="nav__link">
-                    <i class="bx bx-folder nav__icon"></i>
-                    <span class="nav__name">History</span>
-                </a>
-        
-                <!-- <a href="#" class="nav__link">
-                    <i class="bx bx-bar-chart-alt-2 nav__icon"></i>
-                    <span class="nav__name">Analytics</span>
-                </a> -->
-                </div>
-            </div>
-        </nav>
-      </div>      
+    <style>
 
-    <!-- ------X----SideBar Code --------X------- -->
+        body{
+            overflow: hidden;
+        }
+        #bg-img{
+            background-image: url('../../../assets/images/backgrounds/background1.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: -1;
+        }
+    </style>
+<body id="body-pd">
+    <div id="bg-img">
+    <%- include("../../partials/altNavbar"); -%>
+    <%- include("../../partials/altAdminSideNavbar"); -%>
+
 
     <div class="container" style="justify-content: center; margin: 8rem auto 0;">
         <div class="row" style="margin-left: 4rem;">
-            <div class="col-sm-6" data-aos="fade-right">
+            <div class="col-sm-4" data-aos="fade-up-right">
                 <div class="card" style="width: 18rem;border-radius: 25px;box-shadow: 1px 1px 20px 0px rgb(0 0 0 / 50%);">
                     <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aG9zcGl0YWx8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="..." 
                         style="
@@ -82,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6"  data-aos="fade-left">
+            <div class="col-sm-4"  data-aos="fade-down">
                 <div class="card" style="width: 18rem;border-radius: 25px;box-shadow: 1px 1px 20px 0px rgb(0 0 0 / 50%);">
                     <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aG9zcGl0YWx8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="..."
                         style="
@@ -105,9 +67,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" style="margin: 8rem 27vw">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-4" data-aos="fade-up-left">
                 <div class="card" style="width: 18rem;border-radius: 25px;box-shadow: 1px 1px 20px 0px rgb(0 0 0 / 50%);">
                     <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aG9zcGl0YWx8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="..."
                         style="
@@ -136,6 +96,8 @@
         duration: 1200,
         });
     </script>
+     
+    </div>
 </body>
 </html>
 
