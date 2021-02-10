@@ -1,13 +1,12 @@
 var express = require("express");
 var router = express.Router();
 
-router.get("/userDocSection/consultDoc", function (req, res) {
-  res.render("userDocSection/index");
-});
-
 ////+++////
 
 //Doctor routes
+router.get("/userDocSection/profile", function (req, res) {
+  res.render("userDocSection/docfiles/profile");
+});
 router.get("/userDocSection/patientList/:id", function (req, res) {
   res.render("userDocSection/docfiles/patientList");
 });

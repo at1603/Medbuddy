@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link rel="stylesheet" href="/stylesheets/landing.css" />
+  <!-- <link rel="stylesheet" href="/stylesheets/partials/navbar.css" /> -->
+
+  <%- include("../../partials/header"); -%>
+  <body id="body-pd">
+    <%-include("../../partials/altNavbar");-%>
+    <%-include("../../partials/altSidebar");-%>
+    <div class="card">
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="experience">Experience</label>
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Experience"
+              name="experience"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Qualification</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Qualification"
+              name="qualification"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="worksAt">Works At</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Works At"
+            name="worksAt"
+          />
+        </div>
+        <div class="form-group">
+          <label for="timing">Timing</label>
+          <input type="time" class="form-control" name="timing" />
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputCity">City</label>
+            <input type="text" class="form-control" name="city" />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState">State</label>
+            <select id="inputState" class="form-control" name="state">
+              <option selected>Choose...</option>
+              <option>...</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputZip">Zip</label>
+            <input type="text" class="form-control" name="zipCode" />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+    <%-include("../../partials/footer");-%>
+  </body>
+</html>
