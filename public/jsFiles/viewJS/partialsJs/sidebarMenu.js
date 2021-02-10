@@ -1,5 +1,5 @@
 var rows = {
-  userType: "patient",
+  userType: "doctor",
 };
 function sidebarMenuSelector() {
   var patient = document.getElementById("patientMenu");
