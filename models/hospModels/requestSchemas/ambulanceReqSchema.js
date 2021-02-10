@@ -15,7 +15,8 @@ let ambulanceReqSchema = new mongoose.Schema({
     disease: String,
     age: Number,
     reason: String,
-    instructions: String
+    instructions: String,
+    date: String
 });
 
 module.exports = mongoose.model('ambulanceReqSchema', ambulanceReqSchema);
