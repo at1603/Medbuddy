@@ -7,6 +7,7 @@ Hospital = require("../models/hospSchema")
 var router = express.Router();
 
 //----------Patient Routes--------------//
+//TEST PUSH
 router.get("/userDocSection/consultDocs", function (req, res) {
   res.render("user/dashboards/patientDashboard.ejs");
 });
