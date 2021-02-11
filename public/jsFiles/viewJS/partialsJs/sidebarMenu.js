@@ -1,5 +1,5 @@
 var rows = {
-  userType: "patient",
+  userType: "doctor",
 };
 function sidebarMenuSelector() {
   var patient = document.getElementById("patientMenu");
@@ -7,7 +7,7 @@ function sidebarMenuSelector() {
   if (rows.userType == "doctor") {
     patient.style.display = "none";
   } else {
-    // doctor.style.display = "none";
+    doctor.style.display = "none";
   }
 }
 

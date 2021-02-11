@@ -2,21 +2,30 @@ var mongoose = require("mongoose");
 
 var docSchema = new mongoose.Schema({
     speciality: String,
+    handler:{
+      id:{
+         type:mongoose.Schema.Types.ObjectId,
+         ref:"User"
+      },
+      username:String
+   },
     workingAt: {
-            type:mongoose.Schema.Types.ObjectId,
+            type: String,
             ref:"Hospital",
-            default:null
+            default:'Not Connected'
     },
-    qual: [String],
+    workAtHosp: {
+       type: String,
+       default: 'Not Connected'
+    },
+    timing: {
+       timingFrom: Date,
+       timingTo: Date
+    },
+    qual: String,
     experience: Number,
     tier: String,
-    handler:{
-        id:{
-           type:mongoose.Schema.Types.ObjectId,
-           ref:"User"
-        },
-        username:String
-     }
+
 });
 
 module.exports = mongoose.model("Doctor", docSchema);

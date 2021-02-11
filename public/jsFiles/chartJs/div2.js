@@ -9,7 +9,8 @@ var ChartData = {
   labels: ["January", "February", "March", "April", "May", "June", "July"],
   datasets: [
     {
-      data: [65, 450, 53, 56, 107, 56, 55, 40, 65, 45, 56, 78, 56, 55, 40],
+      // data: [65, 450, 53, 56, 107, 56, 55, 40, 65, 45, 56, 78, 56, 55, 40],
+      data: [0, 0.5, 5, 0.866, 1, 1.3, 8, 5],
       backgroundColor: "#91ea91ba",
       borderColor: "rgba(136,136,136,0.5)",
       pointBackgroundColor: "#91ea91ba",

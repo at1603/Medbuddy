@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include("../../partials/header"); -%>
+    <link rel="stylesheet" href="/stylesheets/globalCSS/formTheme.css">
+    <style>
+        select{
+            margin-left: 6rem
+        }
+
+        button{
+            margin-left: 6rem
+        }
+    </style>
 <body>
     <%- include("../../partials/Navbar"); -%>
     <div class="container" style="margin-top: 8rem ;">
-        <h5>Search hospitals in your city</h5>
         <form action="#">
+            <h5 style="text-align: center; margin-bottom: 1rem;">Search hospitals in your city</h5>
             <div class="form-row" style="display: flex; justify-content:safe;">
                 <div class="form-group col-md-4">
                     <select class="form-control" name="state" id="inputState">
