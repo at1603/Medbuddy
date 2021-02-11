@@ -13,61 +13,9 @@
       }
   </style>
 
-<body>
+<body id="body-pd">
   <%- include("../partials/altNavbar"); -%>
-  <!-- -----------SideBar Code ---------------- -->
-  <div class="l-navbar" id="nav-bar">
-      <nav class="nav">
-          <div>
-              <a href="#" class="nav__logo">
-              <i class="bx bx-layer nav__logo-icon"></i>
-              <span class="nav__logo-name">MedBuddy</span>
-              </a>
-      
-              <div class="nav__list" id="patientMenu">
-              <a href="#" class="nav__link active">
-                  <i class="bx bx-grid-alt nav__icon"></i>
-                  <span class="nav__name">Dashboard</span>
-              </a>
-      
-              <a href="/userDocSection/docList/:id" class="nav__link">
-                  <i class="bx bx-user nav__icon"></i>
-                  <span class="nav__name">Doctors</span>
-              </a>
-      
-              <a href="#" class="nav__link">
-                  <i class="bx bx-message-square-detail nav__icon"></i>
-                  <span class="nav__name">Messages</span>
-              </a>
-      
-              <a href="/dashboards/hospAdmin/profileIndex" class="nav__link">
-                  <i class="fas fa-database"></i>
-                  <span class="nav__name">Create Database</span>
-              </a>
-              <a href="/dashboards/hospAdmin/updateProfileIndex" class="nav__link">
-                  <i class="far fa-edit"></i>
-                  <span class="nav__name">Update Database</span>
-              </a>
-              <a href="/hospHospSection/initialPage" class="nav__link">
-                  <i class="bx bx-bookmark nav__icon"></i>
-                  <span class="nav__name">Action Page</span>
-              </a>
-      
-              <a href="#" class="nav__link">
-                  <i class="bx bx-folder nav__icon"></i>
-                  <span class="nav__name">History</span>
-              </a>
-      
-              <!-- <a href="#" class="nav__link">
-                  <i class="bx bx-bar-chart-alt-2 nav__icon"></i>
-                  <span class="nav__name">Analytics</span>
-              </a> -->
-              </div>
-          </div>
-      </nav>
-    </div>      
-
-  <!-- ------X----SideBar Code --------X------- -->
+  <%- include("../partials/altAdminSideNavbar"); -%>
 
     <div class="row">
       <div class="col-sm-5"  data-aos="fade-right">

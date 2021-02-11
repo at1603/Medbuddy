@@ -7,60 +7,91 @@
   <body id="body-pd">
     <%-include("../../partials/altNavbar");-%>
     <%-include("../../partials/altSidebar");-%>
-    <div class="card">
-      <form>
+    <div class="card" style="border: none">
+      <form 
+        action="/userDocSection/createProfile"
+        method="POST"
+        style="margin: 5rem 1rem 2rem 20rem;
+          padding: 2rem;
+          max-width: 600px;
+          box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);
+          border-radius: 42px;">
+        <h4 style="text-align: center;"><strong>Fill Professional Details</strong> </h4>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="experience">Experience</label>
-            <input
-              type="email"
+            <label for="experience">Experience (in Years)</label>
+            <input style=" border-radius: 25px" 
+              type="number"
               class="form-control"
               placeholder="Experience"
               name="experience"
             />
           </div>
           <div class="form-group col-md-6">
-            <label for="inputPassword4">Qualification</label>
-            <input
+            <label for="inputQual">Qualification</label>
+            <input style=" border-radius: 25px" 
               type="text"
               class="form-control"
               placeholder="Qualification"
-              name="qualification"
+              name="qual"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="speciality">Speciality</label>
+            <input style=" border-radius: 25px" 
+              type="text"
+              class="form-control"
+              placeholder="Your Speciality. e.g. Neurology, Dentist etc."
+              name="speciality"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="workAtHosp">Working At Hospital</label>
+            <input style=" border-radius: 25px" 
+              type="text"
+              class="form-control"
+              placeholder="Hospital Name (if any)"
+              name="workAtHosp"
             />
           </div>
         </div>
         <div class="form-group">
-          <label for="worksAt">Works At</label>
-          <input
+          <label for="workingAt">Works At</label>
+          <input style=" border-radius: 25px" 
             type="text"
             class="form-control"
-            placeholder="Works At"
-            name="worksAt"
+            placeholder="Hospital Token Number. (if any)"
+            name="workingAt"
           />
-        </div>
-        <div class="form-group">
-          <label for="timing">Timing</label>
-          <input type="time" class="form-control" name="timing" />
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
+            <label for="timingFrom">Timing Slot: From</label>
+            <input style=" border-radius: 25px"  type="time" class="form-control" name="timing" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="timingTo">Timing Slot: To</label>
+            <input style=" border-radius: 25px"  type="time" class="form-control" name="timing" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-5">
             <label for="inputCity">City</label>
-            <input type="text" class="form-control" name="city" />
+            <input style=" border-radius: 25px"  type="text" class="form-control" name="city" placeholder="City" />
           </div>
           <div class="form-group col-md-4">
             <label for="inputState">State</label>
-            <select id="inputState" class="form-control" name="state">
-              <option selected>Choose...</option>
-              <option>...</option>
-            </select>
+            <input style=" border-radius: 25px"  type="text" class="form-control" name="state" placeholder="State" />
           </div>
-          <div class="form-group col-md-2">
+          <div class="form-group col-md-3">
             <label for="inputZip">Zip</label>
-            <input type="text" class="form-control" name="zipCode" />
+            <input style=" border-radius: 25px"  type="number" class="form-control" name="zipCode" placeholder="000000"/>
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" style="border-radius: 25px;" class="btn btn-primary">Create!</button>
       </form>
     </div>
     <%-include("../../partials/footer");-%>
