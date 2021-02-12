@@ -2,7 +2,8 @@ let express = require("express");
 const HospitalAdmin = require("../models/hospAdminSchema");
 const patientSchema = require("../models/patientSchema");
 const BloodBank = require("../models/userHospModels/bloodBankSchema");
-Hospital = require("../models/hospSchema");
+const Hospital = require("../models/hospSchema");
+const Doctor = require("../models/docSchema");
 
 var router = express.Router();
 
@@ -102,7 +103,6 @@ router.get("/user/hospAdmin/dashboard", function(req, res) {
                         }
                     });
             }
-
         });
 });
 
@@ -176,6 +176,22 @@ router.post("/dashboards/hospAdmin/hospitalProfile", function(req, res) {
         }
     });
 
+});
+
+router.get("/user/hospAdmin/dashboard/doctors", function(req, res){
+    Hospital.findOne().where('handler.id').equals(req.user._id).exec(function(err, foundHosp) {
+        if(err){
+            console.log(err);
+        }else{
+            Doctor.find().where('workingAt').equals(foundHosp._id).exec(function(error, foundDoctors){
+                if(error){
+                    console.log(error);
+                } else{
+                    res.render("hospHospSection/sideBarPages/doctors", {foundDoctors: foundDoctors});
+                }
+            });
+        }
+    });
 });
 
 ////``````````````Hospital Admin Post request```````````````/////
@@ -263,8 +279,6 @@ router.post(
     }
 );
 // -----X----Hospital Admin BloodBank, Ambulance, other routes ------X-------- //
-
-
 
 //-----------------Hospital, Other Profiles Update Routes-------------------//
 
