@@ -1,5 +1,6 @@
 let express = require("express");
 const HospitalAdmin = require("../models/hospAdminSchema");
+const patientSchema = require("../models/patientSchema");
 const BloodBank = require("../models/userHospModels/bloodBankSchema");
 Hospital = require("../models/hospSchema");
 
@@ -7,10 +8,68 @@ var router = express.Router();
 
 //----------Patient Routes--------------//
 
-router.get("/userDocSection/consultDoc", function(req, res) {
+// ---------Patient Profile page routes------------//
+router.get("/userDocSection/patientDashboard", function(req, res){
+  res.render("user/dashboards/patientDashboard" ,{isPatient: true});
+})
 
-    res.render("user/dashboards/patientDashboard.ejs");
+router.get("/userDocSection/createPatientProfile", function(req, res){
+  res.render("user/profilePages/Patient/createPatient");
+}); 
+
+router.post("/userDocSection/cretePatientProfile", function(req, res){
+  newPatient = 
+  {
+    handler:{
+      id:req.user._id,
+      username:req.user.username
+    },
+    prescription: [
+      {
+        relDoc: req.body.docName,
+        presc: {
+          docName: req.cody.docName,
+          patName: req.user.firstName,
+          disease: [req.body.diseaseName],
+          medicines: [
+            {
+              medicineName: req.body.medicineName,
+              power: req.body.power,
+              dosage: req.body.dosage,
+            },
+          ],
+          test: [req.body.test],
+          comment: req.body.comment,
+        },
+      },
+    ],
+    // curDoc: [String], //Currently appointed doctors.
+    disease: [
+      {
+        relDoc: req.body.relDoc,
+        diseaseName: req.body.diseaseName,
+      },
+    ],
+    appointment: [
+      {
+         docId: req.body.docId,
+         appointId: req.body.appointId
+      }
+   ]
+  }
+
+  patientSchema.create(newPatient, function(err, newPat){
+    if(err){
+      console.log(err);
+    }else{
+      res.redirect("/userDocSection/patientDashboard")
+    }
+  });
 });
+
+// router.get("/userDocSection/consultDoc", function (req, res) {
+//   res.render("user/dashboards/patientDashboard");
+// });
 //----X-----Patient Routes-------X------//
 
 //----------Doctor Routes--------------//

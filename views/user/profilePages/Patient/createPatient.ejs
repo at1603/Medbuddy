@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link rel="stylesheet" href="/stylesheets/landing.css" />
+  <!-- <link rel="stylesheet" href="/stylesheets/partials/navbar.css" /> -->
+
+  <%- include("../../../partials/header"); -%>
+  <body id="body-pd">
+    <%-include("../../../partials/altNavbar");-%>
+    <%-include("../../../partials/altSidebar");-%>
+    <div class="card" style="border: none">
+      <form 
+        action="/userDocSection/createPatientProfile"
+        method="POST"
+        style="margin: 5rem 1rem 2rem 20rem;
+          padding: 2rem;
+          max-width: 600px;
+          box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);
+          border-radius: 42px;">
+        <h4 style="text-align: center;"><strong>Fill Patient Details</strong> </h4>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="experience">Experience (in Years)</label>
+            <input style=" border-radius: 25px" 
+              type="number"
+              class="form-control"
+              placeholder="Experience"
+              name="experience"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputQual">Qualification</label>
+            <input style=" border-radius: 25px" 
+              type="text"
+              class="form-control"
+              placeholder="Qualification"
+              name="qual"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="speciality">Speciality</label>
+            <input style=" border-radius: 25px" 
+              type="text"
+              class="form-control"
+              placeholder="Your Speciality. e.g. Neurology, Dentist etc."
+              name="speciality"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="workAtHosp">Working At Hospital</label>
+            <input style=" border-radius: 25px" 
+              type="text"
+              class="form-control"
+              placeholder="Hospital Name (if any)"
+              name="workAtHosp"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="workingAt">Works At</label>
+          <input style=" border-radius: 25px" 
+            type="text"
+            class="form-control"
+            placeholder="Hospital Token Number. (if any)"
+            name="workingAt"
+          />
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="timingFrom">Timing Slot: From</label>
+            <input style=" border-radius: 25px"  type="time" class="form-control" name="timing" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="timingTo">Timing Slot: To</label>
+            <input style=" border-radius: 25px"  type="time" class="form-control" name="timing" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-5">
+            <label for="inputCity">City</label>
+            <input style=" border-radius: 25px"  type="text" class="form-control" name="city" placeholder="City" />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState">State</label>
+            <input style=" border-radius: 25px"  type="text" class="form-control" name="state" placeholder="State" />
+          </div>
+          <div class="form-group col-md-3">
+            <label for="inputZip">Zip</label>
+            <input style=" border-radius: 25px"  type="number" class="form-control" name="zipCode" placeholder="000000"/>
+          </div>
+        </div>
+
+        <button type="submit" style="border-radius: 25px;" class="btn btn-primary">Create!</button>
+      </form>
+    </div>
+    <%-include("../../../partials/footer");-%>
+  </body>
+</html>
