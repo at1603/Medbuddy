@@ -7,201 +7,201 @@ var router = express.Router();
 
 //----------Patient Routes--------------//
 
-router.get("/userDocSection/consultDoc", function (req, res) {
+router.get("/userDocSection/consultDoc", function(req, res) {
 
-  res.render("user/dashboards/patientDashboard.ejs");
+    res.render("user/dashboards/patientDashboard.ejs");
 });
 //----X-----Patient Routes-------X------//
 
 //----------Doctor Routes--------------//
-router.get("/userDocSection/checkPatients", function (req, res) {
-  res.render("user/dashboards/docDashboard.ejs");
+router.get("/userDocSection/checkPatients", function(req, res) {
+    res.render("user/dashboards/docDashboard.ejs");
 });
 //----X-----Doctor Routes--------x-----//
 
 //----------Hospital Admin Routes--------------//
 
-router.get("/user/hospAdmin/dashboard", function (req, res) {
-  Hospital.find()
-    .where("handler.id")
-    .equals(req.user._id)
-    .exec(function (err, foundHosp) {
-      if (err) {
-        console.log(err);
-      } else {
-        HospitalAdmin.find()
-          .where("handler.id")
-          .equals(req.user._id)
-          .exec(function (err, foundAdmin) {
+router.get("/user/hospAdmin/dashboard", function(req, res) {
+    Hospital.find()
+        .where("handler.id")
+        .equals(req.user._id)
+        .exec(function(err, foundHosp) {
             if (err) {
-              console.log(err);
+                console.log(err);
             } else {
-              res.render("user/dashboards/hospAdminDashboard", {
-                foundHosp: foundHosp,
-                foundAdmin: foundAdmin,
-              });
+                HospitalAdmin.find()
+                    .where("handler.id")
+                    .equals(req.user._id)
+                    .exec(function(err, foundAdmin) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.render("user/dashboards/hospAdminDashboard", {
+                                foundHosp: foundHosp,
+                                foundAdmin: foundAdmin,
+                            });
+                        }
+                    });
             }
-          });
-      }
 
-    });
+        });
 });
 
-router.get("/dashboards/hospAdmin/profileIndex", function (req, res) {
-  Hospital.find()
-    .where("handler.id")
-    .equals(req.user._id)
-    .exec(function (err, foundHosp) {
-      if (err) {
-        console.log(err);
-      } else {
-        HospitalAdmin.find()
-          .where("handler.id")
-          .equals(req.user._id)
-          .exec(function (err, foundAdmin) {
+router.get("/dashboards/hospAdmin/profileIndex", function(req, res) {
+    Hospital.find()
+        .where("handler.id")
+        .equals(req.user._id)
+        .exec(function(err, foundHosp) {
             if (err) {
-              console.log(err);
+                console.log(err);
             } else {
-              res.render("user/profilePages/createProfileIndex", {
-                foundHosp: foundHosp,
-                foundAdmin: foundAdmin,
-              });
+                HospitalAdmin.find()
+                    .where("handler.id")
+                    .equals(req.user._id)
+                    .exec(function(err, foundAdmin) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.render("user/profilePages/createProfileIndex", {
+                                foundHosp: foundHosp,
+                                foundAdmin: foundAdmin,
+                            });
+                        }
+                    });
             }
-          });
-      }
-    });
+        });
 });
 
-router.get("/dashboards/hospAdmin/hospitalProfile", function (req, res) {
-  res.render("user/profilePages/profileIndexPage/hospitalProfile");
+router.get("/dashboards/hospAdmin/hospitalProfile", function(req, res) {
+    res.render("user/profilePages/profileIndexPage/hospitalProfile");
 });
 
-router.get("/dashboards/hospAdmin/hospAdminProfile", function (req, res) {
-  res.render("user/profilePages/profileIndexPage/hospAdminProfile");
+router.get("/dashboards/hospAdmin/hospAdminProfile", function(req, res) {
+    res.render("user/profilePages/profileIndexPage/hospAdminProfile");
 });
 
-router.get("/dashboards/hospAdmin/otheProfile", function (req, res) {
-  res.render("user/profilePages/profileIndexPage/otherProfile");
+router.get("/dashboards/hospAdmin/otheProfile", function(req, res) {
+    res.render("user/profilePages/profileIndexPage/otherProfile");
 });
 
 ////```````````Hospital Info post request`````````````///////
 
 
-router.post("/dashboards/hospAdmin/hospitalProfile", function (req, res) {
-  let newHosp = {
-    name: req.body.hospName,
-    type: req.body.type,
-    speciality: req.body.speciality,
-    contact: {
-      email: req.body.email,
-      phone: req.body.phone,
-    },
-    handler: {
-      id: req.user._id,
-      username: req.user.username,
-    },
-    address: {
-      street: req.body.street,
-      city: req.body.city,
-      state: req.body.state,
-      zip: req.body.zip,
-    },
-    about: req.body.aboutHosp,
-  };
+router.post("/dashboards/hospAdmin/hospitalProfile", function(req, res) {
+    let newHosp = {
+        name: req.body.hospName,
+        type: req.body.type,
+        speciality: req.body.speciality,
+        contact: {
+            email: req.body.email,
+            phone: req.body.phone,
+        },
+        handler: {
+            id: req.user._id,
+            username: req.user.username,
+        },
+        address: {
+            street: req.body.street,
+            city: req.body.city,
+            state: req.body.state,
+            zip: req.body.zip,
+        },
+        about: req.body.aboutHosp,
+    };
 
-  Hospital.create(newHosp, function (err, newHospital) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/dashboards/hospAdmin/profileIndex");
-    }
-  });
+    Hospital.create(newHosp, function(err, newHospital) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect("/dashboards/hospAdmin/profileIndex");
+        }
+    });
 
 });
 
 ////``````````````Hospital Admin Post request```````````````/////
 
-router.post("/dashboards/hospAdmin/hospAdminProfile", function (req, res) {
-  let newHospAdm = {
-    oxyCur: req.body.oxyCur,
-    ambCur: req.body.ambCur,
-    numBeds: req.body.numBeds,
-    partOf: req.body.hospId,
-    handler: {
-      id: req.user._id,
-      username: req.user.username,
-    },
-    adminContact: {
-      email: req.body.email,
-      phone: req.body.phone,
-    },
-  };
+router.post("/dashboards/hospAdmin/hospAdminProfile", function(req, res) {
+    let newHospAdm = {
+        oxyCur: req.body.oxyCur,
+        ambCur: req.body.ambCur,
+        numBeds: req.body.numBeds,
+        partOf: req.body.hospId,
+        handler: {
+            id: req.user._id,
+            username: req.user.username,
+        },
+        adminContact: {
+            email: req.body.email,
+            phone: req.body.phone,
+        },
+    };
 
-  Hospital.findById(req.body.hospId, function (error, foundHosp) {
-    if (error) {
-      console.log(error);
-    } else {
-      HospitalAdmin.create(newHospAdm, function (err, newAdmin) {
-        if (err) {
-          console.log(err);
+    Hospital.findById(req.body.hospId, function(error, foundHosp) {
+        if (error) {
+            console.log(error);
         } else {
-          foundHosp.hasAdmin = true;
-          res.redirect("/dashboards/hospAdmin/profileIndex");
+            HospitalAdmin.create(newHospAdm, function(err, newAdmin) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    foundHosp.hasAdmin = true;
+                    res.redirect("/dashboards/hospAdmin/profileIndex");
+                }
+            });
         }
-      });
-    }
-  });
+    });
 });
 
 // ---------Hospital Admin BloodBank, Ambulance, other routes -------------- //
 
-router.post("/dashboards/hospAdmin/otheProfile/bloodbank", function (req, res) {
-  let newBloodbank = {
-    name: req.body.name,
-    address: {
-      street: req.body.street,
-      city: req.body.city,
-      state: req.body.state,
-    },
-    relatedTo: req.body.hospId,
-    maxcapacity: req.body.maxcapacity,
-    currcapacity: {
-      opos: req.body.opos,
-      oneg: req.body.oneg,
+router.post("/dashboards/hospAdmin/otheProfile/bloodbank", function(req, res) {
+    let newBloodbank = {
+        name: req.body.name,
+        address: {
+            street: req.body.street,
+            city: req.body.city,
+            state: req.body.state,
+        },
+        relatedTo: req.body.hospId,
+        maxcapacity: req.body.maxcapacity,
+        currcapacity: {
+            opos: req.body.opos,
+            oneg: req.body.oneg,
 
-      apos: req.body.apos,
-      aneg: req.body.aneg,
+            apos: req.body.apos,
+            aneg: req.body.aneg,
 
-      bpos: req.body.bpos,
-      bneg: req.body.bneg,
+            bpos: req.body.bpos,
+            bneg: req.body.bneg,
 
-      abpos: req.body.abpos,
-      abneg: req.body.abneg,
-    },
-    handlerId: req.user._id,
-    contact: {
-      email: req.body.email,
-      phone: req.body.phone,
-    },
-    price: req.body.price,
-  };
+            abpos: req.body.abpos,
+            abneg: req.body.abneg,
+        },
+        handlerId: req.user._id,
+        contact: {
+            email: req.body.email,
+            phone: req.body.phone,
+        },
+        price: req.body.price,
+    };
 
-  BloodBank.create(newBloodbank, function (err, createdBloodbank) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/dashboards/hospAdmin/profileIndex");
-    }
-  });
+    BloodBank.create(newBloodbank, function(err, createdBloodbank) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect("/dashboards/hospAdmin/profileIndex");
+        }
+    });
 });
 
 router.post(
-  "/dashboards/hospAdmin/otheProfile/oxyAmbForm",
-  function (req, res) {
-    let newData = {
-      //Schema pending.
-    };
-  }
+    "/dashboards/hospAdmin/otheProfile/oxyAmbForm",
+    function(req, res) {
+        let newData = {
+            //Schema pending.
+        };
+    }
 );
 // -----X----Hospital Admin BloodBank, Ambulance, other routes ------X-------- //
 
@@ -209,16 +209,16 @@ router.post(
 
 //-----------------Hospital, Other Profiles Update Routes-------------------//
 
-router.get("/dashboards/hospAdmin/updateProfileIndex", function(req, res){
-    Hospital.find().where('handler.id').equals(req.user._id).exec(function(err, foundHosp){
-        if(err){
+router.get("/dashboards/hospAdmin/updateProfileIndex", function(req, res) {
+    Hospital.find().where('handler.id').equals(req.user._id).exec(function(err, foundHosp) {
+        if (err) {
             console.log(err);
-        }else{
-            HospitalAdmin.find().where('handler.id').equals(req.user._id).exec(function(err, foundAdmin){
-                if(err){
+        } else {
+            HospitalAdmin.find().where('handler.id').equals(req.user._id).exec(function(err, foundAdmin) {
+                if (err) {
                     console.log(err);
-                } else{
-                    res.render("user/profilePages/updateProfileIndex", {foundHosp: foundHosp, foundAdmin: foundAdmin});
+                } else {
+                    res.render("user/profilePages/updateProfileIndex", { foundHosp: foundHosp, foundAdmin: foundAdmin });
                 }
             });
         }
@@ -226,54 +226,54 @@ router.get("/dashboards/hospAdmin/updateProfileIndex", function(req, res){
 });
 
 //--------------------------Hospital Update Routes ---------------------//
-router.get("/dashboards/hospAdmin/updateHospitalProfile", function(req, res){
-    Hospital.find().where('handler.id').equals(req.user._id).exec(function(err, foundHosp){
-        if(err){
+router.get("/dashboards/hospAdmin/updateHospitalProfile", function(req, res) {
+    Hospital.find().where('handler.id').equals(req.user._id).exec(function(err, foundHosp) {
+        if (err) {
             console.log(err);
-        } else{
-            res.render("user/profilePages/updateProfilePages/updateHosp", {foundHosp: foundHosp});
+        } else {
+            res.render("user/profilePages/updateProfilePages/updateHosp", { foundHosp: foundHosp });
         }
     });
 })
 
-router.put("/dashboards/hospAdmin/updateHospitalProfile/:id", function(req, res){
-    Hospital.findByIdAndUpdate(req.params.id, req.body.hosp, function(err, updateHospital){
-        if(err){
+router.put("/dashboards/hospAdmin/updateHospitalProfile/:id", function(req, res) {
+    Hospital.findByIdAndUpdate(req.params.id, req.body.hosp, function(err, updateHospital) {
+        if (err) {
             // req.flash("error", "Policy not found!")
             console.log(err);
             res.redirect("/dashboards/hospAdmin/updateHospitalProfile");
-        }else{
+        } else {
             // req.flash("error", "Policy details succesfully updated!")
             res.redirect("/dashboards/hospAdmin/updateProfileIndex");
         }
-     });
+    });
 });
 //------------X-------------Hospital Update Routes ---------X-----------//
 //--------------------------Other Profiles Update Routes ---------------------//
 
-router.get("/dashboards/hospAdmin/updateOtherProfile", function(req, res){
-    Hospital.find().where('handler.id').equals(req.user._id).exec(function(err, foundHosp){
-        if(err){
+router.get("/dashboards/hospAdmin/updateOtherProfile", function(req, res) {
+    Hospital.find().where('handler.id').equals(req.user._id).exec(function(err, foundHosp) {
+        if (err) {
             console.log(err);
-        } else{
-            BloodBank.find().where('handler.id').equals(req.user.id).exec(function(err, foundBloodBank){
-                res.render("user/profilePages/updateProfilePages/updateHosp", {foundHosp: foundHosp, foundBloodBank,foundBloodBank});
+        } else {
+            BloodBank.find().where('handler.id').equals(req.user._id).exec(function(err, foundBloodBank) {
+                res.render("user/profilePages/updateProfilePages/updateHosp", { foundHosp: foundHosp, foundBloodBank, foundBloodBank });
             });
         }
     });
 });
 
-router.put("/dashboards/hospAdmin/updateOtherProfile/bloodBank/:id", function(req, res){
-    BloodBank.findByIdAndUpdate(req.params.id, req.body.bloodBank, function(err, updateBloodBank){
-        if(err){
+router.put("/dashboards/hospAdmin/updateOtherProfile/bloodBank/:id", function(req, res) {
+    BloodBank.findByIdAndUpdate(req.params.id, req.body.bloodBank, function(err, updateBloodBank) {
+        if (err) {
             // req.flash("error", "Policy not found!")
             console.log(err);
             res.redirect("//dashboards/hospAdmin/updateHospitalProfile");
-        }else{
+        } else {
             // req.flash("error", "Policy details succesfully updated!")
             res.redirect("//dashboards/hospAdmin/updateHospitalProfile");
         }
-     });
+    });
 });
 
 //Schema needed.
