@@ -13,10 +13,16 @@ router.get('/userLogin', function(req,res){
 
 router.post("/userLogin", passport.authenticate("local", 
 {
-    successRedirect: "/", 
     failureRedirect: "/userlogin",
     }),function(req, res){
-
+        if(req.user.role == "patient")
+            res.redirect("/userDocSection/patientDashboard");
+        else if(req.user.role == "doctor")
+            res.redirect("/userDocSection/checkPatients");
+        else if(req.user.role == "hospAdmin")
+            res.redirect("/user/hospAdmin/dashboard");
+        else
+            res.send(404);
 });
 
 //logout 
