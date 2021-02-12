@@ -36,7 +36,7 @@
                     <li class="list-group-item">Cras justo odio</li>
                     </ul>
                     <div class="card-body">
-                        <% if(foundHosp){%>
+                        <% if(foundHosp.length > 0){%>
                             <i class="fas fa-check-circle"></i><span> <strong> Submitted</strong></span>
                         <% } else { %> 
                             <a href="/dashboards/hospAdmin/hospitalProfile" class="card-link btn btn-outline-success btn-xs" style="border-radius: 20px;">Create Hospital Profile <i class="fas fa-chevron-right"></i></a>
@@ -59,7 +59,7 @@
                     <li class="list-group-item">Cras justo odio</li>
                     </ul>
                     <div class="card-body">
-                        <% if(foundAdmin){%>
+                        <% if(foundAdmin.length > 0){%>
                             <i class="fas fa-check-circle"></i><span> <strong> Submitted</strong></span>
                         <% } else { %> 
                             <a href="/dashboards/hospAdmin/hospAdminProfile" class="card-link btn btn-outline-success btn-xs" style="border-radius: 20px;">Create Admin Profile <i class="fas fa-chevron-right"></i></a>
