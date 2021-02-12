@@ -4,6 +4,11 @@ var router = express.Router();
 
 var sendMail = require("../public/jsFiles/mail");
 
+//altLandingpageroute
+router.get("/alt", function(req, res){
+    res.render("altLandingPage");
+});
+
 //Dashboard routes
 router.get("/user/doctor/dashboard", function(req, res) {
     res.render("user/dashboards/docDashboard")
