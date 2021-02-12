@@ -1,28 +1,57 @@
 var mongoose = require("mongoose");
 
 var patientSchema = new mongoose.Schema({
-    handler:{
-        id:{
-           type:mongoose.Schema.Types.ObjectId,
-           ref:"User"
-        },
-        username:String
-     },
-     prescription: [String],
-     curDoc:[String],   //Currently appointed doctors.
-     disease: [String],
-     appointment: [
+   handler: {
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+      username: String,
+   },
+    prescription: { 
+      type: [
          {
-            docId: {
-               type: mongoose.Schema.Types.ObjectId,
-               ref: "Doctor"
-            },
-            appointId: {
-               type: mongoose.mongoose.Schema.Types.ObjectId,
-               ref: "Appointment"
-            }
-         }
+         relDoc: {type: String, default: null},  
+         presc: {
+            docName: String,
+            patName: String,
+            disease: [String],
+            medicines: [
+               {
+               medicineName: String,
+               power: String,
+               dosage: String,
+               },
+            ],
+            test: [String],
+            comment: String,
+         },
+         },
       ],
+      default: () => { return null; }
+   },
+   //  curDoc: [String], //Currently appointed doctors.
+    disease: [
+      {
+        relDoc: {type: String, default:null},
+        diseaseName: {type: String, default:null}
+      },
+    ],
+    appointment: [
+      {
+         docId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Doctor",
+            default: null
+         },
+         appointId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Appointment",
+            default: null
+         }
+      }
+   ]
 });
+
 
 module.exports = mongoose.model("Patient", patientSchema);
