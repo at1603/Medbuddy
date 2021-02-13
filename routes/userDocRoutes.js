@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-const Doctor = require('../models/docSchema');
+const Doctor = require("../models/docSchema");
 
 ////+++////
 
@@ -50,33 +50,32 @@ router.get("/userDocSection/consultDoc/presc", function (req, res) {
   res.render("userDocSection/docfiles/prescription");
 });
 
-
 // -------------Doctor Profile Post Routes ------------------//
 
-router.post("/userDocSection/createProfile", function(req, res){
-  let  newDocPro = {
+router.post("/userDocSection/createProfile", function (req, res) {
+  let newDocPro = {
     speciality: req.body.speciality,
     workingAt: req.body.workingAt,
     workAtHosp: req.body.workAtHosp,
     timing: {
-       timingFrom: req.body.timingFrom,
-       timingTo: req.body.timingTo
+      timingFrom: req.body.timingFrom,
+      timingTo: req.body.timingTo,
     },
     qual: req.body.qual,
     experience: req.body.experience,
-    handler:{
-        id:req.user._id,
-        username:req.user.username
-     }
+    handler: {
+      id: req.user._id,
+      username: req.user.username,
+    },
   };
 
-  Doctor.create(newDocPro, function(err, newProfessionalDoc){
-    if(err){
+  Doctor.create(newDocPro, function (err, newProfessionalDoc) {
+    if (err) {
       console.log(err);
-    }else{
+    } else {
       res.redirect("/userDocSection/checkPatients");
     }
-  })
+  });
 });
 
 ////+++////
@@ -87,7 +86,7 @@ router.get("/userDocSection/docList/:id", function (req, res) {
   res.render("userDocSection/patientfiles/docList");
 });
 router.get("/userDocSection/docList/docInfo/:id", function (req, res) {
-  res.render("userDocSection/patientfiles/docInfo");
+  res.render("userDocSection/patientfiles/appointment");
 });
 
 router.get("/userDocSection/changeDoc/:id", function (req, res) {
@@ -101,6 +100,7 @@ router.get("/userDocSection/searchDoc", function (req, res) {
 router.get("/userDocSection/prescrip/:id", function (req, res) {
   res.render("userDocSection/patientfiles/prescription");
 });
+
 ////+++////
 
 //universal routes
