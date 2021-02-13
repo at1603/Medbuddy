@@ -205,6 +205,7 @@ router.post("/hospHospSection/:service/requests", function(req, res) {
             city: req.body.city,
             state: req.body.state,
             pinCode: req.body.pinCode,
+            email: req.user.email,
             bloodGroup: req.body.bloodGroup,
             disease: req.body.diseaseDescription,
             age: req.body.age,
@@ -224,6 +225,7 @@ router.post("/hospHospSection/:service/requests", function(req, res) {
             city: req.body.city,
             state: req.body.state,
             pinCode: req.body.pinCode,
+            email: req.user.email,
             bloodGroup: req.body.bloodGroup,
             disease: req.body.diseaseDescription,
             age: req.body.age,
@@ -239,15 +241,17 @@ router.post("/hospHospSection/:service/requests", function(req, res) {
         organReqSchema.create({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            address: req.body.address,
-            city: req.body.city,
-            state: req.body.state,
-            pinCode: req.body.pinCode,
+            address: {
+                street: req.body.address,
+                city: req.body.city,
+                state: req.body.state,
+                zip: req.body.pinCode,
+            },
+            email: req.user.email,
             bloodGroup: req.body.bloodGroup,
             disease: req.body.diseaseDescription,
             age: req.body.age,
-            organs: req.body.organs,
-            date: today
+            organType: req.body.organs,
         }, function(err, organReq) {
             if (err)
                 console.log(err)
@@ -261,6 +265,7 @@ router.post("/hospHospSection/:service/requests", function(req, res) {
             address: req.body.address,
             city: req.body.city,
             state: req.body.state,
+            email: req.user.email,
             pinCode: req.body.pinCode,
             bloodGroup: req.body.bloodGroup,
             disease: req.body.diseaseDescription,
