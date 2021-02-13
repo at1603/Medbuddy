@@ -17,8 +17,8 @@
             <thead>
               <tr class="table100-head">
                 <th class="column1">S.N</th>
-                <th class="column1">Specialisation</th>
                 <th class="column1">Name</th>
+                <th class="column1">Specialisation</th>
                 <th class="column7"></th>
 
               </tr>
@@ -27,10 +27,11 @@
               <%for( var i=0;i<doctors.length;i++){%>
               <tr>
                 <td class="column1"><%=i+1%></td>
-                <td class="column1"><%=doctors[i].speciality%></td>
                 <td class="column1"><%=user.firstName+" "+user.lastName%></td>
+                <td class="column1"><%=doctors[i].speciality%></td>
                 <td class="column7">
-                  <div class="appntBtn"><form  action="<%='docList/docInfo/'+doctors[i]._id%>" method="GET">
+                  <div class="appntBtn"><form  action="<%='/userDocSection/docList/docInfo/'+doctors[i]._id%>" method="GET">
+                    <% //if()%>
                   <button type="submit" class="btn btn-success">Book Appointment</button>
                 </form></div>
                 <div class="cancelBtn"><form  action="" method="POST">
@@ -47,8 +48,8 @@
     </div>
    
        <%-include("../../partials/footer"); -%>
-<script src="/jsFiles/viewJS/userDocJS/patFiles/docList.js"></script>
-  </body>
+
+        </body>
 
 </html>
 
