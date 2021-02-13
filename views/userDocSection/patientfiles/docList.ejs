@@ -24,12 +24,13 @@
               </tr>
             </thead>
             <tbody id="front">
+              <%for( var i=0;i<doctors.length;i++){%>
               <tr>
-                <td class="column1">1</td>
-                <td class="column1">P1001</td>
-                <td class="column1">4 Times a Day</td>
+                <td class="column1"><%=i+1%></td>
+                <td class="column1"><%=doctors[i].speciality%></td>
+                <td class="column1"><%=user.firstName+" "+user.lastName%></td>
                 <td class="column7">
-                  <div class="appntBtn"><form  action="docInfo/:id" method="GET">
+                  <div class="appntBtn"><form  action="<%='docList/docInfo/'+doctors[i]._id%>" method="GET">
                   <button type="submit" class="btn btn-success">Book Appointment</button>
                 </form></div>
                 <div class="cancelBtn"><form  action="" method="POST">
@@ -37,30 +38,7 @@
                 </form></div></td>
 
               </tr>
-              <tr>
-                <td class="column1">2</td>
-                <td class="column1">P1002</td>
-                <td class="column1">4 Times a Day</td>
-                <td class="column7"> <div class="appntBtn"><form  action="docInfo/:id" method="GET">
-                  <button type="submit" class="btn btn-success">Book Appointment</button>
-                </form></div>
-                <div class="cancelBtn"><form  action="" method="POST">
-                  <button type="submit" class="btn btn-danger">Cancel Appointment</button>
-                </form></div></td>
-
-              </tr>
-              <tr>
-                <td class="column1">3</td>
-                <td class="column1">P1003</td>
-                <td class="column1">4 Times a Day</td>
-                <td class="column7"><div class="appntBtn"><form  action="docInfo/:id" method="GET">
-                  <button type="submit" class="btn btn-success">Book Appointment</button>
-                </form></div>
-                <div class="cancelBtn"><form  action="" method="POST">
-                  <button type="submit" class="btn btn-danger">Cancel Appointment</button>
-                </form></div></td>
-
-              </tr>
+              <%}%>
             </tbody>
           </table>
         </div>
