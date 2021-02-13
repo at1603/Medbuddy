@@ -1,6 +1,7 @@
 .card {
-    background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
+    padding: 2rem;
+    box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);
+    border-radius: 42px;
     transition: 0.3s;
     margin: auto;
     height: fit-content;
@@ -160,7 +161,7 @@ table td, table th {
 
 table thead tr {
     height: 60px;
-    background: #36304a;
+    background: #3a16b1;
 }
 
 table tbody tr {
