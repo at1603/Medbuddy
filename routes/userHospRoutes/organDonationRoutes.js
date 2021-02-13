@@ -8,21 +8,22 @@ const OrganRequest = require("../../models/hospModels/requestSchemas/organReqSch
 router.post("/userDocSection/index/searchOrgan/Liver", function(req, res){
     const state = req.body.state;
     const city = req.body.city;
+    console.log(state, city);
 
     if(state && city){
-        OrganRequest.find({"organType": 'Liver', "state":state, "city": city, "isDonating": true}).exec(function(err,foundLivers){
+        OrganRequest.find({"organType": 'Liver', "address.state":state, "address.city": city, "isDonating": true}).exec(function(err,foundLivers){
             if(err){
                 console.log(err);
             } else{
-                res.render("userHospSection/Organdonation/index", {foundLivers: foundLivers, flag: 1});
+                res.render("userHospSection/Organdonation/index", {foundLivers: foundLivers, flag: 1, organ: 1});
             }
         });
     } else if(state && !city){
-        OrganRequest.find({"organType": 'Liver', "state":state, "isDonating": true}).exec(function(err,foundLivers){
+        OrganRequest.find({"organType": 'Liver', "address.state":state, "isDonating": true}).exec(function(err,foundLivers){
             if(err){
                 console.log(err);
             } else{
-                res.render("userHospSection/Organdonation/index", {foundLivers: foundLivers, flag: 1});
+                res.render("userHospSection/Organdonation/index", {foundLivers: foundLivers, flag: 1, organ: 1});
             }
         });
     }
@@ -32,19 +33,19 @@ router.post("/userDocSection/index/searchOrgan/Kidney", function(req, res){
     const city = req.body.city;
 
     if(state && city){
-        OrganRequest.find({"organType": 'Kidney', "state":state, "city": city, "isDonating": true}).exec(function(err,foundKidneys){
+        OrganRequest.find({"organType": 'Kidney', "address.state":state, "address.city": city, "isDonating": true}).exec(function(err,foundKidneys){
             if(err){
                 console.log(err);
             } else{
-                res.render("userHospSection/Organdonation/index", {foundKidneys: foundKidneys, flag: 1});
+                res.render("userHospSection/Organdonation/index", {foundKidneys: foundKidneys, flag: 1, organ: 2});
             }
         });
     } else if(state && !city){
-        OrganRequest.find({"organType": 'Kidney', "state":state, "isDonating": true}).exec(function(err,foundKidneys){
+        OrganRequest.find({"organType": 'Kidney', "address.state":state, "isDonating": true}).exec(function(err,foundKidneys){
             if(err){
                 console.log(err);
             } else{
-                res.render("userHospSection/Organdonation/index", {foundKidneys: foundKidneys, flag: 1});
+                res.render("userHospSection/Organdonation/index", {foundKidneys: foundKidneys, flag: 1, organ: 2});
             }
         });
     }
@@ -54,19 +55,19 @@ router.post("/userDocSection/index/searchOrgan/Heart", function(req, res){
     const city = req.body.city;
 
     if(state && city){
-        OrganRequest.find({"organType": 'Heart', "state":state, "city": city, "isDonating": true}).exec(function(err,foundHearts){
+        OrganRequest.find({"organType": 'Heart', "address.state":state, "address.city": city, "isDonating": true}).exec(function(err,foundHearts){
             if(err){
                 console.log(err);
             } else{
-                res.render("userHospSection/Organdonation/index", {foundHearts: foundHearts, flag: 1});
+                res.render("userHospSection/Organdonation/index", {foundHearts: foundHearts, flag: 1, organ: 3});
             }
         });
     } else if(state && !city){
-        OrganRequest.find({"organType": 'Heart', "state":state, "isDonating": true}).exec(function(err,foundHearts){
+        OrganRequest.find({"organType": 'Heart', "address.state":state, "isDonating": true}).exec(function(err,foundHearts){
             if(err){
                 console.log(err);
             } else{
-                res.render("userHospSection/Organdonation/index", {foundHearts: foundHearts, flag: 1});
+                res.render("userHospSection/Organdonation/index", {foundHearts: foundHearts, flag: 1, organ: 3});
             }
         });
     }
@@ -76,19 +77,19 @@ router.post("/userDocSection/index/searchOrgan/Eyes", function(req, res){
     const city = req.body.city;
 
     if(state && city){
-        OrganRequest.find({"organType": 'Eyes', "state":state, "city": city, "isDonating": true}).exec(function(err,foundEyes){
+        OrganRequest.find({"organType": 'Eyes', "address.state":state, "address.city": city, "isDonating": true}).exec(function(err,foundEyes){
             if(err){
                 console.log(err);
             } else{
-                res.render("userHospSection/Organdonation/index", {foundEyes: foundEyes, flag: 1});
+                res.render("userHospSection/Organdonation/index", {foundEyes: foundEyes, flag: 1, organ: 4});
             }
         });
     } else if(state && !city){
-        OrganRequest.find({"organType": 'Eyes', "state":state, "isDonating": true}).exec(function(err,foundEyes){
+        OrganRequest.find({"organType": 'Eyes', "address.state":state, "isDonating": true}).exec(function(err,foundEyes){
             if(err){
                 console.log(err);
             } else{
-                res.render("userHospSection/Organdonation/index", {foundEyes: foundEyes, flag: 1});
+                res.render("userHospSection/Organdonation/index", {foundEyes: foundEyes, flag: 1, organ: 4});
             }
         });
     }
@@ -98,19 +99,19 @@ router.post("/userDocSection/index/searchOrgan/Intestine", function(req, res){
     const city = req.body.city;
 
     if(state && city){
-        OrganRequest.find({"organType": 'Intestine', "state":state, "city": city, "isDonating": true}).exec(function(err,foundIntestines){
+        OrganRequest.find({"organType": 'Intestine', "address.state":state, "address.city": city, "isDonating": true}).exec(function(err,foundIntestines){
             if(err){
                 console.log(err);
             } else{
-                res.render("userHospSection/Organdonation/index", {foundIntestines: foundIntestines, flag: 1});
+                res.render("userHospSection/Organdonation/index", {foundIntestines: foundIntestines, flag: 1, organ: 5});
             }
         });
     } else if(state && !city){
-        OrganRequest.find({"organType": 'Intestine', "state":state, "isDonating": true}).exec(function(err,foundIntestines){
+        OrganRequest.find({"organType": 'Intestine', "address.state":state, "isDonating": true}).exec(function(err,foundIntestines){
             if(err){
                 console.log(err);
             } else{
-                res.render("userHospSection/Organdonation/index", {foundIntestines: foundIntestines, flag: 1});
+                res.render("userHospSection/Organdonation/index", {foundIntestines: foundIntestines, flag: 1, organ: 5});
             }
         });
     }
