@@ -6,15 +6,16 @@ const Hospital = require("../models/hospSchema");
 const Doctor = require("../models/docSchema");
 
 const Appointment = require("../models/appointmentSchema");
+const middleware = require("../middlewares/authMiddlewares");
 
 var router = express.Router();
 
 //----------Patient Routes--------------//
 
 // ---------Patient Profile page routes------------//
-router.get("/userDocSection/patientDashboard", function (req, res) {
-  res.render("user/dashboards/patientDashboard", { isPatient: true });
-});
+router.get("/userDocSection/patientDashboard", middleware.isLoggedIn, function(req, res){
+  res.render("user/dashboards/patientDashboard" ,{isPatient: true});
+})
 
 router.get("/userDocSection/createPatientProfile", function (req, res) {
   res.render("user/profilePages/Patient/createPatient");
@@ -80,7 +81,7 @@ router.get("/userDocSection/consultDoc", function (req, res) {
 
 //----------Doctor Routes--------------//
 
-router.get("/userDocSection/docDashboards", function (req, res) {
+router.get("/userDocSection/docDashboards", middleware.isLoggedIn, function (req, res) {
   Doctor.find()
     .where("handler.id")
     .equals(req.user._id)
@@ -109,18 +110,11 @@ router.get("/userDocSection/docDashboards", function (req, res) {
 
 //----------Hospital Admin Routes--------------//
 
-router.get("/user/hospAdmin/dashboard", function (req, res) {
-  Hospital.find()
-    .where("handler.id")
-    .equals(req.user._id)
-    .exec(function (err, foundHosp) {
-      if (err) {
-        console.log(err);
-      } else {
-        HospitalAdmin.find()
-          .where("handler.id")
-          .equals(req.user._id)
-          .exec(function (err, foundAdmin) {
+router.get("/user/hospAdmin/dashboard", middleware.isLoggedIn, function(req, res) {
+    Hospital.find()
+        .where("handler.id")
+        .equals(req.user._id)
+        .exec(function(err, foundHosp) {
             if (err) {
               console.log(err);
             } else {
@@ -130,8 +124,6 @@ router.get("/user/hospAdmin/dashboard", function (req, res) {
               });
             }
           });
-      }
-    });
 });
 
 router.get("/dashboards/hospAdmin/profileIndex", function (req, res) {

@@ -23,9 +23,9 @@ p {
 }
 
 .card {
-    border: 2px solid #e7e7e7;
-    border-radius: 4px;
-    padding: .5rem;
+    padding: 2rem;
+    box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);
+    border-radius: 42px;
 }
 
 .history {
@@ -177,7 +177,7 @@ table td, table th {
 
 table thead tr {
     height: 60px;
-    background: #36304a;
+    background: #3a16b1;
 }
 
 table tbody tr {

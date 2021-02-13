@@ -62,8 +62,15 @@ router.post("/register", function(req, res){
            res.redirect("/register");
        }else{
        passport.authenticate("local")(req, res, function(){
-          // req.flash("success", "Welcome to JOBify " + user.username);
-          res.redirect("/"); 
+            // req.flash("success", "Welcome to JOBify " + user.username);
+            if(req.user.role == "patient")
+                res.redirect("/userDocSection/patientDashboard");
+            else if(req.user.role == "doctor")
+                res.redirect("/userDocSection/checkPatients");
+            else if(req.user.role == "hospAdmin")
+                res.redirect("/user/hospAdmin/dashboard");
+            else
+                res.send(404); 
        });
     }
     

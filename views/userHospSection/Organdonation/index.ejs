@@ -34,23 +34,43 @@
             <div class="col-md-8">
                 <div>
                     <div class="introPage"  style="text-align: center; margin-top: 3rem;">
-                        <p>
-                            Organ donation is a social act that is looked upon with honour. India follows the opt-in 
-                            system for organ donation. The Transplantation of Human Organs Act 1994 controls the organ
-                            donation in India. India’s Ministry of Health and Family Welfare Government website gives
-                            out legal forms for those wishing to donate an organ.
-                        </p>
+                        <% if(flag == 0) { %>
 
-                        <strong>
-                            <h3>"You were born with the ability to change someone's life. Don't ever waste it"</h3> 
-                        </strong>
+                                <p>
+                                    Organ donation is a social act that is looked upon with honour. India follows the opt-in 
+                                    system for organ donation. The Transplantation of Human Organs Act 1994 controls the organ
+                                    donation in India. India’s Ministry of Health and Family Welfare Government website gives
+                                    out legal forms for those wishing to donate an organ.
+                                </p>
+        
+                                <strong>
+                                    <h3>"You were born with the ability to change someone's life. Don't ever waste it"</h3> 
+                                </strong>
+                            <% } else if(flag==1) { %>
+                                <% if(foundLivers.length > 0) { %>
+                                    <% foundLivers.forEach(function(liver){ %>
+                        
+                                        <div class="jumbotron">
+                                            <h2><strong>Donor Name: </strong> <%= liver.firstName + " " + liver.lastName %></h2>
+                                            <h5><strong>Donor Contact Email: </strong> <%= liver.email %> </h5>
+                                            <h5>Location of the Donor: <%= liver.address.city%>, <%= liver.address.state%></h5>
+                                        </div>
+                                        
+                                    <% }); %>
+                                <% } else{ %>
+                                    <h3><strong>No Liver Donor Found!!</strong></h3>
+                                <% } %>
+                            <% } else { %>
+                                <h5>shaf;dfjas</h5>
+                            <%  } %>
+
                     </div>
                     <div action="#" class="liverPage">
                         <h3>Liver Donation</h3>
                         <button style="border-radius:25px;"  class="btn btn-xs btn-outline-primary" id="liverSearchBtn">Search for Liver Donor</button>
                         <button style="border-radius:25px;"  class="btn btn-xs btn-outline-success" onclick=showLiverForm() id="liverRegisterBtn">Register to donate Liver</button>
                         <div id="liverSearch" style="margin-top: 3rem;">
-                            <form style="border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" class=" p-3 mb-5  border-radius: 25px">
+                            <form style="border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="/userDocSection/index/searchOrgan/Liver" class=" p-3 mb-5  border-radius: 25px" method="POST">
                                 <h3 style="text-align: center;">Search By your city</h3>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
@@ -61,51 +81,73 @@
                                         <label for="firstName">City:</label>
                                         <input style="border-radius:25px;"  type="text" class="form-control" name="city" placeholder="City Name">
                                     </div>
+                                    <button style="border-radius:25px;"  type="submit" class="btn btn-success">Search!</button>
                                 </div>
                             </form>
                         </div>
-                        <form style="margin-top: 3rem; width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" id="liverForm" class="liverForm  p-3 mb-5 ">
-                            <h3 style="text-align: center;">Liver Donation Form</h3>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                <label for="inputEmail4">Email</label>
-                                <input style="border-radius:25px;"  type="email" class="form-control" id="inputEmail4">
+                        <form style="margin-top: 3rem; width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="/userDocSection/organDonation/Liver" id="liverForm" class="liverForm  p-3 mb-5 " method="POST">
+                            <h3 style="text-align: center;"><u>Liver Donation Form</u></h3>
+                            <div style="margin-top: 2rem;" class="form-row">
+                                <div class="form-group col-md-12">
+                                    <h5><strong>Name: </strong> <%= currentUser.firstName + " " + currentUser.lastName %></h5>
                                 </div>
-                                <div class="form-group col-md-6">
-                                <label for="inputPassword4">Password</label>
-                                <input style="border-radius:25px;"  type="password" class="form-control" id="inputPassword4">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputAddress">Address</label>
-                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                <label for="inputCity">City</label>
-                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputCity">
+                                    <h5><strong>Email: </strong> <%= currentUser.email%></h5>
                                 </div>
-                                <div class="form-group col-md-4">
-                                <label for="inputState">State</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
-                                </select>
+                                <div class="form-group col-md-6">
+                                    <h5><strong>Phone: </strong> <%= currentUser.phone%></h5>
                                 </div>
-                                <div class="form-group col-md-2">
-                                <label for="inputZip">Zip</label>
-                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputZip">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <h5><strong>Adderss: </strong> <%= currentUser.address.street + ", " + currentUser.address.city + ", " + currentUser.address.state %></h5>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radioLiver" id="flexRadioDefault9" value="donating" >
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                          I am registering for <u>donation</u>
+                                        </label>
+                                    </div>
+                                </div>
+                                  <div class="form-group col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radioLiver" id="flexRadioDefault10" value="requesting" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                          I am <u>requesting</u> organ
+                                        </label>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="inputDiseases"><strong>Diseases</strong></label>
+                                    <textarea name="disease" id="inputDiseases" class="form-control" cols="30" rows="5" placeholder="Write If you have any Diseases."></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputBloodGroup"><strong>BloodGroup</strong></label>
+                                    <input style="border-radius:25px;"  type="text" name="bloodgroup" class="form-control" id="inputBloodGroup" placeholder="Donor Blood Group">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputAge"><strong>Age</strong></label>
+                                    <input style="border-radius:25px;"  type="number" name="age" class="form-control" id="inputAge" placeholder="Donor Age">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
-                                <input style="border-radius:25px;"  class="form-check-input" type="checkbox" >
+                                <input style="border-radius:25px;"  class="form-check-input" type="checkbox" required >
                                 <label class="form-check-label" for="gridCheck">
-                                    Check me out
+                                    I will bring all the necessary documents with me as instructed by the hospital.
                                 </label>
                                 </div>
                             </div>
-                            <button style="border-radius:25px;"  type="submit" class="btn btn-primary">Sign in</button>
+                            <button style="border-radius:25px;"  type="submit" class="btn btn-success">Apply!</button>
                         </form>
                     </div>
                     <div action="#" class="kidneyPage">
@@ -113,7 +155,7 @@
                         <button style="border-radius:25px;"  class="btn btn-xs btn-outline-primary" id="kidneySearchBtn">Search for Kidney Donor</button>
                         <button style="border-radius:25px;"  class="btn btn-xs btn-outline-success" onclick="showKidneyForm()" id="kidneyRegisterBtn">Register to donate Kidney</button>
                         <div id="kidneySearch" style="margin-top: 3rem;">
-                            <form style="border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" class=" p-3 mb-5 ">
+                            <form style="border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="/userDocSection/index/searchOrgan/Kidney" class=" p-3 mb-5 " method="POST">
                                 <h3 style="text-align: center;">Search By your city</h3>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
@@ -127,48 +169,69 @@
                                 </div>
                             </form>
                         </div>
-                        <form style="margin-top: 3rem; width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" id="kidneyForm" class="kidneyForm  p-3 mb-5 ">
-                            <h3 style="text-align: center;">Kidney Donation Form</h3>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                <label for="inputEmail4">Email</label>
-                                <input style="border-radius:25px;"  type="email" class="form-control" id="inputEmail4">
+                        <form style="margin-top: 3rem; width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="/userDocSection/organDonation/Kidney" id="kidneyForm" class="kidneyForm  p-3 mb-5 " method="POST">
+                            <h3 style="text-align: center;"><u>Kidney Donation Form</u></h3>
+                            <div style="margin-top: 2rem;" class="form-row">
+                                <div class="form-group col-md-12">
+                                    <h5><strong>Name: </strong> <%= currentUser.firstName + " " + currentUser.lastName %></h5>
                                 </div>
-                                <div class="form-group col-md-6">
-                                <label for="inputPassword4">Password</label>
-                                <input style="border-radius:25px;"  type="password" class="form-control" id="inputPassword4">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputAddress">Address</label>
-                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                <label for="inputCity">City</label>
-                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputCity">
+                                    <h5><strong>Email: </strong> <%= currentUser.email%></h5>
                                 </div>
-                                <div class="form-group col-md-4">
-                                <label for="inputState">State</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
-                                </select>
+                                <div class="form-group col-md-6">
+                                    <h5><strong>Phone: </strong> <%= currentUser.phone%></h5>
                                 </div>
-                                <div class="form-group col-md-2">
-                                <label for="inputZip">Zip</label>
-                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputZip">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radioKidney" id="flexRadioDefault7" value="donating" >
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                          I am registering for <u>donation</u>
+                                        </label>
+                                    </div>
+                                </div>
+                                  <div class="form-group col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radioKidney" id="flexRadioDefault8" value="requesting" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                          I am <u>requesting</u> organ
+                                        </label>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <h5><strong>Adderss: </strong> <%= currentUser.address.street + ", " + currentUser.address.city + ", " + currentUser.address.state %></h5>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="inputDiseases"><strong>Diseases</strong></label>
+                                    <textarea name="disease" id="inputDiseases" class="form-control" cols="30" rows="5" placeholder="Write If you have any Diseases."></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputBloodGroup"><strong>BloodGroup</strong></label>
+                                    <input style="border-radius:25px;"  type="text" name="bloodgroup" class="form-control" id="inputBloodGroup" placeholder="Donor Blood Group">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputAge"><strong>Age</strong></label>
+                                    <input style="border-radius:25px;"  type="number" name="age" class="form-control" id="inputAge" placeholder="Donor Age">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
-                                <input style="border-radius:25px;"  class="form-check-input" type="checkbox" >
+                                <input style="border-radius:25px;"  class="form-check-input" type="checkbox" required >
                                 <label class="form-check-label" for="gridCheck">
-                                    Check me out
+                                    I will bring all the necessary documents with me as instructed by the hospital.
                                 </label>
                                 </div>
                             </div>
-                            <button style="border-radius:25px;"  type="submit" class="btn btn-primary">Sign in</button>
+                            <button style="border-radius:25px;"  type="submit" class="btn btn-success">Apply!</button>
                         </form>
                     </div>
                     <div class="heartPage">
@@ -176,7 +239,7 @@
                         <button style="border-radius:25px;"  class="btn btn-xs btn-outline-primary" id="heartSearchBtn">Search for Heart Donor</button>
                         <button style="border-radius:25px;"  class="btn btn-xs btn-outline-success" onclick="showHeartForm()" id="heartRegisterBtn">Register to donate Heart</button>
                         <div id="heartSearch" style="margin-top: 3rem;">
-                            <form style="border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" class=" p-3 mb-5 ">
+                            <form style="border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="/userDocSection/index/searchOrgan/Heart" class=" p-3 mb-5 " method="POST">
                                 <h3 style="text-align: center;">Search By your city</h3>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
@@ -190,48 +253,69 @@
                                 </div>
                             </form>
                         </div>
-                        <form style="margin-top: 3rem; width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" id="heartForm" class="heartForm  p-3 mb-5 ">
-                            <h3 style="text-align: center;">Heart Donation Form</h3>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                <label for="inputEmail4">Email</label>
-                                <input style="border-radius:25px;"  type="email" class="form-control" id="inputEmail4">
+                        <form style="margin-top: 3rem; width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="/userDocSection/organDonation/Heart" id="heartForm" class="heartForm  p-3 mb-5 " method="POST">
+                            <h3 style="text-align: center;"><u>Heart Donation Form</u></h3>
+                            <div style="margin-top: 2rem;" class="form-row">
+                                <div class="form-group col-md-12">
+                                    <h5><strong>Name: </strong> <%= currentUser.firstName + " " + currentUser.lastName %></h5>
                                 </div>
-                                <div class="form-group col-md-6">
-                                <label for="inputPassword4">Password</label>
-                                <input style="border-radius:25px;"  type="password" class="form-control" id="inputPassword4">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputAddress">Address</label>
-                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                <label for="inputCity">City</label>
-                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputCity">
+                                    <h5><strong>Email: </strong> <%= currentUser.email%></h5>
                                 </div>
-                                <div class="form-group col-md-4">
-                                <label for="inputState">State</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
-                                </select>
+                                <div class="form-group col-md-6">
+                                    <h5><strong>Phone: </strong> <%= currentUser.phone%></h5>
                                 </div>
-                                <div class="form-group col-md-2">
-                                <label for="inputZip">Zip</label>
-                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputZip">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <h5><strong>Adderss: </strong> <%= currentUser.address.street + ", " + currentUser.address.city + ", " + currentUser.address.state %></h5>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radioHeart" id="flexRadioDefault5" value="donating" >
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                          I am registering for <u>donation</u>
+                                        </label>
+                                    </div>
+                                </div>
+                                  <div class="form-group col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radioHeart" id="flexRadioDefault6" value="requesting" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                          I am <u>requesting</u> organ
+                                        </label>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="inputDiseases"><strong>Diseases</strong></label>
+                                    <textarea name="disease" id="inputDiseases" class="form-control" cols="30" rows="5" placeholder="Write If you have any Diseases."></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputBloodGroup"><strong>BloodGroup</strong></label>
+                                    <input style="border-radius:25px;"  type="text" name="bloodgroup" class="form-control" id="inputBloodGroup" placeholder="Donor Blood Group">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputAge"><strong>Age</strong></label>
+                                    <input style="border-radius:25px;"  type="number" name="age" class="form-control" id="inputAge" placeholder="Donor Age">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
-                                <input style="border-radius:25px;"  class="form-check-input" type="checkbox" >
+                                <input style="border-radius:25px;"  class="form-check-input" type="checkbox" required >
                                 <label class="form-check-label" for="gridCheck">
-                                    Check me out
+                                    I will bring all the necessary documents with me as instructed by the hospital.
                                 </label>
                                 </div>
                             </div>
-                            <button style="border-radius:25px;"  type="submit" class="btn btn-primary">Sign in</button>
+                            <button style="border-radius:25px;"  type="submit" class="btn btn-success">Apply!</button>
                         </form>
                     </div>
                     <div action="#" class="eyesPage">
@@ -239,7 +323,7 @@
                         <button style="border-radius:25px;"  class="btn btn-xs btn-outline-primary" id="eyesSearchBtn">Search for Eyes Donor</button>
                         <button style="border-radius:25px;"  class="btn btn-xs btn-outline-success" onclick="showEyesForm()" id="eyesRegisterBtn">Register to donate Eyes</button>
                         <div id="eyesSearch" style="margin-top: 3rem;">
-                            <form style="border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" class=" p-3 mb-5 ">
+                            <form style="border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="/userDocSection/index/searchOrgan/Eyes" class=" p-3 mb-5 " method="POST">
                                 <h3 style="text-align: center;">Search By your city</h3>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
@@ -253,48 +337,69 @@
                                 </div>
                             </form>
                         </div>
-                        <form style="margin-top: 3rem; width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" id="eyesForm" class="eyesForm  p-3 mb-5 ">
-                            <h3 style="text-align: center;">Eyes Donation Form</h3>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                <label for="inputEmail4">Email</label>
-                                <input style="border-radius:25px;"  type="email" class="form-control" id="inputEmail4">
+                        <form style="margin-top: 3rem; width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="/userDocSection/organDonation/Eyes" id="eyesForm" class="eyesForm  p-3 mb-5 " method="POST">
+                            <h3 style="text-align: center;"><u>Eyes Donation Form</u></h3>
+                            <div style="margin-top: 2rem;" class="form-row">
+                                <div class="form-group col-md-12">
+                                    <h5><strong>Name: </strong> <%= currentUser.firstName + " " + currentUser.lastName %></h5>
                                 </div>
-                                <div class="form-group col-md-6">
-                                <label for="inputPassword4">Password</label>
-                                <input style="border-radius:25px;"  type="password" class="form-control" id="inputPassword4">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputAddress">Address</label>
-                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                <label for="inputCity">City</label>
-                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputCity">
+                                    <h5><strong>Email: </strong> <%= currentUser.email%></h5>
                                 </div>
-                                <div class="form-group col-md-4">
-                                <label for="inputState">State</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
-                                </select>
+                                <div class="form-group col-md-6">
+                                    <h5><strong>Phone: </strong> <%= currentUser.phone%></h5>
                                 </div>
-                                <div class="form-group col-md-2">
-                                <label for="inputZip">Zip</label>
-                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputZip">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <h5><strong>Adderss: </strong> <%= currentUser.address.street + ", " + currentUser.address.city + ", " + currentUser.address.state %></h5>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radioEyes" id="flexRadioDefault1" value="donating" >
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                          I am registering for <u>donation</u>
+                                        </label>
+                                    </div>
+                                </div>
+                                  <div class="form-group col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radioEyes" id="flexRadioDefault2" value="requesting" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                          I am <u>requesting</u> organ
+                                        </label>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="inputDiseases"><strong>Diseases</strong></label>
+                                    <textarea name="disease" id="inputDiseases" class="form-control" cols="30" rows="5" placeholder="Write If you have any Diseases."></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputBloodGroup"><strong>BloodGroup</strong></label>
+                                    <input style="border-radius:25px;"  type="text" name="bloodgroup" class="form-control" id="inputBloodGroup" placeholder="Donor Blood Group">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputAge"><strong>Age</strong></label>
+                                    <input style="border-radius:25px;"  type="number" name="age" class="form-control" id="inputAge" placeholder="Donor Age">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
-                                <input style="border-radius:25px;"  class="form-check-input" type="checkbox" >
+                                <input style="border-radius:25px;"  class="form-check-input" type="checkbox" required >
                                 <label class="form-check-label" for="gridCheck">
-                                    Check me out
+                                    I will bring all the necessary documents with me as instructed by the hospital.
                                 </label>
                                 </div>
                             </div>
-                            <button style="border-radius:25px;"  type="submit" class="btn btn-primary">Sign in</button>
+                            <button style="border-radius:25px;"  type="submit" class="btn btn-success">Apply!</button>
                         </form>
                     </div>
                     <div action="#" class="intestinePage">
@@ -302,7 +407,7 @@
                         <button style="border-radius:25px;"  class="btn btn-xs btn-outline-primary" id="intestineSearchBtn">Search for Intestines Donor</button>
                         <button style="border-radius:25px;"  class="btn btn-xs btn-outline-success" onclick="showIntestineForm()" id="intestineRegisterBtn">Register to donate Intestines</button>
                         <div id="intestineSearch" style="margin-top: 3rem;">
-                            <form style="border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" class=" p-3 mb-5 ">
+                            <form style="border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="/userDocSection/index/searchOrgan/Intestine" class=" p-3 mb-5 " method="POST">
                                 <h3 style="text-align: center;">Search By your city</h3>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
@@ -316,48 +421,69 @@
                                 </div>
                             </form>
                         </div>
-                        <form style="margin-top: 3rem; margin-top: 3rem;width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="#" id="intestineForm" class="intestineForm  p-3 mb-5 ">
-                            <h3 style="text-align: center;">Intestine Donation Form</h3>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                <label for="inputEmail4">Email</label>
-                                <input style="border-radius:25px;"  type="email" class="form-control" id="inputEmail4">
+                        <form style="margin-top: 3rem; margin-top: 3rem;width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="/userDocSection/organDonation/Intestine    " id="intestineForm" class="intestineForm  p-3 mb-5 " method="POST">
+                            <h3 style="text-align: center;"><u>Liver Donation Form</u></h3>
+                            <div style="margin-top: 2rem;" class="form-row">
+                                <div class="form-group col-md-12">
+                                    <h5><strong>Name: </strong> <%= currentUser.firstName + " " + currentUser.lastName %></h5>
                                 </div>
-                                <div class="form-group col-md-6">
-                                <label for="inputPassword4">Password</label>
-                                <input style="border-radius:25px;"  type="password" class="form-control" id="inputPassword4">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputAddress">Address</label>
-                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                <label for="inputCity">City</label>
-                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputCity">
+                                    <h5><strong>Email: </strong> <%= currentUser.email%></h5>
                                 </div>
-                                <div class="form-group col-md-4">
-                                <label for="inputState">State</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
-                                </select>
+                                <div class="form-group col-md-6">
+                                    <h5><strong>Phone: </strong> <%= currentUser.phone%></h5>
                                 </div>
-                                <div class="form-group col-md-2">
-                                <label for="inputZip">Zip</label>
-                                <input style="border-radius:25px;"  type="text" class="form-control" id="inputZip">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <h5><strong>Adderss: </strong> <%= currentUser.address.street + ", " + currentUser.address.city + ", " + currentUser.address.state %></h5>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radioIntestine" id="flexRadioDefault3" value="donating" >
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                          I am registering for <u>donation</u>
+                                        </label>
+                                    </div>
+                                </div>
+                                  <div class="form-group col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radioIntestine" id="flexRadioDefault4" value="requesting" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                          I am <u>requesting</u> organ
+                                        </label>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="inputDiseases"><strong>Diseases</strong></label>
+                                    <textarea name="disease" id="inputDiseases" class="form-control" cols="30" rows="5" placeholder="Write If you have any Diseases."></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputBloodGroup"><strong>BloodGroup</strong></label>
+                                    <input style="border-radius:25px;"  type="text" name="bloodgroup" class="form-control" id="inputBloodGroup" placeholder="Donor Blood Group">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputAge"><strong>Age</strong></label>
+                                    <input style="border-radius:25px;"  type="number" name="age" class="form-control" id="inputAge" placeholder="Donor Age">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
-                                <input style="border-radius:25px;"  class="form-check-input" type="checkbox" >
+                                <input style="border-radius:25px;"  class="form-check-input" type="checkbox" required >
                                 <label class="form-check-label" for="gridCheck">
-                                    Check me out
+                                    I will bring all the necessary documents with me as instructed by the hospital.
                                 </label>
                                 </div>
                             </div>
-                            <button style="border-radius:25px;"  type="submit" class="btn btn-primary">Sign in</button>
+                            <button style="border-radius:25px;"  type="submit" class="btn btn-success">Apply!</button>
                         </form>
                     </div>
                 </div>
