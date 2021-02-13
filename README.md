@@ -17,6 +17,16 @@ npm install
 nodemon
 ```
 
+## Technology used:
+* Frontend
+    * HTML
+    * CSS
+    * jQuery (also JavaScript)
+    * Bootstrap v4.5
+* Database
+    * MongoDB
+
+
 ## Contributors
 - Abhinav Tripathi  abhi3pathi01@gmail.com  
 - Anmol Sahu  anmolsahu2k@gmail.com  

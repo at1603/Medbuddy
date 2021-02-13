@@ -30,7 +30,7 @@ h4{
                 <tr>
                   <!-- For organVault request -->
                   <th>#</th>
-                  <th>Hospital</th>
+                  <th>Hospital Name</th>
                   <th>Date</th>
                   <th>Organs Required</th>
                   <th>Contact</th>
@@ -41,10 +41,10 @@ h4{
                 <% for(var i = 0; i < requests.length; i++){ %>
                     <tr data-toggle="collapse" data-target="#row<%=i%>" class="accordion-toggle">
                       <td id="element" data-placement="top" data-toggle="popover" data-content="Click to expand"><%= i+1%></td>
-                      <td><%=// requests[i].hospitalName %></td>
-                      <td><%= requests[i].date%></td>
-                      <td><%= requests[i].organs%></td>
-                      <td><%= //requests[i].contact%></td>
+                      <td>-xx-</td>
+                      <td><%= moment(requests[i].filledOn).format('lll')%></td>
+                      <td><%= requests[i].organType%></td>
+                      <td><%= requests[i].email%></td>
                       <td><a href="/hospHospSection/organVault/approve" class="btn btn-outline-success">Approve</a>
                         <a href="/hospHospSection/organVault/reject" class="btn btn-outline-danger">Reject</a>
                       </td>
@@ -61,17 +61,16 @@ h4{
                                   
                                   <p><strong>First Name:</strong> <%=requests[i].firstName%></p>
                                   <p><strong>Last Name:</strong> <%=requests[i].lastName%></p>
-                                  <p><strong>City:</strong> <%=requests[i].city%></p>
+                                  <p><strong>City:</strong> <%=requests[i].address.city%></p>
                                   
                                 </div>
                                 <div class="col-sm-3">
-                                  <p><strong>State:</strong> <%=requests[i].state%></p>
-                                  <p><strong>Pin Code:</strong> <%=requests[i].pinCode%></p>
+                                  <p><strong>State:</strong> <%=requests[i].address.state%></p>
+                                  <p><strong>Pin Code:</strong> <%=requests[i].address.zip%></p>
                                   <p><strong>Age:</strong> <%=requests[i].age%></p>
                                 </div>
                                 <div class="col-sm-3">
                                     <p><strong>Blood Group:</strong> <%=requests[i].bloodGroup%></p>
-                                    <p><strong>Address:</strong> <%=requests[i].address%></p>
                                     <p><strong>Disease History:</strong> <%=requests[i].disease%></p>
 
                                 </div>

@@ -10,6 +10,7 @@ let bloodReqSchema = new mongoose.Schema({
     address: String,
     city: String,
     state: String,
+    email: String,
     pinCode: String,
     bloodGroup: String,
     disease: String,

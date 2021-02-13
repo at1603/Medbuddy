@@ -11,6 +11,7 @@ let ambulanceReqSchema = new mongoose.Schema({
     city: String,
     state: String,
     pinCode: String,
+    email: String,
     bloodGroup: String,
     disease: String,
     age: Number,

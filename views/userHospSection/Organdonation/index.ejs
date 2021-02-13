@@ -42,27 +42,81 @@
                                     donation in India. India’s Ministry of Health and Family Welfare Government website gives
                                     out legal forms for those wishing to donate an organ.
                                 </p>
-        
+
                                 <strong>
                                     <h3>"You were born with the ability to change someone's life. Don't ever waste it"</h3> 
                                 </strong>
-                            <% } else if(flag==1) { %>
-                                <% if(foundLivers.length > 0) { %>
-                                    <% foundLivers.forEach(function(liver){ %>
-                        
+                        <% } else if(flag==1) { %>
+                            <% if(organ == 1) { %>
+                            <% if(foundLivers.length > 0) { %>
+                                <% foundLivers.forEach(function(liver){ %>
+                                    <div class="jumbotron" style="background-color:rgba(211, 234, 224, 0.1); border: 1px solid black; border-radius: 25px; padding: 1rem 1rem 0.2rem; text-align: left;">
+                                        <h3><strong><u>Liver Donor Details</u></strong></h3>
+                                        <h5><strong>Donor Name: </strong> <%= liver.firstName + " " + liver.lastName %></h5>
+                                        <h5><strong>Donor Contact Email: </strong> <%= liver.email %> </h5>
+                                        <h5><strong>Location of the Donor: </strong> <%= liver.address.city%>, <%= liver.address.state%></h5>
+
+                                        <p style="color: rgb(255, 0, 0);">*You can contact donor using Donor's Email.</p>
+                                    </div> 
+                                <% }); %>
+                            <% } else{ %>
+                                <h3><strong>No Liver Donor Found!!</strong></h3>
+                            <% } %>
+                        <% } else if(organ == 2){ %>
+                            <% if(foundKidneys.length > 0) { %>
+                                <% foundKidneys.forEach(function(kidney){ %>
+                                    <div class="jumbotron">
+                                        <h2><strong>Kidney Donor Details</strong></h2>
+                                        <h5><strong>Donor Name: </strong> <%= kidney.firstName + " " + kidney.lastName %></h5>
+                                        <h5><strong>Donor Contact Email: </strong> <%= kidney.email %> </h5>
+                                        <h5>Location of the Donor: <%= kidney.address.city%>, <%= kidney.address.state%></h5>
+                                    </div> 
+                                <% }); %>
+                            <% } else{ %>
+                                <h3><strong>No Kidney Donor Found!!</strong></h3>
+                            <% } %>
+                            <% } else if(organ == 3){ %>
+                                <% if(foundHearts.length > 0) { %>
+                                    <% foundHearts.forEach(function(heart){ %>
                                         <div class="jumbotron">
-                                            <h2><strong>Donor Name: </strong> <%= liver.firstName + " " + liver.lastName %></h2>
-                                            <h5><strong>Donor Contact Email: </strong> <%= liver.email %> </h5>
-                                            <h5>Location of the Donor: <%= liver.address.city%>, <%= liver.address.state%></h5>
-                                        </div>
-                                        
+                                            <h2><strong>Heart Donor Details</strong></h2>
+                                            <h5><strong>Donor Name: </strong> <%= heart.firstName + " " + heart.lastName %></h5>
+                                            <h5><strong>Donor Contact Email: </strong> <%= heart.email %> </h5>
+                                            <h5>Location of the Donor: <%= heart.address.city%>, <%= heart.address.state%></h5>
+                                        </div> 
                                     <% }); %>
                                 <% } else{ %>
-                                    <h3><strong>No Liver Donor Found!!</strong></h3>
+                                    <h3><strong>No Heart Donor Found!!</strong></h3>
                                 <% } %>
-                            <% } else { %>
-                                <h5>shaf;dfjas</h5>
-                            <%  } %>
+                                <% } else if(organ == 4){ %>
+                                    <% if(foundEyes.length > 0) { %>
+                                        <% foundEyes.forEach(function(eye){ %>
+                                            <div class="jumbotron">
+                                                <h2><strong>Eyes Donor Details</strong></h2>
+                                                <h5><strong>Donor Name: </strong> <%= eye.firstName + " " + eye.lastName %></h5>
+                                                <h5><strong>Donor Contact Email: </strong> <%= eye.email %> </h5>
+                                                <h5>Location of the Donor: <%= eye.address.city%>, <%= eye.address.state%></h5>
+                                            </div> 
+                                        <% }); %>
+                                    <% } else{ %>
+                                        <h3><strong>No Eyes Donor Found!!</strong></h3>
+                                    <% } %>
+                                    <% } else if(organ == 5){ %>
+                                        <% if(foundIntestines.length > 0) { %>
+                                            <% foundIntestines.forEach(function(intestine){ %>
+                                                <div class="jumbotron" style="background-color:rgb(0 0 0 / 20%)">
+                                                    <h2><strong>Intestine Donor Details</strong></h2>
+                                                    <h5><strong>Donor Name: </strong> <%= intestine.firstName + " " + intestine.lastName %></h5>
+                                                    <h5><strong>Donor Contact Email: </strong> <%= intestine.email %> </h5>
+                                                    <h5>Location of the Donor: <%= intestine.address.city%>, <%= intestine.address.state%></h5>
+                                                </div> 
+                                            <% }); %>
+                                        <% } else{ %>
+                                            <h3><strong>No Intestine Donor Found!!</strong></h3>
+                                        <% } %>
+                                        <% } %>
+                                    <% } %>
+                            
 
                     </div>
                     <div action="#" class="liverPage">
@@ -167,6 +221,7 @@
                                         <input style="border-radius:25px;"  type="text" class="form-control" name="city" placeholder="City Name">
                                     </div>
                                 </div>
+                                <button style="border-radius:25px;"  type="submit" class="btn btn-success">Search!</button>
                             </form>
                         </div>
                         <form style="margin-top: 3rem; width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="/userDocSection/organDonation/Kidney" id="kidneyForm" class="kidneyForm  p-3 mb-5 " method="POST">
@@ -251,6 +306,7 @@
                                         <input style="border-radius:25px;"  type="text" class="form-control" name="city" placeholder="City Name">
                                     </div>
                                 </div>
+                                <button style="border-radius:25px;"  type="submit" class="btn btn-success">Search!</button>
                             </form>
                         </div>
                         <form style="margin-top: 3rem; width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="/userDocSection/organDonation/Heart" id="heartForm" class="heartForm  p-3 mb-5 " method="POST">
@@ -335,6 +391,7 @@
                                         <input style="border-radius:25px;"  type="text" class="form-control" name="city" placeholder="City Name">
                                     </div>
                                 </div>
+                                <button style="border-radius:25px;"  type="submit" class="btn btn-success">Search!</button>
                             </form>
                         </div>
                         <form style="margin-top: 3rem; width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="/userDocSection/organDonation/Eyes" id="eyesForm" class="eyesForm  p-3 mb-5 " method="POST">
@@ -419,6 +476,7 @@
                                         <input style="border-radius:25px;"  type="text" class="form-control" name="city" placeholder="City Name">
                                     </div>
                                 </div>
+                                <button style="border-radius:25px;"  type="submit" class="btn btn-success">Search!</button>
                             </form>
                         </div>
                         <form style="margin-top: 3rem; margin-top: 3rem;width: 100%; border-radius: 25px;box-shadow: 0 0 12px 0px rgb(0 0 0 / 20%);" action="/userDocSection/organDonation/Intestine    " id="intestineForm" class="intestineForm  p-3 mb-5 " method="POST">
