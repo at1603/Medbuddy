@@ -85,12 +85,12 @@ router.post("/userDocSection/createProfile", function (req, res) {
 router.get("/userDocSection/docList/:id", function (req, res) {
   res.render("userDocSection/patientfiles/docList");
 });
-router.get("/userDocSection/docList/docInfo/:id", function (req, res) {
-  res.render("userDocSection/patientfiles/appointment");
+router.get("/userDocSection/myDoc/docInfo/:id", function (req, res) {
+  res.render("userDocSection/patientfiles/docinfo");
 });
 
-router.get("/userDocSection/changeDoc/:id", function (req, res) {
-  res.render("userDocSection/patientfiles/changeDoc");
+router.get("/userDocSection/myDoc", function (req, res) {
+  res.render("userDocSection/patientfiles/myDoc");
 });
 
 router.get("/userDocSection/searchDoc", function (req, res) {
