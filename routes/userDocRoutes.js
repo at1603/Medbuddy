@@ -13,13 +13,32 @@ router.get("/userDocSection/doctor/createProfile", function(req, res) {
 });
 
 router.get("/userDocSection/patientList/", function(req, res) {
-    // Patient.find().where(appointment[0].docId).equals(req.user._id).exec(err, foundPatient) {
-    //     if (err)
-    //         console.log(err);
-    //     else
-    res.render("userDocSection/docfiles/patientList");
+    // console.log(req.user._id);
+    Appointment.find().where("relation.docId").equals(req.user._id).exec(function(err, foundAppointment) {
+        if (err)
+            console.log(err);
+        else if (foundAppointment.length == 0) {
+            console.log("No appointment found");
+            res.redirect("/userDocSection/docDashboards");
+        } else {
 
-    // }
+            Patient.findById(foundAppointment[0].relation.patientId, function(err, foundPatient) {
+                if (err)
+                    console.log(err);
+                else {
+
+                    User.findById(foundPatient.handler.id, function(err, foundUser) {
+                        if (err)
+                            console.log(err);
+                        else {
+                            console.log(foundUser);
+                            res.render("userDocSection/docfiles/patientList", { patient: foundPatient, user: foundUser });
+                        }
+                    });
+                }
+            });
+        }
+    });
 });
 
 router.get("/userDocSection/patientList/patientInfo/:id", function(req, res) {
@@ -127,72 +146,82 @@ router.get("/userDocSection/docList/docInfo/:id", function(req, res) {
 
 });
 
-//my doctor
-router.get("/userDocSection/myDoctor", function(req, res) {
-            // var Appointment = []
-            //   Appointment.find().where(relation.patientId).equals(req.user._id).exec(err, foundAppointment) {
-            //       if (err)
-            //           console.log(err);
-            //       else {
-            //           // Doctor.find().where(foundAppointment.docId).equals()
-            //           console.log(foundAppointment);
-            //       }
-            //   }
+//my doctor            
 
-            router.get("/userDocSection/myDoc", function(req, res) {
-                res.render("userDocSection/patientfiles/myDoc");
-            });
+router.get("/userDocSection/myDoc", function(req, res) {
+    Appointment.find().where("relation.patientId").equals(req.user._id).exec(function(err, foundAppointment) {
+        if (err)
+            console.log(err);
+        else {
+            Doctor.findById(foundAppointment[0].relation.docId, function(err, foundDoctor) {
+                if (err)
+                    console.log(err);
+                else {
 
-            router.get("/userDocSection/changeDoc/:id", function(req, res) {
-                res.render("userDocSection/patientfiles/changeDoc");
-            });
-
-            router.get("/userDocSection/searchDoc", function(req, res) {
-                res.render("userDocSection/searchDoc");
-            });
-
-            router.get("/userDocSection/prescrip/:id", function(req, res) {
-                res.render("userDocSection/patientfiles/prescription");
-            });
-
-            //book appointment button
-            router.post("/userDocSection/createAppointment/", function(req, res) {
-                let newPatient = {
-                    handler: {
-                        id: req.user._id,
-                        username: req.user.username
-                    },
-                    //  curDoc: [String], //Currently appointed doctors.
-                    disease: [{
-                        relDoc: req.body.docId,
-                        diseaseName: req.body.disease
-                    }],
+                    User.findById(foundDoctor.handler.id, function(err, foundUser) {
+                        if (err)
+                            console.log(err);
+                        else {
+                            console.log(foundUser);
+                            res.render("userDocSection/patientfiles/myDoc", { doctor: foundDoctor, user: foundUser });
+                        }
+                    });
                 }
-                let newAppointment = {
-                    relation: {
-                        docId: req.body.docId,
-                        patientId: req.user._id
-                    }
-                }
-                Patient.create(newPatient, function(err, createdPatient) {
-                    if (err)
-                        console.log(err);
-                    else {
-                        Appointment.create(newAppointment, function(err, createAppointment) {
-                            if (err)
-                                console.log(err);
-                            else
-                                res.redirect("/userDocSection/patientDashboard");
+            });
+        }
+    });
+});
 
-                        });
-                    }
-                });
+router.get("/userDocSection/changeDoc/:id", function(req, res) {
+    res.render("userDocSection/patientfiles/changeDoc");
+});
+
+router.get("/userDocSection/searchDoc", function(req, res) {
+    res.render("userDocSection/searchDoc");
+});
+
+router.get("/userDocSection/prescrip/:id", function(req, res) {
+    res.render("userDocSection/patientfiles/prescription");
+});
+
+//book appointment button
+router.post("/userDocSection/createAppointment/", function(req, res) {
+    let newPatient = {
+        handler: {
+            id: req.user._id,
+            username: req.user.username
+        },
+        //  curDoc: [String], //Currently appointed doctors.
+        disease: [{
+            relDoc: req.body.docId,
+            diseaseName: req.body.disease
+        }],
+    }
+    let newAppointment = {
+        relation: {
+            docId: req.body.docId,
+            patientId: req.user._id
+        }
+    }
+    Patient.create(newPatient, function(err, createdPatient) {
+        if (err)
+            console.log(err);
+        else {
+            Appointment.create(newAppointment, function(err, createAppointment) {
+                if (err)
+                    console.log(err);
+                else
+                    res.redirect("/userDocSection/patientDashboard");
 
             });
+        }
+    });
 
-            //universal routes
-            router.get("/userDocSection/appointments/:id", function(req, res) {
-                res.render("userDocSection/appointments");
-            });
+});
 
-            module.exports = router;
+//universal routes
+router.get("/userDocSection/appointments/:id", function(req, res) {
+    res.render("userDocSection/appointments");
+});
+
+module.exports = router;
