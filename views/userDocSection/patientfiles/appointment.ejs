@@ -9,7 +9,7 @@
     <%-include("../../partials/altSidebar");-%>
     <div class="card" style="border: none">
       <form
-        action="/userDocSection/createProfile"
+        action="/userDocSection/createAppointment"
         method="POST"
         style="
           margin: 5rem 1rem 2rem 20rem;
@@ -25,33 +25,33 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <h6>
-              <span>Name : <a>Doc</a></span>
+              <span>Name : <a><%=user.firstName+" "+user.lastName%></a></span>
             </h6>
             <h6>
-              <span>Works At : <a>Hosp</a></span>
+              <span>Works At : <a><%=doctor.workAtHosp%></a></span>
             </h6>
             <h6>
-              <span>Experience : <a>5 Years</a></span>
+              <span>Experience : <a><%=doctor.experience%></a></span>
             </h6>
             <h6>
-              <span>Specialisation : <a>Neurology</a></span>
+              <span>Specialisation : <a><%=doctor.speciality%></a></span>
             </h6>
           </div>
         </div>
 
         <div class="form-row">
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-12">
             <label for="experience">Diseases</label>
             <input
               style="border-radius: 25px"
-              type="number"
+              type="text"
               class="form-control"
               placeholder="Disease"
               name="disease"
             />
           </div>
         </div>
-
+        <input type = "hidden" name = "docId" value = "<%=doctor._id%>" />
         <button
           type="submit"
           style="border-radius: 25px"
