@@ -1,7 +1,6 @@
 var mongoose = require("mongoose");
 
 var patientSchema = new mongoose.Schema({
-
   handler: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
@@ -9,33 +8,35 @@ var patientSchema = new mongoose.Schema({
     },
     username: String,
   },
-  prescription: [
-    {
-      relDoc: String,
-      presc: {
-        docName: String,
-        patName: String,
-        disease: [String],
-        medicines: [
-          {
-            medicineName: String,
-            power: String,
-            dosage: String,
-          },
-        ],
-        test: [String],
-        comment: String,
+  prescription: {
+    type: [
+      {
+        relDoc: { type: String, default: null },
+        presc: {
+          docName: String,
+          patName: String,
+          disease: [String],
+          medicines: [
+            {
+              medicineName: String,
+              power: String,
+              dosage: String,
+            },
+          ],
+          test: [String],
+          comment: String,
+        },
       },
-
-      default: null,
+    ],
+    default: () => {
+      return null;
     },
-  ],
-  curDoc: [String], //Currently appointed doctors.
+  },
+  //  curDoc: [String], //Currently appointed doctors.
   disease: [
     {
-      relDoc: String,
-      diseaseName: String,
-      default: null,
+      relDoc: { type: String, default: null },
+      diseaseName: { type: String, default: null },
     },
   ],
   appointment: [
@@ -43,10 +44,12 @@ var patientSchema = new mongoose.Schema({
       docId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Doctor",
+        default: null,
       },
       appointId: {
-        type: mongoose.mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Appointment",
+        default: null,
       },
     },
   ],
