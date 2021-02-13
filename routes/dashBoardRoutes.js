@@ -111,10 +111,17 @@ router.get("/userDocSection/docDashboards", middleware.isLoggedIn, function (req
 //----------Hospital Admin Routes--------------//
 
 router.get("/user/hospAdmin/dashboard", middleware.isLoggedIn, function(req, res) {
-    Hospital.find()
-        .where("handler.id")
-        .equals(req.user._id)
-        .exec(function(err, foundHosp) {
+  Hospital.find()
+    .where("handler.id")
+    .equals(req.user._id)
+    .exec(function (err, foundHosp) {
+      if (err) {
+        console.log(err);
+      } else {
+        HospitalAdmin.find()
+          .where("handler.id")
+          .equals(req.user._id)
+          .exec(function (err, foundAdmin) {
             if (err) {
               console.log(err);
             } else {
@@ -124,6 +131,8 @@ router.get("/user/hospAdmin/dashboard", middleware.isLoggedIn, function(req, res
               });
             }
           });
+      }
+    });
 });
 
 router.get("/dashboards/hospAdmin/profileIndex", function (req, res) {
