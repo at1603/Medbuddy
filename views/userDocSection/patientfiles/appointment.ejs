@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link rel="stylesheet" href="/stylesheets/landing.css" />
+  <!-- <link rel="stylesheet" href="/stylesheets/partials/navbar.css" /> -->
+
+  <%- include("../../partials/header"); -%>
+  <body id="body-pd">
+    <%-include("../../partials/altNavbar");-%>
+    <%-include("../../partials/altSidebar");-%>
+    <div class="card" style="border: none">
+      <form
+        action="/userDocSection/createProfile"
+        method="POST"
+        style="
+          margin: 5rem 1rem 2rem 20rem;
+          padding: 2rem;
+          max-width: 600px;
+          box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);
+          border-radius: 42px;
+        "
+      >
+        <h4 style="text-align: center">
+          <strong>Fill Your Disease</strong>
+        </h4>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <h6>
+              <span>Name : <a>Doc</a></span>
+            </h6>
+            <h6>
+              <span>Works At : <a>Hosp</a></span>
+            </h6>
+            <h6>
+              <span>Experience : <a>5 Years</a></span>
+            </h6>
+            <h6>
+              <span>Specialisation : <a>Neurology</a></span>
+            </h6>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="experience">Diseases</label>
+            <input
+              style="border-radius: 25px"
+              type="number"
+              class="form-control"
+              placeholder="Disease"
+              name="disease"
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          style="border-radius: 25px"
+          class="btn btn-primary"
+        >
+          Book Appointment!
+        </button>
+      </form>
+    </div>
+    <%-include("../../partials/footer");-%>
+  </body>
+</html>
