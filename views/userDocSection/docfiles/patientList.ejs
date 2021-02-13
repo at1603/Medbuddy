@@ -16,8 +16,8 @@
             <thead>
               <tr class="table100-head">
                 <th class="column1">S.N</th>
-                <th class="column1">Patient Id</th>
                 <th class="column1">Name</th>
+                <th class="column1">Disease</th>
                 <th class="column7"></th>
 
               </tr>
@@ -25,22 +25,8 @@
             <tbody id="front">
               <tr>
                 <td class="column1">1</td>
-                <td class="column1">P1001</td>
-                <td class="column1">4 Times a Day</td>
-                <td class="column7"><a href="/userDocSection/patientList/patientInfo/:id"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
-
-              </tr>
-              <tr>
-                <td class="column1">2</td>
-                <td class="column1">P1002</td>
-                <td class="column1">4 Times a Day</td>
-                <td class="column7"><a href="/userDocSection/patientList/patientInfo/:id"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
-
-              </tr>
-              <tr>
-                <td class="column1">3</td>
-                <td class="column1">P1003</td>
-                <td class="column1">4 Times a Day</td>
+                <td class="column1"><%=user.firstName+" "+user.lastName%></td>
+                <td class="column1">patient.disease</td>
                 <td class="column7"><a href="/userDocSection/patientList/patientInfo/:id"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
 
               </tr>
