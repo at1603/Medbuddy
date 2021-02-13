@@ -13,12 +13,19 @@ router.put("/user/updateProfile/:id", function(req, res) {
         if (err) {
             // req.flash("error", "Policy not found!")
             console.log(err);
-            res.send("error");
+            res.send(404);
         } else {
             // req.flash("error", "Policy details succesfully updated!")
             console.log(updateUser);
             console.log(req.body);
-            res.send("success");
+            if (req.user.role == "patient")
+                res.redirect("/userDocSection/patientDashboard");
+            else if (req.user.role == "doctor")
+                res.redirect("/userDocSection/docDashboards");
+            else if (req.user.role == "hospAdmin")
+                res.redirect("/user/hospAdmin/dashboard");
+            else
+                res.send(404);
         }
     });
 });
