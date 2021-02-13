@@ -17,9 +17,9 @@ let organReqSchema = new mongoose.Schema({
     bloodGroup: String,
     disease: String,
     age: Number,
-    organType: String,
-    isDonating: {type: Boolean, default: false}
-    // date: String
+    organType: [String],
+    isDonating: {type: Boolean, default: false},
+    filledOn:{type:Date, default:Date.now}
 });
 
 module.exports = mongoose.model('organReqSchema', organReqSchema)
