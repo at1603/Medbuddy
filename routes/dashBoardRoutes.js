@@ -5,6 +5,10 @@ const BloodBank = require("../models/userHospModels/bloodBankSchema");
 const Hospital = require("../models/hospSchema");
 const Doctor = require("../models/docSchema");
 
+
+const Appointment = require("../models/appointmentSchema");
+
+
 var router = express.Router();
 
 //----------Patient Routes--------------//
@@ -66,6 +70,9 @@ router.post("/userDocSection/cretePatientProfile", function(req, res){
       res.redirect("/userDocSection/patientDashboard")
     }
   });
+
+router.get("/userDocSection/consultDoc", function (req, res) {
+  res.render("user/dashboards/patientDashboard.ejs");
 });
 
 // router.get("/userDocSection/consultDoc", function (req, res) {
@@ -74,9 +81,32 @@ router.post("/userDocSection/cretePatientProfile", function(req, res){
 //----X-----Patient Routes-------X------//
 
 //----------Doctor Routes--------------//
-router.get("/userDocSection/checkPatients", function(req, res) {
-    res.render("user/dashboards/docDashboard.ejs");
+
+router.get("/userDocSection/docDashboards", function (req, res) {
+  Doctor.find()
+    .where("handler.id")
+    .equals(req.user._id)
+    .exec(function (err, foundDoctor) {
+      if (err) {
+        console.log(err);
+      } else {
+        Appointment.find()
+          .where("relation.docId")
+          .equals(req.user._id)
+          .exec(function (err, foundAppointments) {
+            if (err) {
+              console.log(err);
+            } else {
+              res.render("user/dashboards/docDashboard", {
+                foundDoctor: foundDoctor,
+                foundAppointments: foundAppointments,
+              });
+            }
+          });
+      }
+    });
 });
+
 //----X-----Doctor Routes--------x-----//
 
 //----------Hospital Admin Routes--------------//
@@ -103,7 +133,10 @@ router.get("/user/hospAdmin/dashboard", function(req, res) {
                         }
                     });
             }
-        });
+
+          });
+      }
+    });
 });
 
 router.get("/dashboards/hospAdmin/profileIndex", function(req, res) {
@@ -146,36 +179,35 @@ router.get("/dashboards/hospAdmin/otheProfile", function(req, res) {
 ////```````````Hospital Info post request`````````````///////
 
 
-router.post("/dashboards/hospAdmin/hospitalProfile", function(req, res) {
-    let newHosp = {
-        name: req.body.hospName,
-        type: req.body.type,
-        speciality: req.body.speciality,
-        contact: {
-            email: req.body.email,
-            phone: req.body.phone,
-        },
-        handler: {
-            id: req.user._id,
-            username: req.user.username,
-        },
-        address: {
-            street: req.body.street,
-            city: req.body.city,
-            state: req.body.state,
-            zip: req.body.zip,
-        },
-        about: req.body.aboutHosp,
-    };
+router.post("/dashboards/hospAdmin/hospitalProfile", function (req, res) {
+  let newHosp = {
+    name: req.body.hospName,
+    type: req.body.type,
+    speciality: req.body.speciality,
+    contact: {
+      email: req.body.email,
+      phone: req.body.phone,
+    },
+    handler: {
+      id: req.user._id,
+      username: req.user.username,
+    },
+    address: {
+      street: req.body.street,
+      city: req.body.city,
+      state: req.body.state,
+      zip: req.body.zip,
+    },
+    about: req.body.aboutHosp,
+  };
 
-    Hospital.create(newHosp, function(err, newHospital) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.redirect("/dashboards/hospAdmin/profileIndex");
-        }
-    });
-
+  Hospital.create(newHosp, function (err, newHospital) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/dashboards/hospAdmin/profileIndex");
+    }
+  });
 });
 
 router.get("/user/hospAdmin/dashboard/doctors", function(req, res){
@@ -228,7 +260,7 @@ router.post("/dashboards/hospAdmin/hospAdminProfile", function(req, res) {
     });
 });
 
-// ---------Hospital Admin BloodBank, Ambulance, other routes -------------- //
+// ---------Hospital Admin BloodBank, Ambulance,  routes -------------- //
 
 router.post("/dashboards/hospAdmin/otheProfile/bloodbank", function(req, res) {
     let newBloodbank = {
@@ -320,7 +352,41 @@ router.put("/dashboards/hospAdmin/updateHospitalProfile/:id", function(req, res)
             res.redirect("/dashboards/hospAdmin/updateProfileIndex");
         }
     });
+=======
+router.get("/dashboards/hospAdmin/updateHospitalProfile", function (req, res) {
+  Hospital.find()
+    .where("handler.id")
+    .equals(req.user._id)
+    .exec(function (err, foundHosp) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("user/profilePages/updateProfilePages/updateHosp", {
+          foundHosp: foundHosp,
+        });
+      }
+    });
 });
+
+router.put(
+  "/dashboards/hospAdmin/updateHospitalProfile/:id",
+  function (req, res) {
+    Hospital.findByIdAndUpdate(
+      req.params.id,
+      req.body.hosp,
+      function (err, updateHospital) {
+        if (err) {
+          // req.flash("error", "Policy not found!")
+          console.log(err);
+          res.redirect("/dashboards/hospAdmin/updateHospitalProfile");
+        } else {
+          // req.flash("error", "Policy details succesfully updated!")
+          res.redirect("/dashboards/hospAdmin/updateProfileIndex");
+        }
+      }
+    );
+  }
+);
 //------------X-------------Hospital Update Routes ---------X-----------//
 //--------------------------Other Profiles Update Routes ---------------------//
 
@@ -331,8 +397,10 @@ router.get("/dashboards/hospAdmin/updateOtherProfile", function(req, res) {
         } else {
             BloodBank.find().where('handler.id').equals(req.user._id).exec(function(err, foundBloodBank) {
                 res.render("user/profilePages/updateProfilePages/updateHosp", { foundHosp: foundHosp, foundBloodBank, foundBloodBank });
+
             });
-        }
+          });
+      }
     });
 });
 
@@ -348,6 +416,7 @@ router.put("/dashboards/hospAdmin/updateOtherProfile/bloodBank/:id", function(re
         }
     });
 });
+
 
 //Schema needed.
 
