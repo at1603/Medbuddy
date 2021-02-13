@@ -50,11 +50,13 @@
                             <% if(organ == 1) { %>
                             <% if(foundLivers.length > 0) { %>
                                 <% foundLivers.forEach(function(liver){ %>
-                                    <div class="jumbotron" style="background-color:rgba(211, 234, 224, 0.1); border: 1px solid black; border-radius: 25px; padding: 1rem; text-align: left;">
+                                    <div class="jumbotron" style="background-color:rgba(211, 234, 224, 0.1); border: 1px solid black; border-radius: 25px; padding: 1rem 1rem 0.2rem; text-align: left;">
                                         <h3><strong><u>Liver Donor Details</u></strong></h3>
                                         <h5><strong>Donor Name: </strong> <%= liver.firstName + " " + liver.lastName %></h5>
                                         <h5><strong>Donor Contact Email: </strong> <%= liver.email %> </h5>
-                                        <h5>Location of the Donor: <%= liver.address.city%>, <%= liver.address.state%></h5>
+                                        <h5><strong>Location of the Donor: </strong> <%= liver.address.city%>, <%= liver.address.state%></h5>
+
+                                        <p style="color: rgb(255, 0, 0);">*You can contact donor using Donor's Email.</p>
                                     </div> 
                                 <% }); %>
                             <% } else{ %>
