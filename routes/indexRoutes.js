@@ -1,25 +1,21 @@
 var express = require("express");
 var router = express.Router();
 
+const middleware = require("../middlewares/authMiddlewares")
 
 var sendMail = require("../public/jsFiles/mail");
 
-//altLandingpageroute
-router.get("/alt", function(req, res){
-    res.render("altLandingPage");
-});
-
 //Dashboard routes
-router.get("/user/doctor/dashboard", function(req, res) {
+router.get("/user/doctor/dashboard", middleware.isLoggedIn, function(req, res) {
     res.render("user/dashboards/docDashboard")
 });
 
-router.get("/user/patient/dashboard", function(req, res) {
+router.get("/user/patient/dashboard", middleware.isLoggedIn, function(req, res) {
     res.render("user/dashboards/patientDashboard")
 });
 //Manage hospital routes
 
-router.get("/hospHospSection/initialPage", function(req, res) {
+router.get("/hospHospSection/initialPage", middleware.isLoggedIn, function(req, res) {
     res.render("hospHospSection/index");
 });
 

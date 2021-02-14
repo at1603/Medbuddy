@@ -44,7 +44,7 @@
 
     <div class="container">
         <h2>Search Blood Banks in your city</h2>
-        <form action="#" method="POST">
+        <form action="/userHospSection/bloodBanks/search" method="POST">
             <div style="box-shadow: 2px 2px 10px 4px rgb(177 177 177 / 40%); margin: 3rem; border-radius: 25px;">
                 <div class="form row" style="justify-content: space-evenly; padding: 0 2rem;position:relative">
                     <div class="form-group col-md-5" style="margin: 1rem 0 2rem;border-radius: 25px;">
@@ -64,6 +64,60 @@
                 </div>
             </div>
         </form>
+
+        <% if(flag == 1) { %>
+            <% console.log(foundBloodBanks) %>
+                <% if(foundBloodBanks.length > 0) { %>
+                    <% foundBloodBanks.forEach(function(bloodBank){ %>
+                        <div class="jumbotron" style="background-color:rgba(211, 234, 224, 0.1); border: 1px solid black; border-radius: 25px; padding: 1rem 1rem 0.2rem; text-align: left;">
+                            <h3><strong><u>BloodBank Details</u></strong></h3>
+                            <h5><strong>Blood Bank Name: </strong> <%= bloodBank.name %></h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5><strong>Email: </strong> <%= bloodBank.contact.email %> </h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5><strong>Phone: </strong> <%= bloodBank.contact.phone %> </h5>
+                                </div>
+                            </div>
+                            <h5><strong>Location of the Bank: </strong> <%=  bloodBank.address.street + ", " + bloodBank.address.city + ", "+ bloodBank.address.state %></h5>
+                            <p><strong><u>Blood Banks Vault Details (Blood/units):</u> </strong></p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <p><strong>O+: </strong><%= bloodBank.currcapacity.opos %></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><strong>O-: </strong><%= bloodBank.currcapacity.oneg %></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><strong>A+: </strong><%= bloodBank.currcapacity.apos%></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><strong>A-: </strong><%= bloodBank.currcapacity.aneg%></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <p><strong>B+: </strong><%= bloodBank.currcapacity.bpos%></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><strong>B-: </strong><%= bloodBank.currcapacity.bneg%></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><strong>AB+: </strong><%= bloodBank.currcapacity.abpos%></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><strong>AB-: </strong><%= bloodBank.currcapacity.abneg%></p>
+                                </div>
+                            </div>
+
+                            <p style="color: rgb(255, 0, 0);">*You can contact Blood Bank using Email or Phone.</p>
+                        </div> 
+                    <% }); %>
+                <% } else { %> 
+                    <h>No BloodBank Found!</h4>
+                <% } %>
+        <% } %>
 
         <h4>Want to donate blood?</h4> <span><button class="btn btn-xs btn-outline-primary" id="registerBtn" onClick=registerDonor() style="border-radius: 25px;">Register Now!</button></span>
         <div class="registerForm" id="registerForm">

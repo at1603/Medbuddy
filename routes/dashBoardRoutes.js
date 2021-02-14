@@ -134,7 +134,7 @@ router.get("/user/hospAdmin/dashboard", middleware.isLoggedIn, function(req, res
     });
 });
 
-router.get("/dashboards/hospAdmin/profileIndex", function(req, res) {
+router.get("/dashboards/hospAdmin/profileIndex", middleware.isLoggedIn, function(req, res) {
     Hospital.find()
         .where("handler.id")
         .equals(req.user._id)
@@ -159,21 +159,21 @@ router.get("/dashboards/hospAdmin/profileIndex", function(req, res) {
         });
 });
 
-router.get("/dashboards/hospAdmin/hospitalProfile", function(req, res) {
+router.get("/dashboards/hospAdmin/hospitalProfile",middleware.isLoggedIn, function(req, res) {
     res.render("user/profilePages/profileIndexPage/hospitalProfile");
 });
 
-router.get("/dashboards/hospAdmin/hospAdminProfile", function(req, res) {
+router.get("/dashboards/hospAdmin/hospAdminProfile", middleware.isLoggedIn,function(req, res) {
     res.render("user/profilePages/profileIndexPage/hospAdminProfile");
 });
 
-router.get("/dashboards/hospAdmin/otheProfile", function(req, res) {
+router.get("/dashboards/hospAdmin/otheProfile",middleware.isLoggedIn, function(req, res) {
     res.render("user/profilePages/profileIndexPage/otherProfile");
 });
 
 ////```````````Hospital Info post request`````````````///////
 
-router.post("/dashboards/hospAdmin/hospitalProfile", function(req, res) {
+router.post("/dashboards/hospAdmin/hospitalProfile",middleware.isLoggedIn, function(req, res) {
     let newHosp = {
         name: req.body.hospName,
         type: req.body.type,
@@ -204,7 +204,7 @@ router.post("/dashboards/hospAdmin/hospitalProfile", function(req, res) {
     });
 });
 
-router.get("/user/hospAdmin/dashboard/doctors", function(req, res) {
+router.get("/user/hospAdmin/dashboard/doctors", middleware.isLoggedIn, function(req, res) {
     Hospital.findOne()
         .where("handler.id")
         .equals(req.user._id)
@@ -230,7 +230,7 @@ router.get("/user/hospAdmin/dashboard/doctors", function(req, res) {
 
 ////``````````````Hospital Admin Post request```````````````/////
 
-router.post("/dashboards/hospAdmin/hospAdminProfile", function(req, res) {
+router.post("/dashboards/hospAdmin/hospAdminProfile", middleware.isLoggedIn, function(req, res) {
     let newHospAdm = {
         oxyCur: req.body.oxyCur,
         ambCur: req.body.ambCur,
@@ -264,7 +264,7 @@ router.post("/dashboards/hospAdmin/hospAdminProfile", function(req, res) {
 
 // ---------Hospital Admin BloodBank, Ambulance,  routes -------------- //
 
-router.post("/dashboards/hospAdmin/otheProfile/bloodbank", function(req, res) {
+router.post("/dashboards/hospAdmin/otheProfile/bloodbank", middleware.isLoggedIn, function(req, res) {
     let newBloodbank = {
         name: req.body.name,
         address: {
@@ -316,7 +316,7 @@ router.post(
 
 //-----------------Hospital, Other Profiles Update Routes-------------------//
 
-router.get("/dashboards/hospAdmin/updateProfileIndex", function(req, res) {
+router.get("/dashboards/hospAdmin/updateProfileIndex",middleware.isLoggedIn, function(req, res) {
     Hospital.find()
         .where("handler.id")
         .equals(req.user._id)
@@ -342,7 +342,7 @@ router.get("/dashboards/hospAdmin/updateProfileIndex", function(req, res) {
 });
 
 //--------------------------Hospital Update Routes ---------------------//
-router.get("/dashboards/hospAdmin/updateHospitalProfile", function(req, res) {
+router.get("/dashboards/hospAdmin/updateHospitalProfile",middleware.isLoggedIn, function(req, res) {
     Hospital.find()
         .where("handler.id")
         .equals(req.user._id)
@@ -358,7 +358,7 @@ router.get("/dashboards/hospAdmin/updateHospitalProfile", function(req, res) {
 });
 
 router.put(
-    "/dashboards/hospAdmin/updateHospitalProfile/:id",
+    "/dashboards/hospAdmin/updateHospitalProfile/:id",middleware.isLoggedIn,
     function(req, res) {
         Hospital.findByIdAndUpdate(
             req.params.id,
@@ -374,72 +374,72 @@ router.put(
                 }
             }
         );
-        router.get(
-            "/dashboards/hospAdmin/updateHospitalProfile",
-            function(req, res) {
-                Hospital.find()
-                    .where("handler.id")
-                    .equals(req.user._id)
-                    .exec(function(err, foundHosp) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            res.render("user/profilePages/updateProfilePages/updateHosp", {
-                                foundHosp: foundHosp,
-                            });
-                        }
+router.get(
+    "/dashboards/hospAdmin/updateHospitalProfile",middleware.isLoggedIn,
+    function(req, res) {
+        Hospital.find()
+            .where("handler.id")
+            .equals(req.user._id)
+            .exec(function(err, foundHosp) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.render("user/profilePages/updateProfilePages/updateHosp", {
+                        foundHosp: foundHosp,
                     });
-            }
-        );
-
-        router.put(
-            "/dashboards/hospAdmin/updateHospitalProfile/:id",
-            function(req, res) {
-                Hospital.findByIdAndUpdate(
-                    req.params.id,
-                    req.body.hosp,
-                    function(err, updateHospital) {
-                        if (err) {
-                            // req.flash("error", "Policy not found!")
-                            console.log(err);
-                            res.redirect("/dashboards/hospAdmin/updateHospitalProfile");
-                        } else {
-                            // req.flash("error", "Policy details succesfully updated!")
-                            res.redirect("/dashboards/hospAdmin/updateProfileIndex");
-                        }
-                    }
-                );
-            }
-        );
-        //------------X-------------Hospital Update Routes ---------X-----------//
-        //--------------------------Other Profiles Update Routes ---------------------//
-
-        router.get("/dashboards/hospAdmin/updateOtherProfile", function(req, res) {
-            Hospital.find()
-                .where("handler.id")
-                .equals(req.user._id)
-                .exec(function(err, foundHosp) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        BloodBank.find()
-                            .where("handler.id")
-                            .equals(req.user._id)
-                            .exec(function(err, foundBloodBank) {
-                                res.render("user/profilePages/updateProfilePages/updateHosp", {
-                                    foundHosp: foundHosp,
-                                    foundBloodBank,
-                                    foundBloodBank,
-                                });
-                            });
-                    }
-                });
-        });
+                }
+            });
     }
 );
 
 router.put(
-    "/dashboards/hospAdmin/updateOtherProfile/bloodBank/:id",
+    "/dashboards/hospAdmin/updateHospitalProfile/:id",middleware.isLoggedIn,
+    function(req, res) {
+        Hospital.findByIdAndUpdate(
+            req.params.id,
+            req.body.hosp,
+            function(err, updateHospital) {
+                if (err) {
+                    // req.flash("error", "Policy not found!")
+                    console.log(err);
+                    res.redirect("/dashboards/hospAdmin/updateHospitalProfile");
+                } else {
+                    // req.flash("error", "Policy details succesfully updated!")
+                    res.redirect("/dashboards/hospAdmin/updateProfileIndex");
+                }
+            }
+        );
+    }
+);
+        //------------X-------------Hospital Update Routes ---------X-----------//
+        //--------------------------Other Profiles Update Routes ---------------------//
+
+router.get("/dashboards/hospAdmin/updateOtherProfile",middleware.isLoggedIn, function(req, res) {
+    Hospital.find()
+        .where("handler.id")
+        .equals(req.user._id)
+        .exec(function(err, foundHosp) {
+            if (err) {
+                console.log(err);
+            } else {
+                BloodBank.find()
+                    .where("handler.id")
+                    .equals(req.user._id)
+                    .exec(function(err, foundBloodBank) {
+                        res.render("user/profilePages/updateProfilePages/updateHosp", {
+                            foundHosp: foundHosp,
+                            foundBloodBank,
+                            foundBloodBank,
+                        });
+                    });
+            }
+        });
+});
+}
+);
+
+router.put(
+    "/dashboards/hospAdmin/updateOtherProfile/bloodBank/:id",middleware.isLoggedIn,
     function(req, res) {
         BloodBank.findByIdAndUpdate(
             req.params.id,

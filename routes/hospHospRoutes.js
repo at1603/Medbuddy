@@ -122,7 +122,7 @@ router.get("/hospHospSection/ambulance", function(req, res) {
 });
 
 //All request form routes
-router.get("/hospHospSection/:service/specificRequest", function(req, res) {
+router.get("/hospHospSection/:service/specificRequest",middleware.isLoggedIn, function(req, res) {
     res.render("hospHospSection/request", { service: _.startCase(req.params.service) });
 });
 
@@ -158,7 +158,7 @@ router.get("/hospHospSection/bloodBank/answer", function(req, res) {
     });
 });
 
-router.get("/hospHospSection/organVault/answer", function(req, res) {
+router.get("/hospHospSection/organVault/answer",middleware.isLoggedIn, function(req, res) {
     organReqSchema.find(function(err, allOrganReq) {
         if (err)
             console.log(err);
@@ -169,7 +169,7 @@ router.get("/hospHospSection/organVault/answer", function(req, res) {
 });
 
 
-router.get("/hospHospSection/oxygenBank/answer", function(req, res) {
+router.get("/hospHospSection/oxygenBank/answer",middleware.isLoggedIn, function(req, res) {
     oxygenReqSchema.find(function(err, allOxygenReq) {
         if (err)
             console.log(err);
@@ -189,7 +189,7 @@ router.get("/hospHospSection/ambulance/answer", function(req, res) {
     });
 });
 
-router.post("/hospHospSection/:service/requests", function(req, res) {
+router.post("/hospHospSection/:service/requests", middleware.isLoggedIn, function(req, res) {
     //----------------Get today date----------------------
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
