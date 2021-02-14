@@ -47,3 +47,15 @@
     <img src="assets/img/perfil.jpg" alt="" />
   </div>
 </header>
+
+<div class="container" style="margin-top: 5rem;">
+  <% if(success && success.length > 0) { %> 
+    <div class="alert alert-success" role="alert">
+      <%=success%>
+    </div>
+  <% }else if(error && error.length > 0) { %>
+    <div class="alert alert-danger" role="alert">
+      <%= error %>
+    </div>
+  <% } %>
+</div>

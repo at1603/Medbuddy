@@ -50,20 +50,19 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content" id="services">
-      <a href="#">Search Hospitals</a>
-      <a href="#">Know about Medicines</a>
-      <a href="#">Miscellaneous</a>
+      <a href="#">Take appointment</a>
+      <a href="/userHospSection/searchHospitals">Search Hospitals</a>
     </div>
   </div>
   <!-- </div> -->
   <div class="pr-2 nav-items">
-    <a href="#">About</a>
+    <a href="/about">About</a>
   </div>
   <div class="pr-2 nav-items nav-links">
-    <a href="#">Contact</a>
+    <a href="/contact">Contact</a>
   </div>
   <div class="pr-2 nav-items nav-links">
-    <a href="#">Explore</a>
+    <a href="/userHospSection/initialPage">Explore</a>
   </div>
   <% if(!currentUser){ %>
     <div class="pr-2 bd-highlight nav-items" style="margin-left: auto">
@@ -95,6 +94,18 @@
         <% } %>
         <a href="/logout">Log Out</a>
       </div>
+    </div>
+  <% } %>
+</div>
+
+<div class="container" style="margin-top: 5rem;">
+  <% if(success && success.length > 0) { %> 
+    <div class="alert alert-success" role="alert">
+      <%=success%>
+    </div>
+  <% }else if(error && error.length > 0) { %>
+    <div class="alert alert-danger" role="alert">
+      <%= error %>
     </div>
   <% } %>
 </div>

@@ -1,0 +1,17 @@
+form {
+    justify-content: center; 
+    margin: 8rem auto; 
+    max-width: 50%;
+}
+
+.form-group > input {
+    background-color: #F9F9FA;
+}
+
+.form-group > textarea {
+    background-color: #F9F9FA;
+}
+
+form > button {
+    width: 100%;
+}
