@@ -1,11 +1,10 @@
-let express = require("express");
-let router = express.Router();
-
+const express = require("express");
+const router = express.Router();
+const middleware = require("../../middlewares/authMiddlewares");
 const OrganRequest = require("../../models/hospModels/requestSchemas/organReqSchema");
 
-
 // --------------Organ Search Routes--------------//
-router.post("/userDocSection/index/searchOrgan/Liver", function(req, res){
+router.post("/userDocSection/index/searchOrgan/Liver",middleware.isLoggedIn, function(req, res){
     const state = req.body.state;
     const city = req.body.city;
     console.log(state, city);
@@ -28,7 +27,7 @@ router.post("/userDocSection/index/searchOrgan/Liver", function(req, res){
         });
     }
 });
-router.post("/userDocSection/index/searchOrgan/Kidney", function(req, res){
+router.post("/userDocSection/index/searchOrgan/Kidney",middleware.isLoggedIn, function(req, res){
     const state = req.body.state;
     const city = req.body.city;
 
@@ -50,7 +49,7 @@ router.post("/userDocSection/index/searchOrgan/Kidney", function(req, res){
         });
     }
 });
-router.post("/userDocSection/index/searchOrgan/Heart", function(req, res){
+router.post("/userDocSection/index/searchOrgan/Heart",middleware.isLoggedIn, function(req, res){
     const state = req.body.state;
     const city = req.body.city;
 
@@ -72,7 +71,7 @@ router.post("/userDocSection/index/searchOrgan/Heart", function(req, res){
         });
     }
 });
-router.post("/userDocSection/index/searchOrgan/Eyes", function(req, res){
+router.post("/userDocSection/index/searchOrgan/Eyes",middleware.isLoggedIn, function(req, res){
     const state = req.body.state;
     const city = req.body.city;
 
@@ -94,7 +93,7 @@ router.post("/userDocSection/index/searchOrgan/Eyes", function(req, res){
         });
     }
 });
-router.post("/userDocSection/index/searchOrgan/Intestine", function(req, res){
+router.post("/userDocSection/index/searchOrgan/Intestine",middleware.isLoggedIn, function(req, res){
     const state = req.body.state;
     const city = req.body.city;
 
@@ -122,7 +121,7 @@ router.post("/userDocSection/index/searchOrgan/Intestine", function(req, res){
 
 // ---------Donation form Routes -------------------//
 
-router.post("/userDocSection/organDonation/Liver", function(req, res){
+router.post("/userDocSection/organDonation/Liver",middleware.isLoggedIn, function(req, res){
     newLiver = {
         firstName: req.user.firstName,
         lastName: req.user.lastName,
@@ -150,7 +149,7 @@ router.post("/userDocSection/organDonation/Liver", function(req, res){
     });
 
 });
-router.post("/userDocSection/organDonation/Kidney", function(req, res){
+router.post("/userDocSection/organDonation/Kidney",middleware.isLoggedIn, function(req, res){
     newKidney = {
         firstName: req.user.firstName,
         lastName: req.user.lastName,
@@ -177,7 +176,7 @@ router.post("/userDocSection/organDonation/Kidney", function(req, res){
         }
     });
 });
-router.post("/userDocSection/organDonation/Heart", function(req, res){
+router.post("/userDocSection/organDonation/Heart",middleware.isLoggedIn, function(req, res){
     newHeart = {
         firstName: req.user.firstName,
         lastName: req.user.lastName,
@@ -204,7 +203,7 @@ router.post("/userDocSection/organDonation/Heart", function(req, res){
         }
     });
 });
-router.post("/userDocSection/organDonation/Eyes", function(req, res){
+router.post("/userDocSection/organDonation/Eyes",middleware.isLoggedIn, function(req, res){
     newEyes = {
         firstName: req.user.firstName,
         lastName: req.user.lastName,
@@ -231,7 +230,7 @@ router.post("/userDocSection/organDonation/Eyes", function(req, res){
         }
     });
 });
-router.post("/userDocSection/organDonation/Intestine", function(req, res){
+router.post("/userDocSection/organDonation/Intestine",middleware.isLoggedIn, function(req, res){
     newIntestine = {
         firstName: req.user.firstName,
         lastName: req.user.lastName,
