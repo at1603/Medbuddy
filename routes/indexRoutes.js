@@ -15,7 +15,7 @@ router.get("/user/patient/dashboard", middleware.isLoggedIn, function(req, res) 
 });
 //Manage hospital routes
 
-router.get("/hospHospSection/initialPage", middleware.isLoggedIn, function(req, res) {
+router.get("/hospHospSection/initialPage", middleware.isLoggedIn, middleware.checkHospAdminOwnership,  function(req, res) {
     res.render("hospHospSection/index");
 });
 
