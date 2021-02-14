@@ -11,3 +11,7 @@ form {
 .form-group > textarea {
     background-color: #F9F9FA;
 }
+
+form > button {
+    width: 100%;
+}
