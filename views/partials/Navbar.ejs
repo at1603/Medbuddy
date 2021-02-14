@@ -51,7 +51,7 @@
     </button>
     <div class="dropdown-content" id="services">
       <a href="#">Take appointment</a>
-      <a href="#">Search Hospitals</a>
+      <a href="/userHospSection/searchHospitals">Search Hospitals</a>
     </div>
   </div>
   <!-- </div> -->
@@ -94,6 +94,18 @@
         <% } %>
         <a href="/logout">Log Out</a>
       </div>
+    </div>
+  <% } %>
+</div>
+
+<div class="container" style="margin-top: 5rem;">
+  <% if(success && success.length > 0) { %> 
+    <div class="alert alert-success" role="alert">
+      <%=success%>
+    </div>
+  <% }else if(error && error.length > 0) { %>
+    <div class="alert alert-danger" role="alert">
+      <%= error %>
     </div>
   <% } %>
 </div>

@@ -143,7 +143,9 @@ router.post("/userDocSection/organDonation/Liver",middleware.isLoggedIn, functio
     OrganRequest.create(newLiver, function(err, newLiverReq){
         if(err){
             console.log(err);
+            req.flash("error", "Something bad occurred!")
         } else{
+            req.flash("success", "Form Submitted Successfully!");
             res.redirect("/userHospSection/organDonation");
         }
     });
@@ -171,7 +173,9 @@ router.post("/userDocSection/organDonation/Kidney",middleware.isLoggedIn, functi
     OrganRequest.create(newKidney, function(err, newKidneyReq){
         if(err){
             console.log(err);
+            req.flash("error", "Something bad occurred!")
         } else{
+            req.flash("success", "Form Submitted Successfully!");
             res.redirect("/userHospSection/organDonation");
         }
     });
@@ -198,7 +202,9 @@ router.post("/userDocSection/organDonation/Heart",middleware.isLoggedIn, functio
     OrganRequest.create(newHeart, function(err, newHeartReq){
         if(err){
             console.log(err);
+            req.flash("error", "Something bad occurred!")
         } else{
+            req.flash("success", "Form Submitted Successfully!");
             res.redirect("/userHospSection/organDonation");
         }
     });
@@ -225,7 +231,9 @@ router.post("/userDocSection/organDonation/Eyes",middleware.isLoggedIn, function
     OrganRequest.create(neEyes, function(err, nwEyesReq){
         if(err){
             console.log(err);
+            req.flash("error", "Something bad occurred!")
         } else{
+            req.flash("success", "Form Submitted Successfully!");
             res.redirect("/userHospSection/organDonation");
         }
     });
@@ -251,8 +259,10 @@ router.post("/userDocSection/organDonation/Intestine",middleware.isLoggedIn, fun
     }
     OrganRequest.create(neIntestine, function(err, nwIntestineReq){
         if(err){
+            req.flash("error", "Something bad occurred!")
             console.log(err);
         } else{
+            req.flash("success", "Form Submitted Successfully!");
             res.redirect("/userHospSection/organDonation");
         }
     });

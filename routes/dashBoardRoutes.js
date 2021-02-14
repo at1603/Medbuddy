@@ -62,15 +62,11 @@ router.post("/userDocSection/cretePatientProfile", function(req, res) {
     });
 });
 
-
-// router.get("/userDocSection/consultDoc", function (req, res) {
-//   res.render("user/dashboards/patientDashboard");
-// });
 //----X-----Patient Routes-------X------//
 
 //----------Doctor Routes--------------//
 
-router.get("/userDocSection/docDashboards", middleware.isLoggedIn, function(req, res) {
+router.get("/userDocSection/docDashboards", middleware.isLoggedIn, middleware.checkDoctorOwnership, function(req, res) {
     Doctor.find()
         .where("handler.id")
         .equals(req.user._id)
@@ -99,7 +95,7 @@ router.get("/userDocSection/docDashboards", middleware.isLoggedIn, function(req,
 
 //----------Hospital Admin Routes--------------//
 
-router.get("/user/hospAdmin/dashboard", middleware.isLoggedIn, function(req, res) {
+router.get("/user/hospAdmin/dashboard", middleware.isLoggedIn, middleware.checkHospAdminOwnership, function(req, res) {
   Hospital.find()
     .where("handler.id")
     .equals(req.user._id)
@@ -134,7 +130,7 @@ router.get("/user/hospAdmin/dashboard", middleware.isLoggedIn, function(req, res
     });
 });
 
-router.get("/dashboards/hospAdmin/profileIndex", middleware.isLoggedIn, function(req, res) {
+router.get("/dashboards/hospAdmin/profileIndex", middleware.isLoggedIn,  middleware.checkHospAdminOwnership, function(req, res) {
     Hospital.find()
         .where("handler.id")
         .equals(req.user._id)
