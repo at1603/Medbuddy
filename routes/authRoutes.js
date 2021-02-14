@@ -13,13 +13,20 @@ router.get('/userLogin', function(req, res) {
 
 router.post("/userLogin", passport.authenticate("local", {
     failureRedirect: "/userlogin",
+    failureFlash : true,
 }), function(req, res) {
-    if (req.user.role == "patient")
+    if (req.user.role == "patient"){
+        req.flash("success", "Welcome to MedBuddy! " + req.user.username);
         res.redirect("/userDocSection/patientDashboard");
-    else if (req.user.role == "doctor")
+    }
+    else if (req.user.role == "doctor"){
+        req.flash("success", "Welcome to MedBuddy! " + req.user.username);
         res.redirect("/userDocSection/docDashboards");
-    else if (req.user.role == "hospAdmin")
+    }
+    else if (req.user.role == "hospAdmin"){
+        req.flash("success", "Welcome to MedBuddy! " + req.user.username);
         res.redirect("/user/hospAdmin/dashboard");
+    }
     else
         res.send(404);
 });
@@ -27,6 +34,7 @@ router.post("/userLogin", passport.authenticate("local", {
 //logout 
 router.get("/logout", function(req, res) {
     req.logout();
+    req.flash("success", "Logged Out Successfully! ");
     res.redirect("/");
 });
 
@@ -60,7 +68,7 @@ router.post("/register", function(req, res) {
             res.redirect("/register");
         } else {
             passport.authenticate("local")(req, res, function() {
-                // req.flash("success", "Welcome to JOBify " + user.username);
+                req.flash("success", "Welcome to MedBuddy " + user.username);
                 if (req.user.role == "patient")
                     res.redirect("/userDocSection/patientDashboard");
                 else if (req.user.role == "doctor")
