@@ -21,7 +21,8 @@ nodemon
 * Frontend
     * HTML
     * CSS
-    * jQuery (also JavaScript)
+    * JavaScript
+    * jQuery
     * Bootstrap v4.5
 * Backend
     * Node
