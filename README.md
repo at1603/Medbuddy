@@ -23,9 +23,19 @@ nodemon
     * CSS
     * jQuery (also JavaScript)
     * Bootstrap v4.5
+* Backend
+    * Node
+    * Express
 * Database
     * MongoDB
+* WebRTC used
+    * sockets
+    * peerjs
 
+
+## Few Insights
+* Hospital Administrator Dashboard
+* Donation Page
 
 ## Contributors
 - Abhinav Tripathi  abhi3pathi01@gmail.com  
