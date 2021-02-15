@@ -14,25 +14,25 @@
           <div class="patInfo-non-preview card">
             <p>
               <span>
-                Mr./Ms./Mrs.:
+               <strong> Mr./Ms./Mrs </strong>.: <%= foundPatient.firstName + " " + foundPatient.lastName %> 
                 <a>  </a>  <!--<%= //rows.name %>-->
               </span>
             </p>
             <p>
               <span>
-                Age:
+              <strong> Age </strong>: 27
                 <a>  </a>  <!--<%= //rows.age %>-->
               </span>
             </p>
             <p>
               <span>
-                Address:
+              <strong>Address </strong>  : <%= foundPatient.address.street + " " + foundPatient.address.city + " " +foundPatient.address.city %>
                 <a>  </a>  <!--<%= //rows.address %>-->
               </span>
             </p>
             <p>
               <span>
-                Contact:
+              <strong> Contact </strong>:  <%= foundPatient.phone %>
                 <a> </a>  <!--<%= //rows.contact %>-->
               </span>
             </p>
