@@ -43,7 +43,9 @@ peer --port 3001
 
 
 ## Few Insights
-![Donation Index Page](/assets\images\READMEimages\organDonationIndex.png)
+![Donation Index Page](/assets/images/READMEimages/organDonationIndex.png)
+
+![Doctor Dashboard](/assets/images/READMEimages/doctorDashboard.png)
 ## Contributors
 - Abhinav Tripathi  abhi3pathi01@gmail.com  
 - Anmol Sahu  anmolsahu2k@gmail.com  
