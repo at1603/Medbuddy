@@ -3,6 +3,18 @@ const router = express.Router();
 const middleware = require("../../middlewares/authMiddlewares");
 const OrganRequest = require("../../models/hospModels/requestSchemas/organReqSchema");
 
+
+// -----------Organ Petitioner search routes ---------------//
+router.post("/userDocSection/index/searchPetitioners", middleware.isLoggedIn, function(req, res){
+    OrganRequest.find({"isDonating": false}).exec(function(err, foundPetitioners){
+        if(err){
+            console.log(err);
+        }else{
+            res.render("userHospSection/Organdonation/index", {foundPetitioners: foundPetitioners, flag: 2});
+        }
+    });
+});
+
 // --------------Organ Search Routes--------------//
 router.post("/userDocSection/index/searchOrgan/Liver",middleware.isLoggedIn, function(req, res){
     const state = req.body.state;
