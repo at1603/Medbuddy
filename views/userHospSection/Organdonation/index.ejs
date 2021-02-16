@@ -8,6 +8,37 @@
         input, textarea {
             border-radius:5px;
         }
+
+        .jumbotron{
+            background-color: rgba(230, 201, 201, 0.2) !important; 
+            border: 1px solid black; 
+            border-radius: 25px; 
+            padding: 1rem 1rem 0.2rem; 
+            text-align: left;
+        }
+
+        .btn-grad {background-image: linear-gradient(to right, #2b5876 0%, #4e4376  51%, #2b5876  100%)}
+         .btn-grad {
+            margin: 2rem 10px 10px;
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 20px #eee;
+            border-radius: 50px;
+            display: block;
+          }
+
+          .btn-grad:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+            } 
+         
+         
         </style>
 
 </head>
@@ -20,7 +51,7 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-header">
-                    <strong id="introPage">Sections</strong>
+                    <strong id="introPage">Organ Donation Sections</strong>
                     </div>
                     <ul class="list-group list-group-flush">
                     <li class="list-group-item" id="liverPage">Liver</li>
@@ -30,10 +61,14 @@
                     <li class="list-group-item" id="intestinePage">Intestines</li>
                     </ul>
                 </div>
+
+                <form action="/userDocSection/index/searchPetitioners" method="POST">
+                    <button type="submit" class="btn btn-xs btn-grad"><span style="display: inline-flex;">Find Organ Petitioners</span></button>
+                </form> 
             </div>
             <div class="col-md-8">
                 <div>
-                    <div class="introPage"  style="text-align: center; margin-top: 3rem;">
+                    <div class="introPage"  style="text-align: center;">
                         <% if(flag == 0) { %>
 
                                 <p>
@@ -50,7 +85,7 @@
                             <% if(organ == 1) { %>
                             <% if(foundLivers.length > 0) { %>
                                 <% foundLivers.forEach(function(liver){ %>
-                                    <div class="jumbotron" style="background-color:rgba(211, 234, 224, 0.1); border: 1px solid black; border-radius: 25px; padding: 1rem 1rem 0.2rem; text-align: left;">
+                                    <div class="jumbotron">
                                         <h3><strong><u>Liver Donor Details</u></strong></h3>
                                         <h5><strong>Donor Name: </strong> <%= liver.firstName + " " + liver.lastName %></h5>
                                         <h5><strong>Donor Contact Email: </strong> <%= liver.email %> </h5>
@@ -65,7 +100,7 @@
                         <% } else if(organ == 2){ %>
                             <% if(foundKidneys.length > 0) { %>
                                 <% foundKidneys.forEach(function(kidney){ %>
-                                    <div class="jumbotron">
+                                    <div class="jumbotron" style="background-color:rgba(211, 234, 224, 0.1); border: 1px solid black; border-radius: 25px; padding: 1rem 1rem 0.2rem; text-align: left;">
                                         <h2><strong>Kidney Donor Details</strong></h2>
                                         <h5><strong>Donor Name: </strong> <%= kidney.firstName + " " + kidney.lastName %></h5>
                                         <h5><strong>Donor Contact Email: </strong> <%= kidney.email %> </h5>
@@ -114,6 +149,21 @@
                                         <% } else{ %>
                                             <h3><strong>No Intestine Donor Found!!</strong></h3>
                                         <% } %>
+                                        <% } %>
+                                    <% } else if(flag == 2) { %>
+                                        <% if(foundPetitioners.length > 0) { %>
+                                            <h2 style="text-align: center; margin-bottom: 1rem; font-family:'Times New Roman', Times, serif;"><strong>Request Petitioners List</strong> </h2>
+                                            <% foundPetitioners.forEach(function(petition){ %>
+                                                <div class="jumbotron" style="background-color:rgb(0 0 0 / 20%)">
+                                                    <h3><strong>Organ Request Petitioner Detail</strong></h3>
+                                                    <h5><strong>Petitioner Name: </strong> <%= petition.firstName + " " + petition.lastName %></h5>
+                                                    <h5><strong>Requested Organ: </strong> <%= petition.organType %></h5>
+                                                    <h5><strong>Petitioner Contact Email: </strong> <%= petition.email %> </h5>
+                                                    <h5><strong>Location of the Donor: </strong><%= petition.address.city%>, <%= petition.address.state%></h5>
+                                                </div> 
+                                            <% }); %>
+                                        <% } else{ %>
+                                            <h3><strong>No Organ Request Petition Found!!</strong></h3>
                                         <% } %>
                                     <% } %>
                             
