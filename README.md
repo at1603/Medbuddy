@@ -7,7 +7,7 @@ The various backend services used ensure removing data redundancy, data maintena
 
 ## How to run
 
-1. Clone this repository in your local storge:
+1. Clone this repository in your local storage:
 
 ```
 git clone https://github.com/Pro-Abhinav/MedBuddy.git
@@ -20,7 +20,7 @@ npm install
 ```
 nodemon
 ```
-4. To enable, video calling run command:
+4. To enable video calling, run command:
 ```
 peer --port 3001
 ```
