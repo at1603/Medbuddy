@@ -43,9 +43,7 @@ peer --port 3001
 
 
 ## Few Insights
-* Hospital Administrator Dashboard
-* Donation Page
-
+![Donation Index Page](./assets\images\READMEimages\organDonationIndex.png)
 ## Contributors
 - Abhinav Tripathi  abhi3pathi01@gmail.com  
 - Anmol Sahu  anmolsahu2k@gmail.com  
