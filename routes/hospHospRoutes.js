@@ -235,7 +235,7 @@ router.post("/hospHospSection/:service/requests", middleware.isLoggedIn, functio
             if (err)
                 console.log(err)
             else
-                console.log(oxygenReq);
+                console.log("Oxygen Request Made! ");
         });
     } else if (req.params.service == "organvault") {
         organReqSchema.create({
@@ -252,11 +252,12 @@ router.post("/hospHospSection/:service/requests", middleware.isLoggedIn, functio
             disease: req.body.diseaseDescription,
             age: req.body.age,
             organType: req.body.organs,
+            adminId: req.user._id
         }, function(err, organReq) {
             if (err)
                 console.log(err)
             else
-                console.log(organReq);
+                console.log("Organ Request Made");
         });
     } else if (req.params.service == "ambulance") {
         ambulanceReqSchema.create({
