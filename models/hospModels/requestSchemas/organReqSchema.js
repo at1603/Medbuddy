@@ -1,10 +1,11 @@
 let mongoose = require('mongoose')
 
 let organReqSchema = new mongoose.Schema({
-    // hospId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Hospital"
-    // },
+    adminId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        default: null
+    },
     firstName: String,
     lastName: String,
     address: {
