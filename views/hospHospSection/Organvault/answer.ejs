@@ -19,15 +19,17 @@ h4{
   margin-bottom: 20px;
 }
 </style>
-<%- include("../../partials/altNavbar"); -%>
-<%- include("../../partials/altAdminSideNavbar"); -%>
 <body id="body-pd">
+  <%- include("../../partials/altNavbar"); -%>
+  <%- include("../../partials/altAdminSideNavbar"); -%> 
   <div class="container">
     <h2 style="text-align: center">Organ Vault Answer Window</h2>
     <div class="row">
       <div class="col-md-12">
         <% if(requests.length > 0){ %>
+          <% yourRequestCount = 0, publicRequestCount = 0 %>
           <% for(var i = 0; i < requests.length; i++){ %>
+            <% if(yourRequestCount == 0) { %>
             <% if(requests[i].adminId == currentUser._id.toString()) { %>
               <h3 style="margin-top: 2rem; text-align: center">Your Requests</h3>
               <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
@@ -42,6 +44,7 @@ h4{
                     <th>Action</th>
                   </tr>
                 </thead>
+            <% } %>
                 <tbody>
                   <tr data-toggle="collapse" data-target="#row<%=i%>" class="accordion-toggle">
                     <td id="element" data-placement="top" data-toggle="popover" data-content="Click to expand"><%= i+1%></td>
@@ -83,6 +86,7 @@ h4{
                   </td>
                 </tr>
             <% } else { %>
+              <% if(publicRequestCount == 0) { %>
               <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
                 <h3 style="margin-top: 2rem; text-align: center">Public Requests</h3>
                   <thead>
@@ -96,6 +100,7 @@ h4{
                       <th>Action</th>
                     </tr>
                   </thead>
+              <% } %>
                   <tbody>
 
                   <tr data-toggle="collapse" data-target="#row<%=i%>" class="accordion-toggle">
