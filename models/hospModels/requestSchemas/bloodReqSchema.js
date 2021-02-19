@@ -1,9 +1,10 @@
 let mongoose = require('mongoose');
 
 let bloodReqSchema = new mongoose.Schema({
-    hospId: {
+    adminId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Hospital"
+        ref: "User",
+        default: null
     },
     firstName: String,
     lastName: String,

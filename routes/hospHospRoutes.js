@@ -210,7 +210,8 @@ router.post("/hospHospSection/:service/requests", middleware.isLoggedIn, functio
             disease: req.body.diseaseDescription,
             age: req.body.age,
             units: req.body.units,
-            date: today
+            date: today,
+            adminId: req.user._id
         }, function(err, bloodReq) {
             if (err)
                 console.log(err)
@@ -230,7 +231,8 @@ router.post("/hospHospSection/:service/requests", middleware.isLoggedIn, functio
             disease: req.body.diseaseDescription,
             age: req.body.age,
             qty: req.body.qty,
-            date: today
+            date: today,
+            adminId: req.user._id
         }, function(err, oxygenReq) {
             if (err)
                 console.log(err)
@@ -273,7 +275,8 @@ router.post("/hospHospSection/:service/requests", middleware.isLoggedIn, functio
             age: req.body.age,
             reason: req.body.reason,
             instructions: req.body.instructions,
-            date: today
+            date: today,
+            adminId: req.user._id
         }, function(err, ambulanceReq) {
             if (err)
                 console.log(err)
