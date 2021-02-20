@@ -3,6 +3,18 @@ const router = express.Router();
 const middleware = require("../../middlewares/authMiddlewares");
 const OrganRequest = require("../../models/hospModels/requestSchemas/organReqSchema");
 
+
+// -----------Organ Petitioner search routes ---------------//
+router.post("/userDocSection/index/searchPetitioners", middleware.isLoggedIn, function(req, res){
+    OrganRequest.find({"isDonating": false}).exec(function(err, foundPetitioners){
+        if(err){
+            console.log(err);
+        }else{
+            res.render("userHospSection/Organdonation/index", {foundPetitioners: foundPetitioners, flag: 2});
+        }
+    });
+});
+
 // --------------Organ Search Routes--------------//
 router.post("/userDocSection/index/searchOrgan/Liver",middleware.isLoggedIn, function(req, res){
     const state = req.body.state;
@@ -121,6 +133,7 @@ router.post("/userDocSection/index/searchOrgan/Intestine",middleware.isLoggedIn,
 
 // ---------Donation form Routes -------------------//
 
+    
 router.post("/userDocSection/organDonation/Liver",middleware.isLoggedIn, function(req, res){
     newLiver = {
         firstName: req.user.firstName,
@@ -170,6 +183,7 @@ router.post("/userDocSection/organDonation/Kidney",middleware.isLoggedIn, functi
     if(req.body.radioKidney == "donating"){
         newKidney.isDonating = true;
     }
+
     OrganRequest.create(newKidney, function(err, newKidneyReq){
         if(err){
             console.log(err);
@@ -199,6 +213,7 @@ router.post("/userDocSection/organDonation/Heart",middleware.isLoggedIn, functio
     if(req.body.radioHeart == "donating"){
         newHeart.isDonating = true;
     }
+
     OrganRequest.create(newHeart, function(err, newHeartReq){
         if(err){
             console.log(err);
@@ -228,6 +243,7 @@ router.post("/userDocSection/organDonation/Eyes",middleware.isLoggedIn, function
     if(req.body.radioEyes == "donating"){
         newEyes.isDonating = true;
     }
+
     OrganRequest.create(neEyes, function(err, nwEyesReq){
         if(err){
             console.log(err);
@@ -257,6 +273,7 @@ router.post("/userDocSection/organDonation/Intestine",middleware.isLoggedIn, fun
     if(req.body.radioIntestine == "donating"){
         newIntestine.isDonating = true;
     }
+
     OrganRequest.create(neIntestine, function(err, nwIntestineReq){
         if(err){
             req.flash("error", "Something bad occurred!")
