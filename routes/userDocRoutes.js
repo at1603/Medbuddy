@@ -43,7 +43,6 @@ router.get("/userDocSection/patientList", function (req, res) {
         //   function (err, foundPatient) {
         //     if (err) console.log(err);
         //     else {
-
         // console.log("above user", foundPatient);
         User.findById(
           foundAppointment[0].relation.patientId,
