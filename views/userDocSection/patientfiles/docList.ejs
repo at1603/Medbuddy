@@ -27,7 +27,8 @@
               <%for( var i=0;i<doctors.length;i++){%>
               <tr>
                 <td class="column1"><%=i+1%></td>
-                <td class="column1"><%=user.firstName+" "+user.lastName%></td>
+                <% console.log(user) %>
+                <td class="column1"><%=doctors[i].firstName+" "+doctors[i].lastName%></td>
                 <td class="column1"><%=doctors[i].speciality%></td>
                 <td class="column7">
                   <div class="appntBtn"><form  action="<%='/userDocSection/docList/docInfo/'+doctors[i]._id%>" method="GET">
