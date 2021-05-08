@@ -24,11 +24,11 @@
               </tr>
             </thead>
             <tbody id="front">
-              <%for( var i=0;i<doctors.length;i++){%>
+              <%for(var i=0;i<doctors.length;i++){%>
+                <%console.log(doctors.length);%>
               <tr>
                 <td class="column1"><%=i+1%></td>
-                <% console.log(user) %>
-                <td class="column1"><%=doctors[i].firstName+" "+doctors[i].lastName%></td>
+                <td class="column1"><%=doctors[i].handler_id.firstName+" "+doctors[i].handler_id.lastName%></td>
                 <td class="column1"><%=doctors[i].speciality%></td>
                 <td class="column7">
                   <div class="appntBtn"><form  action="<%='/userDocSection/docList/docInfo/'+doctors[i]._id%>" method="GET">
