@@ -147,20 +147,13 @@ router.get("/userDocSection/docList/", function (req, res) {
       }
   });
 });
+
 router.get("/userDocSection/docList/docInfo/:id", function (req, res) {
-  Doctor.findById(req.params.id, function (err, foundDoctor) {
-    if (err) console.log(err);
-    else {
-      console.log(foundDoctor);
-      User.findById(foundDoctor.handler.id, function (err, foundUser) {
-        if (err) console.log(err);
-        else {
-          res.render("userDocSection/patientfiles/appointment", {
-            doctor: foundDoctor,
-            user: foundUser,
-          });
-        }
-      });
+  Doctor.findById(req.params.id).populate("handler_id").exec(function(err, foundDoctors){
+    if(err){
+      console.log(err);
+    } else{
+      res.render("userDocSection/patientfiles/takeAppointment", {doctors: foundDoctors});
     }
   });
 });
