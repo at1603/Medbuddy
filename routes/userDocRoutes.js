@@ -121,10 +121,7 @@ router.post("/userDocSection/createProfile", function (req, res) {
     },
     qual: req.body.qual,
     experience: req.body.experience,
-    handler: {
-      id: req.user._id,
-      username: req.user.username,
-    },
+    handler_id: req.user._id
   };
 
   Doctor.create(newDocPro, function (err, newProfessionalDoc) {
@@ -142,20 +139,12 @@ router.post("/userDocSection/createProfile", function (req, res) {
 
 //all doctors
 router.get("/userDocSection/docList/", function (req, res) {
-  Doctor.find(function (err, foundDoctors) {
-    if (err) console.log(err);
-    else {
-      // console.log(foundDoctors);
-      User.findById(foundDoctors[0].handler.id, function (err, foundUser) {
-        if (err) console.log(err);
-        else {
-          res.render("userDocSection/patientfiles/docList", {
-            doctors: foundDoctors,
-            user: foundUser,
-          });
-        }
-      });
-    }
+  Doctor.find().populate("handler_id", "firstName lastName").exec(function(err, foundDoctors){
+      if(err){
+        console.log(err);
+      } else{
+        res.render("userDocSection/patientfiles/docList", {doctors: foundDoctors});
+      }
   });
 });
 router.get("/userDocSection/docList/docInfo/:id", function (req, res) {
