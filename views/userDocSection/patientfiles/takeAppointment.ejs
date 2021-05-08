@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <%- include("../../partials/header"); -%>
+
+    <title>Page Title</title>
+    </head>
+    <body id="body-pd" >
+    <%-include("../../partials/altNavbar"); -%>
+    <%-include("../../partials/altSidebar");-%>
+    <div class="row" style="display: flex;margin: 8rem 4rem;">
+        <div class="col-md-10">
+            <h3><%= doctors.handler_id.firstName + " " + doctors.handler_id.lastName %>'s Information: </h3>
+            <ul>
+                <div class="row">
+                    <div class="col-md-10">
+                        <li><h4><strong>Works At: </strong><%= doctors.workAtHosp%> </h4></li>
+                    </div>
+                    <div class="col-md-4">
+                        <li><h4><strong>Speciality:</strong> <%=doctors.speciality%></h4></li>
+                    </div>
+                    <div class="col-md-4">
+                        <li><h4><strong>Experience:</strong> <%= doctors.experience%> years</h4></li>
+                    </div>
+                </div>
+            </ul>
+        </div>
+        <div class="col-md-2" style="border-radius: 25px;text-align: center;justify-content:center;box-shadow: 0 0 20px 0px rgb(0 0 0 / 20%);">
+            <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-182-132174.png" class="img-fluid rounded-circle border" alt="https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-vector-avatar-icon-png-image_695765.jpg" style="margin-top: 2rem; width:60%; box-shadow: 6px 5px 18px 0px rgba(0,0,0,0.33);" >
+            <h5 id="username"><%=doctors.handler_id.username%></h5>
+            <h5 id="name"><%= doctors.handler_id.firstName + " " + doctors.handler_id.lastName%></h5>
+            <span><em>Joined <%= moment(doctors.handler_id.joinedAt).fromNow()%></em></span>
+        </div>
+        <a href="#" class="btn btn-success">Take Appointment</a>
+    </div>
+    <%-include("../../partials/footer"); -%>
+    </body>
+</html>
