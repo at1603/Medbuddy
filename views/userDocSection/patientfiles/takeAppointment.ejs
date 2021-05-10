@@ -30,8 +30,33 @@
             <h5 id="name"><%= doctors.handler_id.firstName + " " + doctors.handler_id.lastName%></h5>
             <span><em>Joined <%= moment(doctors.handler_id.joinedAt).fromNow()%></em></span>
         </div>
-        <a href="#" class="btn btn-success">Take Appointment</a>
+    </div>
+    <div>
+        <a href="#" class="btn btn-success toggleAppointmentForm">Take Appointment</a>
+        <form class="container takeAppointment" action="/userDocSection/createAppointment/<%= doctors._id%>" method="POST" style="margin: 2rem 0 4rem 0; display: none;">
+            <div class="form-group">
+              <label for="InputNumber">Phone Number</label>
+              <input type="number" class="form-control" name="phone" id="InputNumber" aria-describedby="numberHelp">
+              <small id="numberHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="InputSlot">Input Preferred Slot</label>
+                <input class="form-control" name="preferSlot" type="datetime-local" id="datetime-local-input">
+                <small class="form-text text-muted">Slot Time may change</small>
+            </div>
+            <div class="form-group">
+                <label for="InputDisease">Input Disease Description</label>
+                <textarea class="form-control" name="disease" id="InputDisease" cols="10" rows="4" maxlength="200"></textarea>
+                <small class="form-text text-muted">Maximum character limit is 200.</small>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
     </div>
     <%-include("../../partials/footer"); -%>
     </body>
+    <script>
+        $(".toggleAppointmentForm").click(function(){
+            $(".takeAppointment").toggle();
+        })
+    </script>
 </html>
