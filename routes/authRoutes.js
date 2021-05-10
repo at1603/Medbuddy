@@ -2,6 +2,8 @@ var express = require("express"),
   router = express.Router(),
   passport = require("passport"),
   User = require("../models/userSchema");
+patientStats = require("../models/statsSchema/patientStatsSchema");
+doctorStats = require("../models/statsSchema/doctorStatsSchema");
 
 //Login get requests
 router.get("/userLogin", function (req, res) {
@@ -61,6 +63,7 @@ router.post("/register", function (req, res) {
     avatar: req.body.avatar,
     role: req.body.userRole,
   });
+
   User.register(newUser, req.body.password, function (err, user) {
     if (err) {
       console.log(err);
@@ -68,11 +71,46 @@ router.post("/register", function (req, res) {
     } else {
       passport.authenticate("local")(req, res, function () {
         req.flash("success", "Welcome to MedBuddy " + user.username);
-        if (req.user.role == "patient")
-          res.redirect("/userDocSection/patientDashboard");
-        else if (req.user.role == "doctor")
-          res.redirect("/userDocSection/docDashboards");
-        else if (req.user.role == "hospAdmin")
+        if (req.user.role == "patient") {
+          var defaultPatientStats = {
+            expenditure: 0,
+            handler: {
+              id: req.user._id,
+              username: req.user.username,
+            },
+            activeDoctors: 0,
+            surgeries: 0,
+            appointment: 0,
+          };
+          patientStats.create(
+            defaultPatientStats,
+            function (err, defaultStats) {
+              if (err) {
+                console.log(err);
+              } else {
+                res.redirect("/userDocSection/patientDashboard");
+              }
+            }
+          );
+        } else if (req.user.role == "doctor") {
+          var defaultDoctorStats = {
+            earnings: 0,
+            handler: {
+              id: req.user._id,
+              username: req.user.username,
+            },
+            newPatients: 0,
+            operations: 0,
+            appointment: 0,
+          };
+          doctorStats.create(defaultDoctorStats, function (err, defaultStats) {
+            if (err) {
+              console.log(err);
+            } else {
+              res.redirect("/userDocSection/docDashboard");
+            }
+          });
+        } else if (req.user.role == "hospAdmin")
           res.redirect("/user/hospAdmin/dashboard");
         else res.send(404);
       });

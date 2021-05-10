@@ -11,9 +11,7 @@
   <script src="https://cdn2.hubspot.net/hubfs/476360/utils.js"></script>
 
   <body id="body-pd">
-    <% if (foundDoctor.length > 0){
-      console.log(foundDoctor)
-    }%>
+   
     <%-include("../../partials/altNavbar");-%>
     <%-include("../../partials/altSidebar");-%>
     <main>
@@ -27,7 +25,7 @@
               <h5 class="pull-right">Earning</h5>
             </div>
             <div class="m-r-10 m-l-10">
-              <h3 class="font-weight-bold pull-right mb-0">$18,000</h3>
+              <h3 class="font-weight-bold pull-right mb-0">Rs<%=loadingStats[0].earnings %></h3>
             </div>
           </div>
         </div>
@@ -59,7 +57,7 @@
               <h5 class="pull-right">New Patients</h5>
             </div>
             <div class="m-r-10 m-l-10">
-              <h3 class="font-weight-bold pull-right mb-0">116</h3>
+              <h3 class="font-weight-bold pull-right mb-0"><%=loadingStats[0].newPatients%></h3>
             </div>
           </div>
         </div>
@@ -91,7 +89,7 @@
               <h5 class="pull-right">Operations</h5>
             </div>
             <div class="m-r-10 m-l-10">
-              <h3 class="font-weight-bold pull-right mb-0">24</h3>
+              <h3 class="font-weight-bold pull-right mb-0"><%=loadingStats[0].operations%></h3>
             </div>
           </div>
         </div>
@@ -123,7 +121,7 @@
               <h5 class="pull-right">Appointments</h5>
             </div>
             <div class="m-r-10 m-l-10">
-              <h3 class="font-weight-bold pull-right mb-0">36</h3>
+              <h3 class="font-weight-bold pull-right mb-0"><%=loadingStats[0].appointment%></h3>
             </div>
           </div>
         </div>

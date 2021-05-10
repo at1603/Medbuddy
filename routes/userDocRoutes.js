@@ -121,7 +121,7 @@ router.post("/userDocSection/createProfile", function (req, res) {
     },
     qual: req.body.qual,
     experience: req.body.experience,
-    handler_id: req.user._id
+    handler_id: req.user._id,
   };
 
   Doctor.create(newDocPro, function (err, newProfessionalDoc) {
@@ -139,23 +139,32 @@ router.post("/userDocSection/createProfile", function (req, res) {
 
 //all doctors
 router.get("/userDocSection/docList/", function (req, res) {
-  Doctor.find().populate("handler_id", "firstName lastName").exec(function(err, foundDoctors){
-      if(err){
+  Doctor.find()
+    .populate("handler_id", "firstName lastName")
+    .exec(function (err, foundDoctors) {
+      console.log(foundDoctors);
+      if (err) {
         console.log(err);
-      } else{
-        res.render("userDocSection/patientfiles/docList", {doctors: foundDoctors});
+      } else {
+        res.render("userDocSection/patientfiles/docList", {
+          doctors: foundDoctors,
+        });
       }
-  });
+    });
 });
 
 router.get("/userDocSection/docList/docInfo/:id", function (req, res) {
-  Doctor.findById(req.params.id).populate("handler_id").exec(function(err, foundDoctors){
-    if(err){
-      console.log(err);
-    } else{
-      res.render("userDocSection/patientfiles/takeAppointment", {doctors: foundDoctors});
-    }
-  });
+  Doctor.findById(req.params.id)
+    .populate("handler_id")
+    .exec(function (err, foundDoctors) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("userDocSection/patientfiles/takeAppointment", {
+          doctors: foundDoctors,
+        });
+      }
+    });
 });
 
 //my doctor
