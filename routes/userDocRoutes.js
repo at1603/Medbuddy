@@ -43,7 +43,6 @@ router.get("/userDocSection/patientList", function (req, res) {
         //   function (err, foundPatient) {
         //     if (err) console.log(err);
         //     else {
-
         // console.log("above user", foundPatient);
         User.findById(
           foundAppointment[0].relation.patientId,
@@ -122,10 +121,7 @@ router.post("/userDocSection/createProfile", function (req, res) {
     },
     qual: req.body.qual,
     experience: req.body.experience,
-    handler: {
-      id: req.user._id,
-      username: req.user.username,
-    },
+    handler_id: req.user._id
   };
 
   Doctor.create(newDocPro, function (err, newProfessionalDoc) {
@@ -143,36 +139,21 @@ router.post("/userDocSection/createProfile", function (req, res) {
 
 //all doctors
 router.get("/userDocSection/docList/", function (req, res) {
-  Doctor.find(function (err, foundDoctors) {
-    if (err) console.log(err);
-    else {
-      // console.log(foundDoctors);
-      User.findById(foundDoctors[0].handler.id, function (err, foundUser) {
-        if (err) console.log(err);
-        else {
-          res.render("userDocSection/patientfiles/docList", {
-            doctors: foundDoctors,
-            user: foundUser,
-          });
-        }
-      });
-    }
+  Doctor.find().populate("handler_id", "firstName lastName").exec(function(err, foundDoctors){
+      if(err){
+        console.log(err);
+      } else{
+        res.render("userDocSection/patientfiles/docList", {doctors: foundDoctors});
+      }
   });
 });
+
 router.get("/userDocSection/docList/docInfo/:id", function (req, res) {
-  Doctor.findById(req.params.id, function (err, foundDoctor) {
-    if (err) console.log(err);
-    else {
-      console.log(foundDoctor);
-      User.findById(foundDoctor.handler.id, function (err, foundUser) {
-        if (err) console.log(err);
-        else {
-          res.render("userDocSection/patientfiles/appointment", {
-            doctor: foundDoctor,
-            user: foundUser,
-          });
-        }
-      });
+  Doctor.findById(req.params.id).populate("handler_id").exec(function(err, foundDoctors){
+    if(err){
+      console.log(err);
+    } else{
+      res.render("userDocSection/patientfiles/takeAppointment", {doctors: foundDoctors});
     }
   });
 });

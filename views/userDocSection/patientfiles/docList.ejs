@@ -2,7 +2,7 @@
 <html>
   <%- include("../../partials/header"); -%>
 
-    <title>Page Title</title>
+  <title>Page Title</title>
   </head>
  <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientList.css">
  <link rel="stylesheet" href="/stylesheets/userDocSection/patFiles/docList.css">
@@ -24,20 +24,18 @@
               </tr>
             </thead>
             <tbody id="front">
-              <%for( var i=0;i<doctors.length;i++){%>
+              <%for(var i=0;i<doctors.length;i++){%>
               <tr>
                 <td class="column1"><%=i+1%></td>
-                <td class="column1"><%=user.firstName+" "+user.lastName%></td>
+                <td class="column1"><%=doctors[i].handler_id.firstName+" "+doctors[i].handler_id.lastName%></td>
                 <td class="column1"><%=doctors[i].speciality%></td>
                 <td class="column7">
-                  <div class="appntBtn"><form  action="<%='/userDocSection/docList/docInfo/'+doctors[i]._id%>" method="GET">
-                    <% //if()%>
-                  <button type="submit" class="btn btn-success">Book Appointment</button>
-                </form></div>
-                <div class="cancelBtn"><form  action="" method="POST">
-                  <button type="submit" class="btn btn-danger">Cancel Appointment</button>
-                </form></div></td>
-
+                  <div class="appntBtn">
+                      <a href="/userDocSection/docList/docInfo/<%= doctors[i]._id %>" class="btn btn-success">
+                        Book Appointment
+                      </a>
+                  </div>
+                </td>
               </tr>
               <%}%>
             </tbody>
@@ -46,10 +44,7 @@
         </div>
 
     </div>
-   
-       <%-include("../../partials/footer"); -%>
-
-        </body>
-
+    <%-include("../../partials/footer"); -%>
+  </body>
 </html>
 

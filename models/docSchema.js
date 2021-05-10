@@ -2,13 +2,10 @@ var mongoose = require("mongoose");
 
 var docSchema = new mongoose.Schema({
     speciality: String,
-    handler:{
-      id:{
+    handler_id:{
          type:mongoose.Schema.Types.ObjectId,
          ref:"User"
-      },
-      username:String
-   },
+    },
     workingAt: {
             type: String,
             ref:"Hospital",
