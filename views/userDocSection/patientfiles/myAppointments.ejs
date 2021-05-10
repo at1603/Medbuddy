@@ -5,10 +5,15 @@
     <title>Page Title</title>
   </head>
  <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientList.css">
- 
+ <style>
+   .modal-backdrop.fade.show{
+     width: 100% !important
+   }
+ </style>
   <body id="body-pd">
     <%-include("../../partials/altNavbar"); -%>
     <%-include("../../partials/altSidebar");-%>
+    <% if(foundAppointments.length > 0){ %>
     <div class="content-block">
       <div class="card" style="width: 80%;">
         <h4 style="text-align: center;"><strong>Appointment's list</strong></h4>
@@ -32,9 +37,36 @@
                           <td><%= Appointment.disease%></td>
                           <td><%= moment(Appointment.createdAt).format('ll')%></td>
                           <td>
-                            <a class="btn btn-sm btn-info" style="margin-right:5px ; display: inline;" href="/Appointment/<%//=Appointment._id%>/show">Show</a>
-                            <a class="btn btn-sm btn-danger" style="margin-right:1px ; display: inline;" href="/Appointment/<%//=Appointment._id%>/show">Cancel Appoinment</a>
+                            <% if(Appointment.activityStatus){ %>
+                            <a class="btn btn-sm btn-info" style="margin-right:5px ; display: inline;" href="/Appointment/<%//=Appointment._id%>/show">View</a>
+                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">
+                              Cancel Appointment
+                            </button>
+                            <div class="modal fade" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true" style="width: 100%; z-index: 9999;">
+                              <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Cancel Appointment</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    Do you want to cancel this Appointment?
+                                  </div>
+                                  <form action="/userDocSection/cancelAppointment/<%=Appointment._id%>" method="POST">
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <button type="submit" class="btn btn-danger">Yes</a>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
                           </td>
+                          <% } else { %> 
+                            <p style="color: red;"><strong>Appointment Cancelled!</strong></p>
+                          <% } %>
                       </tr>
                   <% })%>
               </tbody>
@@ -42,9 +74,11 @@
         </div>
       </div>
     </div>
+    <% } else { %>
+      <h4 style="text-align: center;">No Appointments found!!</h4>
+    <% } %>
     <a href="/" class="btn btn-xs btn-secondary" style=" margin-top: 2rem; margin-right: 8rem; float: right;">Go Back!</a>
     <%-include("../../partials/footer"); -%>
   </body>
-
 </html>
 
