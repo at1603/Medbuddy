@@ -210,19 +210,6 @@ router.get("/userDocSection/prescrip/:id", function (req, res) {
 
 //book appointment button
 router.post("/userDocSection/createAppointment/:docId", function (req, res) {
-  // let newPatient = {
-  //   handler: {
-  //     id: req.user._id,
-  //     username: req.user.username,
-  //   },
-  //   //  curDoc: [String], //Currently appointed doctors.
-  //   disease: [
-  //     {
-  //       relDoc: req.body.docId,
-  //       diseaseName: req.body.disease,
-  //     },
-  //   ],
-  // };
   let newAppointment = {
     patientId:req.user._id,
     docId: req.params.docId,
@@ -233,6 +220,17 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
   Appointment.create(newAppointment, function (err, createAppointment) {
       if (err) console.log(err);
       else res.redirect("/userDocSection/patientDashboard");
+  });
+});
+
+//Appointment cancellation route
+router.post("/userDocSection/cancelAppointment/:appointId", function(req, res){
+  Appointment.findByIdAndUpdate(req.params.appointId, {"$set": {"activityStatus": false}}).exec(function(err, updatedAppointment){
+    if(err){
+      console.log(err);
+    }else{
+      res.redirect("/userDocSection/myAppointments");
+    }
   });
 });
 
