@@ -10,34 +10,40 @@
     <%-include("../../partials/altNavbar"); -%>
     <%-include("../../partials/altSidebar");-%>
     <div class="content-block">
-        <div class="card">
-          <div id="patientList">
-          <table>
-            <thead>
-              <tr class="table100-head">
-                <th class="column1">S.N</th>
-                <th class="column1">Speciality</th>
-                <th class="column1">Doc Name</th>
-                <th class="column7">Actions</th>
-
-              </tr>
-            </thead>
-            <tbody id="front">
-              <tr>
-                <td class="column1">1</td>
-                <td class="column1"><%=//doctor.speciality%></td>
-                <td class="column1"><%=//user.firstName+" "+user.lastName%></td>
-                <td class="column7"><a href="/userDocSection/consultDoc/presc"><button class="btn btn-outline-primary mt-3" style="margin:auto; display: block;">Consult Doctor</button></a></td>
-                <!-- original idea was to show doctor info button here -->
-
-            </tbody>
-          </table>
+      <div class="card" style="width: 80%;">
+        <h4 style="text-align: center;"><strong>Appointment's list</strong></h4>
+        <div id="patientList" style="width: 100%;"> 
+          <table class="table table-striped">
+              <thead style="color: white;">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Doctor's Name</th>
+                  <th scope="col">For Disease</th>
+                  <th scope="col">Created On</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <% count = 0 %>
+                  <% foundAppointments.forEach(function(Appointment){ count += 1%>
+                      <tr>
+                          <th scope="row"><%=count %></th>
+                          <td><%= Appointment.docId.handler_id.firstName + " " + Appointment.docId.handler_id.firstName %> </td>
+                          <td><%= Appointment.disease%></td>
+                          <td><%= moment(Appointment.createdAt).format('ll')%></td>
+                          <td>
+                            <a class="btn btn-sm btn-info" style="margin-right:5px ; display: inline;" href="/Appointment/<%//=Appointment._id%>/show">Show</a>
+                            <a class="btn btn-sm btn-danger" style="margin-right:1px ; display: inline;" href="/Appointment/<%//=Appointment._id%>/show">Cancel Appoinment</a>
+                          </td>
+                      </tr>
+                  <% })%>
+              </tbody>
+            </table>
         </div>
-        </div>
-
+      </div>
     </div>
-   
-       <%-include("../../partials/footer"); -%>
+    <a href="/" class="btn btn-xs btn-secondary" style=" margin-top: 2rem; margin-right: 8rem; float: right;">Go Back!</a>
+    <%-include("../../partials/footer"); -%>
   </body>
 
 </html>
