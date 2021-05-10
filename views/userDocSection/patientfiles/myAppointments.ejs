@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <%- include("../../partials/header"); -%>
+
+    <title>Page Title</title>
+  </head>
+ <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientList.css">
+ 
+  <body id="body-pd">
+    <%-include("../../partials/altNavbar"); -%>
+    <%-include("../../partials/altSidebar");-%>
+    <div class="content-block">
+      <div class="card" style="width: 80%;">
+        <h4 style="text-align: center;"><strong>Appointment's list</strong></h4>
+        <div id="patientList" style="width: 100%;"> 
+          <table class="table table-striped">
+              <thead style="color: white;">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Doctor's Name</th>
+                  <th scope="col">For Disease</th>
+                  <th scope="col">Created On</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <% count = 0 %>
+                  <% foundAppointments.forEach(function(Appointment){ count += 1%>
+                      <tr>
+                          <th scope="row"><%=count %></th>
+                          <td><%= Appointment.docId.handler_id.firstName + " " + Appointment.docId.handler_id.firstName %> </td>
+                          <td><%= Appointment.disease%></td>
+                          <td><%= moment(Appointment.createdAt).format('ll')%></td>
+                          <td>
+                            <a class="btn btn-sm btn-info" style="margin-right:5px ; display: inline;" href="/Appointment/<%//=Appointment._id%>/show">Show</a>
+                            <a class="btn btn-sm btn-danger" style="margin-right:1px ; display: inline;" href="/Appointment/<%//=Appointment._id%>/show">Cancel Appoinment</a>
+                          </td>
+                      </tr>
+                  <% })%>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+    <a href="/" class="btn btn-xs btn-secondary" style=" margin-top: 2rem; margin-right: 8rem; float: right;">Go Back!</a>
+    <%-include("../../partials/footer"); -%>
+  </body>
+
+</html>
+
