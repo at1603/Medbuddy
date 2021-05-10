@@ -187,7 +187,7 @@ router.get("/userDocSection/myAppointments", function (req, res) {
   //       );
   //     }
   //   });
-  Appointment.find().where("patientId").equals(req.user._id).exec(function(err, foundAppointments){
+  Appointment.find({}).where("patientId").equals(req.user._id).populate({path: "docId", select: "speciality", populate: {path: "handler_id", select: "firstName lastName"}}).exec(function(err, foundAppointments){
     if(err){
       console.log(err);
     }else{
