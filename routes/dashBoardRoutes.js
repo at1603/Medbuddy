@@ -1,6 +1,6 @@
 let express = require("express");
 const HospitalAdmin = require("../models/hospAdminSchema");
-const patientSchema = require("../models/patientSchema");
+const patientHistory = require("../models/patientHistorySchema");
 const BloodBank = require("../models/userHospModels/bloodBankSchema");
 const Hospital = require("../models/hospSchema");
 const Doctor = require("../models/docSchema");
@@ -81,7 +81,7 @@ router.post("/userDocSection/createPatientProfile", function (req, res) {
     ],
   };
 
-  patientSchema.create(newPatient, function (err, newPat) {
+  patientHistory.create(newPatient, function (err, newPat) {
     if (err) {
       console.log(err);
     } else {

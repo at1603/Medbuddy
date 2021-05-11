@@ -3,7 +3,6 @@ var router = express.Router();
 var ObjectId = require("mongodb").ObjectID;
 const Doctor = require("../models/docSchema");
 const User = require("../models/userSchema");
-const Patient = require("../models/patientSchema");
 const Appointment = require("../models/appointmentSchema");
 ////+++////
 
