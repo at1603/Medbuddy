@@ -4,6 +4,7 @@ var express = require("express"),
   User = require("../models/userSchema");
 patientStats = require("../models/statsSchema/patientStatsSchema");
 doctorStats = require("../models/statsSchema/doctorStatsSchema");
+const patientHistory = require("../models/patientHistorySchema");
 
 //Login get requests
 router.get("/userLogin", function (req, res) {
@@ -82,13 +83,27 @@ router.post("/register", function (req, res) {
             surgeries: 0,
             appointment: 0,
           };
+
+          var defaultPatientHistory = {
+            handlerId: req.user._id,
+            appointedDoctorId: null,
+          };
           patientStats.create(
             defaultPatientStats,
             function (err, defaultStats) {
               if (err) {
                 console.log(err);
               } else {
-                res.redirect("/userDocSection/patientDashboard");
+                patientHistory.create(
+                  defaultPatientHistory,
+                  function (err, defaultHistory) {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      res.redirect("/userDocSection/patientDashboard");
+                    }
+                  }
+                );
               }
             }
           );
