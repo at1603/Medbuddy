@@ -23,13 +23,17 @@
               </tr>
             </thead>
             <tbody id="front">
+              <%for(var i=0;i<patients.length;i++){%>
+              <%  if(patients[i].activityStatus == true){ %>
               <tr>
                 <td class="column1">1</td>
-                <td class="column1"><%=user.firstName+" "+user.lastName%></td>
-                <td class="column1">patient.disease</td>
-                <td class="column7"><a href="/userDocSection/patientList/patientInfo/<%=user._id%>"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
+                <td class="column1"><%=patients[i].patientId.firstName+" "+patients[i].patientId.lastName%></td>
+                <td class="column1"><%= patients[i].disease %></td>
+                <td class="column7"><a href="/userDocSection/patientList/patientInfo/<%=patients[i].patientId._id%>"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
 
               </tr>
+              <%}%>
+              <%}%>
             </tbody>
           </table>
         </div>
