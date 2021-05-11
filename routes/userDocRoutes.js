@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-
+var ObjectId = require("mongodb").ObjectID;
 const Doctor = require("../models/docSchema");
 const User = require("../models/userSchema");
 const Patient = require("../models/patientSchema");
@@ -27,39 +27,29 @@ router.get("/userDocSection/doctor/createProfile", function (req, res) {
 });
 
 router.get("/userDocSection/patientList", function (req, res) {
-  // console.log(req.user._id);
-  Appointment.find()
-    .where("relation.docId")
-    .equals(req.user._id)
-    .exec(function (err, foundAppointment) {
-      if (err) console.log(err);
-      else if (foundAppointment.length == 0) {
-        console.log("No appointment found");
-        req.flash("error", "No appointment found");
+  Doctor.find(
+    { handler_id: ObjectId(req.user._id) },
+    { _id: 1 },
+    function (err, foundDocId) {
+      if (err) {
+        console.log(err);
+        req.flash("error", "No Patient Found");
         res.redirect("/userDocSection/docDashboard");
       } else {
-        // Patient.findById(
-        //   foundAppointment[0].relation.patientId,
-        //   function (err, foundPatient) {
-        //     if (err) console.log(err);
-        //     else {
-        // console.log("above user", foundPatient);
-        User.findById(
-          foundAppointment[0].relation.patientId,
-          function (err, foundUser) {
-            if (err) console.log(err);
-            else {
+        Appointment.find({ docId: ObjectId(foundDocId[0]._id) })
+          .populate("patientId")
+          .exec(function (err, foundPatients) {
+            if (err) {
+              console.log(err);
+            } else {
               res.render("userDocSection/docfiles/patientList", {
-                // patient: foundPatient,
-                user: foundUser,
+                patients: foundPatients,
               });
             }
-            //   });
-            // }
-          }
-        );
+          });
       }
-    });
+    }
+  );
 });
 
 router.get("/userDocSection/patientList/patientInfo/:id", function (req, res) {
