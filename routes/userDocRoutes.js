@@ -159,32 +159,6 @@ router.get("/userDocSection/docList/docInfo/:id", function (req, res) {
 //my doctor
 
 router.get("/userDocSection/myAppointments", function (req, res) {
-  // Appointment.find()
-  //   .where("relation.patientId")
-  //   .equals(req.user._id)
-  //   .exec(function (err, foundAppointment) {
-  //     if (err) console.log(err);
-  //     else {
-  //       Doctor.findById(
-  //         foundAppointment[0].relation.docId,
-  //         function (err, foundDoctor) {
-  //           if (err) console.log(err);
-  //           else {
-  //             User.findById(foundDoctor.handler.id, function (err, foundUser) {
-  //               if (err) console.log(err);
-  //               else {
-  //                 console.log(foundUser);
-  //                 res.render("userDocSection/patientfiles/myDoc", {
-  //                   doctor: foundDoctor,
-  //                   user: foundUser,
-  //                 });
-  //               }
-  //             });
-  //           }
-  //         }
-  //       );
-  //     }
-  //   });
   Appointment.find({})
     .where("patientId")
     .equals(req.user._id)
@@ -226,8 +200,18 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
     disease: req.body.disease,
   };
   Appointment.create(newAppointment, function (err, createAppointment) {
-    if (err) console.log(err);
-    else res.redirect("/userDocSection/patientDashboard");
+    if(err) 
+      console.log(err);
+    else{
+      Patient.findOneAndUpdate({"$push": {"appointedDoctors": docId}}).where("handler.id").equals(req.user._id).exec(function(err, updatedPatients){
+        if(err)
+          console.log(err);
+        else{
+          console.log(updatedPatients);
+          res.redirect("/userDocSection/patientDashboard");
+        }
+      });
+    } 
   });
 });
 

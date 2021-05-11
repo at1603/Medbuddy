@@ -33,7 +33,7 @@
                   <% foundAppointments.forEach(function(Appointment){ count += 1%>
                       <tr>
                           <th scope="row"><%=count %></th>
-                          <td><%= Appointment.docId.handler_id.firstName + " " + Appointment.docId.handler_id.firstName %> </td>
+                          <td><%= Appointment.docId.handler_id.firstName + " " + Appointment.docId.handler_id.lastName %> </td>
                           <td><%= Appointment.disease%></td>
                           <td><%= moment(Appointment.createdAt).format('ll')%></td>
                           <td>
