@@ -24,7 +24,7 @@ router.post(
       res.redirect("/userDocSection/patientDashboard");
     } else if (req.user.role == "doctor") {
       req.flash("success", "Welcome to MedBuddy! " + req.user.username);
-      res.redirect("/userDocSection/docDashboards");
+      res.redirect("/userDocSection/docDashboard");
     } else if (req.user.role == "hospAdmin") {
       req.flash("success", "Welcome to MedBuddy! " + req.user.username);
       res.redirect("/user/hospAdmin/dashboard");
