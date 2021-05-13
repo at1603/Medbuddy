@@ -29,12 +29,16 @@
                 <td class="column1"><%=i+1%></td>
                 <td class="column1"><%=doctors[i].handler_id.firstName+" "+doctors[i].handler_id.lastName%></td>
                 <td class="column1"><%=doctors[i].speciality%></td>
-                <td class="column7">
+                <td class="column1">
+                  <% if(!currentUser.currentDoctors || !currentUser.currentDoctors.includes(doctors[i]._id)){ %>
                   <div class="appntBtn">
                       <a href="/userDocSection/docList/docInfo/<%= doctors[i]._id %>" class="btn btn-success">
                         Book Appointment
                       </a>
                   </div>
+                  <% } else { %>
+                    <p style="color: green;"><strong>Appointment Already Active!</strong></p>  
+                  <% } %>
                 </td>
               </tr>
               <%}%>
