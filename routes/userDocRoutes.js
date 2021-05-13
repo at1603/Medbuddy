@@ -212,7 +212,6 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
     else{
       if(req.user.appointedDoctors && req.user.appointedDoctors.includes(req.params.docId))
         {
-          console.log("doc registered");
           PatientHistory.findOne({"handlerId": req.user._id, "appointedDoctorId": req.params.docId}, function(error, foundHistory){
             if(error){
               console.log(error);
@@ -231,7 +230,6 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
             handlerId: req.user._id,
             appointedDoctorId: req.params.docId,
           };
-          console.log("doc unregisterd");
           PatientHistory.create(defaultPatientHistory, function (error, defaultHistory) { 
             if(error)
             {
@@ -261,8 +259,6 @@ router.post(
       if (err) {
         console.log(err);
       } else {
-        console.log(updatedAppointment.docId)
-        let removeDocId = updatedAppointment.docId;
         User.findByIdAndUpdate(req.user._id, {"$pull": {currentDoctors: updatedAppointment.docId}}, function(error, updatedUser){
           if(error){
             console.log(error);
