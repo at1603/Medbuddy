@@ -4,7 +4,7 @@ var ObjectId = require("mongodb").ObjectID;
 const Doctor = require("../models/docSchema");
 const User = require("../models/userSchema");
 const Appointment = require("../models/appointmentSchema");
-const PatientHistory = require("../models/patientHistorySchema")
+const PatientHistory = require("../models/patientHistorySchema");
 ////+++////
 
 //Doctor routes
@@ -16,6 +16,7 @@ router.get("/generatePresc/:id", function (req, res) {
       req.flash("error", "Something went wrong");
       res.redirect("/userDocSection/patientList");
     } else {
+      console.log(foundPatient._id, "yeah");
       res.render("userDocSection/docfiles/prescription", {
         foundPatient: foundPatient,
       });
@@ -135,16 +136,19 @@ router.get("/userDocSection/docList/", function (req, res) {
       if (err) {
         console.log(err);
       } else {
-        PatientHistory.find().where('handlerId').equals(req.user._id).select("currentDoctorId").exec(function(error, foundHistory){
-          if(error)
-            console.log(error);
-          else{
-            res.render("userDocSection/patientfiles/docList", {
-              doctors: foundDoctors,
-              patientHistory: foundHistory
-            });
-          }
-        });
+        PatientHistory.find()
+          .where("handlerId")
+          .equals(req.user._id)
+          .select("currentDoctorId")
+          .exec(function (error, foundHistory) {
+            if (error) console.log(error);
+            else {
+              res.render("userDocSection/patientfiles/docList", {
+                doctors: foundDoctors,
+                patientHistory: foundHistory,
+              });
+            }
+          });
       }
     });
 });
@@ -207,45 +211,65 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
     disease: req.body.disease,
   };
   Appointment.create(newAppointment, function (err, createAppointment) {
-    if(err) 
-      console.log(err);
-    else{
-      if(req.user.appointedDoctors && req.user.appointedDoctors.includes(req.params.docId))
-        {
-          PatientHistory.findOne({"handlerId": req.user._id, "appointedDoctorId": req.params.docId}, function(error, foundHistory){
-            if(error){
+    if (err) console.log(err);
+    else {
+      if (
+        req.user.appointedDoctors &&
+        req.user.appointedDoctors.includes(req.params.docId)
+      ) {
+        PatientHistory.findOne(
+          { handlerId: req.user._id, appointedDoctorId: req.params.docId },
+          function (error, foundHistory) {
+            if (error) {
               console.log(error);
-            }else{
-              User.findByIdAndUpdate(req.user._id, {"$push": {currentDoctors: req.params.docId}}, function(er, updatedUser){
-                if(er){
-                  console.log(er);
-                }else{
-                  res.redirect("/userDocSection/patientDashboard");
+            } else {
+              User.findByIdAndUpdate(
+                req.user._id,
+                { $push: { currentDoctors: req.params.docId } },
+                function (er, updatedUser) {
+                  if (er) {
+                    console.log(er);
+                  } else {
+                    res.redirect("/userDocSection/patientDashboard");
+                  }
                 }
-              });
+              );
             }
-          });
-        }else{
-          let defaultPatientHistory = {
-            handlerId: req.user._id,
-            appointedDoctorId: req.params.docId,
-          };
-          PatientHistory.create(defaultPatientHistory, function (error, defaultHistory) { 
-            if(error)
-            {
+          }
+        );
+      } else {
+        let defaultPatientHistory = {
+          handlerId: req.user._id,
+          appointedDoctorId: req.params.docId,
+        };
+        PatientHistory.create(
+          defaultPatientHistory,
+          function (error, defaultHistory) {
+            if (error) {
               console.log(error);
-            }else{
-              User.findOneAndUpdate({_id: req.user._id}, {"$push": {appointedDoctors: req.params.docId, currentDoctors: req.params.docId}}, function(er, updatedUser){
-                if(er){
-                  console.log(er);
-                }else{
-                  res.redirect("/userDocSection/patientDashboard");
+            } else {
+              console.log("doc unregistered");
+              User.findOneAndUpdate(
+                { _id: req.user._id },
+                {
+                  $push: {
+                    appointedDoctors: req.params.docId,
+                    currentDoctors: req.params.docId,
+                  },
+                },
+                function (er, updatedUser) {
+                  if (er) {
+                    console.log(er);
+                  } else {
+                    res.redirect("/userDocSection/patientDashboard");
+                  }
                 }
-              });
+              );
             }
-          });
-        }
-    } 
+          }
+        );
+      }
+    }
   });
 });
 
@@ -254,22 +278,66 @@ router.post(
   "/userDocSection/cancelAppointment/:appointId",
   function (req, res) {
     Appointment.findByIdAndUpdate(req.params.appointId, {
-      "$set": { activityStatus: false },
+      $set: { activityStatus: false },
     }).exec(function (err, updatedAppointment) {
       if (err) {
         console.log(err);
       } else {
-        User.findByIdAndUpdate(req.user._id, {"$pull": {currentDoctors: updatedAppointment.docId}}, function(error, updatedUser){
-          if(error){
-            console.log(error);
-          }else{
-            res.redirect("/userDocSection/myAppointments");
+        User.findByIdAndUpdate(
+          req.user._id,
+          { $pull: { currentDoctors: updatedAppointment.docId } },
+          function (error, updatedUser) {
+            if (error) {
+              console.log(error);
+            } else {
+              res.redirect("/userDocSection/myAppointments");
+            }
           }
-        });
+        );
       }
     });
   }
 );
+
+router.post("/generatePresc/addMedicine/:id", function (req, res) {
+  Doctor.find(
+    { handler_id: ObjectId(req.user._id) },
+    { _id: 1 },
+    function (err, foundDocId) {
+      if (err) {
+        console.log(err);
+        req.flash("error", "No Patient Found");
+        res.redirect("/userDocSection/docDashboard");
+      } else {
+        console.log(
+          req.body.medicine,
+          req.params.id,
+          foundDocId[0]._id,
+          "print toh hora"
+        );
+        PatientHistory.findOneAndUpdate(
+          {
+            $and: [
+              { handlerId: req.params.id },
+              { appointedDoctorId: foundDocId[0]._id },
+            ],
+          },
+          { $set: { "prescription.medicines[0][0]": req.body.medicine } },
+          { new: true }
+        ).exec(function (err, medrecord) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(medrecord, "ye new hai");
+            res.render("userDocSection/docfiles/patientList", {
+              patients: foundPatients,
+            });
+          }
+        });
+      }
+    }
+  );
+});
 
 //universal routes
 router.get("/userDocSection/appointments/:id", function (req, res) {

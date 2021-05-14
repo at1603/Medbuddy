@@ -39,7 +39,7 @@
           </div>
           <div class="card">
           <div id= "form1" >
-            <form action="">
+            <form action="/generatePresc/addMedicine/<%=foundPatient._id%>" method="POST">
               <div class="form-row">
                 <div class="form-group col-md-4">
                   <label for="medicine">Choose a Medicine:</label>
@@ -82,7 +82,7 @@
                   </select>
                 </div>
                 <div class="form-group col-md-2" id="btn1">
-                  <button type="button" class="btn btn-success">Add</button>
+                  <button type="submit" class="btn btn-success">Add</button>
                 </div>
               </div>
             </form>

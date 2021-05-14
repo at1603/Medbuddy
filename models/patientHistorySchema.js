@@ -10,39 +10,39 @@ var patientHistorySchema = new mongoose.Schema({
     ref: "Doctor",
     required: false,
   },
-  prescription: {
-    date: {
-      type: [String],
-      default: () => {
-        return null;
+  prescription: [
+    {
+      date: {
+        type: Date,
+        default: Date.now(),
+      },
+      disease: {
+        type: String,
+        default: "6",
+      },
+      medicines: [
+        {
+          medicineName: {
+            type: String,
+            default: "4",
+          },
+          power: {
+            type: String,
+            default: "6",
+          },
+          dosage: {
+            type: String,
+            default: "5",
+          },
+        },
+      ],
+      test: [String],
+      comment: {
+        type: String,
+        default: "5",
       },
     },
-    disease: {
-      type: [String],
-      default: () => {
-        return null;
-      },
-    },
-    medicines: [
-      {
-        medicineName: { type: String, default: null },
-        power: { type: String, default: null },
-        dosage: { type: String, default: null },
-      },
-    ],
-    test: {
-      type: [String],
-      default: () => {
-        return null;
-      },
-    },
-    comment: {
-      type: [String],
-      default: () => {
-        return null;
-      },
-    },
-  },
+  ],
 });
 
 module.exports = mongoose.model("PatientHistory", patientHistorySchema);
