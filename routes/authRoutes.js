@@ -47,7 +47,6 @@ router.get("/register", function (req, res) {
 
 //Signup post request
 router.post("/register", function (req, res) {
-  // console.log("post in /register");
   var newUser = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -83,27 +82,14 @@ router.post("/register", function (req, res) {
             surgeries: 0,
             appointment: 0,
           };
-
-          var defaultPatientHistory = {
-            handlerId: req.user._id,
-            appointedDoctorId: null,
-          };
           patientStats.create(
             defaultPatientStats,
             function (err, defaultStats) {
               if (err) {
                 console.log(err);
-              } else {
-                patientHistory.create(
-                  defaultPatientHistory,
-                  function (err, defaultHistory) {
-                    if (err) {
-                      console.log(err);
-                    } else {
-                      res.redirect("/userDocSection/patientDashboard");
-                    }
-                  }
-                );
+              } else 
+              {
+                  res.redirect("/userDocSection/patientDashboard");
               }
             }
           );

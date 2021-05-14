@@ -18,7 +18,17 @@ var userSchema = new mongoose.Schema({
    role:String,
    gender:String,
    joinedAt:{type:Date, default:Date.now},
-   isAdmin: {type: Boolean, default: false}
+   isAdmin: {type: Boolean, default: false},
+   appointedDoctors: {
+       type: [String],
+       default: ['0'],
+       required: false
+   },
+   currentDoctors: {
+       type: [String],
+       default: '0',
+       required: false
+   }
 });
 
 userSchema.plugin(passportLocalMongoose);
