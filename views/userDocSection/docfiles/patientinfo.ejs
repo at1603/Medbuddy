@@ -12,32 +12,64 @@
 
     <div class="content-block">
       <div class="flex-container">
-      <div class="flex-child patInfo">
-        <div class="row">
+        <div class="flex-child patInfo">
+          <h4 style="text-align: center; margin-top: 2rem; margin-bottom: 1rem;"><strong><u>Patient's Information</u></strong></h4>
+          <hr style="border-top: 1px solid gray">
+          <div class="row" style="width: 90%; margin: 1rem auto 1rem;">
+            <div class="col-md-8">
+              <div class="col-md-12">
+                <span style="display: inline;">Mr./Ms./Mrs.: <strong><%= foundPatient.firstName + " " + foundPatient.lastName %></strong></span>
+              </div>
+              <div class="col-md-12">
+                <span style="display: inline;">Address: <strong><%= foundPatient.address.street + ", " + foundPatient.address.city + ", " +foundPatient.address.state %></strong></span>
+              </div>
+              <div class="col-md-12">
+                <span style="display: inline;">Contact: <strong><%= foundPatient.phone %></strong></span>
+              </div>
+              <div class="col-md-12">
+                <span style="display: inline;">Gender: <strong><%= foundPatient.gender%></strong></span>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="col-md-12">
+                <form id="form2" action="/generatePresc/<%=foundPatient._id%>" method="GET">
+                  <button type="submit" class="btn btn-success" style="width: 15rem; border-radius: 25px;">Generate Prescription</button>
+                </form>
+              </div>
+              <div class="col-md-12" style="margin-top: 3px;">
+                <form id="form1" action="/start_call" method="POST">
+                  <button type="submit" class="btn btn-warning" style="width: 15rem;border-radius: 25px;" onclick="run();">Start Appointment</button>
+                </form>
+              </div>
+            </div>
+          </div>
+      
+
+
+        <!-- <div class="row">
           <div class="col-md-12">
-          <strong style="display: inline;">Mr./Ms./Mrs.: </strong>  <%= foundPatient.firstName + " " + foundPatient.lastName %> 
+          <strong style="display: inline;">Mr./Ms./Mrs.: </strong>  <%= //foundPatient.firstName + " " + foundPatient.lastName %> 
         </div>
       </div>
-       
-        
        <div>
-          <strong>Address: </strong> <%= foundPatient.address.street + " " + foundPatient.address.city + " " +foundPatient.address.city %>
+          <strong>Address: </strong> <%= //foundPatient.address.street + " " + foundPatient.address.city + " " +foundPatient.address.city %>
             
         </div>
          
      
       <div>
-          <strong>Contact:</strong>  <%= foundPatient.phone %>
+          <strong>Contact:</strong>  <%= //foundPatient.phone %>
             
         </div> 
         
         <div>
-          <strong>Gender:</strong>  <%= foundPatient.gender %>
+          <strong>Gender:</strong>  <%= //foundPatient.gender %>
         </div>
 
       </div>
     <div style="display: flex-inline; margin-top: 1.4rem; margin-left: 104rem; position: absolute; ">
-        <form id="form2" action="/generatePresc/<%=foundPatient._id%>" method="GET">
+        <form id="form2" action="/generatePresc/<%=//foundPatient._id%>" method="GET">
         <button type="submit" class="btn btn-success">Generate Prescription</button>
       </form>
       </div>
@@ -46,7 +78,7 @@
         <button type="submit" class="btn btn-success" onclick="run();">Start Appointment</button>
       </form>
       </div>
-    </div>
+    </div> -->
       <hr>
       <%for(var i=0;i<foundPatientMedicalRecords[0].prescription.length;i++){%>
       <div class="history">
