@@ -29,7 +29,11 @@
       <div>
           <strong>Contact:</strong>  <%= foundPatient.phone %>
             
-        </div>  
+        </div> 
+        
+        <div>
+          <strong>Gender:</strong>  <%= foundPatient.gender %>
+        </div>
 
       </div>
     <div style="display: flex-inline; margin-top: 1.4rem; margin-left: 104rem; position: absolute; ">
@@ -44,7 +48,12 @@
       </div>
     </div>
       <hr>
+      <%for(var i=0;i<foundPatientMedicalRecords[0].prescription.length;i++){%>
       <div class="history">
+        <div id="timeline">
+          <strong>Date:</strong>  <%= foundPatientMedicalRecords[0].prescription[i].date %>
+
+        </div>
         <div class="row">
 
           <div class="col1">
@@ -58,27 +67,11 @@
                       </tr>
                     </thead>
                     <tbody id="back">
+                      <%for(var j=0;j<foundPatientMedicalRecords[0].prescription[i].test.length;j++){%>
                       <tr>
-                        <td class="column1">X-Ray</td>
+                        <td class="column1"><%=foundPatientMedicalRecords[0].prescription[i].test[j].testName%></td>
                       </tr>
-                      <tr>
-                        <td class="column1">X-Ray</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">X-Ray</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">X-Ray</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">X-Ray</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">CT-Scan</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">Blood-Test</td>
-                      </tr>
+                      <%}%>
                     </tbody>
                   </table>
                 </div>
@@ -98,45 +91,13 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <%for(var k=0;k<foundPatientMedicalRecords[0].prescription[i].medicines.length;k++){%>
                       <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column2">300MG</td>
-                        <td class="column3">4 Times a Day</td>
+                        <td class="column1"><%=foundPatientMedicalRecords[0].prescription[i].medicines[k].medicineName%></td>
+                        <td class="column2"><%=foundPatientMedicalRecords[0].prescription[i].medicines[k].dosage%></td>
+                        <td class="column3"><%=foundPatientMedicalRecords[0].prescription[i].medicines[k].frequency%></td>
                       </tr>
-                      <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column2">300MG</td>
-                        <td class="column3">4 Times a Day</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column2">300MG</td>
-                        <td class="column3">4 Times a Day</td>
-                      </tr> <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column2">300MG</td>
-                        <td class="column3">4 Times a Day</td>
-                      </tr> <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column2">300MG</td>
-                        <td class="column3">4 Times a Day</td>
-                      </tr> <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column2">300MG</td>
-                        <td class="column3">4 Times a Day</td>
-                      </tr> <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column2">300MG</td>
-                        <td class="column3">4 Times a Day</td>
-                      </tr> <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column2">300MG</td>
-                        <td class="column3">4 Times a Day</td>
-                      </tr> <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column2">300MG</td>
-                        <td class="column3">4 Times a Day</td>
-                      </tr>
+                      <%}%>
                     </tbody>
                   </table>
                 </div>
@@ -154,15 +115,8 @@
                       </tr>
                     </thead>
                     <tbody>
-                     
                       <tr>
-                        <td class="column1">X-Ray</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">CT-Scan</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">Blood-Test</td>
+                        <td class="column1"><%=foundPatientMedicalRecords[0].prescription[i].comment%></td>
                       </tr>
                     </tbody>
                   </table>
@@ -173,8 +127,9 @@
         </div>
 
       <hr id="historyDivider">
+     
     </div>
-
+    <%}%>
     </div>
 
 

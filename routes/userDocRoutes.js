@@ -60,9 +60,36 @@ router.get("/userDocSection/patientList/patientInfo/:id", function (req, res) {
       req.flash("error", "Something went wrong");
       res.redirect("/userDocSection/patientList");
     } else {
-      res.render("userDocSection/docfiles/patientInfo", {
-        foundPatient: foundPatient,
-      });
+      Doctor.find(
+        { handler_id: ObjectId(req.user._id) },
+        { _id: 1 },
+        function (err, foundDocId) {
+          if (err) {
+            console.log(err);
+            req.flash("error", "No Patient Found");
+            res.redirect("/userDocSection/docDashboard");
+          } else {
+            console.log(foundPatient, "checking");
+            PatientHistory.find({
+              handlerId: req.params.id,
+              appointedDoctorId: foundDocId[0]._id,
+            }).exec(function (err, foundPatientMedicalRecords) {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log(
+                  foundPatientMedicalRecords[0].prescription,
+                  "These r medical records"
+                );
+                res.render("userDocSection/docfiles/patientInfo", {
+                  foundPatient: foundPatient,
+                  foundPatientMedicalRecords: foundPatientMedicalRecords,
+                });
+              }
+            });
+          }
+        }
+      );
     }
   });
 });
@@ -154,6 +181,8 @@ router.get("/userDocSection/docList/", function (req, res) {
 });
 
 router.get("/userDocSection/docList/docInfo/:id", function (req, res) {
+  console.log("raaaaaaaaaaa");
+
   Doctor.findById(req.params.id)
     .populate("handler_id")
     .exec(function (err, foundDoctors) {
@@ -189,17 +218,7 @@ router.get("/userDocSection/myAppointments", function (req, res) {
     });
 });
 
-router.get("/userDocSection/changeDoc/:id", function (req, res) {
-  res.render("userDocSection/patientfiles/changeDoc");
-});
-
-router.get("/userDocSection/searchDoc", function (req, res) {
-  res.render("userDocSection/searchDoc");
-});
-
-router.get("/userDocSection/prescrip/:id", function (req, res) {
-  res.render("userDocSection/patientfiles/prescription");
-});
+router.get("/userDocSection/myAppointments/show", function (req, res) {});
 
 //book appointment button
 router.post("/userDocSection/createAppointment/:docId", function (req, res) {
@@ -300,6 +319,17 @@ router.post(
 );
 
 router.post("/generatePresc/addMedicine/:id", function (req, res) {
+  const MedicineData = JSON.parse(req.body.hiddenMedicineName);
+  const TestData = JSON.parse(req.body.hiddenTest);
+
+  const prescriptionData = {
+    date: Date.now(),
+    disease: req.body.disease,
+    medicines: MedicineData,
+    test: TestData,
+    comment: req.body.comment,
+  };
+  console.log(prescriptionData);
   Doctor.find(
     { handler_id: ObjectId(req.user._id) },
     { _id: 1 },
@@ -309,29 +339,15 @@ router.post("/generatePresc/addMedicine/:id", function (req, res) {
         req.flash("error", "No Patient Found");
         res.redirect("/userDocSection/docDashboard");
       } else {
-        console.log(
-          req.body.medicine,
-          req.params.id,
-          foundDocId[0]._id,
-          "print toh hora"
-        );
-        PatientHistory.findOneAndUpdate(
-          {
-            $and: [
-              { handlerId: req.params.id },
-              { appointedDoctorId: foundDocId[0]._id },
-            ],
-          },
-          { $set: { "prescription.medicines[0][0]": req.body.medicine } },
-          { new: true }
+        PatientHistory.updateOne(
+          { handlerId: req.params.id, appointedDoctorId: foundDocId[0]._id },
+          { $push: { prescription: prescriptionData } }
         ).exec(function (err, medrecord) {
           if (err) {
             console.log(err);
           } else {
-            console.log(medrecord, "ye new hai");
-            res.render("userDocSection/docfiles/patientList", {
-              patients: foundPatients,
-            });
+            console.log(medrecord, "pls print");
+            res.redirect("/userDocSection/patientList");
           }
         });
       }
