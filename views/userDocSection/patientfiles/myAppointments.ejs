@@ -3,8 +3,8 @@
   <%- include("../../partials/header"); -%>
 
     <title>Page Title</title>
+    <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientInfo.css">
   </head>
- <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientList.css">
  <style>
    .modal-backdrop.fade.show{
      width: 100% !important
@@ -15,7 +15,7 @@
     <%-include("../../partials/altSidebar");-%>
     <% if(foundAppointments.length > 0){ %>
     <div class="content-block">
-      <div class="card" style="width: 80%;">
+      <div class="card" style="width: 80%; margin: auto">
         <h4 style="text-align: center;"><strong>Appointment's list</strong></h4>
         <div id="patientList" style="width: 100%;"> 
           <table class="table table-striped">
@@ -38,8 +38,8 @@
                           <td><%= moment(Appointment.createdAt).format('ll')%></td>
                           <td>
                             <% if(Appointment.activityStatus){ %>
-                            <a class="btn btn-sm btn-info" style="margin-right:5px ; display: inline;" href="/Appointment/<%/=Appointment._id%>/show">View</a>
-                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">
+                            <a class="btn btn-sm btn-info" style="margin-right:5px;margin-bottom: 2px; width: 90%;justify-content: center; display: inline-flex;" href="/Appointment/<%=Appointment._id%>/show">View</a>
+                            <button type="button" style="display: inline-flex;width: 90%; justify-content: center;" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">
                               Cancel Appointment
                             </button>
                             <div class="modal fade" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true" style="width: 100%; z-index: 9999;">
