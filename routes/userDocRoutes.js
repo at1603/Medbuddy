@@ -181,8 +181,6 @@ router.get("/userDocSection/docList/", function (req, res) {
 });
 
 router.get("/userDocSection/docList/docInfo/:id", function (req, res) {
-  console.log("raaaaaaaaaaa");
-
   Doctor.findById(req.params.id)
     .populate("handler_id")
     .exec(function (err, foundDoctors) {
@@ -260,6 +258,11 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
         let defaultPatientHistory = {
           handlerId: req.user._id,
           appointedDoctorId: req.params.docId,
+          prescription: [
+            {
+              date: Date.now()
+            }
+          ]
         };
         PatientHistory.create(
           defaultPatientHistory,
