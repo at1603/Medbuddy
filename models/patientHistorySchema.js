@@ -14,32 +14,39 @@ var patientHistorySchema = new mongoose.Schema({
     {
       date: {
         type: Date,
-        default: Date.now(),
+        default: "",
       },
       disease: {
         type: String,
-        default: "6",
+        default: "",
       },
       medicines: [
         {
           medicineName: {
             type: String,
-            default: "4",
-          },
-          power: {
-            type: String,
-            default: "6",
+            default: "",
           },
           dosage: {
             type: String,
-            default: "5",
+            default: "",
+          },
+          frequency: {
+            type: String,
+            default: "",
           },
         },
       ],
-      test: [String],
+      test: [
+        {
+          testName: {
+            type: String,
+            default: "",
+          },
+        },
+      ],
       comment: {
         type: String,
-        default: "5",
+        default: "",
       },
     },
   ],

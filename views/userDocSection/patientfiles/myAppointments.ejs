@@ -38,7 +38,7 @@
                           <td><%= moment(Appointment.createdAt).format('ll')%></td>
                           <td>
                             <% if(Appointment.activityStatus){ %>
-                            <a class="btn btn-sm btn-info" style="margin-right:5px ; display: inline;" href="/Appointment/<%//=Appointment._id%>/show">View</a>
+                            <a class="btn btn-sm btn-info" style="margin-right:5px ; display: inline;" href="/Appointment/<%/=Appointment._id%>/show">View</a>
                             <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">
                               Cancel Appointment
                             </button>

@@ -365,3 +365,7 @@ tbody::-webkit-scrollbar-thumb {
     width: 36.66%;
     padding: 10px;
 }
+
+#timeline {
+    padding: 1rem;
+}

@@ -37,26 +37,28 @@
               </span>
             </p>
           </div>
+          <form action="/generatePresc/addMedicine/<%=foundPatient._id%>" method="POST">
           <div class="card">
           <div id= "form1" >
-            <form action="/generatePresc/addMedicine/<%=foundPatient._id%>" method="POST">
+            <!-- <form action="/generatePresc/addMedicine/<%=foundPatient._id%>" method="POST"> -->
               <div class="form-row">
                 <div class="form-group col-md-4">
                   <label for="medicine">Choose a Medicine:</label>
 
-                  <select name="medicine" id="medicine" class="form-control">
+                  <select name="medicine[]" id="medicine" class="form-control">
                     <option value="Norflox">Norflox</option>
                     <option value="Paracetamol">Paracetamol</option>
                     <option value="Crocin">Crocin</option>
                     <option value="Cough Syrup">Cough Syrup</option>
                   </select>
+                  <input type="hidden" name="hiddenMedicineName" id="hiddenMedicineName">
                 </div>
                 <div class="form-group col-md-2">
-                  <label for="dosage-amount">Dosage</label>
+                  <label for="dosage">Dosage</label>
 
                   <select
-                    name="dosage-amount"
-                    id="dosage-amount"
+                    name="dosage"
+                    id="dosage"
                     class="form-control"
                   >
                     <option value="1">1</option>
@@ -67,13 +69,14 @@
                     <option value="6">6</option>
                     <option value="7">7</option>
                   </select>
+
                 </div>
                 <div class="form-group col-md-3">
-                  <label for="dosage-times">Frequency</label>
+                  <label for="frequency">Frequency</label>
 
                   <select
-                    name="dosage-times"
-                    id="dosage-times"
+                    name="frequency"
+                    id="frequency"
                     class="form-control"
                   >
                     <option value="day">day</option>
@@ -82,13 +85,13 @@
                   </select>
                 </div>
                 <div class="form-group col-md-2" id="btn1">
-                  <button type="submit" class="btn btn-success">Add</button>
+                  <button type="button" class="btn btn-success" onclick="updateMedicines()">Add</button>
                 </div>
               </div>
-            </form>
+            <!-- </form> -->
           </div>
           <div id="form2">
-            <form action="">
+            <!-- <form action=""> -->
               <div class="form-row">
                 <div class="form-group col-md-9">
                   <label for="test">Choose a Test:</label>
@@ -99,24 +102,34 @@
                     <option value="MRI">MRI</option>
                     <option value="CT-Scan">CT-Scan</option>
                   </select>
+                  <input type="hidden" name="hiddenTest" id="hiddenTest">
+
                 </div>
 
                 <div class="form-group col-md-2" id="btn2">
-                  <button type="button" class="btn btn-success">Add</button>
+                  <button type="button" class="btn btn-success" onclick="updateTests()">Add</button>
                 </div>
               </div>
-            </form>
+            <!-- </form> -->
           </div>
         </div>
         <div class="card" id="code-area">
+          <div>
+            <label for="disease">Disease</label>
+            <input type="text" placeholder="Please Enter The Disease" name="disease" id="disease">
+          </div>
           <div class="code-area">
             <textarea
+            name="comment"
               id="comment"
               placeholder=""
               oninput="showPreview()"
             ></textarea>
           </div>
+          <button>Add</button>
         </div>
+        <button type="submit">Submit</button>
+        </form>
       </div>
         <div class="preview-area">
           <div class="card-outer">
@@ -178,7 +191,7 @@
             <div class="flipcard">
               <div class="flipcardinner">
                 <div class="flipcardfront">
-                  <table>
+                  <table id="medicineTable"> 
                     <thead>
                       <tr class="table100-head">
                         <th class="column1">Medicine</th>
@@ -187,98 +200,19 @@
                       </tr>
                     </thead>
                     <tbody id="front">
-                      <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column1">300MG</td>
-                        <td class="column1">4 Times a Day</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column1">300MG</td>
-                        <td class="column1">4 Times a Day</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column1">300MG</td>
-                        <td class="column1">4 Times a Day</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column1">300MG</td>
-                        <td class="column1">4 Times a Day</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column1">300MG</td>
-                        <td class="column1">4 Times a Day</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column1">300MG</td>
-                        <td class="column1">4 Times a Day</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column1">300MG</td>
-                        <td class="column1">4 Times a Day</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column1">300MG</td>
-                        <td class="column1">4 Times a Day</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column1">300MG</td>
-                        <td class="column1">4 Times a Day</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column1">300MG</td>
-                        <td class="column1">4 Times a Day</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column1">300MG</td>
-                        <td class="column1">4 Times a Day</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">Norflox</td>
-                        <td class="column1">300MG</td>
-                        <td class="column1">4 Times a Day</td>
-                      </tr>
+                      
                     </tbody>
                   </table>
                 </div>
                 <div class="flipcardback">
-                  <table>
+                  <table id="testTable">
                     <thead>
                       <tr class="table100-head">
                         <th class="column1">Recommended Test</th>
                       </tr>
                     </thead>
                     <tbody id="back">
-                      <tr>
-                        <td class="column1">X-Ray</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">X-Ray</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">X-Ray</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">X-Ray</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">X-Ray</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">CT-Scan</td>
-                      </tr>
-                      <tr>
-                        <td class="column1">Blood-Test</td>
-                      </tr>
+                      
                     </tbody>
                   </table>
                 </div>
@@ -351,7 +285,55 @@
         frame.close();
       }
     </script>
+<script> 
+  var medicine = [];
+  var test = [];
+  var comment;
 
+  function updateMedicines(){  
+    var medicineData = {
+    medicineName:document.getElementById("medicine").value,
+    dosage:document.getElementById("dosage").value,
+    frequency:document.getElementById("frequency").value
+  }
+    medicine.push(medicineData)
+    var table = document.getElementById("front")
+    var row= table.insertRow(-1)
+    var cell1 = row.insertCell(0)
+    cell1.className = "column1"
+    var cell2 = row.insertCell(1)
+    cell2.className = "column1"
+
+    var cell3 = row.insertCell(2)
+    cell3.className = "column1"
+
+    cell1.innerHTML = document.getElementById("medicine").value
+    cell2.innerHTML = document.getElementById("dosage").value
+    cell3.innerHTML = document.getElementById("frequency").value
+
+    document.getElementById("hiddenMedicineName").value = JSON.stringify(medicine)
+  }
+  function updateTests(){
+    var testData = {
+      testName:document.getElementById("test").value
+    }
+    test.push(testData)
+    var table = document.getElementById("back")
+    var row= table.insertRow(-1)
+    var cell1 = row.insertCell(0)
+    cell1.className = "column1"
+    cell1.innerHTML = document.getElementById("test").value
+    document.getElementById("hiddenTest").value = JSON.stringify(test)
+  }
+  function updateComment(){
+    comment = document.getElementById("comment").value
+    console.log(comment)
+  }
+
+  function mySubmit(){
+    document.getElementById
+  }
+</script>
     <script>
       $(".flipcard .flipcardinner").click(function () {
         $(this).closest(".flipcard").toggleClass("click");
