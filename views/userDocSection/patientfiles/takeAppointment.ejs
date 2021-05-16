@@ -32,15 +32,22 @@
         </div>
     </div>
     <div>
-        <a href="#" class="btn btn-success toggleAppointmentForm">Take Appointment</a>
+       
+        <a href="#" class="btn btn-success toggleAppointmentForm" onclick="slotChecker()">Take Appointment</a>
         <form class="container takeAppointment" action="/userDocSection/createAppointment/<%= doctors._id%>" method="POST" style="margin: 2rem 0 4rem 0; display: none;">
             <div class="form-group">
               <label for="InputNumber">Phone Number</label>
               <input type="number" class="form-control" name="phone" id="InputNumber" aria-describedby="numberHelp" required>
               <small id="numberHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
             </div>
-            <div class="form-group">
+           
+
+                            <div class="form-group">
                 <label for="InputSlot">Input Preferred Slot</label>
+                <label for="slotA" id="labelForSlotA">Morning Slot:<%=doctors.availableSlots.slotA%></label>
+                <input type="radio" name="selectedSlot" value="slotA" id="slotA"></input>
+                <label for="slotB" id="labelForSlotB">Evening Slot:<%=doctors.availableSlots.slotB%></label>
+                <input type="radio" name="selectedSlot" value="slotB" id="slotB"></input>
                 <input class="form-control" name="preferSlot" type="datetime-local" id="datetime-local-input">
                 <small class="form-text text-muted">Slot Time may change</small>
             </div>
@@ -58,5 +65,16 @@
         $(".toggleAppointmentForm").click(function(){
             $(".takeAppointment").toggle();
         })
+     
+        function slotChecker(){
+            var slotA = parseInt(document.getElementById("labelForSlotA").innerHTML.slice(13,document.getElementById("labelForSlotA").innerHTML.length))
+            var slotB = parseInt(document.getElementById("labelForSlotB").innerHTML.slice(13,document.getElementById("labelForSlotB").innerHTML.length))
+            if(slotA==0){
+                document.getElementById("slotA").disabled = true
+            }
+            if(slotB==0){
+                document.getElementById("slotB").disabled = true
+            }
+        }
     </script>
 </html>
