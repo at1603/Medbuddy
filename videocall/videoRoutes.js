@@ -17,13 +17,13 @@ router.post("/start_call", (req, res) => {
       const link = "http://localhost:3000/start_call" + roomId;
       sendMail(link, function (err, data) {
         if (err) {
-          res.status(500).json({ message: "Internal Error" });
+          console.log(err)
         } else {
-          res.redirect("/userDocSection/patientInfo");
+          // res.redirect("/userDocSection/patientInfo");
+          res.redirect(`/start_call${roomId}`);
           res.status({ message: "Email sent!!!" });
         }
       });
-      res.redirect(`/start_call${roomId}`);
     }
   });
 });

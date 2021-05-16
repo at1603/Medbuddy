@@ -17,7 +17,8 @@ let oxygenReqSchema = new mongoose.Schema({
     disease: String,
     age: Number,
     qty: Number,
-    date: String
+    date: String,
+    isEmergengency: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model('oxygenReqSchema', oxygenReqSchema);

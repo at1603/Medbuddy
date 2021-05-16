@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="/stylesheets/authCSS/signup.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/globalCSS/formTheme.css">
 <body>
-    <%- include("../partials/Navbar"); -%>
+    <%- include("../partials/altNavbar"); -%>
+    <%- include("../partials/altSidebar"); -%>
     <div class=" container signup-wrapper">
         <form action="/user/updateProfile/<%=currentUser._id%>?_method=PUT" method="POST">
             <h2 style="text-align: center;">Update Details</h2>
@@ -47,5 +48,6 @@
             </div>
             <button type="submit" class="btn btn-xs btn-success" id="goToSetup">Save and Update</button>
 </body>
+<%- include("../partials/footer"); -%>
 
 </html>

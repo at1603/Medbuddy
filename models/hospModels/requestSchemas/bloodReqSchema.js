@@ -17,7 +17,8 @@ let bloodReqSchema = new mongoose.Schema({
     disease: String,
     age: Number,
     units: Number,
-    date: String
+    date: String,
+    isEmergengency: {type: Boolean, default: false}
 });
 
 

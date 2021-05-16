@@ -1,7 +1,6 @@
 var mongoose = require("mongoose");
 
 var appointmentSchema = new mongoose.Schema({
-  roomId: { type: String, default: null },
   patientId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -16,6 +15,7 @@ var appointmentSchema = new mongoose.Schema({
   disease: { type: String, required: true },
   createdAt: { type: Date, default: Date.now() },
   activityStatus: { type: Boolean, default: true },
+  isEmergengency: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model("Appointment", appointmentSchema);
