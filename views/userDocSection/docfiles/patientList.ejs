@@ -9,6 +9,7 @@
   <body id="body-pd">
     <%-include("../../partials/altNavbar"); -%>
     <%-include("../../partials/altSidebar");-%>
+    <% if(patients.length > 0) { %> 
     <div class="content-block">
         <div class="card">
           <div id="patientList">
@@ -38,9 +39,10 @@
           </table>
         </div>
         </div>
-
     </div>
-   
+    <% }else { %>
+      <h4 style="text-align: center;">No Current Appointments Found!!</h4>
+    <% } %>   
        <%-include("../../partials/footer"); -%>
   </body>
 

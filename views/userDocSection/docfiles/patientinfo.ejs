@@ -27,7 +27,7 @@
                 <span style="display: inline;">Contact: <strong><%= foundPatient.phone %></strong></span>
               </div>
               <div class="col-md-12">
-                <span style="display: inline;">Gender: <strong><%= foundPatient.gender%></strong></span>
+                <span style="display: inline;">Gender: <strong><%= foundPatient.gender.charAt(0).toUpperCase() + foundPatient.gender.slice(1)%></strong></span>
               </div>
             </div>
 
@@ -44,43 +44,10 @@
               </div>
             </div>
           </div>
-      
-
-
-        <!-- <div class="row">
-          <div class="col-md-12">
-          <strong style="display: inline;">Mr./Ms./Mrs.: </strong>  <%= //foundPatient.firstName + " " + foundPatient.lastName %> 
-        </div>
-      </div>
-       <div>
-          <strong>Address: </strong> <%= //foundPatient.address.street + " " + foundPatient.address.city + " " +foundPatient.address.city %>
-            
-        </div>
-         
-     
-      <div>
-          <strong>Contact:</strong>  <%= //foundPatient.phone %>
-            
-        </div> 
-        
-        <div>
-          <strong>Gender:</strong>  <%= //foundPatient.gender %>
-        </div>
-
-      </div>
-    <div style="display: flex-inline; margin-top: 1.4rem; margin-left: 104rem; position: absolute; ">
-        <form id="form2" action="/generatePresc/<%=//foundPatient._id%>" method="GET">
-        <button type="submit" class="btn btn-success">Generate Prescription</button>
-      </form>
-      </div>
-      <div class="flex-child callBtn">
-        <form id="form1" action="/start_call" method="POST">
-        <button type="submit" class="btn btn-success" onclick="run();">Start Appointment</button>
-      </form>
-      </div>
-    </div> -->
       <hr>
-      <%for(var i=0;i<foundPatientMedicalRecords[0].prescription.length;i++){%>
+      <% console.log(foundPatientMedicalRecords.length) %> 
+      <% if(foundPatientMedicalRecords.length > 0) { %> 
+      <%for(var i=1;i<foundPatientMedicalRecords[0].prescription.length;i++){%>
       <div class="history">
         <div id="timeline">
           <strong>Date:</strong>  <%= foundPatientMedicalRecords[0].prescription[i].date %>
@@ -162,6 +129,9 @@
      
     </div>
     <%}%>
+    <% }else { %>
+      <h4 style="text-align: center;">No Medical Records Currently Exists!!</h4>
+    <% } %> 
     </div>
 
 
