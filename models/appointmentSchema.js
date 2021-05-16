@@ -12,6 +12,7 @@ var appointmentSchema = new mongoose.Schema({
   },
   phone: { type: Number, required: true },
   slot: { type: Date, required: false, default: null },
+
   disease: { type: String, required: true },
   createdAt: { type: Date, default: Date.now() },
   activityStatus: { type: Boolean, default: true },
