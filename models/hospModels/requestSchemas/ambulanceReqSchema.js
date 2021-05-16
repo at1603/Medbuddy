@@ -18,7 +18,8 @@ let ambulanceReqSchema = new mongoose.Schema({
     age: Number,
     reason: String,
     instructions: String,
-    date: String
+    date: String,
+    isEmergengency: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model('ambulanceReqSchema', ambulanceReqSchema);

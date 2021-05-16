@@ -9,7 +9,8 @@ let eyesSchema = new mongoose.Schema({
     },
     date: String,
     donorAge: Number,
-    type: String
+    type: String,
+    isEmergengency: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model('eyesSchema', eyesSchema)

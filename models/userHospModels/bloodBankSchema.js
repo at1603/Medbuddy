@@ -34,7 +34,8 @@ let bloodBankSchema = new mongoose.Schema({
         email: String,
         phone: Number
     },
-    price: Number
+    price: Number,
+    isEmergengency: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model("BloodBank", bloodBankSchema);
