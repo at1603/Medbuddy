@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <%- include("../../partials/header"); -%>
+
+    <title>Page Title</title>
+  </head>
+ 
+  <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientInfo.css">
+  <body id="body-pd">
+    <%-include("../../partials/altNavbar"); -%>
+    <%-include("../../partials/altSidebar");-%>
+    <% console.log(patientHistory[0].appointedDoctorId._id) %>
+    <div class="content-block">
+        <div class="card">
+          <div id="patientList">
+          <table>
+            <h4 style="text-align: center;margin-bottom: 1rem;"><strong>Your Medical History</strong></h4>
+            </h4>
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">S.N</th>
+                <th class="column1">Doctor's Name</th>
+                <th class="column1">Specialisation</th>
+                <th class="column1">Action</th>
+              </tr>
+            </thead>
+            <tbody id="front">
+              <%for(var i=0;i<patientHistory.length;i++){%>
+              <tr>
+                <td class="column1"><%=i+1%></td>
+                <td class="column1"><%=patientHistory[i].appointedDoctorId.handler_id.firstName+" "+patientHistory[i].appointedDoctorId.handler_id.lastName%></td>
+                <td class="column1"><%=patientHistory[i].appointedDoctorId.speciality%></td>
+                <td class="column1">
+                  <a href="/user/showMedicalHisotryList/showFullReport/<%=patientHistory[i].appointedDoctorId._id%>" style="justify-content: center;" class="btn btn-success btn-sm">View Full History</a>
+                </td>
+              </tr>
+              <%}%>
+            </tbody>
+          </table>
+        </div>
+        </div>
+    </div>
+
+  </body>
+  <%- include("../../partials/footer"); -%>
+</html>

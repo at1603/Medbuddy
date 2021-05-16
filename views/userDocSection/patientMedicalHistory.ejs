@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+  <%- include("../partials/header"); -%>
+
+    <title>Page Title</title>
+  </head>
+  <style>
+    .effect2
+    {
+      position: relative;
+    }
+    .effect2:before, .effect2:after
+    {
+      z-index: -1;
+      position: absolute;
+      content: "";
+      bottom: 15px;
+      left: 10px;
+      width: 50%;
+      top: 80%;
+      max-width:300px;
+      background: #777;
+      -webkit-box-shadow: 0 15px 10px #777;
+      -moz-box-shadow: 0 15px 10px #777;
+      box-shadow: 0 15px 10px #777;
+      -webkit-transform: rotate(-3deg);
+      -moz-transform: rotate(-3deg);
+      -o-transform: rotate(-3deg);
+      -ms-transform: rotate(-3deg);
+      transform: rotate(-3deg);
+    }
+    .effect2:after
+    {
+      -webkit-transform: rotate(3deg);
+      -moz-transform: rotate(3deg);
+      -o-transform: rotate(3deg);
+      -ms-transform: rotate(3deg);
+      transform: rotate(3deg);
+      right: 10px;
+      left: auto;
+    }
+  </style>
+  <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientInfo.css">
+  <body id="body-pd">
+    <%-include("../partials/altNavbar"); -%>
+    <%-include("../partials/altSidebar");-%>
+    <% console.log(patientHistory)%>
+    <div class="content-block">
+      <div class="flex-container">
+      <div class="flex-child patInfo">
+        <h4 style="margin-bottom: .5rem;">Patient's Info</h4>
+        <div class="row">
+          <div class="col-md-12">
+          <span style="display: inline;">Mr./Mrs./Ms./: <strong><%= currentUser.firstName + " " + currentUser.lastName %></strong></span> 
+        </div>
+      </div>
+      <div>
+        <span style="display: inline;">Address <strong><%= currentUser.address.street + " " + currentUser.address.city + " " + currentUser.address.state + " " + currentUser.address.zip %></strong></span>      
+      </div>
+      <div>
+        <span style="display: inline;">Email <strong><%= currentUser.email %></strong></span>            
+      </div>  
+      <div class="row">
+        <div class="col-md-12">
+          <h4 style="margin-bottom: 0.5rem; margin-top: 1rem;">Doctor's Info</h4>
+          <div>
+            <span style="display: inline;">Mr./Mrs./Ms./: <strong><%= patientHistory.appointedDoctorId.handler_id.firstName + " " + patientHistory.appointedDoctorId.handler_id.lastName %></strong></span> 
+          </div>
+          <div>
+            <span style="display: inline;">Speciality: <strong><%= patientHistory.appointedDoctorId.speciality %></strong></span>
+          </div>
+          <div>
+            <span style="display: inline;">Contact Email: <strong><%= patientHistory.appointedDoctorId.handler_id.email %></strong></span>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <% for(let i=1;i<patientHistory.prescription.length; i++) { %> 
+    <hr>
+    <div class="jumbotron effect2" style="width: 80%;padding-top: 2rem; padding-bottom: 2rem; margin: auto; background-color: #F9FAFB; border-radius: 25px; border: 1px solid gray;">
+      <h3 style="text-align: center; top: 0; padding-top: 0">Appointment <%= i %> </h3>
+      <div class="row">
+        <div class="col-md-9">
+          <span style="display: inline;">Appointment Date: <strong><%= moment(patientHistory.prescription[i].date).format('ll') %></strong></span>
+        </div>
+        <div class="col-md-9">
+          <span style="display: inline;">Disease: <strong><%= patientHistory.prescription[i].disease %></strong></span>
+        </div>
+      </div>
+      <h5 style="text-align: center;">Prescription</h5>
+      <div class="row">
+        <div class="col-md-9">
+          <span style="display: inline;">Comment From Doctor: <strong><%= patientHistory.prescription[i].comment %></strong></span>
+        </div>
+        <div class="col-md-9">
+          <span style="display: inline;">Prescribed Medicines: <strong><%= patientHistory.prescription[i].date %></strong></span>
+        </div>
+        <div class="col-md-9">
+          <span style="display: inline;">Prescribed Tests: <strong><%= patientHistory.prescription[i].date %></strong></span>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- Old Table format to show different appointments -->
+      <div class="history" style="margin-bottom: 3rem;">
+        <div class="row">
+
+          <div class="col1">
+            <div class="card">
+              <div class="card-body">
+                <div class="test">
+                  <table>
+                    <thead>
+                      <tr class="table100-head">
+                        <th class="column1">Recommended Test</th>
+                      </tr>
+                    </thead>
+                    <tbody id="back">
+                      <tr>
+                        <td class="column1">X-Ray</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">X-Ray</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">X-Ray</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">X-Ray</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">X-Ray</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">CT-Scan</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">Blood-Test</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col2">
+            <div class="card">
+              <div class="card-body">
+                <div class="medicine" id="front">
+                  <table>
+                    <thead>
+                      <tr class="table100-head">
+                        <th class="column1">Medicine</th>
+                        <th class="column2">Power</th>
+                        <th class="column3">Dosage</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column2">300MG</td>
+                        <td class="column3">4 Times a Day</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column2">300MG</td>
+                        <td class="column3">4 Times a Day</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column2">300MG</td>
+                        <td class="column3">4 Times a Day</td>
+                      </tr> <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column2">300MG</td>
+                        <td class="column3">4 Times a Day</td>
+                      </tr> <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column2">300MG</td>
+                        <td class="column3">4 Times a Day</td>
+                      </tr> <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column2">300MG</td>
+                        <td class="column3">4 Times a Day</td>
+                      </tr> <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column2">300MG</td>
+                        <td class="column3">4 Times a Day</td>
+                      </tr> <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column2">300MG</td>
+                        <td class="column3">4 Times a Day</td>
+                      </tr> <tr>
+                        <td class="column1">Norflox</td>
+                        <td class="column2">300MG</td>
+                        <td class="column3">4 Times a Day</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col1">
+            <div class="card">
+              <div class="card-body">
+                <div class="test">
+                  <table>
+                    <thead>
+                      <tr class="table100-head">
+                        <th class="column1">Comments</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     
+                      <tr>
+                        <td class="column1">X-Ray</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">CT-Scan</td>
+                      </tr>
+                      <tr>
+                        <td class="column1">Blood-Test</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <hr id="historyDivider">
+    </div>
+
+    </div>
+    <%-include("../partials/footer"); -%>
+    
+</body>
+
+</html>
