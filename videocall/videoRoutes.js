@@ -17,9 +17,8 @@ router.post("/start_call", (req, res) => {
       const link = "http://localhost:3000/start_call" + roomId;
       sendMail(link, function (err, data) {
         if (err) {
-          console.log(err)
+          console.log(err);
         } else {
-          // res.redirect("/userDocSection/patientInfo");
           res.redirect(`/start_call${roomId}`);
           res.status({ message: "Email sent!!!" });
         }

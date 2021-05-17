@@ -140,7 +140,7 @@
           ></canvas>
         </div>
       </div>
-      <div class="div5 card">
+      <!-- <div class="div5 card">
         
           <canvas  id="div5" width="883.5" height="450"  style="background-color:rgba(255,255,255,1.00);border-radius:0px;width:883.5px;height:450px;padding-left:0px;padding-right:0px;padding-top:0px;padding-bottom:0px"></canvas>
 
@@ -148,8 +148,9 @@
       </div>
       <div class="div6 card">
         <canvas id="div6" width="883.5" height="450" style="width: 883.5px;height: 450px;" class="chartjs-render-monitor"></canvas>
-      </div>
+      </div> -->
       <!-- <div class="div7 card">div7</div> -->
+      <% if(emergencyPatient.length>0){%>
       <div class="div8 card">
         <div id="div8">
           <table>
@@ -157,46 +158,30 @@
               <tr class="table100-head">
                 <th class="column1">S.N</th>
                 <th class="column1">Patient Name</th>
-                <th class="column1">Date</th>
                 <th class="column1">Disease</th>
+                <th class="column1">Slot</th>
+                <th class="column1">Contact</th>
                 <th class="column7">Action</th>
               </tr>
             </thead>
             <tbody id="front">
+              <%for(var i=0;i<emergencyPatient.length;i++){%>
               <tr>
-                <td class="column1">1</td>
-                <td class="column1">Mark</td>
-                <td class="column1">20/05/2021</td>
-                <td class="column1">Cancer</td>
+                <td class="column1"><%=i+1%></td>
+                <td class="column1"><%=emergencyPatient[i].patientId.firstName + " " + emergencyPatient[i].patientId.lastName%></td>
+                <td class="column1"><%=emergencyPatient[i].disease %></td>
+                <td class="column1"><%=emergencyPatient[i].selectedSlot %></td>
+                <td class="column1"><%=emergencyPatient[i].phone %></td>
 
-                <td><form method="POST" id="delete_form"><a id="dlt_icon" return false;" href="javascript:{}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
-                </svg></a></form></td>
+                <td><a href="/userDocSection/patientList/patientInfo/<%=emergencyPatient[i].patientId._id%>"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
               </tr>
-              <tr>
-                <td class="column1">1</td>
-                <td class="column1">Mark</td>
-                <td class="column1">20/05/2021</td>
-                <td class="column1">Cancer</td>
-
-                <td><form method="POST" id="delete_form"><a id="dlt_icon" return false;" href="javascript:{}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
-                </svg></a></form></td>
-              </tr>
-              <tr>
-                <td class="column1">1</td>
-                <td class="column1">Mark</td>
-                <td class="column1">20/05/2021</td>
-                <td class="column1">Cancer</td>
-
-                <td><form method="POST" id="delete_form"><a id="dlt_icon" return false;" href="javascript:{}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
-                </svg></a></form></td>
-              </tr>
+              <%}%>
+             
             </tbody>
           </table>
         </div>
       </div>
+      <%}%>
     </main>
     <%-include("../../partials/footer");-%>
     <script src="/jsFiles/chartJs/div1.js"></script>

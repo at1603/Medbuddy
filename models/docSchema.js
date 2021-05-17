@@ -31,7 +31,7 @@ var docSchema = new mongoose.Schema({
       min: 0,
     },
   },
-  rating: {type: Number, default: 0, min: 0},
+  rating: { type: Number, default: 0, min: 0 },
   qual: String,
   experience: Number,
   tier: String,

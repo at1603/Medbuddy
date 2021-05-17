@@ -6,9 +6,11 @@ const Hospital = require("../models/hospSchema");
 const Doctor = require("../models/docSchema");
 const patientStats = require("../models/statsSchema/patientStatsSchema");
 const doctorStats = require("../models/statsSchema/doctorStatsSchema");
+var ObjectId = require("mongodb").ObjectID;
 
 const Appointment = require("../models/appointmentSchema");
 const middleware = require("../middlewares/authMiddlewares");
+const { populate } = require("../models/docSchema");
 
 var router = express.Router();
 
@@ -129,10 +131,31 @@ router.get(
         if (err) {
           console.log(err);
         } else {
-          res.render("user/dashboards/docDashboard", {
-            isDoctor: true,
-            loadingStats: loadingStats,
-          });
+          Doctor.find({ handler_id: ObjectId(req.user._id) }, { _id: 1 }).exec(
+            function (err, docId) {
+              if (err) {
+                console.log(err);
+              } else {
+                Appointment.find({
+                  docId: docId[0]._id,
+                  activityStatus: true,
+                  isEmergency: true,
+                })
+                  .populate("patientId")
+                  .exec(function (err, emergencyPatient) {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      res.render("user/dashboards/docDashboard", {
+                        isDoctor: true,
+                        loadingStats: loadingStats,
+                        emergencyPatient: emergencyPatient,
+                      });
+                    }
+                  });
+              }
+            }
+          );
         }
       });
   }
