@@ -20,6 +20,7 @@ var appointmentSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now() },
   activityStatus: { type: Boolean, default: true },
   isEmergency: { type: Boolean, default: false },
+  review: {type: Number, default: 0, required: false}
 });
 
 module.exports = mongoose.model("Appointment", appointmentSchema);
