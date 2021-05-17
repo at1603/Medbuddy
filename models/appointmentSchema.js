@@ -11,11 +11,15 @@ var appointmentSchema = new mongoose.Schema({
   },
   phone: { type: Number, required: true },
   slot: { type: Date, required: false, default: null },
+  selectedSlot: {
+    type: String,
+    default: "",
+  },
 
   disease: { type: String, required: true },
   createdAt: { type: Date, default: Date.now() },
   activityStatus: { type: Boolean, default: true },
-  isEmergengency: {type: Boolean, default: false}
+  isEmergency: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model("Appointment", appointmentSchema);

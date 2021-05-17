@@ -220,12 +220,18 @@ router.get("/userDocSection/myAppointments/show", function (req, res) {});
 //book appointment button
 
 router.post("/userDocSection/createAppointment/:docId", function (req, res) {
+  var emergency = false;
+  if (req.body.emergency != undefined) {
+    emergency = true;
+  }
   let newAppointment = {
     patientId: req.user._id,
     docId: req.params.docId,
     phone: req.body.phone,
     slot: req.body.preferSlot,
     disease: req.body.disease,
+    selectedSlot: req.body.selectedSlot,
+    isEmergency: emergency,
   };
   const dynamicSlotkey = "availableSlots." + req.body.selectedSlot;
 
@@ -339,7 +345,6 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
                           console.log(er);
                         } else {
                           if (req.body.selectedSlot == "slotA") {
-                            console.log(req.body.selectedSlot, "entered");
                             Doctor.updateOne(
                               { _id: ObjectId(req.params.docId) },
                               { $inc: { "availableSlots.slotA": -1 } },
@@ -348,18 +353,12 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
                               if (err) {
                                 console.log(err);
                               } else {
-                                console.log("Success", result);
                                 res.redirect(
                                   "/userDocSection/patientDashboard"
                                 );
                               }
                             });
                           } else {
-                            console.log(
-                              req.body.selectedSlot,
-                              "entered22222222222"
-                            );
-
                             Doctor.updateOne(
                               { _id: ObjectId(req.params.docId) },
                               { $inc: { "availableSlots.slotB": -1 } },
@@ -368,7 +367,6 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
                               if (err) {
                                 console.log(err);
                               } else {
-                                console.log("newsuc", result);
                                 res.redirect(
                                   "/userDocSection/patientDashboard"
                                 );
@@ -406,7 +404,32 @@ router.post(
             if (error) {
               console.log(error);
             } else {
-              res.redirect("/userDocSection/myAppointments");
+              Appointment.find(
+                {
+                  _id: ObjectId(req.params.appointId),
+                  patientId: ObjectId(req.user._id),
+                  docId: ObjectId(updatedAppointment.docId),
+                },
+                { selectedSlot: 1 }
+              ).exec(function (err, selectedSlot) {
+                if (err) {
+                  console.log(err);
+                } else {
+                  const dynamicSlotKey =
+                    "availableSlots." + selectedSlot[0].selectedSlot;
+                  Doctor.updateOne(
+                    { _id: ObjectId(updatedAppointment.docId) },
+                    { $inc: { [dynamicSlotKey]: 1 } }
+                  ).exec(function (err) {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      req.flash("success", "Appointment Canceled");
+                      res.redirect("/userDocSection/myAppointments");
+                    }
+                  });
+                }
+              });
             }
           }
         );
