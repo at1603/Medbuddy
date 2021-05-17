@@ -10,12 +10,17 @@ var express = require("express"),
 router.post("/start_call", (req, res) => {
   var roomId = uuidV4();
   var newRoom = { roomId: roomId };
+  console.log(
+    req.body.filename,
+    req.body.email,
+    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+  );
   room.create(newRoom, function (err, newCreated) {
     if (err) {
       console.log(err);
     } else {
       const link = "http://localhost:3000/start_call" + roomId;
-      sendMail(link, function (err, data) {
+      sendMail(link, req.body.email, function (err, data) {
         if (err) {
           console.log(err);
         } else {

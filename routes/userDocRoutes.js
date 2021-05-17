@@ -5,6 +5,8 @@ const Doctor = require("../models/docSchema");
 const User = require("../models/userSchema");
 const Appointment = require("../models/appointmentSchema");
 const PatientHistory = require("../models/patientHistorySchema");
+
+const sendPrescriptionMail = require("../public/jsFiles/mail");
 ////+++////
 
 //Doctor routes
@@ -17,8 +19,30 @@ router.get("/generatePresc/:id", function (req, res) {
       res.redirect("/userDocSection/patientList");
     } else {
       console.log(foundPatient._id, "yeah");
-      res.render("userDocSection/docfiles/prescription", {
-        foundPatient: foundPatient,
+      User.find({ _id: ObjectId(req.user._id) }).exec(function (
+        err,
+        doctorDetails
+      ) {
+        if (err) {
+          console.log(err);
+        } else {
+          Doctor.find({ handler_id: ObjectId(req.user._id) }).exec(function (
+            err,
+            doctorProfessionalDetails
+          ) {
+            if (err) {
+              console.log(err);
+            } else {
+              res.render("userDocSection/docfiles/prescription", {
+                foundPatient: foundPatient,
+                doctorDetails: doctorDetails,
+                date: Date(),
+                prescriptionNo: Date.now(),
+                doctorProfessionalDetails: doctorProfessionalDetails,
+              });
+            }
+          });
+        }
       });
     }
   });
@@ -76,10 +100,7 @@ router.get("/userDocSection/patientList/patientInfo/:id", function (req, res) {
               if (err) {
                 console.log(err);
               } else {
-                console.log(
-                  foundPatientMedicalRecords[0].prescription,
-                  "These r medical records"
-                );
+                console.log(foundPatient);
                 res.render("userDocSection/docfiles/patientInfo", {
                   foundPatient: foundPatient,
                   foundPatientMedicalRecords: foundPatientMedicalRecords,
@@ -467,9 +488,26 @@ router.post("/generatePresc/addMedicine/:id", function (req, res) {
             console.log(err);
           } else {
             console.log(medrecord, "pls print");
-            res.redirect("/userDocSection/patientList");
           }
         });
+      }
+    }
+  );
+});
+
+router.post("/userDocSection/emailPrescription/:id", function (req, res) {
+  console.log(req.body, "from presc");
+  sendPrescriptionMail.sendPrescriptionMail(
+    req.body.email,
+    req.body.filename,
+    function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect(
+          `/userDocSection/patientList/patientInfo/${req.params.id}`
+        );
+        console.log("Successfully emailed prescription");
       }
     }
   );

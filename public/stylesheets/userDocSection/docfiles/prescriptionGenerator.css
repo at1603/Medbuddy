@@ -534,9 +534,18 @@ thead, tbody tr {
 
 #code-area {
     margin-top: 35px;
-    height: 460px;
+    height: 260px;
 }
 
 #btn1, #btn2 {
     margin-top: 32px;
+}
+
+#btn3, #btn4 {
+    width: fit-content;
+    margin: auto;
+}
+
+#btnDiv {
+    margin: auto;
 }

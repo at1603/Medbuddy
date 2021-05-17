@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/prescriptionGenerator.css" />
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 <html>
   <%- include("../../partials/header"); -%>
   
@@ -37,7 +39,7 @@
               </span>
             </p>
           </div>
-          <form action="/generatePresc/addMedicine/<%=foundPatient._id%>" method="POST">
+          <form id="prescriptionForm" action="/generatePresc/addMedicine/<%=foundPatient._id%>" method="POST">
           <div class="card">
           <div id= "form1" >
             <!-- <form action="/generatePresc/addMedicine/<%=foundPatient._id%>" method="POST"> -->
@@ -126,12 +128,21 @@
               oninput="showPreview()"
             ></textarea>
           </div>
-          <button>Add</button>
         </div>
-        <button type="submit">Submit</button>
         </form>
+        <div id="btnDiv">
+<form action="/userDocSection/emailPrescription/<%=foundPatient._id%>" method="POST" id="emailForm">
+        <input type="hidden" name="filename" id="filename">
+        <input type="hidden" name="email" value=<%=foundPatient.email%>>
+      </form>
+      <button id="btn4" class="btn btn-success">Submit</button>
+      <button id="btn3" class="btn btn-success" form="emailForm">Email Prescription</button>
+
+       </div>
+        
+
       </div>
-        <div class="preview-area">
+        <div class="preview-area" id="print">
           <div class="card-outer">
             <br />
             <br />
@@ -162,25 +173,25 @@
             <div class="docInfo collapse" id="docInfo">
               <p class="p1">
                 <span id="docName">
-                  <input type="text" placeholder="Name" />
-                </span>
-                <span id="prescNo">
-                  Prescription No:
-                  <input type="text" />
-                </span>
+                  Doctor: <%= doctorDetails[0].firstName + " " + doctorDetails[0].lastName %>
+                  </span>
+                
               </p>
+              <p><span>
+                Prescription No: <span id="prescriptionNo"><%=prescriptionNo%></span>
+              </span></p>
               <p class="p2">
                 <span>
-                  <input type="text" placeholder="MBBS" />
+                  Qualification: <%= doctorProfessionalDetails[0].qual%>
                 </span>
-                <span id="date">
-                  Date:
-                  <input type="text" />
-                </span>
+                
               </p>
+              <p><span>
+                Date: <%= date%>
+              </span></p>
               <p class="p3">
                 <span>
-                  <input type="text" placeholder="Contact" />
+                  Email: <%= doctorDetails[0].email%>
                 </span>
               </p>
             </div>
@@ -230,31 +241,25 @@
             <br /><br />
             <br />
 
-            <iframe id="preview-window"> </iframe>
+
+<!-- <iframe id="preview-window"> </iframe>           -->
 
             <div class="patInfo">
+              
               <p>
                 <span>
-                  Mr./Ms./Mrs.:
-                  <input type="text" placeholder="Name" />
+                 <strong> Mr./Ms./Mrs.:</strong>  <%= foundPatient.firstName + " " + foundPatient.lastName %> 
+                </span>
+              </p>
+              <p ><span><strong>Comment:</strong><span id="commentPreview"></span></span></p>
+              <p>
+                <span>
+                  <strong>Address:</strong> <%= foundPatient.address.street + " " + foundPatient.address.city + " " +foundPatient.address.city %>
                 </span>
               </p>
               <p>
                 <span>
-                  Age:
-                  <input type="text" />
-                </span>
-              </p>
-              <p>
-                <span>
-                  Address:
-                  <input type="text" />
-                </span>
-              </p>
-              <p>
-                <span>
-                  Contact:
-                  <input type="text" />
+                  <strong>Contact:</strong> <%= foundPatient.phone %>
                 </span>
               </p>
             </div>
@@ -273,9 +278,12 @@
         </div>
       </div>
     </div>
+    <div id="print-btn"></div>
+
 
     <%-include("../../partials/footer"); -%>
     <script>
+      
       function showPreview() {
         var comment = document.getElementById("comment").value;
         var frame = document.getElementById("preview-window").contentWindow
@@ -341,6 +349,27 @@
       });
     </script>
       <script src="/jsFiles/navbar.js"></script>
-
+     
+      <script>
+      var specialElementHandlers = {
+          '#print-btn': function (element, renderer) {
+              return true;
+          }
+      };
+      
+      $('#btn4').click(function () {
+        var doc = new jsPDF();
+        var filename = document.getElementById("prescriptionNo").innerHTML + ".pdf"
+        var comment = document.getElementById("comment").value;
+      document.getElementById("commentPreview").innerHTML=comment
+          doc.fromHTML($('#print').html(), 15, 15, {
+              'width': 170,
+                  'elementHandlers': specialElementHandlers
+          });
+          doc.save(filename);
+          document.getElementById("filename").value = filename
+          document.getElementById("prescriptionForm").submit()
+      });
+      </script> 
   </body>
 </html>
