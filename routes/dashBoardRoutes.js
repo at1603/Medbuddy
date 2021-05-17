@@ -22,8 +22,8 @@ router.get(
   middleware.isLoggedIn,
   function (req, res) {
     patientStats
-      .find()
-      .where("handler.id")
+      .findOne()
+      .where("handlerId")
       .equals(req.user._id)
       .exec(function (err, loadingStats) {
         if (err) {
@@ -31,7 +31,7 @@ router.get(
         } else {
           res.render("user/dashboards/patientDashboard", {
             isPatient: true,
-            loadingStats: loadingStats,
+            patientStats: loadingStats,
           });
         }
       });
@@ -101,58 +101,53 @@ router.get(
   middleware.isLoggedIn,
   middleware.checkDoctorOwnership,
   function (req, res) {
-    // Doctor.find()
-    //   .where("handler.id")
-    //   .equals(req.user._id)
-    //   .exec(function (err, foundDoctor) {
-    //     if (err) {
-    //       console.log(err);
-    //     } else {
-    //       Appointment.find()
-    //         .where("relation.docId")
-    //         .equals(req.user._id)
-    //         .exec(function (err, foundAppointments) {
-    //           if (err) {
-    //             console.log(err);
-    //           } else {
-    //             res.render("user/dashboards/docDashboard", {
-    //               foundDoctor: foundDoctor,
-    //               foundAppointments: foundAppointments,
-    //             });
-    //           }
-    //         });
-    //     }
-    //   });
     doctorStats
-      .find()
-      .where("handler.id")
+      .findOne()
+      .where("handlerId")
       .equals(req.user._id)
       .exec(function (err, loadingStats) {
         if (err) {
           console.log(err);
         } else {
           Doctor.find({ handler_id: ObjectId(req.user._id) }, { _id: 1 }).exec(
-            function (err, docId) {
+            function (err, foundDoctor) {
               if (err) {
                 console.log(err);
               } else {
-                Appointment.find({
-                  docId: docId[0]._id,
-                  activityStatus: true,
-                  isEmergency: true,
-                })
-                  .populate("patientId")
-                  .exec(function (err, emergencyPatient) {
-                    if (err) {
-                      console.log(err);
-                    } else {
-                      res.render("user/dashboards/docDashboard", {
-                        isDoctor: true,
-                        loadingStats: loadingStats,
-                        emergencyPatient: emergencyPatient,
-                      });
-                    }
+                if(foundDoctor.length > 0)
+                {
+                  console.log(foundDoctor)
+                  Appointment.find({
+                    docId: foundDoctor[0]._id,
+                    activityStatus: true,
+                    isEmergency: true,
+                  })
+                    .populate("patientId")
+                    .exec(function (err, emergencyPatient) {
+                      if (err) {
+                        console.log(err);
+                      } else {
+                        Appointment.distinct("patientId").where("docId").equals(foundDoctor[0]._id).exec(function(error, calculatedPatients){
+                          if(error){
+                            console.log(error);
+                          }else{
+                            res.render("user/dashboards/docDashboard", {
+                              patientsLength: calculatedPatients.length,
+                              isDoctor: true,
+                              doctorStats: loadingStats,
+                              emergencyPatient: emergencyPatient,
+                            });
+                          }
+                        });
+                      }
+                    });
+                }else{
+                  res.render("user/dashboards/docDashboard", {
+                    patientsLength: 0,
+                    emergencyPatient: 0,
+                    doctorStats: loadingStats,
                   });
+                }
               }
             }
           );

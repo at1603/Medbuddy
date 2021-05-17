@@ -74,12 +74,7 @@ router.post("/register", function (req, res) {
         if (req.user.role == "patient") {
           var defaultPatientStats = {
             expenditure: 0,
-            handler: {
-              id: req.user._id,
-              username: req.user.username,
-            },
-            activeDoctors: 0,
-            surgeries: 0,
+            handlerId: req.user._id,
             appointment: 0,
           };
           patientStats.create(
@@ -96,12 +91,9 @@ router.post("/register", function (req, res) {
         } else if (req.user.role == "doctor") {
           var defaultDoctorStats = {
             earnings: 0,
-            handler: {
-              id: req.user._id,
-              username: req.user.username,
-            },
+            handlerId: req.user._id,
             newPatients: 0,
-            operations: 0,
+            rating: 0,
             appointment: 0,
           };
           doctorStats.create(defaultDoctorStats, function (err, defaultStats) {
