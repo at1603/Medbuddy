@@ -32,40 +32,37 @@
         </div>
     </div>
     <div>
-       
         <a href="#" class="btn btn-success toggleAppointmentForm" onclick="slotChecker()">Take Appointment</a>
         <form class="container takeAppointment" action="/userDocSection/createAppointment/<%= doctors._id%>" method="POST" style="margin: 2rem 0 4rem 0; display: none;">
-            <div class="form-group">
-              <label for="InputNumber">Phone Number</label>
-              <input type="number" class="form-control" name="phone" id="InputNumber" aria-describedby="numberHelp" required>
-              <small id="numberHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="InputNumber">Phone Number</label>
+                    <input type="number" class="form-control" name="phone" id="InputNumber" aria-describedby="numberHelp" required>
+                    <small id="numberHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="InputSlot">Preferred Slot</label><br>
+                    <div class="col-md-12">
+                        <label for="slotA" id="labelForSlotA">Morning Slot: <strong>Available Seats: </strong> <%=doctors.availableSlots.slotA%></label>
+                        <input type="radio" name="selectedSlot" value="slotA" id="slotA" required></input>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="slotB" id="labelForSlotB">Evening Slot: <strong>Available Seats: </strong> <%=doctors.availableSlots.slotB%></label>
+                        <input type="radio" name="selectedSlot" value="slotB" id="slotB" required></input>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                      <label for="InputSlotDate">Prefered Date and Time of Slot</label>
+                      <input class="form-control" name="preferSlot" type="datetime-local" id="datetfield" required>
+                      <small class="form-text text-muted">Slot Time may change</small>
+                  </div>
+                  <div class="form-group col-md-12">
+                      <label for="InputDisease">Disease Description</label>
+                      <textarea class="form-control" name="disease" id="InputDisease" cols="10" rows="4" maxlength="200" required></textarea>
+                      <small class="form-text text-muted">Maximum character limit is 200.</small>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-           
-
-                            <div class="form-group">
-                <label for="InputSlot">Input Preferred Slot</label>
-                <label for="slotA" id="labelForSlotA">Morning Slot:<%=doctors.availableSlots.slotA%></label>
-                <input type="radio" name="selectedSlot" value="slotA" id="slotA" required>
-                <label for="slotB" id="labelForSlotB">Evening Slot:<%=doctors.availableSlots.slotB%></label>
-                <input type="radio" name="selectedSlot" value="slotB" id="slotB" required>
-            </div>
-            <div  class="form-group">
-                <label for="InputSlot">Input Preferred Timing for Your Slot</label>
-                <input class="form-control" name="preferSlot" type="datetime-local" id="datetime-local-input" required>
-                <small class="form-text text-muted">Slot Time may change</small>
-            </div>
-            <div class="form-group">
-                <label for="InputDisease">Input Disease Description</label>
-                <textarea class="form-control" name="disease" id="InputDisease" cols="10" rows="4" maxlength="200" required></textarea>
-                <small class="form-text text-muted">Maximum character limit is 200.</small>
-            </div>
-            <div class="form-group">
-                <label for="emergency">Is This An Emergency?</label>
-                <input type="checkbox" name="emergency">
-                <small  class="form-text text-muted">Please use this option responsibly.</small>
-
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
           </form>
     </div>
     <%-include("../../partials/footer"); -%>
@@ -76,14 +73,32 @@
         })
      
         function slotChecker(){
-            var slotA = parseInt(document.getElementById("labelForSlotA").innerHTML.slice(13,document.getElementById("labelForSlotA").innerHTML.length))
-            var slotB = parseInt(document.getElementById("labelForSlotB").innerHTML.slice(13,document.getElementById("labelForSlotB").innerHTML.length))
+            var slotA = parseInt(document.getElementById("labelForSlotA").innerHTML.slice(49,document.getElementById("labelForSlotA").innerHTML.length))
+            var slotB = parseInt(document.getElementById("labelForSlotB").innerHTML.slice(49,document.getElementById("labelForSlotB").innerHTML.length))
             if(slotA==0){
                 document.getElementById("slotA").disabled = true
             }
             if(slotB==0){
                 document.getElementById("slotB").disabled = true
             }
+        }
+
+        function setMin(){
+            // Use Javascript
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
+            var yyyy = today.getFullYear();
+            if(dd<10){
+            dd='0'+dd
+            } 
+            if(mm<10){
+            mm='0'+mm
+            } 
+
+            today = yyyy+'-'+mm+'-'+dd;
+                
+            document.getElementById("datefield").setAttribute("min", today);
         }
     </script>
 </html>

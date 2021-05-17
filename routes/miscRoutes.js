@@ -2,6 +2,8 @@ var express = require("express");
 var router = express.Router();
 const User = require("../models/userSchema");
 const PatientHistory = require("../models/patientHistorySchema");
+const Appointment = require("../models/appointmentSchema");
+const DoctorStats = require("../models/statsSchema/doctorStatsSchema");
 const middleware = require("../middlewares/authMiddlewares");
 const middlewareObj = require("../middlewares/authMiddlewares");
 
@@ -56,10 +58,45 @@ router.get("/user/showMedicalHisotryList/showFullReport/:docId", function(req, r
         if(error){
             console.log(error);
         }else{
+            console.log(foundPatientHistory)
             res.render("userDocSection/patientMedicalHistory", {patientHistory: foundPatientHistory});
         }
       });
 });
 
+// ------------------- Review routes -------------------------
+router.post("/review/setReview/:docId/:appointId/:doctorUserId", function(req, res){
+    Appointment.findOneAndUpdate({"patientId": req.user._id, "docId": req.params.docId, "_id":req.params.appointId }, 
+        {"$inc": {"review": req.body.review}}, 
+        function(err, updatedAppointment){
+        if(err){
+            console.log(err)
+        }else{
+            
+            // DoctorStats.findOneAndUpdate({"handlerId": req.params.doctorUserId}, {"$set": {"rating": {"$divide": [{"$add": [req.params.review,{"$multiply": [{"$toInt":"$rating"},{"$toInt":"$appointment"}]} ] }, "$appointment" ] }}}, function(err, updatedStats){
+            //     if(err){
+            //         console.log(err)
+            //     }else{
+            //         res.redirect("/user/showMedicalHistoryList");
+            //     }
+            // });
+            DoctorStats.findOne({"handlerId": req.params.doctorUserId}, function(err, foundData){
+                if(err){
+                    console.log(err);
+                }else{
+                    let changeData = (foundData.rating*(foundData.appointment-1)+req.body.review)/(foundData.appointment);
+                    DoctorStats.updateOne({"handlerId": req.params.doctorUserId}, {"$set": {rating: changeData}}, function(error, updatedData){
+                        if(error){
+                            console.log(error);
+                        }else{
+                            console.log(updatedData);
+                            res.redirect("/user/showMedicalHistoryList");
+                        }
+                    });
+                }
+            });
+        }
+    })
+});
 
 module.exports = router;

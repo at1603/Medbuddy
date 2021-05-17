@@ -3,22 +3,23 @@ var mongoose = require("mongoose");
 var doctorStatsSchema = new mongoose.Schema({
   earnings: {
     type: Number,
+    default: 0
   },
-  handler: {
-    id: {
+  handlerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-    },
-    username: String,
   },
   newPatients: {
     type: Number,
+    default: 0
   },
-  operations: {
+  rating: {
     type: Number,
+    default: 0
   },
   appointment: {
     type: Number,
+    default: 0
   },
 });
 

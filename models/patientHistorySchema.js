@@ -12,6 +12,10 @@ var patientHistorySchema = new mongoose.Schema({
   },
   prescription: [
     {
+      appointmentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Appointment"
+      },
       date: {
         type: Date,
         default: "",

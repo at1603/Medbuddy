@@ -5,6 +5,9 @@
     <title>Page Title</title>
   </head>
   <style>
+    .modal-backdrop.fade.show{
+      width: 100% !important
+    }
     .effect2
     {
       position: relative;
@@ -78,88 +81,129 @@
       </div>
       </div>
     </div>
-
-    <% for(let i=1;i<patientHistory.prescription.length; i++) { %> 
-      <% console.log(patientHistory.prescription[i].medicines)%>
-    <hr>
+    <% console.log(patientHistory)%>
     <div class="jumbotron effect2" style="width: 80%;padding-top: 2rem; padding-bottom: 2rem; margin: auto; background-color: #F9FAFB; border-radius: 25px; border: 1px solid gray;">
-      <h3 style="text-align: center; top: 0; padding-top: 0">Appointment <%= i %> </h3>
-      <div class="row">
-        <div class="col-md-9">
-          <span style="display: inline;">Appointment Date: <strong><%= moment(patientHistory.prescription[i].date).format('ll') %></strong></span>
+      <% for(let i=1;i<patientHistory.prescription.length; i++) { %> 
+        <h3 style="text-align: center; top: 0; padding-top: 0">Appointment <%= i %> </h3>
+        <a href="#" style="text-align: center; display:block; float: right; margin-right: 7rem;" data-toggle="modal" data-target="#exampleModalCenter<%=i%>" id="ratingButton" class="btn btn-success btn-sm">Give Review!</a>
+        <!-- Modal -->
+        <div class="modal fade" style="z-index: 9999; width: 100%" id="exampleModalCenter<%=i%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">How was your Experience?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="/review/setReview/<%=patientHistory.appointedDoctorId._id%>/<%=patientHistory.prescription[i].appointmentId%>/<%=patientHistory.appointedDoctorId.handler_id._id%>" method="POST">
+                <div class="modal-body" style="text-align: center; display: inline-flex; margin: auto">
+                  <div style="margin: 0 .5rem 0 .5rem">
+                    <label for="inputRating1">1</label>
+                    <input type="radio" name="review" value=1 id="inputRating1">
+                  </div>
+                  <div style="margin: 0 .5rem 0 .5rem">
+                    <label for="inputRating1">2</label>
+                    <input type="radio" name="review" value=2 id="inputRating2">
+                  </div>
+                  <div style="margin: 0 .5rem 0 .5rem">
+                    <label for="inputRating1">3</label>
+                    <input type="radio" name="review" value=3 id="inputRating3">
+                  </div>
+                  <div style="margin: 0 .5rem 0 .5rem">
+                    <label for="inputRating1">4</label>
+                    <input type="radio" name="review" value=4 id="inputRating4">
+                  </div>
+                  <div style="margin: 0 .5rem 0 .5rem">
+                    <label for="inputRating1">5</label>
+                    <input type="radio" name="review" value=5 id="inputRating5">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        <div class="col-md-9">
-          <span style="display: inline;">Disease: <strong><%= patientHistory.prescription[i].disease %></strong></span>
-        </div>
-      </div>
-      <h5 style="text-align: center;">Prescription</h5>
-      <div class="row">
-        <div class="col-md-9">
-          <span style="display: inline;">Comment From Doctor: <strong><%= patientHistory.prescription[i].comment %></strong></span>
-        </div>
-      </div>
-      <div class="history" style="margin-bottom: 3rem;">
         <div class="row">
-          <% if(patientHistory.prescription[i].medicines.length > 0) { %>
-            <div class="col3" style="margin: 2rem auto 2rem">
-              <div class="card">
-                <div class="card-body">
-                  <div class="medicine" id="front">
-                    <table>
-                      <thead>
-                        <tr class="table100-head">
-                          <th class="column1" style="text-align: center;">Medicine</th>
-                          <th class="column2" style="text-align: center;">Dosage</th>
-                          <th class="column3" style="text-align: center;">Frequency</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% patientHistory.prescription[i].medicines.forEach(function(medicine){ %>
-
-                          <tr>
-                            <td class="column1" style="text-align: center;"><%= medicine.medicineName %></td>
-                            <td class="column2" style="text-align: center;"><%= medicine.dosage %></td>
-                            <td class="column3" style="text-align: center;"><%= medicine.frequency %></td>
-                          </tr>
-                        <% }); %>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% } else { %> 
-            <p>No medicines are presribed.</p>
-          <% } %>
-          <% if(patientHistory.prescription[i].test.length > 0) { %>
-            <div class="col3" style="margin: 0 auto 2rem">
-              <div class="card">
-                <div class="card-body">
-                  <div class="test">
-                    <table>
-                      <thead>
-                        <tr class="table100-head">
-                          <th class="column1">Recommended Test</th>
-                        </tr>
-                      </thead>
-                      <tbody id="back">
-                        <% patientHistory.prescription[i].test.forEach(function(test){ %>
-                          <tr>
-                            <td class="column1"><%= test.testName %></td>
-                          </tr>
-                        <% }); %>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% } else { %> 
-            <p>No tests are presribed.</p>
-          <% } %>
+          <div class="col-md-9">
+            <span style="display: inline;">Appointment Date: <strong><%= moment(patientHistory.prescription[i].date).format('ll') %></strong></span>
+          </div>
+          <div class="col-md-9">
+            <span style="display: inline;">Disease: <strong><%= patientHistory.prescription[i].disease %></strong></span>
+          </div>
         </div>
-    </div>
-    <% } %>
+        <h5 style="text-align: center;">Prescription</h5>
+        <div class="row">
+          <div class="col-md-9">
+            <span style="display: inline;">Comment From Doctor: <strong><%= patientHistory.prescription[i].comment %></strong></span>
+          </div>
+        </div>
+        <div class="history" style="margin-bottom: 3rem;">
+          <div class="row">
+            <% if(patientHistory.prescription[i].medicines.length > 0) { %>
+              <div class="col3" style="margin: 2rem auto 2rem">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="medicine" id="front">
+                      <table>
+                        <thead>
+                          <tr class="table100-head">
+                            <th class="column1" style="text-align: center;">Medicine</th>
+                            <th class="column2" style="text-align: center;">Dosage</th>
+                            <th class="column3" style="text-align: center;">Frequency</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% patientHistory.prescription[i].medicines.forEach(function(medicine){ %>
+
+                            <tr>
+                              <td class="column1" style="text-align: center;"><%= medicine.medicineName %></td>
+                              <td class="column2" style="text-align: center;"><%= medicine.dosage %></td>
+                              <td class="column3" style="text-align: center;"><%= medicine.frequency %></td>
+                            </tr>
+                          <% }); %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% } else { %> 
+              <p>No medicines are presribed.</p>
+            <% } %>
+            <% if(patientHistory.prescription[i].test.length > 0) { %>
+              <div class="col3" style="margin: 0 auto 2rem">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="test">
+                      <table>
+                        <thead>
+                          <tr class="table100-head">
+                            <th class="column1">Recommended Test</th>
+                          </tr>
+                        </thead>
+                        <tbody id="back">
+                          <% patientHistory.prescription[i].test.forEach(function(test){ %>
+                            <tr>
+                              <td class="column1"><%= test.testName %></td>
+                            </tr>
+                          <% }); %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% } else { %> 
+              <p>No tests are presribed.</p>
+            <% } %>
+          </div>
+      </div>
+      <hr>  
+      <% } %>
     </div>
 
   </div>

@@ -7,6 +7,8 @@ const Appointment = require("../models/appointmentSchema");
 const PatientHistory = require("../models/patientHistorySchema");
 
 const sendPrescriptionMail = require("../public/jsFiles/mail");
+const DoctorStats = require("../models/statsSchema/doctorStatsSchema");
+const PatientStats = require("../models/statsSchema/patientStatsSchema");
 ////+++////
 
 //Doctor routes
@@ -100,7 +102,6 @@ router.get("/userDocSection/patientList/patientInfo/:id", function (req, res) {
               if (err) {
                 console.log(err);
               } else {
-                console.log(foundPatient);
                 res.render("userDocSection/docfiles/patientInfo", {
                   foundPatient: foundPatient,
                   foundPatientMedicalRecords: foundPatientMedicalRecords,
@@ -463,14 +464,6 @@ router.post("/generatePresc/addMedicine/:id", function (req, res) {
   const MedicineData = JSON.parse(req.body.hiddenMedicineName);
   const TestData = JSON.parse(req.body.hiddenTest);
 
-  const prescriptionData = {
-    date: Date.now(),
-    disease: req.body.disease,
-    medicines: MedicineData,
-    test: TestData,
-    comment: req.body.comment,
-  };
-  console.log(prescriptionData);
   Doctor.find(
     { handler_id: ObjectId(req.user._id) },
     { _id: 1 },
@@ -480,14 +473,40 @@ router.post("/generatePresc/addMedicine/:id", function (req, res) {
         req.flash("error", "No Patient Found");
         res.redirect("/userDocSection/docDashboard");
       } else {
-        PatientHistory.updateOne(
-          { handlerId: req.params.id, appointedDoctorId: foundDocId[0]._id },
-          { $push: { prescription: prescriptionData } }
-        ).exec(function (err, medrecord) {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log(medrecord, "pls print");
+        Appointment.findOne({"patientId": req.params.id, "docId": foundDocId[0]._id, "activityStatus": true}).exec(function(error, foundAppointment){
+          if(error){
+            console.log(error);
+          }else{
+            const prescriptionData = {
+              appointmentId: foundAppointment._id,
+              date: Date.now(),
+              disease: req.body.disease,
+              medicines: MedicineData,
+              test: TestData,
+              comment: req.body.comment,
+            };
+            PatientHistory.updateOne(
+              { handlerId: req.params.id, appointedDoctorId: foundDocId[0]._id },
+              { $push: { prescription: prescriptionData } }
+            ).exec(function (err, medrecord) {
+              if (err) {
+                console.log(err);
+              } else {
+                DoctorStats.findOneAndUpdate({"$inc": {earnings: 500, newPatients: 1, appointment: 1}}).where("handlerId").equals(req.user._id).exec(function(error, updatedStats){
+                  if(error){
+                    console.log(error);
+                  }else{
+                    PatientStats.findOneAndUpdate({"$inc": {expenditure: 550, appointment: 1}}).where("handlerId").equals(req.params.id).exec(function(err, updatedPatientStats){
+                      if(err){
+                        console.log(err);
+                      }else{
+                        console.log("Prescription Created!! Email the Prescription")
+                      }
+                    });
+                  }
+                });
+              }
+            });
           }
         });
       }

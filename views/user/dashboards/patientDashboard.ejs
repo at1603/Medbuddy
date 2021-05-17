@@ -6,7 +6,6 @@
     href="https://fonts.googleapis.com/icon?family=Material+Icons"
   />
   <%- include("../../partials/header"); -%>
-  <!-- <link rel="stylesheet" href="/stylesheets/partials/navbar.css" /> -->
   <link rel="stylesheet" href="/stylesheets/dashboard.css" />
   <script src="https://cdn2.hubspot.net/hubfs/476360/utils.js"></script>
 
@@ -24,7 +23,7 @@
               <h5 class="pull-right">Expenditure</h5>
             </div>
             <div class="m-r-10 m-l-10">
-              <h3 class="font-weight-bold pull-right mb-0">Rs<%=loadingStats[0].expenditure%></h3>
+              <h3 class="font-weight-bold pull-right mb-0">Rs <%=patientStats.expenditure%></h3>
             </div>
           </div>
         </div>
@@ -56,7 +55,7 @@
               <h5 class="pull-right">Active Doctors</h5>
             </div>
             <div class="m-r-10 m-l-10">
-              <h3 class="font-weight-bold pull-right mb-0"><%=loadingStats[0].activeDoctors%></h3>
+              <h3 class="font-weight-bold pull-right mb-0"><%=currentUser.currentDoctors.length - 1%></h3>
             </div>
           </div>
         </div>
@@ -85,10 +84,10 @@
           </div>
           <div class="card-right">
             <div>
-              <h5 class="pull-right">Surgeries</h5>
+              <h5 class="pull-right">Total Doctors</h5>
             </div>
             <div class="m-r-10 m-l-10">
-              <h3 class="font-weight-bold pull-right mb-0"><%=loadingStats[0].surgeries%></h3>
+              <h3 class="font-weight-bold pull-right mb-0"><%=currentUser.appointedDoctors.length - 1%></h3>
             </div>
           </div>
         </div>
@@ -120,7 +119,7 @@
               <h5 class="pull-right">Appointments</h5>
             </div>
             <div class="m-r-10 m-l-10">
-              <h3 class="font-weight-bold pull-right mb-0"><%=loadingStats[0].appointment%></h3>
+              <h3 class="font-weight-bold pull-right mb-0"><%=patientStats.appointment%></h3>
             </div>
           </div>
         </div>

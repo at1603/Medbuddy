@@ -33,7 +33,7 @@ const sendMail = (text, receiver, cb) => {
 };
 
 const sendPrescriptionMail = (receiver, fileName, cb) => {
-  var file = "C:/Users/MasterChief/Downloads/" + fileName;
+  var file = "C:/Users/Abhinav/Downloads/" + fileName;
   const mailOptions = {
     sender: "medbuddyHack2021@gmail.com",
     from: "MedBuddy",
