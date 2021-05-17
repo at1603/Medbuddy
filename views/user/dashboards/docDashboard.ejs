@@ -14,6 +14,7 @@
    
     <%-include("../../partials/altNavbar");-%>
     <%-include("../../partials/altSidebar");-%>
+    <% console.log(doctorStats)%>
     <main>
       <div class="div1 card">
         <div class="clearfix">
@@ -25,7 +26,7 @@
               <h5 class="pull-right">Earning</h5>
             </div>
             <div class="m-r-10 m-l-10">
-              <h3 class="font-weight-bold pull-right mb-0">Rs<%=loadingStats[0].earnings %></h3>
+              <h3 class="font-weight-bold pull-right mb-0">Rs <%=doctorStats.earnings %></h3>
             </div>
           </div>
         </div>
@@ -57,7 +58,7 @@
               <h5 class="pull-right">New Patients</h5>
             </div>
             <div class="m-r-10 m-l-10">
-              <h3 class="font-weight-bold pull-right mb-0"><%=loadingStats[0].newPatients%></h3>
+              <h3 class="font-weight-bold pull-right mb-0"><%=patientsLength%></h3>
             </div>
           </div>
         </div>
@@ -86,10 +87,10 @@
           </div>
           <div class="card-right">
             <div>
-              <h5 class="pull-right">Operations</h5>
+              <h5 class="pull-right">Rating</h5>
             </div>
             <div class="m-r-10 m-l-10">
-              <h3 class="font-weight-bold pull-right mb-0"><%=loadingStats[0].operations%></h3>
+              <h3 class="font-weight-bold pull-right mb-0"><%=doctorStats.rating%></h3>
             </div>
           </div>
         </div>
@@ -121,7 +122,7 @@
               <h5 class="pull-right">Appointments</h5>
             </div>
             <div class="m-r-10 m-l-10">
-              <h3 class="font-weight-bold pull-right mb-0"><%=loadingStats[0].appointment%></h3>
+              <h3 class="font-weight-bold pull-right mb-0"><%=doctorStats.appointment%></h3>
             </div>
           </div>
         </div>
