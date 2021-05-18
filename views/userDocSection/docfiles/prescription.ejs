@@ -38,6 +38,12 @@
                 <a> </a>  <!--<%= //rows.contact %>-->
               </span>
             </p>
+            <p>
+              <span>
+              <strong> Email </strong>: <span id="email"><%= foundPatient.email %></span>
+                
+              </span>
+            </p>
           </div>
           <form id="prescriptionForm" action="/generatePresc/addMedicine/<%=foundPatient._id%>" method="POST">
           <div class="card">
@@ -131,12 +137,8 @@
         </div>
         </form>
         <div id="btnDiv">
-<form action="/userDocSection/emailPrescription/<%=foundPatient._id%>" method="POST" id="emailForm">
-        <input type="hidden" name="filename" id="filename">
-        <input type="hidden" name="email" value=<%=foundPatient.email%>>
-      </form>
-      <button id="btn4" class="btn btn-success">Submit</button>
-      <button id="btn3" class="btn btn-success" form="emailForm">Email Prescription</button>
+
+      <button id="btn4" class="btn btn-success" onclick="sendEncodedPdf('<%=foundPatient._id%>')">Submit</button>
 
        </div>
         
@@ -349,6 +351,7 @@
       });
     </script>
       <script src="/jsFiles/navbar.js"></script>
+      
      
       <script>
       var specialElementHandlers = {
@@ -357,8 +360,9 @@
           }
       };
       
-      $('#btn4').click(function () {
+      function sendEncodedPdf(id) {
         var doc = new jsPDF();
+        var email = document.getElementById("email").innerHTML
         var filename = document.getElementById("prescriptionNo").innerHTML + ".pdf"
         var comment = document.getElementById("comment").value;
       document.getElementById("commentPreview").innerHTML=comment
@@ -366,10 +370,17 @@
               'width': 170,
                   'elementHandlers': specialElementHandlers
           });
-          doc.save(filename);
-          document.getElementById("filename").value = filename
-          document.getElementById("prescriptionForm").submit()
-      });
+          // doc.save(filename);
+          var pdf = btoa(doc.output()); 
+    $.ajax({
+      method: "POST",
+      url: `/userDocSection/emailPrescription/${id}`,
+      data: {data: pdf,email:email,filename:filename},
+    }).done(function(data){
+      document.getElementById("prescriptionForm").submit()
+    });
+          
+      };
       </script> 
   </body>
 </html>
