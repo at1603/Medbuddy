@@ -44,6 +44,11 @@
                   <button type="submit" class="btn btn-warning" style="width: 15rem;border-radius: 25px;" onclick="run();">Start Appointment</button>
                 </form>
               </div>
+              <div class="col-md-12" style="margin-top: 3px;">
+                <form action="/userDocSection/completeAppointment/<%=foundPatient._id%>" method="POST">
+                  <button type="submit" class="btn btn-danger" style="width: 15rem;border-radius: 25px;">Complete Appointment</button>
+                </form>
+              </div>
             </div>
           </div>
       <hr>
@@ -134,19 +139,6 @@
       <h4 style="text-align: center;">No Medical Records Currently Exists!!</h4>
     <% } %> 
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
     <%-include("../../partials/footer"); -%>
     <script>
       const submitForms = function(){
