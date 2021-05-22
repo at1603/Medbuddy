@@ -4,6 +4,7 @@ const User = require("../models/userSchema");
 const PatientHistory = require("../models/patientHistorySchema");
 const Appointment = require("../models/appointmentSchema");
 const DoctorStats = require("../models/statsSchema/doctorStatsSchema");
+const Doctor = require("../models/docSchema");
 const middleware = require("../middlewares/authMiddlewares");
 const middlewareObj = require("../middlewares/authMiddlewares");
 
@@ -72,14 +73,6 @@ router.post("/review/setReview/:docId/:appointId/:doctorUserId", function(req, r
         if(err){
             console.log(err)
         }else{
-            
-            // DoctorStats.findOneAndUpdate({"handlerId": req.params.doctorUserId}, {"$set": {"rating": {"$divide": [{"$add": [req.params.review,{"$multiply": [{"$toInt":"$rating"},{"$toInt":"$appointment"}]} ] }, "$appointment" ] }}}, function(err, updatedStats){
-            //     if(err){
-            //         console.log(err)
-            //     }else{
-            //         res.redirect("/user/showMedicalHistoryList");
-            //     }
-            // });
             DoctorStats.findOne({"handlerId": req.params.doctorUserId}, function(err, foundData){
                 if(err){
                     console.log(err);
@@ -89,8 +82,23 @@ router.post("/review/setReview/:docId/:appointId/:doctorUserId", function(req, r
                         if(error){
                             console.log(error);
                         }else{
-                            console.log(updatedData);
-                            res.redirect("/user/showMedicalHistoryList");
+                            Doctor.findOneAndUpdate({"handler_id": req.params.doctorUserId}, {"$set": {rating: changeData}}, function(err, updatedDoctorData){
+                                if(err){
+                                    console.log(err);
+                                }else{
+                                    PatientHistory.findOneAndUpdate({"handlerId": req.user._id, "appointedDoctorId": req.params.docId, "prescription.appointmentId": req.params.appointId},{$set:{"prescription.$.review": req.body.review}}, function(error, foundPatientHistory){
+                                        if(error){
+                                            console.log(error);
+                                        }else{
+                                            console.log("starataetteat")
+                                            console.log(foundPatientHistory);
+                                            const foundPrescription = foundPatientHistory.prescription.filter(item => item.appointmentId == req.params.appointId);
+                                            foundPrescription[0].review = req.body.review;
+                                            res.redirect("/user/showMedicalHistoryList");
+                                        }
+                                    });
+                                }
+                            });
                         }
                     });
                 }
