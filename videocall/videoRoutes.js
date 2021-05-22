@@ -20,7 +20,7 @@ router.post("/start_call", (req, res) => {
       console.log(err);
     } else {
       const link = "http://localhost:3000/start_call" + roomId;
-      sendMail(link, req.body.email, function (err, data) {
+      sendMail.sendMail(link, req.body.email, function (err, data) {
         if (err) {
           console.log(err);
         } else {
