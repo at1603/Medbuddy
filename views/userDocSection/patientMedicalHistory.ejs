@@ -5,6 +5,9 @@
     <title>Page Title</title>
   </head>
   <style>
+    .checked{
+      color: orange
+    }
     .modal-backdrop.fade.show{
       width: 100% !important
     }
@@ -85,48 +88,60 @@
     <div class="jumbotron effect2" style="width: 80%;padding-top: 2rem; padding-bottom: 2rem; margin: auto; background-color: #F9FAFB; border-radius: 25px; border: 1px solid gray;">
       <% for(let i=1;i<patientHistory.prescription.length; i++) { %> 
         <h3 style="text-align: center; top: 0; padding-top: 0">Appointment <%= i %> </h3>
-        <a href="#" style="text-align: center; display:block; float: right; margin-right: 7rem;" data-toggle="modal" data-target="#exampleModalCenter<%=i%>" id="ratingButton" class="btn btn-success btn-sm">Give Review!</a>
-        <!-- Modal -->
-        <div class="modal fade" style="z-index: 9999; width: 100%" id="exampleModalCenter<%=i%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">How was your Experience?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+        <% if(!patientHistory.prescription[i].review) { %>
+          <a href="#" style="text-align: center; display:block; float: right; margin-right: 7rem;" data-toggle="modal" data-target="#exampleModalCenter<%=i%>" id="ratingButton" class="btn btn-success btn-sm">Give Review!</a>
+          <!-- Modal -->
+          <div class="modal fade" style="z-index: 9999; width: 100%" id="exampleModalCenter<%=i%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">How was your Experience?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form action="/review/setReview/<%=patientHistory.appointedDoctorId._id%>/<%=patientHistory.prescription[i].appointmentId%>/<%=patientHistory.appointedDoctorId.handler_id._id%>" method="POST">
+                  <div class="modal-body" style="text-align: center; display: inline-flex; margin: auto">
+                    <div style="margin: 0 .5rem 0 .5rem">
+                      <label for="inputRating1">1</label>
+                      <input type="radio" name="review" value=1 id="inputRating1">
+                    </div>
+                    <div style="margin: 0 .5rem 0 .5rem">
+                      <label for="inputRating1">2</label>
+                      <input type="radio" name="review" value=2 id="inputRating2">
+                    </div>
+                    <div style="margin: 0 .5rem 0 .5rem">
+                      <label for="inputRating1">3</label>
+                      <input type="radio" name="review" value=3 id="inputRating3">
+                    </div>
+                    <div style="margin: 0 .5rem 0 .5rem">
+                      <label for="inputRating1">4</label>
+                      <input type="radio" name="review" value=4 id="inputRating4">
+                    </div>
+                    <div style="margin: 0 .5rem 0 .5rem">
+                      <label for="inputRating1">5</label>
+                      <input type="radio" name="review" value=5 id="inputRating5">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
               </div>
-              <form action="/review/setReview/<%=patientHistory.appointedDoctorId._id%>/<%=patientHistory.prescription[i].appointmentId%>/<%=patientHistory.appointedDoctorId.handler_id._id%>" method="POST">
-                <div class="modal-body" style="text-align: center; display: inline-flex; margin: auto">
-                  <div style="margin: 0 .5rem 0 .5rem">
-                    <label for="inputRating1">1</label>
-                    <input type="radio" name="review" value=1 id="inputRating1">
-                  </div>
-                  <div style="margin: 0 .5rem 0 .5rem">
-                    <label for="inputRating1">2</label>
-                    <input type="radio" name="review" value=2 id="inputRating2">
-                  </div>
-                  <div style="margin: 0 .5rem 0 .5rem">
-                    <label for="inputRating1">3</label>
-                    <input type="radio" name="review" value=3 id="inputRating3">
-                  </div>
-                  <div style="margin: 0 .5rem 0 .5rem">
-                    <label for="inputRating1">4</label>
-                    <input type="radio" name="review" value=4 id="inputRating4">
-                  </div>
-                  <div style="margin: 0 .5rem 0 .5rem">
-                    <label for="inputRating1">5</label>
-                    <input type="radio" name="review" value=5 id="inputRating5">
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-              </form>
             </div>
           </div>
-        </div>
+        <% } else { %>
+          <div style="float: right;">
+            <%let nostardata = stardata = patientHistory.prescription[i].review %>
+            <% while(stardata>0) { %>
+              <span class="fa fa-star checked"></span>
+            <% stardata -= 1; } %>
+            <% while(5 - nostardata > 0) { %> 
+              <span class="fa fa-star"></span>
+            <% nostardata++; } %>
+          </div>
+        <% } %>
         <div class="row">
           <div class="col-md-9">
             <span style="display: inline;">Appointment Date: <strong><%= moment(patientHistory.prescription[i].date).format('ll') %></strong></span>
