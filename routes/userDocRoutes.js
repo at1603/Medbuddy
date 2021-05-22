@@ -304,18 +304,12 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
                               if (err) {
                                 console.log(err);
                               } else {
-                                console.log("Success", result);
                                 res.redirect(
                                   "/userDocSection/patientDashboard"
                                 );
                               }
                             });
                           } else {
-                            console.log(
-                              req.body.selectedSlot,
-                              "entered22222222222"
-                            );
-
                             Doctor.updateOne(
                               { _id: ObjectId(req.params.docId) },
                               { $inc: { "availableSlots.slotB": -1 } },
@@ -324,7 +318,6 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
                               if (err) {
                                 console.log(err);
                               } else {
-                                console.log("newsuc", result);
                                 res.redirect(
                                   "/userDocSection/patientDashboard"
                                 );
@@ -362,9 +355,9 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
                           currentDoctors: req.params.docId,
                         },
                       },
-                      function (er, updatedUser) {
-                        if (er) {
-                          console.log(er);
+                      function (err, updatedUser) {
+                        if (err) {
+                          console.log(err);
                         } else {
                           if (req.body.selectedSlot == "slotA") {
                             Doctor.updateOne(
@@ -473,10 +466,14 @@ router.post("/generatePresc/addMedicine/:id", function (req, res) {
         req.flash("error", "No Patient Found");
         res.redirect("/userDocSection/docDashboard");
       } else {
-        Appointment.findOne({"patientId": req.params.id, "docId": foundDocId[0]._id, "activityStatus": true}).exec(function(error, foundAppointment){
-          if(error){
+        Appointment.findOne({
+          patientId: req.params.id,
+          docId: foundDocId[0]._id,
+          activityStatus: true,
+        }).exec(function (error, foundAppointment) {
+          if (error) {
             console.log(error);
-          }else{
+          } else {
             const prescriptionData = {
               appointmentId: foundAppointment._id,
               date: Date.now(),
@@ -486,25 +483,43 @@ router.post("/generatePresc/addMedicine/:id", function (req, res) {
               comment: req.body.comment,
             };
             PatientHistory.updateOne(
-              { handlerId: req.params.id, appointedDoctorId: foundDocId[0]._id },
+              {
+                handlerId: req.params.id,
+                appointedDoctorId: foundDocId[0]._id,
+              },
               { $push: { prescription: prescriptionData } }
             ).exec(function (err, medrecord) {
               if (err) {
                 console.log(err);
               } else {
-                DoctorStats.findOneAndUpdate({"$inc": {earnings: 500, newPatients: 1, appointment: 1}}).where("handlerId").equals(req.user._id).exec(function(error, updatedStats){
-                  if(error){
-                    console.log(error);
-                  }else{
-                    PatientStats.findOneAndUpdate({"$inc": {expenditure: 550, appointment: 1}}).where("handlerId").equals(req.params.id).exec(function(err, updatedPatientStats){
-                      if(err){
-                        console.log(err);
-                      }else{
-                        console.log("Prescription Created!! Email the Prescription")
-                      }
-                    });
-                  }
-                });
+                DoctorStats.findOneAndUpdate({
+                  $inc: { earnings: 500, newPatients: 1, appointment: 1 },
+                })
+                  .where("handlerId")
+                  .equals(req.user._id)
+                  .exec(function (error, updatedStats) {
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      PatientStats.findOneAndUpdate({
+                        $inc: { expenditure: 550, appointment: 1 },
+                      })
+                        .where("handlerId")
+                        .equals(req.params.id)
+                        .exec(function (err, updatedPatientStats) {
+                          if (err) {
+                            console.log(err);
+                          } else {
+                            console.log(
+                              "Prescription Created!! Email the Prescription"
+                            );
+                            res.redirect(
+                              `/userDocSection/patientList/patientInfo/${req.params.id}`
+                            );
+                          }
+                        });
+                    }
+                  });
               }
             });
           }
@@ -515,18 +530,18 @@ router.post("/generatePresc/addMedicine/:id", function (req, res) {
 });
 
 router.post("/userDocSection/emailPrescription/:id", function (req, res) {
-  console.log(req.body, "from presc");
   sendPrescriptionMail.sendPrescriptionMail(
     req.body.email,
     req.body.filename,
+    req.body.data,
     function (err, result) {
       if (err) {
         console.log(err);
       } else {
+        console.log("Successfully emailed prescription");
         res.redirect(
           `/userDocSection/patientList/patientInfo/${req.params.id}`
         );
-        console.log("Successfully emailed prescription");
       }
     }
   );

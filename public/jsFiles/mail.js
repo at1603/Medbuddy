@@ -32,8 +32,7 @@ const sendMail = (text, receiver, cb) => {
   });
 };
 
-const sendPrescriptionMail = (receiver, fileName, cb) => {
-  var file = "C:/Users/Abhinav/Downloads/" + fileName;
+const sendPrescriptionMail = (receiver, fileName, encodedString, cb) => {
   const mailOptions = {
     sender: "medbuddyHack2021@gmail.com",
     from: "MedBuddy",
@@ -43,7 +42,8 @@ const sendPrescriptionMail = (receiver, fileName, cb) => {
     attachments: [
       {
         filename: fileName,
-        path: file,
+        content: new Buffer.from(encodedString, "base64"),
+        encoding: "base64",
         contentType: "application/pdf",
       },
     ],
