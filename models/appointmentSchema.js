@@ -15,7 +15,7 @@ var appointmentSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-
+  age: String,
   disease: { type: String, required: true },
   createdAt: { type: Date, default: Date.now() },
   activityStatus: { type: Boolean, default: true },

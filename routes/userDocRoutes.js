@@ -20,7 +20,6 @@ router.get("/generatePresc/:id", function (req, res) {
       req.flash("error", "Something went wrong");
       res.redirect("/userDocSection/patientList");
     } else {
-      console.log(foundPatient._id, "yeah");
       User.find({ _id: ObjectId(req.user._id) }).exec(function (
         err,
         doctorDetails
@@ -35,12 +34,22 @@ router.get("/generatePresc/:id", function (req, res) {
             if (err) {
               console.log(err);
             } else {
-              res.render("userDocSection/docfiles/prescription", {
-                foundPatient: foundPatient,
-                doctorDetails: doctorDetails,
-                date: Date(),
-                prescriptionNo: Date.now(),
-                doctorProfessionalDetails: doctorProfessionalDetails,
+              Appointment.find(
+                { patientId: ObjectId(req.params.id), activityStatus: true },
+                { age: 1 }
+              ).exec(function (err, age) {
+                if (err) {
+                  console.log(err);
+                } else {
+                  res.render("userDocSection/docfiles/prescription", {
+                    foundPatient: foundPatient,
+                    doctorDetails: doctorDetails,
+                    date: Date(),
+                    prescriptionNo: Date.now(),
+                    doctorProfessionalDetails: doctorProfessionalDetails,
+                    age: age,
+                  });
+                }
               });
             }
           });
@@ -266,6 +275,7 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
     disease: req.body.disease,
     selectedSlot: req.body.selectedSlot,
     isEmergency: emergency,
+    age: req.body.age,
   };
   const dynamicSlotkey = "availableSlots." + req.body.selectedSlot;
 
@@ -307,7 +317,6 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
                           console.log(er);
                         } else {
                           if (req.body.selectedSlot == "slotA") {
-                            console.log(req.body.selectedSlot, "entered");
                             Doctor.updateOne(
                               { _id: ObjectId(req.params.docId) },
                               { $inc: { "availableSlots.slotA": -1 } },
@@ -358,7 +367,6 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
                   if (error) {
                     console.log(error);
                   } else {
-                    console.log("doc unregistered");
                     User.findOneAndUpdate(
                       { _id: req.user._id },
                       {
@@ -599,7 +607,6 @@ router.post(
               if (error) {
                 console.log(error);
               } else {
-                console.log(foundDoctor);
                 User.findByIdAndUpdate(
                   req.params.patientUserId,
                   { $pull: { currentDoctors: foundDoctor._id } },
