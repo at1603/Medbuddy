@@ -12,13 +12,16 @@
             <h3><%= doctors.handler_id.firstName + " " + doctors.handler_id.lastName %>'s Information: </h3>
             <ul>
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-6">
                         <li><h4><strong>Works At: </strong><%= doctors.workAtHosp%> </h4></li>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
+                        <li><h4><strong>Timings: </strong><%= doctors.timing.timingFrom%> to <%= doctors.timing.timingTo%> (24 Hour Format)</h4></li>
+                    </div>
+                    <div class="col-md-6">
                         <li><h4><strong>Speciality:</strong> <%=doctors.speciality%></h4></li>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <li><h4><strong>Experience:</strong> <%= doctors.experience%> years</h4></li>
                     </div>
                 </div>
@@ -52,8 +55,8 @@
                     </div>
                   </div>
                   <div class="form-group col-md-6">
-                      <label for="InputSlotDate">Prefered Date and Time of Slot</label>
-                      <input class="form-control" name="preferSlot" type="datetime-local" id="datetfield" required>
+                      <label for="InputSlotDate">Prefered Time of Slot</label>
+                      <input class="form-control" name="preferSlot" type="time" id="timeField" required max="<%=doctors.timing.timingTo %>" min=<%=doctors.timing.timingFrom %>>
                       <small class="form-text text-muted">Slot Time may change</small>
                   </div>
                   <div class="form-group col-md-12">
@@ -63,10 +66,13 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="emergency">Is it an Emergency?</label>
-                    <input class="form-control" name="emergency" type="checkbox" id="emergency">
+                    <input name="emergency" type="checkbox" id="emergency">
                     <small class="form-text text-muted">Please use this option responsibly!</small>
                 </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="form-group col-md-6">
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+                </div>
             </div>
           </form>
     </div>

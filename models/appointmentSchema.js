@@ -10,7 +10,7 @@ var appointmentSchema = new mongoose.Schema({
     ref: "Doctor",
   },
   phone: { type: Number, required: true },
-  slot: { type: Date, required: false, default: null },
+  slot: { type: String, required: false, default: null },
   selectedSlot: {
     type: String,
     default: "",
@@ -20,9 +20,9 @@ var appointmentSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now() },
   activityStatus: { type: Boolean, default: true },
   isEmergency: { type: Boolean, default: false },
-  review: {type: Number, default: 0, required: false},
-  isPrescriptionGenerated: {type: Boolean, default: false, required: false},
-  isCompleted: {type: Boolean, default: false, required: false}
+  review: { type: Number, default: 0, required: false },
+  isPrescriptionGenerated: { type: Boolean, default: false, required: false },
+  isCompleted: { type: Boolean, default: false, required: false },
 });
 
 module.exports = mongoose.model("Appointment", appointmentSchema);

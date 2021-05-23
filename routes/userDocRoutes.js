@@ -622,7 +622,7 @@ router.post(
                             "availableSlots." + selectedSlot[0].selectedSlot;
                           Doctor.updateOne(
                             { _id: ObjectId(foundDoctor._id) },
-                            { $inc: { [dynamicSlotKey]: 1 } }
+                            { $inc: { [dynamicSlotKey]: 0 } }
                           ).exec(function (err) {
                             if (err) {
                               console.log(err);
