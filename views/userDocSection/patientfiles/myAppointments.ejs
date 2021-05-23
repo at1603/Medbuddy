@@ -3,8 +3,7 @@
   <%- include("../../partials/header"); -%>
 
     <title>Page Title</title>
-    <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientInfo.css">
-  </head>
+    <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientList.css">  </head>
  <style>
    .modal-backdrop.fade.show{
      width: 100% !important
@@ -15,10 +14,10 @@
     <%-include("../../partials/altSidebar");-%>
     <% if(foundAppointments.length > 0){ %>
     <div class="content-block">
-      <div class="card" style="width: 80%; margin: auto">
+      <div class="card" style="width: 80%; margin: auto;height: 100%;">
         <h4 style="text-align: center; margin: 1rem auto 2rem"><strong>Appointment's list</strong></h4>
         <div id="patientList" style="width: 100%;"> 
-          <table class="table table-striped">
+          <table class="table table-striped" style="height: 100%;">
               <thead style="color: white;">
                 <tr>
                   <th scope="col">S.N</th>

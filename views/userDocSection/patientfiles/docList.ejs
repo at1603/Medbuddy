@@ -37,13 +37,18 @@
                 <td class="column1"><%=doctors[i].handler_id.firstName+" "+doctors[i].handler_id.lastName%></td>
                 <td class="column1"><%=doctors[i].speciality%></td>
                 <td class="column1">
-                  <%let nostardata = stardata = doctors[i].rating %>
-                  <% while(stardata>0) { %>
+                  <% nostardata = Math.ceil(doctors[i].rating) %>
+                  <%let fullstardata = Math.floor(doctors[i].rating) %>
+                  <% let halfstardata = doctors[i].rating - fullstardata%>
+                  <% while(fullstardata>0) { %>
                     <span class="fa fa-star checked"></span>
-                  <% stardata -= 1; } %>
+                  <% fullstardata -= 1; } %>
+                  <% if(halfstardata > 0) { %>
+                    <span class="fa fa-star-half checked"></span>
+                  <% } %>
                   <% while(5 - nostardata > 0) { %> 
                     <span class="fa fa-star"></span>
-                  <% nostardata++; } %> 
+                  <% nostardata++; } %>
                 </td>
                 <td class="column1">
                   <% if(!currentUser.currentDoctors || !currentUser.currentDoctors.includes(doctors[i]._id)){ %>
