@@ -16,13 +16,13 @@ var docSchema = new mongoose.Schema({
     default: "Not Connected",
   },
   timing: {
-    timingFrom: Date,
-    timingTo: Date,
+    timingFrom: String,
+    timingTo: String,
   },
   availableSlots: {
     slotA: {
       type: Number,
-      default: 1,
+      default: 10,
       min: 0,
     },
     slotB: {
@@ -35,6 +35,7 @@ var docSchema = new mongoose.Schema({
   qual: String,
   experience: Number,
   tier: String,
+  fees: Number,
 });
 
 module.exports = mongoose.model("Doctor", docSchema);

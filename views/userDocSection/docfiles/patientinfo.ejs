@@ -39,6 +39,7 @@
               </div>
               <div class="col-md-12" style="margin-top: 3px;">
                 <form id="form1" action="/start_call" method="POST">
+                  <input type="hidden" name="phone" id="phone" value=<%=foundPatient.phone%>>
                   <input type="hidden" name="email" id="" value=<%=foundPatient.email%>>
                   <input type="hidden" name="filename" value=<%=foundPatient._id%>>
                   <button type="submit" class="btn btn-warning" style="width: 15rem;border-radius: 25px;" onclick="run();">Start Appointment</button>

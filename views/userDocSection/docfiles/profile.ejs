@@ -8,19 +8,25 @@
     <%-include("../../partials/altNavbar");-%>
     <%-include("../../partials/altSidebar");-%>
     <div class="card" style="border: none">
-      <form 
+      <form
         action="/userDocSection/createProfile"
         method="POST"
-        style="margin: 5rem 1rem 2rem 20rem;
+        style="
+          margin: 5rem 1rem 2rem 20rem;
           padding: 2rem;
           max-width: 600px;
           box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);
-          border-radius: 42px;">
-        <h4 style="text-align: center;"><strong>Fill Professional Details</strong> </h4>
+          border-radius: 42px;
+        "
+      >
+        <h4 style="text-align: center">
+          <strong>Fill Professional Details</strong>
+        </h4>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="experience">Experience (in Years)</label>
-            <input style=" border-radius: 25px" 
+            <input
+              style="border-radius: 25px"
               type="number"
               class="form-control"
               placeholder="Experience"
@@ -29,7 +35,8 @@
           </div>
           <div class="form-group col-md-6">
             <label for="inputQual">Qualification</label>
-            <input style=" border-radius: 25px" 
+            <input
+              style="border-radius: 25px"
               type="text"
               class="form-control"
               placeholder="Qualification"
@@ -40,7 +47,8 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="speciality">Speciality</label>
-            <input style=" border-radius: 25px" 
+            <input
+              style="border-radius: 25px"
               type="text"
               class="form-control"
               placeholder="Your Speciality. e.g. Neurology, Dentist etc."
@@ -49,7 +57,8 @@
           </div>
           <div class="form-group col-md-6">
             <label for="workAtHosp">Working At Hospital</label>
-            <input style=" border-radius: 25px" 
+            <input
+              style="border-radius: 25px"
               type="text"
               class="form-control"
               placeholder="Hospital Name (if any)"
@@ -59,39 +68,104 @@
         </div>
         <div class="form-group">
           <label for="workingAt">Works At</label>
-          <input style=" border-radius: 25px" 
+          <input
+            style="border-radius: 25px"
             type="text"
             class="form-control"
             placeholder="Hospital Token Number. (if any)"
             name="workingAt"
           />
         </div>
+        <div class="form-group">
+          <label for="fees">Fees</label>
+          <input
+            style="border-radius: 25px"
+            type="number"
+            class="form-control"
+            placeholder="Enter Your Fees in (Rs)"
+            name="fees"
+          />
+        </div>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="timingFrom">Timing Slot: From</label>
-            <input style=" border-radius: 25px"  type="time" class="form-control" name="timing" />
+            <input
+              style="border-radius: 25px"
+              type="time"
+              class="form-control"
+              name="timingFrom"
+            />
           </div>
           <div class="form-group col-md-6">
             <label for="timingTo">Timing Slot: To</label>
-            <input style=" border-radius: 25px"  type="time" class="form-control" name="timing" />
+            <input
+              style="border-radius: 25px"
+              type="time"
+              class="form-control"
+              name="timingTo"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="morningSlot">Enter Seats For Morning:</label>
+            <input
+              style="border-radius: 25px"
+              type="number"
+              class="form-control"
+              name="morningSlot"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="eveningSlot">Enter Seats For Evening:</label>
+            <input
+              style="border-radius: 25px"
+              type="number"
+              class="form-control"
+              name="eveningSlot"
+            />
           </div>
         </div>
         <div class="form-row">
           <div class="form-group col-md-5">
             <label for="inputCity">City</label>
-            <input style=" border-radius: 25px"  type="text" class="form-control" name="city" placeholder="City" />
+            <input
+              style="border-radius: 25px"
+              type="text"
+              class="form-control"
+              name="city"
+              placeholder="City"
+            />
           </div>
           <div class="form-group col-md-4">
             <label for="inputState">State</label>
-            <input style=" border-radius: 25px"  type="text" class="form-control" name="state" placeholder="State" />
+            <input
+              style="border-radius: 25px"
+              type="text"
+              class="form-control"
+              name="state"
+              placeholder="State"
+            />
           </div>
           <div class="form-group col-md-3">
             <label for="inputZip">Zip</label>
-            <input style=" border-radius: 25px"  type="number" class="form-control" name="zipCode" placeholder="000000"/>
+            <input
+              style="border-radius: 25px"
+              type="number"
+              class="form-control"
+              name="zipCode"
+              placeholder="000000"
+            />
           </div>
         </div>
 
-        <button type="submit" style="border-radius: 25px;" class="btn btn-primary">Create!</button>
+        <button
+          type="submit"
+          style="border-radius: 25px"
+          class="btn btn-primary"
+        >
+          Create!
+        </button>
       </form>
     </div>
     <%-include("../../partials/footer");-%>

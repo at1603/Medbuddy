@@ -4,6 +4,7 @@ var express = require("express"),
   User = require("../models/userSchema");
 patientStats = require("../models/statsSchema/patientStatsSchema");
 doctorStats = require("../models/statsSchema/doctorStatsSchema");
+const Doctor = require("../models/docSchema");
 const patientHistory = require("../models/patientHistorySchema");
 
 //Login get requests
@@ -82,9 +83,8 @@ router.post("/register", function (req, res) {
             function (err, defaultStats) {
               if (err) {
                 console.log(err);
-              } else 
-              {
-                  res.redirect("/userDocSection/patientDashboard");
+              } else {
+                res.redirect("/userDocSection/patientDashboard");
               }
             }
           );
@@ -96,11 +96,30 @@ router.post("/register", function (req, res) {
             rating: 0,
             appointment: 0,
           };
+          let newDocPro = {
+            speciality: "",
+            workingAt: "",
+            workAtHosp: "",
+            timing: {
+              timingFrom: "",
+              timingTo: "",
+            },
+            qual: "",
+            experience: "",
+            handler_id: req.user._id,
+          };
+
           doctorStats.create(defaultDoctorStats, function (err, defaultStats) {
             if (err) {
               console.log(err);
             } else {
-              res.redirect("/userDocSection/docDashboard");
+              Doctor.create(newDocPro, function (err, newProfessionalDoc) {
+                if (err) {
+                  console.log(err);
+                } else {
+                  res.redirect("/userDocSection/doctor/createProfile");
+                }
+              });
             }
           });
         } else if (req.user.role == "hospAdmin")

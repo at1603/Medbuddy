@@ -56,7 +56,24 @@ const sendPrescriptionMail = (receiver, fileName, encodedString, cb) => {
     }
   });
 };
+const sendContactUsMail = (message, cb) => {
+  const mailOptions = {
+    sender: "medbuddyHack2021@gmail.com",
+    from: "MedBuddy",
+    to: "ultimateraze011@gmail.com",
+    subject: "Help Needed!",
+    html: `<p>Name: ${message.name}</p><p>Email: ${message.email}</p><p>${message.message}</p>`,
+  };
+  transporter.sendMail(mailOptions, function (err, data) {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, data);
+    }
+  });
+};
 module.exports = {
   sendMail,
   sendPrescriptionMail,
+  sendContactUsMail,
 };

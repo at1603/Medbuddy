@@ -1,5 +1,6 @@
 const { db } = require("../models/roomIdSchema");
 const sendMail = require("../public/jsFiles/mail");
+const sendSms = require("../public/jsFiles/sms");
 
 var express = require("express"),
   router = express.Router(),
@@ -20,12 +21,16 @@ router.post("/start_call", (req, res) => {
       console.log(err);
     } else {
       const link = "http://localhost:3000/start_call" + roomId;
-      sendMail.sendMail(link, req.body.email, function (err, data) {
+      sendMail.sendMail(link, req.body.email, function (err) {
         if (err) {
           console.log(err);
         } else {
-          res.redirect(`/start_call${roomId}`);
+          console.log(req.body.phone);
+          const message =
+            "Appointment Started! Pls check your email to join the room!";
+          sendSms(req.body.phone, message);
           res.status({ message: "Email sent!!!" });
+          res.redirect(`/start_call${roomId}`);
         }
       });
     }
