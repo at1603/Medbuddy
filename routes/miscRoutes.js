@@ -77,7 +77,7 @@ router.post("/review/setReview/:docId/:appointId/:doctorUserId", function(req, r
                 if(err){
                     console.log(err);
                 }else{
-                    let changeData = (foundData.rating*(foundData.appointment-1)+req.body.review)/(foundData.appointment);
+                    let changeData = Number(((foundData.rating*(foundData.appointment-1)))+Number(req.body.review))/(foundData.appointment);
                     DoctorStats.updateOne({"handlerId": req.params.doctorUserId}, {"$set": {rating: changeData}}, function(error, updatedData){
                         if(error){
                             console.log(error);
