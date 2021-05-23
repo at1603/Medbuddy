@@ -98,6 +98,7 @@ router.post("/register", function (req, res) {
           };
           let newDocPro = {
             speciality: "",
+            availableSlots: { slotA: "", slotB: "" },
             workingAt: "",
             workAtHosp: "",
             timing: {
@@ -107,6 +108,8 @@ router.post("/register", function (req, res) {
             qual: "",
             experience: "",
             handler_id: req.user._id,
+            rating: 0,
+            fees: 0,
           };
 
           doctorStats.create(defaultDoctorStats, function (err, defaultStats) {
