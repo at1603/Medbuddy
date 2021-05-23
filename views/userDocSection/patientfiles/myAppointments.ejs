@@ -64,8 +64,10 @@
                               </div>
                             </div>
                           </td>
-                          <% } else{ %> 
-                            <p style="color: red;"><strong>Appointment Cancelled!</strong></p>
+                          <% } else if(!Appointment.activityStatus && Appointment.isCompleted){ %> 
+                            <p style="color: lightgreen;"><strong>Appointment Compeleted!</strong></p>
+                          <% } else { %>
+                            <p style="color: red;"><strong>Appointment Canceled!</strong></p>
                           <% } %>
                       </tr>
                   <% })%>

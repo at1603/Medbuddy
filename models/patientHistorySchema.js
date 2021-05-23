@@ -11,7 +11,9 @@ var patientHistorySchema = new mongoose.Schema({
     required: false,
   },
   prescription: [
+
     {
+      review: {type: Number, default: null, min: 0},
       appointmentId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Appointment"

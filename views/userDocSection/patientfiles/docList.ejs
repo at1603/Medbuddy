@@ -4,9 +4,13 @@
 
   <title>Page Title</title>
   </head>
- <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientList.css">
- <link rel="stylesheet" href="/stylesheets/userDocSection/patFiles/docList.css">
- 
+  <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientList.css">
+  <link rel="stylesheet" href="/stylesheets/userDocSection/patFiles/docList.css">
+  <style>
+    .checked{
+      color: orange;
+    }
+  </style>
   <body id="body-pd" >
     <%-include("../../partials/altNavbar"); -%>
     <%-include("../../partials/altSidebar");-%>
@@ -21,16 +25,26 @@
                 <th class="column1">S.N</th>
                 <th class="column1">Name</th>
                 <th class="column1">Specialisation</th>
-                <th class="column7"></th>
-
+                <th class="column1">Rating</th>
+                <th class="column1">Action</th>
               </tr>
             </thead>
             <tbody id="front">
               <%for(var i=0;i<doctors.length;i++){%>
+                <% console.log(doctors[i])%>
               <tr>
                 <td class="column1"><%=i+1%></td>
                 <td class="column1"><%=doctors[i].handler_id.firstName+" "+doctors[i].handler_id.lastName%></td>
                 <td class="column1"><%=doctors[i].speciality%></td>
+                <td class="column1">
+                  <%let nostardata = stardata = doctors[i].rating %>
+                  <% while(stardata>0) { %>
+                    <span class="fa fa-star checked"></span>
+                  <% stardata -= 1; } %>
+                  <% while(5 - nostardata > 0) { %> 
+                    <span class="fa fa-star"></span>
+                  <% nostardata++; } %> 
+                </td>
                 <td class="column1">
                   <% if(!currentUser.currentDoctors || !currentUser.currentDoctors.includes(doctors[i]._id)){ %>
                   <div class="appntBtn">

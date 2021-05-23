@@ -109,16 +109,21 @@ router.get(
         if (err) {
           console.log(err);
         } else {
-          Doctor.find({ handler_id: ObjectId(req.user._id) }, { _id: 1 }).exec(
+          Doctor.findOne({ handler_id: ObjectId(req.user._id) }, { _id: 1 }).exec(
             function (err, foundDoctor) {
               if (err) {
                 console.log(err);
               } else {
-                if(foundDoctor.length > 0)
-                {
+                if(foundDoctor == undefined){
+                  res.render("user/dashboards/docDashboard", {
+                    patientsLength: 0,
+                    emergencyPatient: 0,
+                    doctorStats: loadingStats,
+                  });
+                }else{
                   console.log(foundDoctor)
                   Appointment.find({
-                    docId: foundDoctor[0]._id,
+                    docId: foundDoctor._id,
                     activityStatus: true,
                     isEmergency: true,
                   })
@@ -127,7 +132,7 @@ router.get(
                       if (err) {
                         console.log(err);
                       } else {
-                        Appointment.distinct("patientId").where("docId").equals(foundDoctor[0]._id).exec(function(error, calculatedPatients){
+                        Appointment.distinct("patientId").where("docId").equals(foundDoctor._id).exec(function(error, calculatedPatients){
                           if(error){
                             console.log(error);
                           }else{
@@ -141,12 +146,6 @@ router.get(
                         });
                       }
                     });
-                }else{
-                  res.render("user/dashboards/docDashboard", {
-                    patientsLength: 0,
-                    emergencyPatient: 0,
-                    doctorStats: loadingStats,
-                  });
                 }
               }
             }

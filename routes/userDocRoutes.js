@@ -63,7 +63,7 @@ router.get("/userDocSection/patientList", function (req, res) {
         req.flash("error", "No Patient Found");
         res.redirect("/userDocSection/docDashboard");
       } else {
-        Appointment.find({ docId: ObjectId(foundDocId[0]._id) })
+        Appointment.find({ docId: ObjectId(foundDocId[0]._id), activityStatus: true })
           .populate("patientId")
           .exec(function (err, foundPatients) {
             if (err) {
@@ -469,7 +469,7 @@ router.post("/generatePresc/addMedicine/:id", function (req, res) {
         Appointment.findOne({
           patientId: req.params.id,
           docId: foundDocId[0]._id,
-          activityStatus: true,
+          activityStatus: true
         }).exec(function (error, foundAppointment) {
           if (error) {
             console.log(error);
@@ -510,12 +510,19 @@ router.post("/generatePresc/addMedicine/:id", function (req, res) {
                           if (err) {
                             console.log(err);
                           } else {
-                            console.log(
-                              "Prescription Created!! Email the Prescription"
-                            );
-                            res.redirect(
-                              `/userDocSection/patientList/patientInfo/${req.params.id}`
-                            );
+                            Appointment.findOneAndUpdate({patientId: req.params.id,
+                              docId: foundDocId[0]._id,
+                              activityStatus: true
+                            }, {$set: {"isPrescriptionGenerated": true}}, function(error, updatedAppointment){
+                              if(error){
+                                console.log(error);
+                              }else{
+                                console.log("Prescription Created!! Email the Prescription");
+                                res.redirect(
+                                  `/userDocSection/patientList/patientInfo/${req.params.id}`
+                                );
+                              }
+                            });
                           }
                         });
                     }
@@ -546,6 +553,63 @@ router.post("/userDocSection/emailPrescription/:id", function (req, res) {
     }
   );
 });
+
+//-------------Complete Appointment Route----------
+router.post("/userDocSection/completeAppointment/:patientUserId", function(req, res){
+  Doctor.findOne({"handler_id": req.user._id},{_id: 1}, function(error, foundDoctor){
+    if(error){
+      console.log(err);
+    }else{
+      Appointment.findOneAndUpdate({
+        patientId: req.params.patientUserId,
+        docId: foundDoctor.id,
+        activityStatus: true
+      }, {$set: {"isCompleted": true, "activityStatus": false}}, function(error, updatedAppointment){
+        if(error){
+          console.log(error);
+        }else{
+          console.log(foundDoctor)
+          User.findByIdAndUpdate(
+            req.params.patientUserId,
+            { $pull: { currentDoctors: foundDoctor._id } },
+            function (error, updatedUser) {
+              if (error) {
+                console.log(error);
+              } else {
+                Appointment.find(
+                  {
+                    _id: ObjectId(updatedAppointment._id),
+                    patientId: ObjectId(req.params.patientUserId),
+                    docId: ObjectId(foundDoctor._id ),
+                  },
+                  { selectedSlot: 1 }
+                ).exec(function (err, selectedSlot) {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    const dynamicSlotKey =
+                      "availableSlots." + selectedSlot[0].selectedSlot;
+                    Doctor.updateOne(
+                      { _id: ObjectId(foundDoctor._id) },
+                      { $inc: { [dynamicSlotKey]: 1 } }
+                    ).exec(function (err) {
+                      if (err) {
+                        console.log(err);
+                      } else {
+                        req.flash("success", "Appointment Completed");
+                        res.redirect("/userDocSection/patientList");
+                      }
+                    });
+                  }
+                });
+              }
+            }
+          );
+        }
+      })
+    }
+  })
+})
 
 //universal routes
 router.get("/userDocSection/appointments/:id", function (req, res) {
