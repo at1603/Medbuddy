@@ -7,18 +7,17 @@
   <body id="body-pd">
     <%-include("../../partials/altNavbar");-%>
     <%-include("../../partials/altSidebar");-%>
-    <div class="card" style="border: none">
-      <form
-        action="/userDocSection/createProfile"
-        method="POST"
-        style="
-          margin: 5rem 1rem 2rem 20rem;
-          padding: 2rem;
-          max-width: 600px;
-          box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);
-          border-radius: 42px;
-        "
-      >
+    <div
+      class="card"
+      style="
+        margin: auto;
+        padding: 2rem;
+        max-width: 30%;
+        box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);
+        border-radius: 42px;
+      "
+    >
+      <form action="/userDocSection/createProfile" method="POST">
         <h4 style="text-align: center">
           <strong>Fill Professional Details</strong>
         </h4>

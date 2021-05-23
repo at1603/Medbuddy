@@ -21,18 +21,18 @@
           <table class="table table-striped">
               <thead style="color: white;">
                 <tr>
-                  <th scope="col"style="text-align: center;"style="text-align: center;">#</th>
-                  <th scope="col"style="text-align: center;">Doctor's Name</th>
-                  <th scope="col"style="text-align: center;">For Disease</th>
-                  <th scope="col"style="text-align: center;">Created On</th>
-                  <th scope="col"style="text-align: center;">Action</th>
+                  <th scope="col">S.N</th>
+                  <th scope="col">Doctor's Name</th>
+                  <th scope="col">For Disease</th>
+                  <th scope="col">Created On</th>
+                  <th scope="col">Status</th>
                 </tr>
               </thead>
               <tbody>
                   <% count = 0 %>
                   <% foundAppointments.forEach(function(Appointment){ count += 1%>
                       <tr style="text-align: center;">
-                          <th scope="row"><%=count %></th>
+                          <td><%=count %></td>
                           <td ><%= Appointment.docId.handler_id.firstName + " " + Appointment.docId.handler_id.lastName %> </td>
                           <td><%= Appointment.disease%></td>
                           <td><%= moment(Appointment.createdAt).format('ll')%></td>
@@ -79,7 +79,7 @@
     <% } else { %>
       <h4 style="text-align: center;">No Appointments found!!</h4>
     <% } %>
-    <a href="/" class="btn btn-xs btn-secondary" style=" margin-top: 2rem; margin-right: 8rem; float: right;">Go Back!</a>
+    <a href="/userDocSection/patientDashboard" class="btn btn-xs btn-secondary" style=" margin-top: 2rem; margin-right: 8rem; float: right;">Go Back!</a>
     <%-include("../../partials/footer"); -%>
   </body>
 </html>
