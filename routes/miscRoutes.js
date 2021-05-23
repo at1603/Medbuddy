@@ -25,7 +25,6 @@ router.put("/user/updateProfile/:id", function (req, res) {
         res.send(404);
       } else {
         // req.flash("error", "Policy details succesfully updated!")
-        console.log(updateUser);
         if (req.user.role == "patient")
           res.redirect("/userDocSection/patientDashboard");
         else if (req.user.role == "doctor")
@@ -144,8 +143,6 @@ router.post(
                                 if (error) {
                                   console.log(error);
                                 } else {
-                                  console.log("starataetteat");
-                                  console.log(foundPatientHistory);
                                   const foundPrescription =
                                     foundPatientHistory.prescription.filter(
                                       (item) =>

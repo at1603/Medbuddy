@@ -109,33 +109,37 @@ router.get(
         if (err) {
           console.log(err);
         } else {
-          Doctor.findOne({ handler_id: ObjectId(req.user._id) }, { _id: 1 }).exec(
-            function (err, foundDoctor) {
-              if (err) {
-                console.log(err);
+          Doctor.findOne(
+            { handler_id: ObjectId(req.user._id) },
+            { _id: 1 }
+          ).exec(function (err, foundDoctor) {
+            if (err) {
+              console.log(err);
+            } else {
+              if (foundDoctor == undefined) {
+                res.render("user/dashboards/docDashboard", {
+                  patientsLength: 0,
+                  emergencyPatient: 0,
+                  doctorStats: loadingStats,
+                });
               } else {
-                if(foundDoctor == undefined){
-                  res.render("user/dashboards/docDashboard", {
-                    patientsLength: 0,
-                    emergencyPatient: 0,
-                    doctorStats: loadingStats,
-                  });
-                }else{
-                  console.log(foundDoctor)
-                  Appointment.find({
-                    docId: foundDoctor._id,
-                    activityStatus: true,
-                    isEmergency: true,
-                  })
-                    .populate("patientId")
-                    .exec(function (err, emergencyPatient) {
-                      if (err) {
-                        console.log(err);
-                      } else {
-                        Appointment.distinct("patientId").where("docId").equals(foundDoctor._id).exec(function(error, calculatedPatients){
-                          if(error){
+                Appointment.find({
+                  docId: foundDoctor._id,
+                  activityStatus: true,
+                  isEmergency: true,
+                })
+                  .populate("patientId")
+                  .exec(function (err, emergencyPatient) {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      Appointment.distinct("patientId")
+                        .where("docId")
+                        .equals(foundDoctor._id)
+                        .exec(function (error, calculatedPatients) {
+                          if (error) {
                             console.log(error);
-                          }else{
+                          } else {
                             res.render("user/dashboards/docDashboard", {
                               patientsLength: calculatedPatients.length,
                               isDoctor: true,
@@ -144,12 +148,11 @@ router.get(
                             });
                           }
                         });
-                      }
-                    });
-                }
+                    }
+                  });
               }
             }
-          );
+          });
         }
       });
   }

@@ -22,14 +22,20 @@
             </p>
             <p>
               <span>
-              <strong> Age </strong>: 27
+              <strong> Age </strong>: <%= age[0].age %>
                 <a>  </a>  <!--<%= //rows.age %>-->
               </span>
             </p>
             <p>
               <span>
-              <strong>Address </strong>  : <%= foundPatient.address.street + " " + foundPatient.address.city + " " +foundPatient.address.city %>
+              <strong>Address </strong>  : <%= foundPatient.address.street + " " + foundPatient.address.city + " " +foundPatient.address.state %>
                 <a>  </a>  <!--<%= //rows.address %>-->
+              </span>
+            </p>
+            <p>
+              <span>
+              <strong> Gender </strong>:  <%= foundPatient.gender %>
+                <a> </a>  <!--<%= //rows.contact %>-->
               </span>
             </p>
             <p>
@@ -38,6 +44,7 @@
                 <a> </a>  <!--<%= //rows.contact %>-->
               </span>
             </p>
+           
             <p>
               <span>
               <strong> Email </strong>: <span id="email"><%= foundPatient.email %></span>
