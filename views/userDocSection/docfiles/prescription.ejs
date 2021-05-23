@@ -57,7 +57,7 @@
           <div id= "form1" >
             <!-- <form action="/generatePresc/addMedicine/<%=foundPatient._id%>" method="POST"> -->
               <div class="form-row">
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-5">
                   <label for="medicine">Medicine:</label>
 
                   <select name="medicine[]" id="medicine" class="form-control">
@@ -86,7 +86,7 @@
                   </select>
 
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                   <label for="frequency">Frequency</label>
 
                   <select
@@ -110,7 +110,7 @@
           <div id="form2">
             <!-- <form action=""> -->
               <div class="form-row">
-                <div class="form-group col-md-9">
+                <div class="form-group col-md-10">
                   <label for="test">Choose a Test:</label>
 
                   <select name="Test" id="test" class="form-control">
@@ -133,13 +133,13 @@
         <div class="card" id="code-area">
           <div>
             <label for="disease">Disease</label>
-            <input type="text" placeholder="Please Enter The Disease" name="disease" id="disease">
+            <input type="text" class="form-control" placeholder="Please Enter The Disease" name="disease" id="disease">
           </div>
           <div class="code-area">
             <textarea
             name="comment"
               id="comment"
-              placeholder=""
+              placeholder="Input Comment"
               oninput="showPreview()"
             ></textarea>
           </div>
@@ -147,7 +147,7 @@
         </form>
         <div id="btnDiv">
 
-      <button id="btn4" class="btn btn-success" onclick="sendEncodedPdf('<%=foundPatient._id%>')">Submit</button>
+      <button id="btn4" style=" margin-top: 1rem; margin-bottom: 2rem;" class="btn btn-success" onclick="sendEncodedPdf('<%=foundPatient._id%>')">Submit</button>
 
        </div>
         
@@ -216,9 +216,9 @@
                   <table id="medicineTable"> 
                     <thead>
                       <tr class="table100-head">
-                        <th class="column1">Medicine</th>
-                        <th class="column1">Dosage</th>
-                        <th class="column1">Frequency</th>
+                        <th class="column2" style="text-align: center;">Medicine</th>
+                        <th class="column2" style="text-align: center;">Dosage</th>
+                        <th class="column2" style="text-align: center;">Frequency</th>
                       </tr>
                     </thead>
                     <tbody id="front">
@@ -319,12 +319,12 @@
     var table = document.getElementById("front")
     var row= table.insertRow(-1)
     var cell1 = row.insertCell(0)
-    cell1.className = "column1"
+    cell1.className = "column2"
     var cell2 = row.insertCell(1)
-    cell2.className = "column1"
+    cell2.className = "column2"
 
     var cell3 = row.insertCell(2)
-    cell3.className = "column1"
+    cell3.className = "column2"
 
     cell1.innerHTML = document.getElementById("medicine").value
     cell2.innerHTML = document.getElementById("dosage").value
