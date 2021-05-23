@@ -70,7 +70,8 @@
       </div>  
       <div class="row">
         <div class="col-md-12">
-          <h4 style="margin-bottom: 0.5rem; margin-top: 1rem;">Doctor's Info</h4>
+          <h4 style="display: inline-flex; margin-bottom: 0.5rem; margin-top: 1rem;">Doctor's Info</h4>
+          <a href="#" style="display: inline-flex; float: right; margin-right: 7rem;" id="ratingButton" class="btn btn-success btn-xs">Give Review!</a>
           <div>
             <span style="display: inline;">Mr./Mrs./Ms./: <strong><%= patientHistory.appointedDoctorId.handler_id.firstName + " " + patientHistory.appointedDoctorId.handler_id.lastName %></strong></span> 
           </div>
@@ -84,7 +85,6 @@
       </div>
       </div>
     </div>
-    <% console.log(patientHistory)%>
     <div class="jumbotron effect2" style="width: 80%;padding-top: 2rem; padding-bottom: 2rem; margin: auto; background-color: #F9FAFB; border-radius: 25px; border: 1px solid gray;">
       <% for(let i=1;i<patientHistory.prescription.length; i++) { %> 
         <h3 style="text-align: center; top: 0; padding-top: 0">Appointment <%= i %> </h3>
@@ -133,10 +133,16 @@
           </div>
         <% } else { %>
           <div style="float: right;">
-            <%let nostardata = stardata = patientHistory.prescription[i].review %>
-            <% while(stardata>0) { %>
+            <% nostardata = Math.ceil(patientHistory.prescription[i].review) %>
+            <%let fullstardata = Math.floor(patientHistory.prescription[i].review) %>
+            <% let halfstardata = patientHistory.prescription[i].review - fullstardata%>
+            <% console.log(nostardata, fullstardata, halfstardata, patientHistory.prescription[i].review) %>
+            <% while(fullstardata>0) { %>
               <span class="fa fa-star checked"></span>
-            <% stardata -= 1; } %>
+            <% fullstardata -= 1; } %>
+            <% if(halfstardata > 0) { %>
+              <span class="fa fa-star-half checked"></span>
+            <% } %>
             <% while(5 - nostardata > 0) { %> 
               <span class="fa fa-star"></span>
             <% nostardata++; } %>

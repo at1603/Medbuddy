@@ -12,12 +12,12 @@
       style="
         margin: auto;
         padding: 2rem;
-        max-width: 30%;
+        max-width: 40rem;
         box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);
         border-radius: 42px;
       "
     >
-      <form action="/userDocSection/createProfile" method="POST">
+      <form action="/userDocSection/createProfile?_method=PUT" method="POST">
         <h4 style="text-align: center">
           <strong>Fill Professional Details</strong>
         </h4>
@@ -29,7 +29,8 @@
               type="number"
               class="form-control"
               placeholder="Experience"
-              name="experience"
+              name="doctor[experience]"
+              value=<%=foundData.experience %>
             />
           </div>
           <div class="form-group col-md-6">
@@ -39,7 +40,8 @@
               type="text"
               class="form-control"
               placeholder="Qualification"
-              name="qual"
+              name="doctor[qual]"
+              value="<%=foundData.qual %>"
             />
           </div>
         </div>
@@ -51,7 +53,8 @@
               type="text"
               class="form-control"
               placeholder="Your Speciality. e.g. Neurology, Dentist etc."
-              name="speciality"
+              name="doctor[speciality]"
+              value="<%=foundData.speciality %>"
             />
           </div>
           <div class="form-group col-md-6">
@@ -61,7 +64,8 @@
               type="text"
               class="form-control"
               placeholder="Hospital Name (if any)"
-              name="workAtHosp"
+              name="doctor[workAtHosp]"
+              value="<%=foundData.workAtHosp %>"
             />
           </div>
         </div>
@@ -72,7 +76,8 @@
             type="text"
             class="form-control"
             placeholder="Hospital Token Number. (if any)"
-            name="workingAt"
+            name="doctor[workingAt]"
+            value="<%=foundData.workingAt %>"
           />
         </div>
         <div class="form-group">
@@ -82,7 +87,8 @@
             type="number"
             class="form-control"
             placeholder="Enter Your Fees in (Rs)"
-            name="fees"
+            name="doctor[fees]"
+            value=<%=foundData.fees %>
           />
         </div>
         <div class="form-row">
@@ -92,7 +98,8 @@
               style="border-radius: 25px"
               type="time"
               class="form-control"
-              name="timingFrom"
+              name="doctor[timing][timingFrom]"
+              value=<%=foundData.timing.timingFrom %>
             />
           </div>
           <div class="form-group col-md-6">
@@ -101,7 +108,8 @@
               style="border-radius: 25px"
               type="time"
               class="form-control"
-              name="timingTo"
+              name="doctor[timing][timingTo]"
+              value=<%=foundData.timing.timingTo %>
             />
           </div>
         </div>
@@ -112,7 +120,8 @@
               style="border-radius: 25px"
               type="number"
               class="form-control"
-              name="morningSlot"
+              name="doctor[availableSlots][slotA]"
+              value=<%=foundData.availableSlots.slotA %>
             />
           </div>
           <div class="form-group col-md-6">
@@ -121,39 +130,8 @@
               style="border-radius: 25px"
               type="number"
               class="form-control"
-              name="eveningSlot"
-            />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-5">
-            <label for="inputCity">City</label>
-            <input
-              style="border-radius: 25px"
-              type="text"
-              class="form-control"
-              name="city"
-              placeholder="City"
-            />
-          </div>
-          <div class="form-group col-md-4">
-            <label for="inputState">State</label>
-            <input
-              style="border-radius: 25px"
-              type="text"
-              class="form-control"
-              name="state"
-              placeholder="State"
-            />
-          </div>
-          <div class="form-group col-md-3">
-            <label for="inputZip">Zip</label>
-            <input
-              style="border-radius: 25px"
-              type="number"
-              class="form-control"
-              name="zipCode"
-              placeholder="000000"
+              name="doctor[availableSlots][slotB]"
+              value=<%=foundData.availableSlots.slotB %>
             />
           </div>
         </div>

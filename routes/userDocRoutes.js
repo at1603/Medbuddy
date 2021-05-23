@@ -59,7 +59,13 @@ router.get("/generatePresc/:id", function (req, res) {
   });
 });
 router.get("/userDocSection/doctor/createProfile", function (req, res) {
-  res.render("userDocSection/docfiles/profile");
+  Doctor.findOne().where("handler_id").equals(req.user._id).exec(function(err, foundDoctorData){
+    if(err){
+      console.log(err);
+    }else{
+      res.render("userDocSection/docfiles/profile", {foundData: foundDoctorData});
+    }
+  });
 });
 
 router.get("/userDocSection/patientList", function (req, res) {
@@ -161,28 +167,12 @@ router.get("/userDocSection/consultDoc/presc", function (req, res) {
 
 // -------------Doctor Profile Post Routes ------------------//
 
-router.post("/userDocSection/createProfile", function (req, res) {
-  let newDocPro = {
-    speciality: req.body.speciality,
-    workingAt: req.body.workingAt,
-    workAtHosp: req.body.workAtHosp,
-    fees: req.body.fees,
-    timing: {
-      timingFrom: req.body.timingFrom,
-      timingTo: req.body.timingTo,
-    },
-    availableSlots: {
-      slotA: req.body.morningSlot,
-      slotB: req.body.eveningSlot,
-    },
-    qual: req.body.qual,
-    experience: req.body.experience,
-    handler_id: req.user._id,
-  };
-
+router.put("/userDocSection/createProfile", function (req, res) {
+  console.log(req.body.doctor);
+  // res.sendStatus(200);
   Doctor.updateOne(
     { handler_id: ObjectId(req.user._id) },
-    { $set: newDocPro },
+    req.body.doctor,
     function (err, newProfessionalDoc) {
       if (err) {
         console.log(err);
@@ -278,148 +268,13 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
     age: req.body.age,
   };
   const dynamicSlotkey = "availableSlots." + req.body.selectedSlot;
-
-  Doctor.find(
-    { _id: ObjectId(req.params.docId) },
-    { [dynamicSlotkey]: 1 }
-  ).exec(function (err, checkAvailableSlots) {
-    if (err) {
+  Doctor.findById(req.params.docId).populate("handler_id").exec(function(err, foundDoctor){
+    if(err){
       console.log(err);
-    } else {
-      if (
-        checkAvailableSlots[0]["availableSlots"][req.body.selectedSlot] == 0
-      ) {
-        console.log("This Slot is Already full");
-        req.flash("error", "This Slot is Already full");
-        res.redirect(`/userDocSection/docList/docInfo/${req.params.docId}`);
-      } else {
-        Appointment.create(newAppointment, function (err, createAppointment) {
-          if (err) console.log(err);
-          else {
-            if (
-              req.user.appointedDoctors &&
-              req.user.appointedDoctors.includes(req.params.docId)
-            ) {
-              PatientHistory.findOne(
-                {
-                  handlerId: req.user._id,
-                  appointedDoctorId: req.params.docId,
-                },
-                function (error, foundHistory) {
-                  if (error) {
-                    console.log(error);
-                  } else {
-                    User.findByIdAndUpdate(
-                      req.user._id,
-                      { $push: { currentDoctors: req.params.docId } },
-                      function (er, updatedUser) {
-                        if (er) {
-                          console.log(er);
-                        } else {
-                          if (req.body.selectedSlot == "slotA") {
-                            Doctor.updateOne(
-                              { _id: ObjectId(req.params.docId) },
-                              { $inc: { "availableSlots.slotA": -1 } },
-                              { new: true }
-                            ).exec(function (err, result) {
-                              if (err) {
-                                console.log(err);
-                              } else {
-                                res.redirect(
-                                  "/userDocSection/patientDashboard"
-                                );
-                              }
-                            });
-                          } else {
-                            Doctor.updateOne(
-                              { _id: ObjectId(req.params.docId) },
-                              { $inc: { "availableSlots.slotB": -1 } },
-                              { new: true }
-                            ).exec(function (err, result) {
-                              if (err) {
-                                console.log(err);
-                              } else {
-                                res.redirect(
-                                  "/userDocSection/patientDashboard"
-                                );
-                              }
-                            });
-                          }
-                        }
-                      }
-                    );
-                  }
-                }
-              );
-            } else {
-              let defaultPatientHistory = {
-                handlerId: req.user._id,
-                appointedDoctorId: req.params.docId,
-                prescription: [
-                  {
-                    date: Date.now(),
-                  },
-                ],
-              };
-              PatientHistory.create(
-                defaultPatientHistory,
-                function (error, defaultHistory) {
-                  if (error) {
-                    console.log(error);
-                  } else {
-                    User.findOneAndUpdate(
-                      { _id: req.user._id },
-                      {
-                        $push: {
-                          appointedDoctors: req.params.docId,
-                          currentDoctors: req.params.docId,
-                        },
-                      },
-                      function (err, updatedUser) {
-                        if (err) {
-                          console.log(err);
-                        } else {
-                          if (req.body.selectedSlot == "slotA") {
-                            Doctor.updateOne(
-                              { _id: ObjectId(req.params.docId) },
-                              { $inc: { "availableSlots.slotA": -1 } },
-                              { new: true }
-                            ).exec(function (err, result) {
-                              if (err) {
-                                console.log(err);
-                              } else {
-                                res.redirect(
-                                  "/userDocSection/patientDashboard"
-                                );
-                              }
-                            });
-                          } else {
-                            Doctor.updateOne(
-                              { _id: ObjectId(req.params.docId) },
-                              { $inc: { "availableSlots.slotB": -1 } },
-                              { new: true }
-                            ).exec(function (err, result) {
-                              if (err) {
-                                console.log(err);
-                              } else {
-                                res.redirect(
-                                  "/userDocSection/patientDashboard"
-                                );
-                              }
-                            });
-                          }
-                        }
-                      }
-                    );
-                  }
-                }
-              );
-            }
-          }
-        });
-      }
+    }else{
+      res.render("user/Payment/transaction", {newAppointment: newAppointment, doctorData: foundDoctor });
     }
-  });
+  })
 });
 
 //Appointment cancellation route

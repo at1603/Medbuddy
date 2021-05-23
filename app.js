@@ -42,6 +42,7 @@ var indexRoutes = require("./routes/indexRoutes.js"),
   hospHospRoutes = require("./routes/hospHospRoutes"),
   miscRoutes = require("./routes/miscRoutes"),
   videoCallRoute = require("./videocall/videoRoutes"),
+  paymentRoutes = require("./routes/paymentRoutes");
   seedDB = require("./seeds");
 
 
@@ -85,7 +86,7 @@ app.use(bloodBankRoutes);
 app.use(organDonationRoutes);
 app.use(peekintoHospitalRoutes);
 app.use(hospHospRoutes);
-
+app.use(paymentRoutes);
 app.use(miscRoutes);
 app.use(videoCallRoute);
 

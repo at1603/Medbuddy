@@ -16,7 +16,7 @@
                         <li><h4><strong>Works At: </strong><%= doctors.workAtHosp%> </h4></li>
                     </div>
                     <div class="col-md-6">
-                        <li><h4><strong>Timings: </strong><%= doctors.timing.timingFrom%> to <%= doctors.timing.timingTo%> (24 Hour Format)</h4></li>
+                        <li><h4><strong>Timings: </strong><%= moment(doctors.timing.timingFrom, 'HH:mm').format('LT')%> to <%= moment(doctors.timing.timingTo, 'HH:mm').format('LT')%></h4></li>
                     </div>
                     <div class="col-md-6">
                         <li><h4><strong>Speciality:</strong> <%=doctors.speciality%></h4></li>
@@ -38,12 +38,16 @@
         <a href="#" class="btn btn-success toggleAppointmentForm" onclick="slotChecker()">Take Appointment</a>
         <form class="container takeAppointment" action="/userDocSection/createAppointment/<%= doctors._id%>" method="POST" style="margin: 2rem 0 4rem 0; display: none;">
             <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="InputNumber">Phone Number</label>
-                    <input type="number" class="form-control" name="phone" id="InputNumber" aria-describedby="numberHelp" required>
-                    <small id="numberHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
-                    <label for="age">Age:</label>
-                    <input type="number" name="age" class="form-control" id="age">
+                <div class="form-group col-md-12"  style="display: inline-flex;">
+                    <div class="form-group col-md-6">
+                        <label for="InputNumber">Phone Number</label>
+                        <input type="number" class="form-control" name="phone" id="InputNumber" aria-describedby="numberHelp" required>
+                        <small id="numberHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>    
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="age">Age:</label>
+                        <input type="number" name="age" class="form-control" id="age">
+                    </div>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="InputSlot">Preferred Slot</label><br>
@@ -94,24 +98,6 @@
             if(slotB==0){
                 document.getElementById("slotB").disabled = true
             }
-        }
-
-        function setMin(){
-            // Use Javascript
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
-            var yyyy = today.getFullYear();
-            if(dd<10){
-            dd='0'+dd
-            } 
-            if(mm<10){
-            mm='0'+mm
-            } 
-
-            today = yyyy+'-'+mm+'-'+dd;
-                
-            document.getElementById("datefield").setAttribute("min", today);
         }
     </script>
 </html>
