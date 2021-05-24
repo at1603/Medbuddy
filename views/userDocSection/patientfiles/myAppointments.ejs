@@ -44,20 +44,18 @@
                 </tr>
               </thead>
               <tbody>
-
-                  <% count = 0 %>
-                  <% foundAppointments.forEach(function(Appointment){ count += 1%>
-                      <tr style="text-align: center;" class="<%=Appointment.activityStatus%>">
-                          <td id="cou"><%=count %></td>
-                          <td ><%= Appointment.docId.handler_id.firstName + " " + Appointment.docId.handler_id.lastName %> </td>
-                          <td><%= Appointment.disease%></td>
-                          <td><%= moment(Appointment.createdAt).format('ll')%></td>
+                  <% for(let i=foundAppointments.length -1 ;i>=0;i--) { %>
+                      <tr style="text-align: center;" class="<%=foundAppointments[i].activityStatus%>">
+                          <td id="cou"><%=foundAppointments.length - i %></td>
+                          <td ><%= foundAppointments[i].docId.handler_id.firstName + " " + foundAppointments[i].docId.handler_id.lastName %> </td>
+                          <td><%= foundAppointments[i].disease%></td>
+                          <td><%= moment(foundAppointments[i].createdAt).format('ll')%></td>
                           <td>
-                            <% if(Appointment.activityStatus){ %>
-                              <% if(Appointment.roomId != ""){%>
-                                <a class="btn btn-sm btn-info" style="margin-right:5px;margin-bottom: 2px; width: 90%;justify-content: center; display: inline-flex;" href="/start_call<%=Appointment.roomId%>">Join Room</a>
+                            <% if(foundAppointments[i].activityStatus){ %>
+                              <% if(foundAppointments[i].roomId != ""){%>
+                                <a class="btn btn-sm btn-info" style="margin-right:5px;margin-bottom: 2px; width: 90%;justify-content: center; display: inline-flex;" href="/start_call<%=foundAppointments[i].roomId%>">Join Room</a>
                                 <%}else{%>
-                            <a class="btn btn-sm btn-info" style="margin-right:5px;margin-bottom: 2px; width: 90%;justify-content: center; display: inline-flex;" href="/Appointment/<%=Appointment._id%>/show">View</a>
+                            <a class="btn btn-sm btn-info" style="margin-right:5px;margin-bottom: 2px; width: 90%;justify-content: center; display: inline-flex;" href="/Appointment/<%=foundAppointments[i]._id%>/show">View</a>
                             <button type="button" style="display: inline-flex;width: 90%; justify-content: center;" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">
                               Cancel Appointment
                             </button>
@@ -73,7 +71,7 @@
                                   <div class="modal-body">
                                     Do you want to cancel this Appointment?
                                   </div>
-                                  <form action="/userDocSection/cancelAppointment/<%=Appointment._id%>" method="POST">
+                                  <form action="/userDocSection/cancelAppointment/<%=foundAppointments[i]._id%>" method="POST">
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                       <button type="submit" class="btn btn-danger">Yes</a>
@@ -84,13 +82,13 @@
                             </div>
                           </td>
                           <%}%>
-                          <% } else if(!Appointment.activityStatus && Appointment.isCompleted){ %> 
+                          <% } else if(!foundAppointments[i].activityStatus && foundAppointments[i].isCompleted){ %> 
                             <p style="color: lightgreen;"><strong>Appointment Compeleted!</strong></p>
                           <% } else { %>
                             <p style="color: red;"><strong>Appointment Canceled!</strong></p>
                           <% } %>
                       </tr>
-                  <% })%>
+                  <% }%>
               </tbody>
             </table>
         </div>
@@ -106,7 +104,6 @@
       if ($(this).val() == "true") {
         var rowCount = $('#table .true').length;
         var table = document.getElementsByClassName("true");
-        console.log(table)
         let j=1;
         for (let i = 0; i<rowCount; i++) {
           table[i].cells[0].innerHTML = j
@@ -118,7 +115,6 @@
       else if ($(this).val() == "false") {
         var rowCount = $('#table .false').length;
         var table = document.getElementsByClassName("false");
-        console.log(table)
         let k=1;
         for (let i = 0; i<rowCount; i++) {
           table[i].cells[0].innerHTML = k
@@ -129,7 +125,6 @@
       }
       else {
         var table = document.getElementById("table");
-        console.log(table.rows.length)
         let l=1;
         for (let i = 1; i<table.rows.length; i++) {
           table.rows[i].cells[0].innerHTML = l
