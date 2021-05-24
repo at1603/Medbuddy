@@ -36,9 +36,15 @@
                   <i class="fa fa-video-camera" aria-hidden="true"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="/userDocSection/patientList/patientInfo/:id">
+                  <% if(foundUser.role == "doctor"){ %>
+                  <a href="/userDocSection/patientList/patientInfo/<%=roomId%>">
                     <i class="fa fa-phone-square" aria-hidden="true"></i>
                   </a>
+                  <%}else{%>
+                  <a href="/userDocSection/myAppointments">
+                    <i class="fa fa-phone-square" aria-hidden="true"></i>
+                  </a>
+                  <%}%>
                 </li>
               </ul>
             </div>
