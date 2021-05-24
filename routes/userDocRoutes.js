@@ -125,21 +125,16 @@ router.get("/userDocSection/patientList/patientInfo/:id", function (req, res) {
               if (err) {
                 console.log(err);
               } else {
-                Appointment.findOne({
-                  docId: ObjectId(foundDocId[0]._id),
-                  patientId: ObjectId(req.params.id),
-                  activityStatus: true,
-                }).exec(function (err, foundAppointment) {
-                  if (err) {
+                Appointment.findOne({"patientId": req.params.id, "docId": foundDocId[0]._id, "activityStatus": true}, function(err, foundAppointment){
+                  if(err){
                     console.log(err);
-                  }
-                  {
-                    console.log(foundAppointment, "asdasdadadada");
+                  }else{
+                    console.log(foundAppointment);
                     res.render("userDocSection/docfiles/patientInfo", {
                       foundDocId: foundDocId,
                       foundPatient: foundPatient,
                       foundPatientMedicalRecords: foundPatientMedicalRecords,
-                      foundAppointment: foundAppointment,
+                      foundAppointment: foundAppointment
                     });
                   }
                 });
@@ -287,18 +282,14 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
     age: req.body.age,
   };
   const dynamicSlotkey = "availableSlots." + req.body.selectedSlot;
-  Doctor.findById(req.params.docId)
-    .populate("handler_id")
-    .exec(function (err, foundDoctor) {
-      if (err) {
-        console.log(err);
-      } else {
-        res.render("user/Payment/transaction", {
-          newAppointment: newAppointment,
-          doctorData: foundDoctor,
-        });
-      }
-    });
+  Doctor.findById(req.params.docId).populate("handler_id").exec(function(err, foundDoctor){
+    if(err){
+      console.log(err);
+    }else{
+      newAppointment.paidDoctorFees = foundDoctor.fees;
+      res.render("user/Payment/transaction", {newAppointment: newAppointment, doctorData: foundDoctor });
+    }
+  })
 });
 
 //Appointment cancellation route
