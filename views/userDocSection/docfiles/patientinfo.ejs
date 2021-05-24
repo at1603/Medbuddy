@@ -5,7 +5,6 @@
     <title>Page Title</title>
   </head>
   <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientInfo.css">
-  <% console.log(foundAppointment.isPrescriptionGenerated, "hsdfhs")%>
   <body id="body-pd" onload="disable('<%=foundAppointment.isPrescriptionGenerated%>')">
     <%-include("../../partials/altNavbar"); -%>
     <%-include("../../partials/altSidebar");-%>
@@ -54,7 +53,6 @@
             </div>
           </div>
       <hr>
-      <%console.log(foundAppointment)%>
       <% if(foundPatientMedicalRecords.length > 0) { %> 
       <%for(var i=1;i<foundPatientMedicalRecords[0].prescription.length;i++){%>
       <div class="history">
@@ -66,33 +64,16 @@
             <div class="col-md-12">
               <strong>Generated On:</strong> <%= moment(foundPatientMedicalRecords[0].prescription[i].date).format('ll') %>
             </div>
+            <div class="col-md-12">
+              <strong>Disease:</strong> <%= foundPatientMedicalRecords[0].prescription[i].disease %>
+            </div>
+            <div class="col-md-12">
+              <strong>Comment By Doctor:</strong> <%= foundPatientMedicalRecords[0].prescription[i].comment %>
+            </div>
           </div>
         </div>
         <div class="row">
-
-          <div class="col1">
-            <div class="card">
-              <div class="card-body">
-                <div class="test">
-                  <table>
-                    <thead>
-                      <tr class="table100-head">
-                        <th class="column1">Recommended Test</th>
-                      </tr>
-                    </thead>
-                    <tbody id="back">
-                      <%for(var j=0;j<foundPatientMedicalRecords[0].prescription[i].test.length;j++){%>
-                      <tr>
-                        <td class="column1"><%=foundPatientMedicalRecords[0].prescription[i].test[j].testName%></td>
-                      </tr>
-                      <%}%>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col2">
+          <div class="col1" style="width: 30rem;">
             <div class="card">
               <div class="card-body">
                 <div class="medicine" id="front">
@@ -118,20 +99,22 @@
               </div>
             </div>
           </div>
-          <div class="col1">
+          <div class="col1" style="width: 25rem;">
             <div class="card">
               <div class="card-body">
                 <div class="test">
                   <table>
                     <thead>
                       <tr class="table100-head">
-                        <th class="column1">Comments</th>
+                        <th class="column1">Recommended Test</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="back">
+                      <%for(var j=0;j<foundPatientMedicalRecords[0].prescription[i].test.length;j++){%>
                       <tr>
-                        <td class="column1"><%=foundPatientMedicalRecords[0].prescription[i].comment%></td>
+                        <td class="column1"><%=foundPatientMedicalRecords[0].prescription[i].test[j].testName%></td>
                       </tr>
+                      <%}%>
                     </tbody>
                   </table>
                 </div>

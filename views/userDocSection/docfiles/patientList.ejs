@@ -13,6 +13,7 @@
     <% if(patients.length > 0) { %> 
     <div class="content-block">
         <div class="card">
+          <h3 style="text-align: center;"><strong>Available Appointments</strong></h3>
           <div id="patientList">
           <table>
             <thead>
@@ -31,7 +32,7 @@
                 <td class="column1">1</td>
                 <td class="column1"><%=patients[i].patientId.firstName+" "+patients[i].patientId.lastName%></td>
                 <td class="column1"><%= patients[i].disease %></td>
-                <td class="column7"><a href="/userDocSection/patientList/patientInfo/<%=patients[i].patientId._id%>"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
+                <td class="column7"><a href="/userDocSection/patientList/patientInfo/<%=patients[i].patientId._id%>"><i style="color: green;" class="fas fa-arrow-alt-circle-right fa-lg"></i></a></td>
 
               </tr>
               <%}%>
