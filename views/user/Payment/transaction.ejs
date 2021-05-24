@@ -96,54 +96,54 @@
           </div>
         </div>
       </div>
-      <h5 style="margin-bottom: 0.5rem; margin-top: 1rem">
-        Transaction Details:
-      </h5>
-      <div class="row">
-        <div class="col-md-12" style="display: inline-flex">
-          <div class="col-md-8">Doctor's Fees:</div>
-          <div class="col-md-3" style="display: inline-flex">250.00</div>
+      <h5 style="margin-bottom: 0.5rem; margin-top: 1rem;">Transaction Details: </h5>
+        <div class="row">
+            <div class="col-md-12" style="display: inline-flex;">
+                <div class="col-md-8">
+                    Doctor's Fees: 
+                </div>
+                <div class="col-md-3" style="display: inline-flex;">
+                    <%= parseFloat(doctorData.fees).toFixed(2) %>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12" style="display: inline-flex">
-          <div class="col-md-8">Convenience Charge:</div>
-          <div class="col-md-3" style="display: inline-flex">50.00</div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12" style="display: inline-flex">
-          <div class="col-md-8">Emergency Charge:</div>
-          <div class="col-md-3" style="display: inline-flex">
-            <%= newAppointment.isEmergency ? "100.00" : "0.00" %>
+        <div class="row">
+          <div class="col-md-12" style="display: inline-flex;">
+              <div class="col-md-8">
+                  Convenience Charge: 
+              </div>
+              <div class="col-md-3" style="display: inline-flex;">
+                  50.00
+              </div>
           </div>
         </div>
-      </div>
-      <hr />
-      <div class="row">
-        <div class="col-md-12" style="display: inline-flex">
-          <div class="col-md-8">Total:</div>
-          <div class="col-md-3" style="display: inline-flex">300.00</div>
+        <div class="row">
+          <div class="col-md-12" style="display: inline-flex;">
+              <div class="col-md-8">
+                  Emergency Charge: 
+              </div>
+              <div class="col-md-3" style="display: inline-flex;">
+                  <%= newAppointment.isEmergency ? "100.00" : "0.00" %>
+              </div>
+          </div>
         </div>
-      </div>
-      <form
-        action="/user/transaction/bookAppointment/<%=doctorData._id%>"
-        method="POST"
-      >
-        <!-- <input type="checkbox" name="confirm" id="confirmbtn" required /> -->
-        <input
-          type="hidden"
-          name="newAppointment"
-          id="hiddenAppointInput"
-          value="<%=JSON.stringify(newAppointment,null,4)%>"
-        />
-        <button
-          class="btn btn-success btn-sm"
-          style="margin-left: 30rem; margin-top: 2rem; margin-bottom: 2rem"
-        >
-          Confirm and Book!
-        </button>
-      </form>
+        <hr>
+        <div class="row">
+          <div class="col-md-12" style="display: inline-flex;">
+              <div class="col-md-8">
+                  Total: 
+              </div>
+              <div class="col-md-3" style="display: inline-flex;">
+                  <%= newAppointment.isEmergency ? (parseFloat(doctorData.fees) + parseFloat(150)).toFixed(2) : (parseFloat(doctorData.fees) + parseFloat(50)).toFixed(2) %>
+              </div>
+          </div>
+        </div>
+        <% //console.log(JSON.stringify(newAppointment, null, 4))%>
+        <form action="/user/transaction/bookAppointment/<%=doctorData._id%>" method="POST">
+            <!-- <input type="checkbox" name="confirm" id="confirmbtn" required /> -->
+            <input type="hidden" name="newAppointment" id="hiddenAppointInput" value="<%=JSON.stringify(newAppointment, null, 4)%>" />
+            <button class="btn btn-success btn-sm" style="margin-left: 30rem; margin-top: 2rem; margin-bottom: 2rem;">Confirm and Book!</button>
+        </form>
     </div>
     <%-include("../../partials/footer");-%>
   </body>
