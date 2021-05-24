@@ -4,9 +4,9 @@
 
     <title>Page Title</title>
   </head>
- 
   <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientInfo.css">
-  <body id="body-pd" onload="disable('<%=!foundAppointment.isPrescriptionGenerated%>')">
+  <% console.log(foundAppointment.isPrescriptionGenerated, "hsdfhs")%>
+  <body id="body-pd" onload="disable('<%=foundAppointment.isPrescriptionGenerated%>')">
     <%-include("../../partials/altNavbar"); -%>
     <%-include("../../partials/altSidebar");-%>
 
@@ -59,8 +59,14 @@
       <%for(var i=1;i<foundPatientMedicalRecords[0].prescription.length;i++){%>
       <div class="history">
         <div id="timeline">
-          <strong>Date:</strong>  <%= foundPatientMedicalRecords[0].prescription[i].date %>
-
+          <div class="row">
+            <div class="col-md-12">
+              <strong>Appointment: </strong><%= i %>
+            </div>
+            <div class="col-md-12">
+              <strong>Generated On:</strong> <%= moment(foundPatientMedicalRecords[0].prescription[i].date).format('ll') %>
+            </div>
+          </div>
         </div>
         <div class="row">
 
@@ -153,13 +159,17 @@
     </script>
     <script>
       function disable(isDisabled){
-        console.log("ss",Boolean(isDisabled))
-          document.getElementById("prescBtn").disabled = Boolean(isDisabled)
-          document.getElementById("cmpltBtn").disabled = !Boolean(isDisabled)
-          document.getElementById("prescBtn").style.cursor = none
-          document.getElementById("cmpltBtn").disabled = !Boolean(isDisabled)
-
-
+        if(isDisabled === 'true'){
+          document.getElementById("prescBtn").disabled = true
+          document.getElementById("cmpltBtn").disabled = false
+          document.getElementById("prescBtn").style.cursor = "not-allowed";
+          document.getElementById("cmpltBtn").style.pointerEvents = "none";
+        } else{
+          document.getElementById("prescBtn").disabled = false
+          document.getElementById("cmpltBtn").disabled = true
+          document.getElementById("cmpltBtn").style.cursor = "not-allowed";
+          document.getElementById("cmpltBtn").style.pointerEvents = "none";
+        }
       }
     </script>
 </body>
