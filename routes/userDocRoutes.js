@@ -59,13 +59,18 @@ router.get("/generatePresc/:id", function (req, res) {
   });
 });
 router.get("/userDocSection/doctor/createProfile", function (req, res) {
-  Doctor.findOne().where("handler_id").equals(req.user._id).exec(function(err, foundDoctorData){
-    if(err){
-      console.log(err);
-    }else{
-      res.render("userDocSection/docfiles/profile", {foundData: foundDoctorData});
-    }
-  });
+  Doctor.findOne()
+    .where("handler_id")
+    .equals(req.user._id)
+    .exec(function (err, foundDoctorData) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("userDocSection/docfiles/profile", {
+          foundData: foundDoctorData,
+        });
+      }
+    });
 });
 
 router.get("/userDocSection/patientList", function (req, res) {
@@ -120,9 +125,23 @@ router.get("/userDocSection/patientList/patientInfo/:id", function (req, res) {
               if (err) {
                 console.log(err);
               } else {
-                res.render("userDocSection/docfiles/patientInfo", {
-                  foundPatient: foundPatient,
-                  foundPatientMedicalRecords: foundPatientMedicalRecords,
+                Appointment.findOne({
+                  docId: ObjectId(foundDocId[0]._id),
+                  patientId: ObjectId(req.params.id),
+                  activityStatus: true,
+                }).exec(function (err, foundAppointment) {
+                  if (err) {
+                    console.log(err);
+                  }
+                  {
+                    console.log(foundAppointment, "asdasdadadada");
+                    res.render("userDocSection/docfiles/patientInfo", {
+                      foundDocId: foundDocId,
+                      foundPatient: foundPatient,
+                      foundPatientMedicalRecords: foundPatientMedicalRecords,
+                      foundAppointment: foundAppointment,
+                    });
+                  }
                 });
               }
             });
@@ -268,13 +287,18 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
     age: req.body.age,
   };
   const dynamicSlotkey = "availableSlots." + req.body.selectedSlot;
-  Doctor.findById(req.params.docId).populate("handler_id").exec(function(err, foundDoctor){
-    if(err){
-      console.log(err);
-    }else{
-      res.render("user/Payment/transaction", {newAppointment: newAppointment, doctorData: foundDoctor });
-    }
-  })
+  Doctor.findById(req.params.docId)
+    .populate("handler_id")
+    .exec(function (err, foundDoctor) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("user/Payment/transaction", {
+          newAppointment: newAppointment,
+          doctorData: foundDoctor,
+        });
+      }
+    });
 });
 
 //Appointment cancellation route
@@ -457,7 +481,7 @@ router.post(
               docId: foundDoctor.id,
               activityStatus: true,
             },
-            { $set: { isCompleted: true, activityStatus: false } },
+            { $set: { isCompleted: true, activityStatus: false, roomId: "" } },
             function (error, updatedAppointment) {
               if (error) {
                 console.log(error);

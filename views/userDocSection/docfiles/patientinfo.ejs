@@ -6,7 +6,7 @@
   </head>
  
   <link rel="stylesheet" href="/stylesheets/userDocSection/docfiles/patientInfo.css">
-  <body id="body-pd">
+  <body id="body-pd" onload="disable('<%=!foundAppointment.isPrescriptionGenerated%>')">
     <%-include("../../partials/altNavbar"); -%>
     <%-include("../../partials/altSidebar");-%>
 
@@ -34,25 +34,27 @@
             <div class="col-md-4">
               <div class="col-md-12">
                 <form id="form2" action="/generatePresc/<%=foundPatient._id%>" method="GET">
-                  <button type="submit" class="btn btn-success" style="width: 15rem; border-radius: 25px;">Generate Prescription</button>
+                  <button id="prescBtn" type="submit" class="btn btn-success" style="width: 15rem; border-radius: 25px;">Generate Prescription</button>
                 </form>
               </div>
               <div class="col-md-12" style="margin-top: 3px;">
                 <form id="form1" action="/start_call" method="POST">
                   <input type="hidden" name="phone" id="phone" value=<%=foundPatient.phone%>>
                   <input type="hidden" name="email" id="" value=<%=foundPatient.email%>>
-                  <input type="hidden" name="filename" value=<%=foundPatient._id%>>
+                  <input type="hidden" name="patientId" value=<%=foundPatient._id%>>
+                  <input type="hidden" name="docId" value=<%=foundDocId[0]._id%>>
                   <button type="submit" class="btn btn-warning" style="width: 15rem;border-radius: 25px;" onclick="run();">Start Appointment</button>
                 </form>
               </div>
               <div class="col-md-12" style="margin-top: 3px;">
                 <form action="/userDocSection/completeAppointment/<%=foundPatient._id%>" method="POST">
-                  <button type="submit" class="btn btn-danger" style="width: 15rem;border-radius: 25px;">Complete Appointment</button>
+                  <button id="cmpltBtn" type="submit" class="btn btn-danger" style="width: 15rem;border-radius: 25px;" disabled=<%=!foundAppointment.isPrescriptionGenerated%>>Complete Appointment</button>
                 </form>
               </div>
             </div>
           </div>
       <hr>
+      <%console.log(foundAppointment)%>
       <% if(foundPatientMedicalRecords.length > 0) { %> 
       <%for(var i=1;i<foundPatientMedicalRecords[0].prescription.length;i++){%>
       <div class="history">
@@ -149,7 +151,17 @@
 }
       }
     </script>
-    
+    <script>
+      function disable(isDisabled){
+        console.log("ss",Boolean(isDisabled))
+          document.getElementById("prescBtn").disabled = Boolean(isDisabled)
+          document.getElementById("cmpltBtn").disabled = !Boolean(isDisabled)
+          document.getElementById("prescBtn").style.cursor = none
+          document.getElementById("cmpltBtn").disabled = !Boolean(isDisabled)
+
+
+      }
+    </script>
 </body>
 
 </html>

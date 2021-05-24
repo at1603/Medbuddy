@@ -23,6 +23,7 @@ var appointmentSchema = new mongoose.Schema({
   review: { type: Number, default: 0, required: false },
   isPrescriptionGenerated: { type: Boolean, default: false, required: false },
   isCompleted: { type: Boolean, default: false, required: false },
+  roomId: { type: String, default: "" },
 });
 
 module.exports = mongoose.model("Appointment", appointmentSchema);

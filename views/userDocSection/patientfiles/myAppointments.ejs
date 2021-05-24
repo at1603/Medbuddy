@@ -14,10 +14,26 @@
     <%-include("../../partials/altSidebar");-%>
     <% if(foundAppointments.length > 0){ %>
     <div class="content-block">
+      <div  style="margin: auto;">
+        <div style="display: inline;"><a href="/userDocSection/patientDashboard" class="btn btn-xs btn-secondary" >Go Back!</a>
+        </div>
+        
+      </div>
       <div class="card" style="width: 80%; margin: auto;height: 100%;">
-        <h4 style="text-align: center; margin: 1rem auto 2rem"><strong>Appointment's list</strong></h4>
+        <div style="display: inline-flex;">
+          <h4 style="text-align: center; margin: 1rem auto 2rem"><strong>Appointment's list</strong></h4>
+          <div style="float: right;">
+            <label for="filter">Filter</label>
+            <select name="filter" id="filter" style="border: 2px solid black;" class="form-control">
+              <option value="all">All</option>
+              <option value="true">Active</option>
+              <option value="false">Canceled</option>
+            </select>
+          </div>
+        </div>
+        
         <div id="patientList" style="width: 100%;"> 
-          <table class="table table-striped" style="height: 100%;">
+          <table id="table" class="table table-striped" style="height: 100%;">
               <thead style="color: white;">
                 <tr>
                   <th scope="col">S.N</th>
@@ -28,15 +44,19 @@
                 </tr>
               </thead>
               <tbody>
+
                   <% count = 0 %>
                   <% foundAppointments.forEach(function(Appointment){ count += 1%>
-                      <tr style="text-align: center;">
-                          <td><%=count %></td>
+                      <tr style="text-align: center;" class="<%=Appointment.activityStatus%>">
+                          <td id="cou"><%=count %></td>
                           <td ><%= Appointment.docId.handler_id.firstName + " " + Appointment.docId.handler_id.lastName %> </td>
                           <td><%= Appointment.disease%></td>
                           <td><%= moment(Appointment.createdAt).format('ll')%></td>
                           <td>
                             <% if(Appointment.activityStatus){ %>
+                              <% if(Appointment.roomId != ""){%>
+                                <a class="btn btn-sm btn-info" style="margin-right:5px;margin-bottom: 2px; width: 90%;justify-content: center; display: inline-flex;" href="/start_call<%=Appointment.roomId%>">Join Room</a>
+                                <%}else{%>
                             <a class="btn btn-sm btn-info" style="margin-right:5px;margin-bottom: 2px; width: 90%;justify-content: center; display: inline-flex;" href="/Appointment/<%=Appointment._id%>/show">View</a>
                             <button type="button" style="display: inline-flex;width: 90%; justify-content: center;" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">
                               Cancel Appointment
@@ -63,6 +83,7 @@
                               </div>
                             </div>
                           </td>
+                          <%}%>
                           <% } else if(!Appointment.activityStatus && Appointment.isCompleted){ %> 
                             <p style="color: lightgreen;"><strong>Appointment Compeleted!</strong></p>
                           <% } else { %>
@@ -78,8 +99,48 @@
     <% } else { %>
       <h4 style="text-align: center;">No Appointments found!!</h4>
     <% } %>
-    <a href="/userDocSection/patientDashboard" class="btn btn-xs btn-secondary" style=" margin-top: 2rem; margin-right: 8rem; float: right;">Go Back!</a>
     <%-include("../../partials/footer"); -%>
   </body>
+  <script>
+    $('#filter').on('change', function () {
+      if ($(this).val() == "true") {
+        var rowCount = $('#table .true').length;
+        var table = document.getElementsByClassName("true");
+        console.log(table)
+        let j=1;
+        for (let i = 0; i<rowCount; i++) {
+          table[i].cells[0].innerHTML = j
+          j+=1
+        }
+        $(".true").show()
+        $(".false").hide()
+      }
+      else if ($(this).val() == "false") {
+        var rowCount = $('#table .false').length;
+        var table = document.getElementsByClassName("false");
+        console.log(table)
+        let k=1;
+        for (let i = 0; i<rowCount; i++) {
+          table[i].cells[0].innerHTML = k
+          k+=1
+        }
+        $(".false").show()
+        $(".true").hide()
+      }
+      else {
+        var table = document.getElementById("table");
+        console.log(table.rows.length)
+        let l=1;
+        for (let i = 1; i<table.rows.length; i++) {
+          table.rows[i].cells[0].innerHTML = l
+          l+=1
+        }
+        $(".true").show()
+        $(".false").show()
+      }
+    });
+    
+  </script>
+  
 </html>
 

@@ -2,104 +2,149 @@
 <html lang="en">
   <link rel="stylesheet" href="/stylesheets/landing.css" />
   <!-- <link rel="stylesheet" href="/stylesheets/partials/navbar.css" /> -->
-    <script>
-        // $(document).ready(function() {
-        //     $("#confirmbtn").click(function(){
-        //         $('#hiddenAppointInput').val(JSON.stringify(newAppointment));
-        //         console.log(JSON.stringify(newAppointment), "sfsafasf")
-        //     });
-        // }); 
-    </script>
+  <script>
+    // $(document).ready(function() {
+    //     $("#confirmbtn").click(function(){
+    //         $('#hiddenAppointInput').val(JSON.stringify(newAppointment));
+    //         console.log(JSON.stringify(newAppointment), "sfsafasf")
+    //     });
+    // });
+  </script>
   <%- include("../../partials/header"); -%>
   <body id="body-pd">
     <%-include("../../partials/altNavbar");-%>
     <%-include("../../partials/altSidebar");-%>
-    
 
-    <div style="justify-content: center;width: 60%; margin: auto; border: 1px solid gray; border-radius: 25px; padding: 2rem; background-color: #eeeeeec5;">
-        <h3 style="text-align: center"><strong>Payment Page</strong></h3>
-        <div class="row">
-            <div class="col-md-12">
-              <h4 style="margin-bottom: 0.5rem; margin-top: 1rem;">Doctor's Info</h4>
-              <div>
-                <span style="display: inline;">Mr./Mrs./Ms./: <strong><%= doctorData.handler_id.firstName + " " + doctorData.handler_id.lastName %></strong></span> 
-              </div>
-              <div>
-                <span style="display: inline;">Speciality: <strong><%= doctorData.speciality %></strong></span>
-              </div>
-              <div>
-                <span style="display: inline;">Contact Email: <strong><%= doctorData.handler_id.email %></strong></span>
-              </div>
-            </div>
+    <div
+      style="
+        justify-content: center;
+        width: 60%;
+        margin: auto;
+        border: 1px solid gray;
+        border-radius: 25px;
+        padding: 2rem;
+        background-color: #eeeeeec5;
+      "
+    >
+      <h3 style="text-align: center"><strong>Payment Page</strong></h3>
+      <div class="row">
+        <div class="col-md-12">
+          <h4 style="margin-bottom: 0.5rem; margin-top: 1rem">Doctor's Info</h4>
+          <div>
+            <span style="display: inline"
+              >Mr./Mrs./Ms./:
+              <strong
+                ><%= doctorData.handler_id.firstName + " " +
+                doctorData.handler_id.lastName %></strong
+              ></span
+            >
           </div>
-          <div class="row">
-            <div class="col-md-12">
-                <h4 style="margin-bottom: 0.5rem; margin-top: 1rem;">Patient's Appointment Info</h4>
-                <div>
-                    <span style="display: inline;">Registered By: <strong><%= currentUser.firstName + " " + currentUser.lastName %></strong></span> 
-                </div>
-                <div>
-                    <span style="display: inline;">Phone Number: <strong><%= newAppointment.phone %></strong></span>
-                </div>
-                <div>
-                    <span style="display: inline;">Prefered Slot: <strong><%= (newAppointment.selectedSlot.toString().trim() === 'slotA') ? "Morning" : "Evening" %>, <%= moment(newAppointment.slot, 'HH:mm').format('LT') %></strong></span>
-                </div>
-                <div>
-                    <span style="display: inline;">Disease: <strong><%= newAppointment.disease %></strong></span>
-                </div>
-                <div>
-                    <span style="display: inline;">Emergency Appointment: <strong><%= newAppointment.isEmergency ? "Yes" : "No" %></strong></span>
-                </div>
-            </div>
+          <div>
+            <span style="display: inline"
+              >Speciality: <strong><%= doctorData.speciality %></strong></span
+            >
           </div>
-          <h5 style="margin-bottom: 0.5rem; margin-top: 1rem;">Transaction Details: </h5>
-            <div class="row">
-                <div class="col-md-12" style="display: inline-flex;">
-                    <div class="col-md-8">
-                        Doctor's Fees: 
-                    </div>
-                    <div class="col-md-3" style="display: inline-flex;">
-                        250.00
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12" style="display: inline-flex;">
-                  <div class="col-md-8">
-                      Convenience Charge: 
-                  </div>
-                  <div class="col-md-3" style="display: inline-flex;">
-                      50.00
-                  </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12" style="display: inline-flex;">
-                  <div class="col-md-8">
-                      Emergency Charge: 
-                  </div>
-                  <div class="col-md-3" style="display: inline-flex;">
-                      <%= newAppointment.isEmergency ? "100.00" : "0.00" %>
-                  </div>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-md-12" style="display: inline-flex;">
-                  <div class="col-md-8">
-                      Total: 
-                  </div>
-                  <div class="col-md-3" style="display: inline-flex;">
-                      300.00
-                  </div>
-              </div>
-            </div>
-            <form action="/user/transaction/bookAppointment/<%=doctorData._id%>" method="POST">
-                <!-- <input type="checkbox" name="confirm" id="confirmbtn" required /> -->
-                <input type="hidden" name="newAppointment" id="hiddenAppointInput" value=<%=JSON.stringify(newAppointment)%> />
-                <button class="btn btn-success btn-sm" style="margin-left: 30rem; margin-top: 2rem; margin-bottom: 2rem;">Confirm and Book!</button>
-            </form>
+          <div>
+            <span style="display: inline"
+              >Contact Email:
+              <strong><%= doctorData.handler_id.email %></strong></span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4 style="margin-bottom: 0.5rem; margin-top: 1rem">
+            Patient's Appointment Info
+          </h4>
+          <div>
+            <span style="display: inline"
+              >Registered By:
+              <strong
+                ><%= currentUser.firstName + " " + currentUser.lastName
+                %></strong
+              ></span
+            >
+          </div>
+          <div>
+            <span style="display: inline"
+              >Phone Number: <strong><%= newAppointment.phone %></strong></span
+            >
+          </div>
+          <div>
+            <span style="display: inline"
+              >Prefered Slot:
+              <strong
+                ><%= (newAppointment.selectedSlot.toString().trim() === 'slotA')
+                ? "Morning" : "Evening" %>, <%= moment(newAppointment.slot,
+                'HH:mm').format('LT') %></strong
+              ></span
+            >
+          </div>
+          <div>
+            <span style="display: inline"
+              >Disease: <strong><%= newAppointment.disease %></strong></span
+            >
+          </div>
+          <div>
+            <span style="display: inline"
+              >Emergency Appointment:
+              <strong
+                ><%= newAppointment.isEmergency ? "Yes" : "No" %></strong
+              ></span
+            >
+          </div>
+        </div>
+      </div>
+      <h5 style="margin-bottom: 0.5rem; margin-top: 1rem">
+        Transaction Details:
+      </h5>
+      <div class="row">
+        <div class="col-md-12" style="display: inline-flex">
+          <div class="col-md-8">Doctor's Fees:</div>
+          <div class="col-md-3" style="display: inline-flex">250.00</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" style="display: inline-flex">
+          <div class="col-md-8">Convenience Charge:</div>
+          <div class="col-md-3" style="display: inline-flex">50.00</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" style="display: inline-flex">
+          <div class="col-md-8">Emergency Charge:</div>
+          <div class="col-md-3" style="display: inline-flex">
+            <%= newAppointment.isEmergency ? "100.00" : "0.00" %>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-12" style="display: inline-flex">
+          <div class="col-md-8">Total:</div>
+          <div class="col-md-3" style="display: inline-flex">300.00</div>
+        </div>
+      </div>
+      <form
+        action="/user/transaction/bookAppointment/<%=doctorData._id%>"
+        method="POST"
+      >
+        <!-- <input type="checkbox" name="confirm" id="confirmbtn" required /> -->
+        <input
+          type="hidden"
+          name="newAppointment"
+          id="hiddenAppointInput"
+          value="<%=JSON.stringify(newAppointment,null,4)%>"
+        />
+        <button
+          class="btn btn-success btn-sm"
+          style="margin-left: 30rem; margin-top: 2rem; margin-bottom: 2rem"
+        >
+          Confirm and Book!
+        </button>
+      </form>
     </div>
     <%-include("../../partials/footer");-%>
-</body>
+  </body>
 </html>
