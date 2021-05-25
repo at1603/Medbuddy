@@ -1,147 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-  <link rel="stylesheet" href="/stylesheets/landing.css" />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  />
-  <%- include("../../partials/header"); -%>
+<link rel="stylesheet" href="/stylesheets/landing.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<%- include("../../partials/header"); -%>
   <!-- <link rel="stylesheet" href="/stylesheets/partials/navbar.css" /> -->
   <link rel="stylesheet" href="/stylesheets/dashboard.css" />
   <script src="https://cdn2.hubspot.net/hubfs/476360/utils.js"></script>
 
   <body id="body-pd">
-   
-    <%-include("../../partials/altNavbar");-%>
-    <%-include("../../partials/altSidebar");-%>
-    <% console.log(doctorStats)%>
-    <main>
-      <div class="div1 card">
-        <div class="clearfix">
-          <div class="card-icon shadow-primary bg-blue">
-            <i class="material-icons align-middle">local_activity</i>
-          </div>
-          <div class="card-right">
-            <div>
-              <h5 class="pull-right">Earning</h5>
+
+    <%- include("../../partials/altNavbar"); -%>
+      <%- include("../../partials/altSidebar"); -%>
+        <% console.log(doctorStats)%>
+          <main>
+            <div class="div1 card">
+              <div class="clearfix">
+                <div class="card-icon shadow-primary bg-blue">
+                  <i class="material-icons align-middle">local_activity</i>
+                </div>
+                <div class="card-right">
+                  <div>
+                    <h5 class="pull-right">Earning</h5>
+                  </div>
+                  <div class="m-r-10 m-l-10">
+                    <h3 class="font-weight-bold pull-right mb-0">Rs <%=doctorStats.earnings %>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="card-chart">
+                <div class="chartjs-size-monitor">
+                  <div class="chartjs-size-monitor-expand"></div>
+                  <div class="chartjs-size-monitor-shrink"></div>
+                </div>
+                <canvas id="div1" basechart="" class="chartjs-render-monitor" width="432" height="216"
+                  style="display: block; width: 432px; height: 216px"></canvas>
+              </div>
             </div>
-            <div class="m-r-10 m-l-10">
-              <h3 class="font-weight-bold pull-right mb-0">Rs <%=doctorStats.earnings %></h3>
+            <div class="div2 card">
+              <div class="clearfix">
+                <div class="card-icon shadow-primary bg-green" style="background: #228b22ba">
+                  <i class="material-icons align-middle">person_add</i>
+                </div>
+                <div class="card-right">
+                  <div>
+                    <h5 class="pull-right">New Patients</h5>
+                  </div>
+                  <div class="m-r-10 m-l-10">
+                    <h3 class="font-weight-bold pull-right mb-0">
+                      <%=patientsLength%>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="card-chart">
+                <div class="chartjs-size-monitor">
+                  <div class="chartjs-size-monitor-expand"></div>
+                  <div class="chartjs-size-monitor-shrink"></div>
+                </div>
+                <canvas id="div2" basechart="" class="chartjs-render-monitor" width="432" height="216"
+                  style="display: block; width: 432px; height: 216px"></canvas>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="card-chart">
-          <div class="chartjs-size-monitor">
-            <div class="chartjs-size-monitor-expand"></div>
-            <div class="chartjs-size-monitor-shrink"></div>
-          </div>
-          <canvas
-            id="div1"
-            basechart=""
-            class="chartjs-render-monitor"
-            width="432"
-            height="216"
-            style="display: block; width: 432px; height: 216px"
-          ></canvas>
-        </div>
-      </div>
-      <div class="div2 card">
-        <div class="clearfix">
-          <div
-            class="card-icon shadow-primary bg-green"
-            style="background: #228b22ba"
-          >
-            <i class="material-icons align-middle">person_add</i>
-          </div>
-          <div class="card-right">
-            <div>
-              <h5 class="pull-right">New Patients</h5>
+            <div class="div3 card">
+              <div class="clearfix">
+                <div class="card-icon shadow-primary bg-orange" style="background: orange">
+                  <i class="material-icons align-middle">content_cut</i>
+                </div>
+                <div class="card-right">
+                  <div>
+                    <h5 class="pull-right">Rating</h5>
+                  </div>
+                  <div class="m-r-10 m-l-10">
+                    <h3 class="font-weight-bold pull-right mb-0">
+                      <%=doctorStats.rating%>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="card-chart">
+                <div class="chartjs-size-monitor">
+                  <div class="chartjs-size-monitor-expand"></div>
+                  <div class="chartjs-size-monitor-shrink"></div>
+                </div>
+                <canvas id="div3" basechart="" class="chartjs-render-monitor" width="432" height="216"
+                  style="display: block; width: 432px; height: 216px"></canvas>
+              </div>
             </div>
-            <div class="m-r-10 m-l-10">
-              <h3 class="font-weight-bold pull-right mb-0"><%=patientsLength%></h3>
+            <div class="div4 card">
+              <div class="clearfix">
+                <div class="card-icon shadow-primary bg-purple" style="background: #8309d0b8">
+                  <i class="material-icons align-middle">face</i>
+                </div>
+                <div class="card-right">
+                  <div>
+                    <h5 class="pull-right">Appointments</h5>
+                  </div>
+                  <div class="m-r-10 m-l-10">
+                    <h3 class="font-weight-bold pull-right mb-0">
+                      <%=doctorStats.appointment%>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="card-chart">
+                <div class="chartjs-size-monitor">
+                  <div class="chartjs-size-monitor-expand"></div>
+                  <div class="chartjs-size-monitor-shrink"></div>
+                </div>
+                <canvas id="div4" basechart="" class="chartjs-render-monitor" width="432" height="216"
+                  style="display: block; width: 432px; height: 216px"></canvas>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="card-chart">
-          <div class="chartjs-size-monitor">
-            <div class="chartjs-size-monitor-expand"></div>
-            <div class="chartjs-size-monitor-shrink"></div>
-          </div>
-          <canvas
-            id="div2"
-            basechart=""
-            class="chartjs-render-monitor"
-            width="432"
-            height="216"
-            style="display: block; width: 432px; height: 216px"
-          ></canvas>
-        </div>
-      </div>
-      <div class="div3 card">
-        <div class="clearfix">
-          <div
-            class="card-icon shadow-primary bg-orange"
-            style="background: orange"
-          >
-            <i class="material-icons align-middle">content_cut</i>
-          </div>
-          <div class="card-right">
-            <div>
-              <h5 class="pull-right">Rating</h5>
-            </div>
-            <div class="m-r-10 m-l-10">
-              <h3 class="font-weight-bold pull-right mb-0"><%=doctorStats.rating%></h3>
-            </div>
-          </div>
-        </div>
-        <div class="card-chart">
-          <div class="chartjs-size-monitor">
-            <div class="chartjs-size-monitor-expand"></div>
-            <div class="chartjs-size-monitor-shrink"></div>
-          </div>
-          <canvas
-            id="div3"
-            basechart=""
-            class="chartjs-render-monitor"
-            width="432"
-            height="216"
-            style="display: block; width: 432px; height: 216px"
-          ></canvas>
-        </div>
-      </div>
-      <div class="div4 card">
-        <div class="clearfix">
-          <div
-            class="card-icon shadow-primary bg-purple"
-            style="background: #8309d0b8"
-          >
-            <i class="material-icons align-middle">face</i>
-          </div>
-          <div class="card-right">
-            <div>
-              <h5 class="pull-right">Appointments</h5>
-            </div>
-            <div class="m-r-10 m-l-10">
-              <h3 class="font-weight-bold pull-right mb-0"><%=doctorStats.appointment%></h3>
-            </div>
-          </div>
-        </div>
-        <div class="card-chart">
-          <div class="chartjs-size-monitor">
-            <div class="chartjs-size-monitor-expand"></div>
-            <div class="chartjs-size-monitor-shrink"></div>
-          </div>
-          <canvas
-            id="div4"
-            basechart=""
-            class="chartjs-render-monitor"
-            width="432"
-            height="216"
-            style="display: block; width: 432px; height: 216px"
-          ></canvas>
-        </div>
-      </div>
-      <!-- <div class="div5 card">
+            <!-- <div class="div5 card">
         
           <canvas  id="div5" width="883.5" height="450"  style="background-color:rgba(255,255,255,1.00);border-radius:0px;width:883.5px;height:450px;padding-left:0px;padding-right:0px;padding-top:0px;padding-bottom:0px"></canvas>
 
@@ -150,48 +121,61 @@
       <div class="div6 card">
         <canvas id="div6" width="883.5" height="450" style="width: 883.5px;height: 450px;" class="chartjs-render-monitor"></canvas>
       </div> -->
-      <!-- <div class="div7 card">div7</div> -->
-      <% if(emergencyPatient.length>0){%>
-      <div class="div8 card">
-        <div id="div8">
-          <table>
-            <thead>
-              <tr class="table100-head">
-                <th class="column1">S.N</th>
-                <th class="column1">Patient Name</th>
-                <th class="column1">Disease</th>
-                <th class="column1">Slot</th>
-                <th class="column1">Contact</th>
-                <th class="column7">Action</th>
-              </tr>
-            </thead>
-            <tbody id="front">
-              <%for(var i=0;i<emergencyPatient.length;i++){%>
-              <tr>
-                <td class="column1"><%=i+1%></td>
-                <td class="column1"><%=emergencyPatient[i].patientId.firstName + " " + emergencyPatient[i].patientId.lastName%></td>
-                <td class="column1"><%=emergencyPatient[i].disease %></td>
-                <td class="column1"><%=emergencyPatient[i].selectedSlot %></td>
-                <td class="column1"><%=emergencyPatient[i].phone %></td>
+            <!-- <div class="div7 card">div7</div> -->
+            <% if(emergencyPatient.length>0){%>
+              <div class="div8 card">
+                <div id="div8">
+                  <table>
+                    <thead>
+                      <tr class="table100-head">
+                        <th class="column1">S.N</th>
+                        <th class="column1">Patient Name</th>
+                        <th class="column1">Disease</th>
+                        <th class="column1">Slot</th>
+                        <th class="column1">Contact</th>
+                        <th class="column7">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="front">
+                      <%for(var i=0;i<emergencyPatient.length;i++){%>
+                        <tr>
+                          <td class="column1">
+                            <%=i+1%>
+                          </td>
+                          <td class="column1">
+                            <%=emergencyPatient[i].patientId.firstName + " " + emergencyPatient[i].patientId.lastName%>
+                          </td>
+                          <td class="column1">
+                            <%=emergencyPatient[i].disease %>
+                          </td>
+                          <td class="column1">
+                            <%=emergencyPatient[i].selectedSlot %>
+                          </td>
+                          <td class="column1">
+                            <%=emergencyPatient[i].phone %>
+                          </td>
 
-                <td><a href="/userDocSection/patientList/patientInfo/<%=emergencyPatient[i].patientId._id%>"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
-              </tr>
+                          <td><a
+                              href="/userDocSection/patientList/patientInfo/<%=emergencyPatient[i].patientId._id%>"><i
+                                class="fa fa-plus" aria-hidden="true"></i></a></td>
+                        </tr>
+                        <%}%>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
               <%}%>
-             
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <%}%>
-    </main>
-    <%-include("../../partials/footer");-%>
-    <script src="/jsFiles/chartJs/div1.js"></script>
-    <script src="/jsFiles/chartJs/div2.js"></script>
-    <script src="/jsFiles/chartJs/div3.js"></script>
-    <script src="/jsFiles/chartJs/div4.js"></script>
-    <script src="/jsFiles/chartJs/div5.js"></script>
-    <script src="/jsFiles/chartJs/div6.js"></script>
+          </main>
+          <%- include("../../partials/footer"); -%>
+            <script src="/jsFiles/chartJs/div1.js"></script>
+            <script src="/jsFiles/chartJs/div2.js"></script>
+            <script src="/jsFiles/chartJs/div3.js"></script>
+            <script src="/jsFiles/chartJs/div4.js"></script>
+            <script src="/jsFiles/chartJs/div5.js"></script>
+            <script src="/jsFiles/chartJs/div6.js"></script>
 
 
   </body>
+
 </html>

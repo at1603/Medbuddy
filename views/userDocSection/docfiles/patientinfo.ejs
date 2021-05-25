@@ -47,7 +47,7 @@
               </div>
               <div class="col-md-12" style="margin-top: 3px;">
                 <form action="/userDocSection/completeAppointment/<%=foundPatient._id%>" method="POST">
-                  <button id="cmpltBtn" type="submit" class="btn btn-danger" style="width: 15rem;border-radius: 25px;" disabled=<%=!foundAppointment.isPrescriptionGenerated%>>Complete Appointment</button>
+                  <button id="cmpltBtn" type="submit" class="btn btn-danger" style="width: 15rem;border-radius: 25px;" >Complete Appointment</button>
                 </form>
               </div>
             </div>
@@ -146,7 +146,7 @@
           document.getElementById("prescBtn").disabled = true
           document.getElementById("cmpltBtn").disabled = false
           document.getElementById("prescBtn").style.cursor = "not-allowed";
-          document.getElementById("cmpltBtn").style.pointerEvents = "none";
+          document.getElementById("prescBtn").style.pointerEvents = "none";
         } else{
           document.getElementById("prescBtn").disabled = false
           document.getElementById("cmpltBtn").disabled = true

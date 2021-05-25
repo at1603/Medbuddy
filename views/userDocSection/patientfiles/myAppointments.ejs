@@ -27,7 +27,7 @@
             <select name="filter" id="filter" style="border: 2px solid black;" class="form-control">
               <option value="all">All</option>
               <option value="true">Active</option>
-              <option value="false">Canceled</option>
+              <option value="false">Canceled or Completed</option>
             </select>
           </div>
         </div>
@@ -55,7 +55,6 @@
                               <% if(foundAppointments[i].roomId != ""){%>
                                 <a class="btn btn-sm btn-info" style="margin-right:5px;margin-bottom: 2px; width: 90%;justify-content: center; display: inline-flex;" href="/start_call<%=foundAppointments[i].roomId%>">Join Room</a>
                                 <%}else{%>
-                            <a class="btn btn-sm btn-info" style="margin-right:5px;margin-bottom: 2px; width: 90%;justify-content: center; display: inline-flex;" href="/Appointment/<%=foundAppointments[i]._id%>/show">View</a>
                             <button type="button" style="display: inline-flex;width: 90%; justify-content: center;" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">
                               Cancel Appointment
                             </button>

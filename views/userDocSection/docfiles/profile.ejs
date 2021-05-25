@@ -3,10 +3,11 @@
   <link rel="stylesheet" href="/stylesheets/landing.css" />
   <!-- <link rel="stylesheet" href="/stylesheets/partials/navbar.css" /> -->
 
-  <%- include("../../partials/header"); -%>
+  <%- include("../../partials/header"); -%> <%-
+  include("../../partials/altNavbar"); -%> <%-
+  include("../../partials/altSidebar"); -%>
+
   <body id="body-pd">
-    <%-include("../../partials/altNavbar");-%>
-    <%-include("../../partials/altSidebar");-%>
     <div
       class="card"
       style="
@@ -30,7 +31,7 @@
               class="form-control"
               placeholder="Experience"
               name="doctor[experience]"
-              value=<%=foundData.experience %>
+              value="<%= foundData.experience%>"
             />
           </div>
           <div class="form-group col-md-6">
@@ -41,7 +42,7 @@
               class="form-control"
               placeholder="Qualification"
               name="doctor[qual]"
-              value="<%=foundData.qual %>"
+              value="<%= foundData.qual %>"
             />
           </div>
         </div>
@@ -54,7 +55,7 @@
               class="form-control"
               placeholder="Your Speciality. e.g. Neurology, Dentist etc."
               name="doctor[speciality]"
-              value="<%=foundData.speciality %>"
+              value="<%= foundData.speciality %>"
             />
           </div>
           <div class="form-group col-md-6">
@@ -65,7 +66,7 @@
               class="form-control"
               placeholder="Hospital Name (if any)"
               name="doctor[workAtHosp]"
-              value="<%=foundData.workAtHosp %>"
+              value="<%= foundData.workAtHosp %>"
             />
           </div>
         </div>
@@ -77,7 +78,7 @@
             class="form-control"
             placeholder="Hospital Token Number. (if any)"
             name="doctor[workingAt]"
-            value="<%=foundData.workingAt %>"
+            value="<%= foundData.workingAt %>"
           />
         </div>
         <div class="form-group">
@@ -88,7 +89,7 @@
             class="form-control"
             placeholder="Enter Your Fees in (Rs)"
             name="doctor[fees]"
-            value=<%=foundData.fees %>
+            value="<%= foundData.fees%>"
           />
         </div>
         <div class="form-row">
@@ -99,7 +100,7 @@
               type="time"
               class="form-control"
               name="doctor[timing][timingFrom]"
-              value=<%=foundData.timing.timingFrom %>
+              value="<%= foundData.timing.timingFrom%>"
             />
           </div>
           <div class="form-group col-md-6">
@@ -109,7 +110,7 @@
               type="time"
               class="form-control"
               name="doctor[timing][timingTo]"
-              value=<%=foundData.timing.timingTo %>
+              value="<%= foundData.timing.timingTo%>"
             />
           </div>
         </div>
@@ -121,7 +122,7 @@
               type="number"
               class="form-control"
               name="doctor[availableSlots][slotA]"
-              value=<%=foundData.availableSlots.slotA %>
+              value="<%= foundData.availableSlots.slotA%>"
             />
           </div>
           <div class="form-group col-md-6">
@@ -131,20 +132,20 @@
               type="number"
               class="form-control"
               name="doctor[availableSlots][slotB]"
-              value=<%=foundData.availableSlots.slotB %>
+              value="<%= foundData.availableSlots.slotB%>"
             />
           </div>
         </div>
 
         <button
           type="submit"
-          style="border-radius: 25px"
+          style="border-radius: 25px; margin-left: 15rem"
           class="btn btn-primary"
         >
-          Create!
+          Update!
         </button>
       </form>
     </div>
-    <%-include("../../partials/footer");-%>
+    <%- include("../../partials/footer"); -%>
   </body>
 </html>
