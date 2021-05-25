@@ -32,6 +32,7 @@
               placeholder="Experience"
               name="doctor[experience]"
               value="<%= foundData.experience%>"
+              required
             />
           </div>
           <div class="form-group col-md-6">
@@ -43,6 +44,7 @@
               placeholder="Qualification"
               name="doctor[qual]"
               value="<%= foundData.qual %>"
+              required
             />
           </div>
         </div>
@@ -56,10 +58,11 @@
               placeholder="Your Speciality. e.g. Neurology, Dentist etc."
               name="doctor[speciality]"
               value="<%= foundData.speciality %>"
+              required
             />
           </div>
           <div class="form-group col-md-6">
-            <label for="workAtHosp">Working At Hospital</label>
+            <label for="workAtHosp">Working At Hospital/Clinic</label>
             <input
               style="border-radius: 25px"
               type="text"
@@ -67,6 +70,7 @@
               placeholder="Hospital Name (if any)"
               name="doctor[workAtHosp]"
               value="<%= foundData.workAtHosp %>"
+              required
             />
           </div>
         </div>
@@ -90,6 +94,7 @@
             placeholder="Enter Your Fees in (Rs)"
             name="doctor[fees]"
             value="<%= foundData.fees%>"
+            required
           />
         </div>
         <div class="form-row">
@@ -101,6 +106,7 @@
               class="form-control"
               name="doctor[timing][timingFrom]"
               value="<%= foundData.timing.timingFrom%>"
+              required
             />
           </div>
           <div class="form-group col-md-6">
@@ -111,6 +117,7 @@
               class="form-control"
               name="doctor[timing][timingTo]"
               value="<%= foundData.timing.timingTo%>"
+              required
             />
           </div>
         </div>
@@ -123,6 +130,7 @@
               class="form-control"
               name="doctor[availableSlots][slotA]"
               value="<%= foundData.availableSlots.slotA%>"
+              required
             />
           </div>
           <div class="form-group col-md-6">
@@ -133,6 +141,7 @@
               class="form-control"
               name="doctor[availableSlots][slotB]"
               value="<%= foundData.availableSlots.slotB%>"
+              required
             />
           </div>
         </div>
