@@ -15,7 +15,9 @@ router.get("/user/transaction", middleware.isLoggedIn, function (req, res) {
 
 router.post("/user/transaction/bookAppointment/:docId", function (req, res) {
   let newAppointment = JSON.parse(req.body.newAppointment);
+  console.log(newAppointment)
   const dynamicSlotkey = "availableSlots." + newAppointment.selectedSlot;
+  console.log(dynamicSlotkey)
   Doctor.find(
     { _id: ObjectId(req.params.docId) },
     { [dynamicSlotkey]: 1, handler_id: 1 }

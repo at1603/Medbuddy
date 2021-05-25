@@ -18,7 +18,11 @@
         border-radius: 42px;
       "
     >
-      <form action="/userDocSection/createProfile?_method=PUT" method="POST">
+      <form
+        id="updateProfile"
+        action="/userDocSection/createProfile?_method=PUT"
+        method="POST"
+      >
         <h4 style="text-align: center">
           <strong>Fill Professional Details</strong>
         </h4>
@@ -94,53 +98,126 @@
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="timingFrom">Timing Slot: From</label>
+            <label for="timingFrom">Morning Timing Slot: From</label>
             <input
               style="border-radius: 25px"
               type="time"
               class="form-control"
-              name="doctor[timing][timingFrom]"
-              value="<%= foundData.timing.timingFrom%>"
+              name="doctor[timing][morning][timingFrom]"
+              value="<%= foundData.timing.morning.timingFrom%>"
             />
           </div>
           <div class="form-group col-md-6">
-            <label for="timingTo">Timing Slot: To</label>
+            <label for="timingTo">Morning Timing Slot: To</label>
             <input
               style="border-radius: 25px"
               type="time"
               class="form-control"
-              name="doctor[timing][timingTo]"
-              value="<%= foundData.timing.timingTo%>"
+              name="doctor[timing][morning][timingTo]"
+              value="<%= foundData.timing.morning.timingTo%>"
             />
           </div>
         </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="timingFrom">Evening Timing Slot: From</label>
+            <input
+              style="border-radius: 25px"
+              type="time"
+              class="form-control"
+              name="doctor[timing][evening][timingFrom]"
+              value="<%= foundData.timing.evening.timingFrom%>"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="timingTo">Evening Timing Slot: To</label>
+            <input
+              style="border-radius: 25px"
+              type="time"
+              class="form-control"
+              name="doctor[timing][evening][timingTo]"
+              value="<%= foundData.timing.evening.timingTo%>"
+            />
+          </div>
+        </div>
+
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="morningSlot">Enter Seats For Morning:</label>
             <input
+              id="morningSlot"
               style="border-radius: 25px"
               type="number"
               class="form-control"
-              name="doctor[availableSlots][slotA]"
-              value="<%= foundData.availableSlots.slotA%>"
+              value="<%= foundData.availableSlots.slotA.a + foundData.availableSlots.slotA.b + foundData.availableSlots.slotA.c +foundData.availableSlots.slotA.d %>"
+            />
+            <input
+              id="aM"
+              type="hidden"
+              class="aM"
+              name="doctor[availableSlots][slotA][a]"
+            />
+            <input
+              id="bM"
+              type="hidden"
+              class="abcM"
+              name="doctor[availableSlots][slotA][b]"
+            />
+            <input
+              id="cM"
+              type="hidden"
+              class="abcM"
+              name="doctor[availableSlots][slotA][c]"
+            />
+            <input
+              id="dM"
+              type="hidden"
+              class="abcM"
+              name="doctor[availableSlots][slotA][d]"
             />
           </div>
           <div class="form-group col-md-6">
             <label for="eveningSlot">Enter Seats For Evening:</label>
             <input
+              id="eveningSlot"
               style="border-radius: 25px"
               type="number"
               class="form-control"
-              name="doctor[availableSlots][slotB]"
-              value="<%= foundData.availableSlots.slotB%>"
+              value="<%= foundData.availableSlots.slotB.a + foundData.availableSlots.slotB.b + foundData.availableSlots.slotB.c +foundData.availableSlots.slotB.d %>"
+            />
+            <input
+              id="aE"
+              type="hidden"
+              class="aE"
+              name="doctor[availableSlots][slotB][a]"
+            />
+            <input
+              id="bE"
+              type="hidden"
+              class="abcE"
+              name="doctor[availableSlots][slotB][b]"
+            />
+            <input
+              id="cE"
+              type="hidden"
+              class="abcE"
+              name="doctor[availableSlots][slotB][c]"
+            />
+            <input
+              id="dE"
+              type="hidden"
+              class="abcE"
+              name="doctor[availableSlots][slotB][d]"
             />
           </div>
         </div>
 
         <button
-          type="submit"
+          type="button"
           style="border-radius: 25px; margin-left: 15rem"
           class="btn btn-primary"
+          onclick="slotValues()"
         >
           Update!
         </button>
@@ -148,4 +225,36 @@
     </div>
     <%- include("../../partials/footer"); -%>
   </body>
+  <script>
+    function slotValues() {
+      document.getElementById("aM").value = Number(
+        ~~(document.getElementById("morningSlot").value / 4) +
+          (document.getElementById("morningSlot").value % 4)
+      );
+      document.getElementById("bM").value = Number(
+        ~~(document.getElementById("morningSlot").value / 4)
+      );
+      document.getElementById("cM").value = Number(
+        ~~(document.getElementById("morningSlot").value / 4)
+      );
+      document.getElementById("dM").value = Number(
+        ~~(document.getElementById("morningSlot").value / 4)
+      );
+      document.getElementById("aE").value = Number(
+        ~~(document.getElementById("eveningSlot").value / 4) +
+          (document.getElementById("eveningSlot").value % 4)
+      );
+      document.getElementById("bE").value = Number(
+        ~~(document.getElementById("eveningSlot").value / 4)
+      );
+      document.getElementById("cE").value = Number(
+        ~~(document.getElementById("eveningSlot").value / 4)
+      );
+      document.getElementById("dE").value = Number(
+        ~~(document.getElementById("eveningSlot").value / 4)
+      );
+
+      document.getElementById("updateProfile").submit();
+    }
+  </script>
 </html>

@@ -238,8 +238,32 @@ router.get("/userDocSection/docList/docInfo/:id", function (req, res) {
       if (err) {
         console.log(err);
       } else {
+        var minutesA =
+          (Number(foundDoctor.timing.morning.timingTo.slice(0, 2)) * 60 + Number(foundDoctor.timing.morning.timingTo.slice(3))) -
+          (Number(foundDoctor.timing.morning.timingFrom.slice(0, 2)) * 60 + Number(foundDoctor.timing.morning.timingFrom.slice(3)))
+        var minutesB =
+          (Number(foundDoctor.timing.evening.timingTo.slice(0, 2)) * 60 + Number(foundDoctor.timing.evening.timingTo.slice(3))) -
+          (Number(foundDoctor.timing.evening.timingFrom.slice(0, 2)) * 60 + Number(foundDoctor.timing.evening.timingFrom.slice(3)))
+
+        var slotAa = ~~((Number(foundDoctor.timing.morning.timingFrom.slice(0, 2)) * 60 + Number(foundDoctor.timing.morning.timingFrom.slice(3)) + ~~(minutesA / 4)) / 60) + ":" + (((Number(foundDoctor.timing.morning.timingFrom.slice(0, 2)) * 60 + Number(foundDoctor.timing.morning.timingFrom.slice(3)) + ~~(minutesA / 4)) % 60) >= 10 ? ((Number(foundDoctor.timing.morning.timingFrom.slice(0, 2)) * 60 + Number(foundDoctor.timing.morning.timingFrom.slice(3)) + ~~(minutesA / 4)) % 60) : "0" + ((Number(foundDoctor.timing.morning.timingFrom.slice(0, 2)) * 60 + Number(foundDoctor.timing.morning.timingFrom.slice(3)) + ~~(minutesA / 4)) % 60))
+        var slotAb = ~~((Number(slotAa.slice(0, 2)) * 60 + Number(slotAa.slice(3)) + ~~(minutesA / 4)) / 60) + ":" + (((Number(slotAa.slice(0, 2)) * 60 + Number(slotAa.slice(3)) + ~~(minutesA / 4)) % 60) >= 10 ? ((Number(slotAa.slice(0, 2)) * 60 + Number(slotAa.slice(3)) + ~~(minutesA / 4)) % 60) : "0" + ((Number(slotAa.slice(0, 2)) * 60 + Number(slotAa.slice(3)) + ~~(minutesA / 4)) % 60))
+        var slotAc = ~~((Number(slotAb.slice(0, 2)) * 60 + Number(slotAb.slice(3)) + ~~(minutesA / 4)) / 60) + ":" + (((Number(slotAb.slice(0, 2)) * 60 + Number(slotAb.slice(3)) + ~~(minutesA / 4)) % 60) >= 10 ? ((Number(slotAb.slice(0, 2)) * 60 + Number(slotAb.slice(3)) + ~~(minutesA / 4)) % 60) : "0" + ((Number(slotAb.slice(0, 2)) * 60 + Number(slotAb.slice(3)) + ~~(minutesA / 4)) % 60))
+        var slotBa = ~~((Number(foundDoctor.timing.evening.timingFrom.slice(0, 2)) * 60 + Number(foundDoctor.timing.evening.timingFrom.slice(3)) + ~~(minutesB / 4)) / 60) + ":" + (((Number(foundDoctor.timing.evening.timingFrom.slice(0, 2)) * 60 + Number(foundDoctor.timing.evening.timingFrom.slice(3)) + ~~(minutesB / 4)) % 60) >= 10 ? (Number(foundDoctor.timing.evening.timingFrom.slice(0, 2)) * 60 + Number(foundDoctor.timing.evening.timingFrom.slice(3)) + ~~(minutesB / 4)) % 60 : "0" + (Number(foundDoctor.timing.evening.timingFrom.slice(0, 2)) * 60 + Number(foundDoctor.timing.evening.timingFrom.slice(3)) + ~~(minutesB / 4)) % 60)
+        var slotBb = ~~((Number(slotBa.slice(0, 2)) * 60 + Number(slotBa.slice(3)) + ~~(minutesB / 4)) / 60) + ":" + (((Number(slotBa.slice(0, 2)) * 60 + Number(slotBa.slice(3)) + ~~(minutesB / 4)) % 60) >= 10 ? ((Number(slotBa.slice(0, 2)) * 60 + Number(slotBa.slice(3)) + ~~(minutesB / 4)) % 60) : "0" + ((Number(slotBa.slice(0, 2)) * 60 + Number(slotBa.slice(3)) + ~~(minutesB / 4)) % 60))
+        var slotBc = ~~((Number(slotBb.slice(0, 2)) * 60 + Number(slotBb.slice(3)) + ~~(minutesB / 4)) / 60) + ":" + (((Number(slotBb.slice(0, 2)) * 60 + Number(slotBb.slice(3)) + ~~(minutesB / 4)) % 60) >= 10 ? ((Number(slotBb.slice(0, 2)) * 60 + Number(slotBb.slice(3)) + ~~(minutesB / 4)) % 60) : "0" + ((Number(slotBb.slice(0, 2)) * 60 + Number(slotBb.slice(3)) + ~~(minutesB / 4)) % 60))
+
+
+        let slotTime = {
+          slotAa: slotAa,
+          slotAb: slotAb,
+          slotAc: slotAc,
+          slotBa: slotBa,
+          slotBb: slotBb,
+          slotBc: slotBc
+        }
         res.render("userDocSection/patientfiles/takeAppointment", {
           doctors: foundDoctor,
+          slotTime: slotTime
         });
       }
     });
@@ -267,7 +291,7 @@ router.get("/userDocSection/myAppointments", function (req, res) {
     });
 });
 
-router.get("/userDocSection/myAppointments/show", function (req, res) {});
+router.get("/userDocSection/myAppointments/show", function (req, res) { });
 
 //book appointment button
 
