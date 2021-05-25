@@ -125,19 +125,25 @@ router.get("/userDocSection/patientList/patientInfo/:id", function (req, res) {
               if (err) {
                 console.log(err);
               } else {
-                Appointment.findOne({"patientId": req.params.id, "docId": foundDocId[0]._id, "activityStatus": true}, function(err, foundAppointment){
-                  if(err){
-                    console.log(err);
-                  }else{
-                    console.log(foundAppointment);
-                    res.render("userDocSection/docfiles/patientInfo", {
-                      foundDocId: foundDocId,
-                      foundPatient: foundPatient,
-                      foundPatientMedicalRecords: foundPatientMedicalRecords,
-                      foundAppointment: foundAppointment
-                    });
+                Appointment.findOne(
+                  {
+                    patientId: req.params.id,
+                    docId: foundDocId[0]._id,
+                    activityStatus: true,
+                  },
+                  function (err, foundAppointment) {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      res.render("userDocSection/docfiles/patientInfo", {
+                        foundDocId: foundDocId,
+                        foundPatient: foundPatient,
+                        foundPatientMedicalRecords: foundPatientMedicalRecords,
+                        foundAppointment: foundAppointment,
+                      });
+                    }
                   }
-                });
+                );
               }
             });
           }
@@ -182,7 +188,6 @@ router.get("/userDocSection/consultDoc/presc", function (req, res) {
 // -------------Doctor Profile Post Routes ------------------//
 
 router.put("/userDocSection/createProfile", function (req, res) {
-  console.log(req.body.doctor);
   // res.sendStatus(200);
   Doctor.updateOne(
     { handler_id: ObjectId(req.user._id) },
@@ -282,14 +287,19 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
     age: req.body.age,
   };
   const dynamicSlotkey = "availableSlots." + req.body.selectedSlot;
-  Doctor.findById(req.params.docId).populate("handler_id").exec(function(err, foundDoctor){
-    if(err){
-      console.log(err);
-    }else{
-      newAppointment.paidDoctorFees = foundDoctor.fees;
-      res.render("user/Payment/transaction", {newAppointment: newAppointment, doctorData: foundDoctor });
-    }
-  })
+  Doctor.findById(req.params.docId)
+    .populate("handler_id")
+    .exec(function (err, foundDoctor) {
+      if (err) {
+        console.log(err);
+      } else {
+        newAppointment.paidDoctorFees = foundDoctor.fees;
+        res.render("user/Payment/transaction", {
+          newAppointment: newAppointment,
+          doctorData: foundDoctor,
+        });
+      }
+    });
 });
 
 //Appointment cancellation route
@@ -309,28 +319,52 @@ router.post(
             if (error) {
               console.log(error);
             } else {
-              Appointment.find(
-                {
-                  _id: ObjectId(req.params.appointId),
-                  patientId: ObjectId(req.user._id),
-                  docId: ObjectId(updatedAppointment.docId),
-                },
-                { selectedSlot: 1 }
-              ).exec(function (err, selectedSlot) {
+              Appointment.find({
+                _id: ObjectId(req.params.appointId),
+                patientId: ObjectId(req.user._id),
+                docId: ObjectId(updatedAppointment.docId),
+              }).exec(function (err, foundAppointment) {
                 if (err) {
                   console.log(err);
                 } else {
                   const dynamicSlotKey =
-                    "availableSlots." + selectedSlot[0].selectedSlot;
-                  Doctor.updateOne(
+                    "availableSlots." + foundAppointment[0].selectedSlot;
+                  Doctor.findOneAndUpdate(
                     { _id: ObjectId(updatedAppointment.docId) },
                     { $inc: { [dynamicSlotKey]: 1 } }
-                  ).exec(function (err) {
+                  ).exec(function (err, foundDoc) {
                     if (err) {
                       console.log(err);
                     } else {
-                      req.flash("success", "Appointment Canceled");
-                      res.redirect("/userDocSection/myAppointments");
+                      DoctorStats.findOneAndUpdate(
+                        { handlerId: ObjectId(foundDoc.handler_id) },
+                        {
+                          $inc: {
+                            earnings: -foundAppointment[0].paidDoctorFees,
+                          },
+                        }
+                      ).exec(function (err) {
+                        if (err) {
+                          console.log(err);
+                        } else {
+                          PatientStats.findOneAndUpdate(
+                            { handlerId: ObjectId(req.user._id) },
+                            {
+                              $inc: {
+                                expenditure:
+                                  -foundAppointment[0].paidDoctorFees,
+                              },
+                            }
+                          ).exec(function (err) {
+                            if (err) {
+                              console.log(err);
+                            } else {
+                              req.flash("success", "Appointment Canceled");
+                              res.redirect("/userDocSection/myAppointments");
+                            }
+                          });
+                        }
+                      });
                     }
                   });
                 }
@@ -384,7 +418,6 @@ router.post("/generatePresc/addMedicine/:id", function (req, res) {
               } else {
                 DoctorStats.findOneAndUpdate({
                   $inc: {
-                    earnings: foundDoc[0].fees,
                     newPatients: 1,
                     appointment: 1,
                   },
@@ -396,7 +429,7 @@ router.post("/generatePresc/addMedicine/:id", function (req, res) {
                       console.log(error);
                     } else {
                       PatientStats.findOneAndUpdate({
-                        $inc: { expenditure: foundDoc[0].fees, appointment: 1 },
+                        $inc: { appointment: 1 },
                       })
                         .where("handlerId")
                         .equals(req.params.id)
@@ -495,19 +528,19 @@ router.post(
                         if (err) {
                           console.log(err);
                         } else {
-                          const dynamicSlotKey =
-                            "availableSlots." + selectedSlot[0].selectedSlot;
-                          Doctor.updateOne(
-                            { _id: ObjectId(foundDoctor._id) },
-                            { $inc: { [dynamicSlotKey]: 0 } }
-                          ).exec(function (err) {
-                            if (err) {
-                              console.log(err);
-                            } else {
-                              req.flash("success", "Appointment Completed");
-                              res.redirect("/userDocSection/patientList");
-                            }
-                          });
+                          // const dynamicSlotKey =
+                          //   "availableSlots." + selectedSlot[0].selectedSlot;
+                          // Doctor.updateOne(
+                          //   { _id: ObjectId(foundDoctor._id) },
+                          //   { $inc: { [dynamicSlotKey]: 0 } }
+                          // ).exec(function (err) {
+                          //   if (err) {
+                          //     console.log(err);
+                          //   } else {
+                          req.flash("success", "Appointment Completed");
+                          res.redirect("/userDocSection/patientList");
+                          //   }
+                          // });
                         }
                       });
                     }

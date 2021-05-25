@@ -6,18 +6,19 @@ const Doctor = require("../models/docSchema");
 const User = require("../models/userSchema");
 const Appointment = require("../models/appointmentSchema");
 const PatientHistory = require("../models/patientHistorySchema");
+const DoctorStats = require("../models/statsSchema/doctorStatsSchema");
+const PatientStats = require("../models/statsSchema/patientStatsSchema");
 
 router.get("/user/transaction", middleware.isLoggedIn, function (req, res) {
   res.render("user/Payment/transaction");
 });
 
 router.post("/user/transaction/bookAppointment/:docId", function (req, res) {
-  console.log(req.body.newAppointment, "yaha maybe");
   let newAppointment = JSON.parse(req.body.newAppointment);
   const dynamicSlotkey = "availableSlots." + newAppointment.selectedSlot;
   Doctor.find(
     { _id: ObjectId(req.params.docId) },
-    { [dynamicSlotkey]: 1 }
+    { [dynamicSlotkey]: 1, handler_id: 1 }
   ).exec(function (err, checkAvailableSlots) {
     if (err) {
       console.log(err);
@@ -53,35 +54,50 @@ router.post("/user/transaction/bookAppointment/:docId", function (req, res) {
                         if (er) {
                           console.log(er);
                         } else {
-                          if (newAppointment.selectedSlot == "slotA") {
-                            Doctor.updateOne(
-                              { _id: ObjectId(req.params.docId) },
-                              { $inc: { "availableSlots.slotA": -1 } },
-                              { new: true }
-                            ).exec(function (err, result) {
-                              if (err) {
-                                console.log(err);
-                              } else {
-                                res.redirect(
-                                  "/userDocSection/patientDashboard"
-                                );
-                              }
-                            });
-                          } else {
-                            Doctor.updateOne(
-                              { _id: ObjectId(req.params.docId) },
-                              { $inc: { "availableSlots.slotB": -1 } },
-                              { new: true }
-                            ).exec(function (err, result) {
-                              if (err) {
-                                console.log(err);
-                              } else {
-                                res.redirect(
-                                  "/userDocSection/patientDashboard"
-                                );
-                              }
-                            });
-                          }
+                          // if (newAppointment.selectedSlot == "slotA") {
+                          Doctor.updateOne(
+                            { _id: ObjectId(req.params.docId) },
+                            { $inc: { [dynamicSlotkey]: -1 } },
+                            { new: true }
+                          ).exec(function (err, result) {
+                            if (err) {
+                              console.log(err);
+                            } else {
+                              PatientStats.findOneAndUpdate(
+                                { handlerId: ObjectId(req.user._id) },
+                                {
+                                  $inc: {
+                                    expenditure: req.body.totalExpenditure,
+                                  },
+                                }
+                              ).exec(function (err) {
+                                if (err) {
+                                  console.log(err);
+                                } else {
+                                  DoctorStats.findOneAndUpdate(
+                                    {
+                                      handlerId: ObjectId(
+                                        checkAvailableSlots[0].handler_id
+                                      ),
+                                    },
+                                    {
+                                      $inc: {
+                                        earnings: newAppointment.paidDoctorFees,
+                                      },
+                                    }
+                                  ).exec(function (err) {
+                                    if (err) {
+                                      console.log(err);
+                                    } else {
+                                      res.redirect(
+                                        "/userDocSection/patientDashboard"
+                                      );
+                                    }
+                                  });
+                                }
+                              });
+                            }
+                          });
                         }
                       }
                     );
@@ -104,7 +120,6 @@ router.post("/user/transaction/bookAppointment/:docId", function (req, res) {
                   if (error) {
                     console.log(error);
                   } else {
-                    console.log("doc unregistered");
                     User.findOneAndUpdate(
                       { _id: req.user._id },
                       {
@@ -117,35 +132,50 @@ router.post("/user/transaction/bookAppointment/:docId", function (req, res) {
                         if (err) {
                           console.log(err);
                         } else {
-                          if (newAppointment.selectedSlot == "slotA") {
-                            Doctor.updateOne(
-                              { _id: ObjectId(req.params.docId) },
-                              { $inc: { "availableSlots.slotA": -1 } },
-                              { new: true }
-                            ).exec(function (err, result) {
-                              if (err) {
-                                console.log(err);
-                              } else {
-                                res.redirect(
-                                  "/userDocSection/patientDashboard"
-                                );
-                              }
-                            });
-                          } else {
-                            Doctor.updateOne(
-                              { _id: ObjectId(req.params.docId) },
-                              { $inc: { "availableSlots.slotB": -1 } },
-                              { new: true }
-                            ).exec(function (err, result) {
-                              if (err) {
-                                console.log(err);
-                              } else {
-                                res.redirect(
-                                  "/userDocSection/patientDashboard"
-                                );
-                              }
-                            });
-                          }
+                          // if (newAppointment.selectedSlot == "slotA") {
+                          Doctor.updateOne(
+                            { _id: ObjectId(req.params.docId) },
+                            { $inc: { [dynamicSlotkey]: -1 } },
+                            { new: true }
+                          ).exec(function (err, result) {
+                            if (err) {
+                              console.log(err);
+                            } else {
+                              PatientStats.findOneAndUpdate(
+                                { handlerId: ObjectId(req.user._id) },
+                                {
+                                  $inc: {
+                                    expenditure: req.body.totalExpenditure,
+                                  },
+                                }
+                              ).exec(function (err) {
+                                if (err) {
+                                  console.log(err);
+                                } else {
+                                  DoctorStats.findOneAndUpdate(
+                                    {
+                                      handlerId: ObjectId(
+                                        checkAvailableSlots[0].handler_id
+                                      ),
+                                    },
+                                    {
+                                      $inc: {
+                                        earnings: newAppointment.paidDoctorFees,
+                                      },
+                                    }
+                                  ).exec(function (err) {
+                                    if (err) {
+                                      console.log(err);
+                                    } else {
+                                      res.redirect(
+                                        "/userDocSection/patientDashboard"
+                                      );
+                                    }
+                                  });
+                                }
+                              });
+                            }
+                          });
                         }
                       }
                     );
