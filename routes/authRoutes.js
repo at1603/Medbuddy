@@ -10,7 +10,7 @@ const patientHistory = require("../models/patientHistorySchema");
 //Login get requests
 router.get("/userLogin", function (req, res) {
   // console.log(req.flash(error));
-  res.render("auth/login");
+  res.render("auth/altLogin");
 });
 //login post requests
 
@@ -43,7 +43,7 @@ router.get("/logout", function (req, res) {
 
 //Signup get requests
 router.get("/register", function (req, res) {
-  res.render("auth/signup");
+  res.render("auth/altSignup");
 });
 
 //Signup post request
@@ -64,6 +64,8 @@ router.post("/register", function (req, res) {
     avatar: req.body.avatar,
     role: req.body.userRole,
   });
+
+  console.log(newUser)
 
   User.register(newUser, req.body.password, function (err, user) {
     if (err) {
