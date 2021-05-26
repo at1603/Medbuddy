@@ -18,29 +18,29 @@
         </div>
         <h5 class="form-group col-md-12">Your Name: </h5>
         <div class="form-group col-md-6">
-          <input type="text" class="form-control" id="firstname" name="firstName" placeholder="First Name">
+          <input type="text" class="form-control" id="firstname" name="firstName" placeholder="First Name" required>
         </div>
         <div class="form-group col-md-6">
-          <input type="text" class="form-control" id="lastname" name="lastName" placeholder="Last Name">
+          <input type="text" class="form-control" id="lastname" name="lastName" placeholder="Last Name" required>
         </div>
         <h5 class="form-group col-md-12">Your Address:</h5>
         <div class="form-group col-md-12">
-          <input type="text" class="form-control" id="streetAddress" name="streetAddress" placeholder="Your Street Address">
+          <input type="text" class="form-control" id="streetAddress" name="streetAddress" placeholder="Your Street Address" required>
         </div>
         <div class="form-group col-md-6">
-          <input type="text" name="city" class="form-control" id="inputCity" placeholder="City">
+          <input type="text" name="city" class="form-control" id="inputCity" placeholder="City" required>
         </div>
         <div class="form-group col-md-4">
-          <select id="inputState" name="state" class="form-control">
+          <select id="inputState" name="state" class="form-control" required>
             <option selected>Select State</option>
             <option value="Uttar Pradesh">Uttar Pradesh</option>
           </select>
         </div>
         <div class="form-group col-md-2">
-          <input type="number" name="zip" class="form-control" id="inputZip" placeholder="Zip Code">
+          <input type="number" name="zip" class="form-control" id="inputZip" placeholder="Zip Code" required>
         </div>
         <div class="form-group col-md-6">
-          <select class="form-control" name="gender" id="gender">
+          <select class="form-control" name="gender" id="gender" required>
             <option selected disabled> Gender </option>
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -58,10 +58,10 @@
             <h4>Set up Your Account: </h4>
           </div>
           <div class="form-group col-md-6">
-            <input type="text" name="username" class="form-control" id="inputUserName4" placeholder="Username">
+            <input type="text" name="username" class="form-control" id="inputUserName4" placeholder="Username"  required>
           </div>
           <div class="form-group col-md-6">
-            <input type="password" name="password" class="form-control" id="inputPassword4" placeholder="Your Password">
+            <input type="password" name="password" class="form-control" id="inputPassword4" placeholder="Your Password" required>
             <span><input type="checkbox" onclick="toggleShowPassword()"> Show Password</span>
           </div>
         </div>
@@ -71,7 +71,7 @@
             <input type="email" name="email" class="form-control" placeholder="Email" required>
           </div>
           <div class="form-group col-md-6">
-            <input type="number" name="contactNumber" class="form-control" placeholder="Contact Number">
+            <input type="tel" name="contactNumber" maxlength="10" class="form-control" placeholder="Contact Number" required>
           </div>
           <div class="form-group col-md-12">
             <input type="url" name='avatar'class="form-control" placeholder="Upload Photo(insert Url)">
@@ -79,7 +79,7 @@
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <select class="form-control" name="userRole" id="userRole" placeholder="select">
+            <select class="form-control" name="userRole" id="userRole" placeholder="select" required>
               <option selected disabled> Signing Up as </option>
               <option value="patient">Patient</option>
               <option value="doctor">Doctor</option>
@@ -92,7 +92,7 @@
       <div id="submit">
         <div class="form-group">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <input class="form-check-input" type="checkbox" id="gridCheck" required>
             <label class="form-check-label" for="gridCheck">
               I accept <a href="#">Terms & Conditions</a>
             </label>
