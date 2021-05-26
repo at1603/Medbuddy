@@ -14,6 +14,7 @@
 
 <div class="container">
 	<h2>Bloodbank</h2>
+  <% if(bloodbanks.length > 0){ %> 
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
@@ -41,7 +42,7 @@
                 <% for(var i = 0; i < bloodbanks.length; i++){ %>
                     <tr>
                       <td><%= i+1%></td>
-                      <td><%= //hospitals[i].name %></td>
+                      <td><%= bloodbanks[i].relatedTo.name %></td>
                       <td><%= bloodbanks[i].currcapacity.opos %></td>
                       <td><%= bloodbanks[i].currcapacity.oneg%></td>
                       <td><%= bloodbanks[i].currcapacity.apos%></td>
@@ -51,7 +52,7 @@
                       <td><%= bloodbanks[i].currcapacity.abpos%></td>
                       <td><%= bloodbanks[i].currcapacity.abneg%></td>
                       <td><%= bloodbanks[i].price%></td>
-                      <td><%= bloodbanks[i].contact%></td>
+                      <td><%= bloodbanks[i].contact.email%></td>
                       <td><a href="/hospHospSection/bloodbank/specificRequest" class="btn btn-outline-danger">Request</a></td>
 
                     </tr>
@@ -60,5 +61,8 @@
             </table>
 		</div>
 	</div>
+  <% }else{ %>
+    <h5 style="text-align: center;">No Bloodbanks Found!!</h5>  
+  <% } %>
 </div> 
 <%-include("../../partials/footer");-%>

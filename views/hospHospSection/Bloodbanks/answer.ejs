@@ -39,7 +39,7 @@ h4{
                   <tr>
                     <!-- For bloodbank request -->
                     <th>#</th>
-                    <th>Hospital</th>
+                    <th>Requestee</th>
                     <th>Date</th>
                     <th>Blood Group</th>
                     <th>Units Required</th>
@@ -51,11 +51,11 @@ h4{
                 <tbody>
                   <tr data-toggle="collapse" data-target="#row<%=i%>" class="accordion-toggle">
                     <td id="element" data-placement="top" data-toggle="popover" data-content="Click to expand"><%= i+1%></td>
-                    <td><%=// requests[i].hospitalName %></td>
+                    <td><%= requests[i].firstName + " "  + requests[i].lastName %></td>
                     <td><%= requests[i].date%></td>
                     <td><%= requests[i].bloodGroup%></td>
                     <td><%= requests[i].units%></td>
-                    <td><%= //requests[i].contact%></td>
+                    <td><%= requests[i].email%></td>
                     <!-- <td>
                       <a href="/hospHospSection/bloodBank/approve" class="btn btn-outline-success">Approve</a>
                       <a href="/hospHospSection/bloodBank/reject" class="btn btn-outline-danger">Reject</a>
