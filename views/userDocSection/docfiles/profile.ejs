@@ -36,6 +36,7 @@
               placeholder="Experience"
               name="doctor[experience]"
               value="<%= foundData.experience%>"
+              required
             />
           </div>
           <div class="form-group col-md-6">
@@ -47,6 +48,7 @@
               placeholder="Qualification"
               name="doctor[qual]"
               value="<%= foundData.qual %>"
+              required
             />
           </div>
         </div>
@@ -60,10 +62,11 @@
               placeholder="Your Speciality. e.g. Neurology, Dentist etc."
               name="doctor[speciality]"
               value="<%= foundData.speciality %>"
+              required
             />
           </div>
           <div class="form-group col-md-6">
-            <label for="workAtHosp">Working At Hospital</label>
+            <label for="workAtHosp">Working At Hospital/Clinic</label>
             <input
               style="border-radius: 25px"
               type="text"
@@ -71,6 +74,7 @@
               placeholder="Hospital Name (if any)"
               name="doctor[workAtHosp]"
               value="<%= foundData.workAtHosp %>"
+              required
             />
           </div>
         </div>
@@ -94,6 +98,7 @@
             placeholder="Enter Your Fees in (Rs)"
             name="doctor[fees]"
             value="<%= foundData.fees%>"
+            required
           />
         </div>
         <div class="form-row">
@@ -103,8 +108,10 @@
               style="border-radius: 25px"
               type="time"
               class="form-control"
+
               name="doctor[timing][morning][timingFrom]"
               value="<%= foundData.timing.morning.timingFrom%>"
+
             />
           </div>
           <div class="form-group col-md-6">
@@ -113,8 +120,10 @@
               style="border-radius: 25px"
               type="time"
               class="form-control"
+
               name="doctor[timing][morning][timingTo]"
               value="<%= foundData.timing.morning.timingTo%>"
+
             />
           </div>
         </div>
@@ -150,6 +159,7 @@
               style="border-radius: 25px"
               type="number"
               class="form-control"
+
               value="<%= foundData.availableSlots.slotA.a + foundData.availableSlots.slotA.b + foundData.availableSlots.slotA.c +foundData.availableSlots.slotA.d %>"
             />
             <input
@@ -175,6 +185,7 @@
               type="hidden"
               class="abcM"
               name="doctor[availableSlots][slotA][d]"
+
             />
           </div>
           <div class="form-group col-md-6">
@@ -209,6 +220,7 @@
               type="hidden"
               class="abcE"
               name="doctor[availableSlots][slotB][d]"
+
             />
           </div>
         </div>
