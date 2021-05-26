@@ -13,23 +13,23 @@
             <ul>
                 <div class="row">
                     <div class="col-md-6">
-                        <li><h4><strong>Works At: </strong><%= doctors.workAtHosp%> </h4></li>
+                        <li><h5><strong>Works At: </strong><%= doctors.workAtHosp%> </h5></li>
                     </div>
                     <div class="col-md-6">
-                        <li><h4><strong>Speciality:</strong> <%=doctors.speciality%></h4></li>
+                        <li><h5><strong>Speciality:</strong> <%=doctors.speciality%></h5></li>
                     </div>
                     <div class="col-md-6">
-                        <li><h4><strong>Morning Timings: </strong><%= moment(doctors.timing.morning.timingFrom, 'HH:mm').format('LT')%> to <%= moment(doctors.timing.morning.timingTo, 'HH:mm').format('LT')%></h4></li>
+                        <li><h5><strong>Morning Timings: </strong><%= moment(doctors.timing.morning.timingFrom, 'HH:mm').format('LT')%> to <%= moment(doctors.timing.morning.timingTo, 'HH:mm').format('LT')%></h5></li>
                     </div>
                     <div class="col-md-6">
-                        <li><h4><strong>Evening Timings: </strong><%= moment(doctors.timing.evening.timingFrom, 'HH:mm').format('LT')%> to <%= moment(doctors.timing.evening.timingTo, 'HH:mm').format('LT')%></h4></li>
+                        <li><h5><strong>Evening Timings: </strong><%= moment(doctors.timing.evening.timingFrom, 'HH:mm').format('LT')%> to <%= moment(doctors.timing.evening.timingTo, 'HH:mm').format('LT')%></h5></li>
                     </div>
                     
                     <div class="col-md-6">
-                        <li><h4><strong>Experience:</strong> <%= doctors.experience%> years</h4></li>
+                        <li><h5><strong>Experience:</strong> <%= doctors.experience%> years</h5></li>
                     </div>
                     <div class="col-md-6">
-                        <li><h4><strong>Fees:</strong> Rs. <%= doctors.fees%></h4></li>
+                        <li><h5><strong>Fees:</strong> Rs. <%= doctors.fees%></h5></li>
                     </div>
                 </div>
             </ul>
@@ -42,18 +42,18 @@
         </div>
     </div>
     <div>
-        <a href="#" class="btn btn-success toggleAppointmentForm" onclick="slotChecker()">Take Appointment</a>
+        <a href="#" class="btn btn-success toggleAppointmentForm" style="border-radius: 25px; margin-left: 4rem; text-align: center;" onclick="slotChecker()">Take Appointment</a>
         <form class="container takeAppointment" action="/userDocSection/createAppointment/<%= doctors._id%>" method="POST" style="margin: 2rem 0 4rem 0; display: none;">
             <div class="form-row">
                 <div class="form-group col-md-12"  style="display: inline-flex;">
                     <div class="form-group col-md-6">
                         <label for="InputNumber">Phone Number</label>
-                        <input type="number" class="form-control" name="phone" id="InputNumber" aria-describedby="numberHelp" required>
+                        <input type="tel" class="form-control" name="phone" id="InputNumber" pattern="[0-9]{10}" maxlength="10" min=0 aria-describedby="numberHelp" required>
                         <small id="numberHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>    
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="age">Age:</label>
-                        <input type="number" name="age" class="form-control" id="age">
+                        <label for="age">Age(in years):</label>
+                        <input type="number" name="age" class="form-control" min="1" id="age">
                     </div>
                   </div>
                   <div class="form-group col-md-6">
@@ -61,57 +61,79 @@
                     <div class="col-md-12">
                         <label for="slotA" id="labelForSlotA.a">Morning Slot: <strong>Available Seats: </strong> </label>
                         <div>
-                            <strong id="Aa"><%=doctors.timing.morning.timingFrom%> to <%=slotTime.slotAa%></strong>
-                            <input type="radio" name="selectedSlot" value="slotA.a" id="slotA.a" required></input>
-                            <span id="slotAa"><%=doctors.availableSlots.slotA.a%></span>
+                            <div class="form-group col-md-5" style="display: inline-block;">
+                                <div>
+                                    <strong id="Aa"><%=doctors.timing.morning.timingFrom%> to <%=slotTime.slotAa%></strong>
+                                    <input type="radio" name="selectedSlot" value="slotA.a" id="slotA.a" required></input>
+                                    <span id="slotAa"><%=doctors.availableSlots.slotA.a%></span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-5" style="display: inline-block;">
+                                <div>
+                                    <strong id="Ab"><%=slotTime.slotAa%> to <%=slotTime.slotAb%></strong>
+                                    <input type="radio" name="selectedSlot" value="slotA.b" id="slotA.b" required></input>
+                                    <span id="slotAb"><%=doctors.availableSlots.slotA.b%></span>
+                                </div>
+                            </div>
                         </div>
                         <div>
-                            <strong id="Ab"><%=slotTime.slotAa%> to <%=slotTime.slotAb%></strong>
-                            <input type="radio" name="selectedSlot" value="slotA.b" id="slotA.b" required></input>
-                            <span id="slotAb"><%=doctors.availableSlots.slotA.b%></span>
+                            <div class="form-group col-md-5" style="display: inline-block;">
+                                <div>
+                                    <strong id="Ac"><%=slotTime.slotAb%> to <%=slotTime.slotAc%></strong>
+                                    <input type="radio" name="selectedSlot" value="slotA.c" id="slotA.c" required></input>
+                                    <span id="slotAc"><%=doctors.availableSlots.slotA.c%></span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-5" style="display: inline-block;">
+                                <div>
+                                    <strong id="Ad"><%=slotTime.slotAc%> to <%=doctors.timing.morning.timingTo%></strong>
+                                    <input type="radio" name="selectedSlot" value="slotA.d" id="slotA.d" required></input>
+                                    <span id="slotAd"><%=doctors.availableSlots.slotA.d%></span>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <strong id="Ac"><%=slotTime.slotAb%> to <%=slotTime.slotAc%></strong>
-                            <input type="radio" name="selectedSlot" value="slotA.c" id="slotA.c" required></input>
-                            <span id="slotAc"><%=doctors.availableSlots.slotA.c%></span>
-                        </div>
-                        <div>
-                            <strong id="Ad"><%=slotTime.slotAc%> to <%=doctors.timing.morning.timingTo%></strong>
-                            <input type="radio" name="selectedSlot" value="slotA.d" id="slotA.d" required></input>
-                            <span id="slotAd"><%=doctors.availableSlots.slotA.d%></span>
-                        </div>
-                        
-                        
-                        
                     </div>
                     <div class="col-md-12">
                         <label for="slotB" id="labelForSlotB">Evening Slot: <strong>Available Seats: </strong> </label>
                         <div>
-                            <strong id="Ba"><%=doctors.timing.evening.timingFrom%> to <%=slotTime.slotBa%></strong>
-                            <input type="radio" name="selectedSlot" value="slotB.a" id="slotB.a" required></input>
-                            <span id="slotBa"><%=doctors.availableSlots.slotB.a%></span>
+                            <div class="form-group col-md-5" style="display: inline-block;">
+                                <div>
+                                    <strong id="Ba"><%=doctors.timing.evening.timingFrom%> to <%=slotTime.slotBa%></strong>
+                                    <input type="radio" name="selectedSlot" value="slotB.a" id="slotB.a" required></input>
+                                    <span id="slotBa"><%=doctors.availableSlots.slotB.a%></span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-5" style="display: inline-block;">
+                                <div>
+                                    <strong id="Bb"><%=slotTime.slotBa%> to <%=slotTime.slotBb%></strong>
+                                    <input type="radio" name="selectedSlot" value="slotB.b" id="slotB.b" required></input>
+                                    <span id="slotBb"><%=doctors.availableSlots.slotB.b%></span>
+                                </div>
+                            </div>
                         </div>
                         <div>
-                            <strong id="Bb"><%=slotTime.slotBa%> to <%=slotTime.slotBb%></strong>
-                            <input type="radio" name="selectedSlot" value="slotB.b" id="slotB.b" required></input>
-                            <span id="slotBb"><%=doctors.availableSlots.slotB.b%></span>
-                        </div>
-                        <div>
-                            <strong id="Bc"><%=slotTime.slotBb%> to <%=slotTime.slotBc%></strong>
-                            <input type="radio" name="selectedSlot" value="slotB.c" id="slotB.c" required></input>
-                            <span id="slotBc"><%=doctors.availableSlots.slotB.c%></span>
-                        </div>
+                            <div class="form-group col-md-5" style="display: inline-block;">
+                                <div>
+                                    <strong id="Bc"><%=slotTime.slotBb%> to <%=slotTime.slotBc%></strong>
+                                    <input type="radio" name="selectedSlot" value="slotB.c" id="slotB.c" required></input>
+                                    <span id="slotBc"><%=doctors.availableSlots.slotB.c%></span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-5" style="display: inline-block;">
+                                
                         <div>
                             <strong id="Bd"><%=slotTime.slotBc%> to <%=doctors.timing.evening.timingTo%></strong>
                             <input type="radio" name="selectedSlot" value="slotB.d" id="slotB.d" required></input>
                             <span id="slotBd"><%=doctors.availableSlots.slotB.d%></span>
+                        </div>
+                            </div>
                         </div>
                     </div>
                   </div>
                   <div class="form-group col-md-6">
                       <label for="InputSlotDate">Prefered Time of Slot</label>
                       <input class="form-control" name="preferSlot" type="time" id="timeField" required>
-                      <small class="form-text text-muted">Elgible Slot time is <%= moment(doctors.timing.morning.timingFrom, 'HH:mm').format('LT')%> to <%= moment(doctors.timing.morning.timingTo, 'HH:mm').format('LT')%>. Slot Time may change</small>
+                      <small class="form-text text-muted">Elgible Slot Time: <br> Morning: <%= moment(doctors.timing.morning.timingFrom, 'HH:mm').format('LT')%> to <%= moment(doctors.timing.morning.timingTo, 'HH:mm').format('LT')%>. <br> Evening: <%= moment(doctors.timing.evening.timingFrom, 'HH:mm').format('LT')%> to <%= moment(doctors.timing.evening.timingTo, 'HH:mm').format('LT')%>. <br> Slot Time may change</small>
                   </div>
                   <div class="form-group col-md-12">
                       <label for="InputDisease">Disease Description</label>
@@ -121,7 +143,7 @@
                   <div class="form-group col-md-6">
                     <label for="emergency">Is it an Emergency?</label>
                     <input name="emergency" type="checkbox" id="emergency">
-                    <small class="form-text text-muted">Please use this option responsibly!</small>
+                    <small class="form-text text-muted">Please use this option responsibly!. Incurs extra charges</small>
                 </div>
                 <div class="form-group col-md-6">
                 <button type="submit" class="btn btn-primary">Submit</button>
