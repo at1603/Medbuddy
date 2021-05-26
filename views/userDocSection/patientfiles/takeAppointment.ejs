@@ -16,11 +16,15 @@
                         <li><h4><strong>Works At: </strong><%= doctors.workAtHosp%> </h4></li>
                     </div>
                     <div class="col-md-6">
-                        <li><h4><strong>Timings: </strong><%= moment(doctors.timing.timingFrom, 'HH:mm').format('LT')%> to <%= moment(doctors.timing.timingTo, 'HH:mm').format('LT')%></h4></li>
-                    </div>
-                    <div class="col-md-6">
                         <li><h4><strong>Speciality:</strong> <%=doctors.speciality%></h4></li>
                     </div>
+                    <div class="col-md-6">
+                        <li><h4><strong>Morning Timings: </strong><%= moment(doctors.timing.morning.timingFrom, 'HH:mm').format('LT')%> to <%= moment(doctors.timing.morning.timingTo, 'HH:mm').format('LT')%></h4></li>
+                    </div>
+                    <div class="col-md-6">
+                        <li><h4><strong>Evening Timings: </strong><%= moment(doctors.timing.evening.timingFrom, 'HH:mm').format('LT')%> to <%= moment(doctors.timing.evening.timingTo, 'HH:mm').format('LT')%></h4></li>
+                    </div>
+                    
                     <div class="col-md-6">
                         <li><h4><strong>Experience:</strong> <%= doctors.experience%> years</h4></li>
                     </div>
@@ -55,17 +59,58 @@
                   <div class="form-group col-md-6">
                     <label for="InputSlot">Preferred Slot</label><br>
                     <div class="col-md-12">
-                        <label for="slotA" id="labelForSlotA">Morning Slot: <strong>Available Seats: </strong> <%=doctors.availableSlots.slotA%></label>
-                        <input type="radio" name="selectedSlot" value="slotA" id="slotA" required></input>
+                        <label for="slotA" id="labelForSlotA.a">Morning Slot: <strong>Available Seats: </strong> </label>
+                        <div>
+                            <strong id="Aa"><%=doctors.timing.morning.timingFrom%> to <%=slotTime.slotAa%></strong>
+                            <input type="radio" name="selectedSlot" value="slotA.a" id="slotA.a" required></input>
+                            <span id="slotAa"><%=doctors.availableSlots.slotA.a%></span>
+                        </div>
+                        <div>
+                            <strong id="Ab"><%=slotTime.slotAa%> to <%=slotTime.slotAb%></strong>
+                            <input type="radio" name="selectedSlot" value="slotA.b" id="slotA.b" required></input>
+                            <span id="slotAb"><%=doctors.availableSlots.slotA.b%></span>
+                        </div>
+                        <div>
+                            <strong id="Ac"><%=slotTime.slotAb%> to <%=slotTime.slotAc%></strong>
+                            <input type="radio" name="selectedSlot" value="slotA.c" id="slotA.c" required></input>
+                            <span id="slotAc"><%=doctors.availableSlots.slotA.c%></span>
+                        </div>
+                        <div>
+                            <strong id="Ad"><%=slotTime.slotAc%> to <%=doctors.timing.morning.timingTo%></strong>
+                            <input type="radio" name="selectedSlot" value="slotA.d" id="slotA.d" required></input>
+                            <span id="slotAd"><%=doctors.availableSlots.slotA.d%></span>
+                        </div>
+                        
+                        
+                        
                     </div>
                     <div class="col-md-12">
-                        <label for="slotB" id="labelForSlotB">Evening Slot: <strong>Available Seats: </strong> <%=doctors.availableSlots.slotB%></label>
-                        <input type="radio" name="selectedSlot" value="slotB" id="slotB" required></input>
+                        <label for="slotB" id="labelForSlotB">Evening Slot: <strong>Available Seats: </strong> </label>
+                        <div>
+                            <strong id="Ba"><%=doctors.timing.evening.timingFrom%> to <%=slotTime.slotBa%></strong>
+                            <input type="radio" name="selectedSlot" value="slotB.a" id="slotB.a" required></input>
+                            <span id="slotBa"><%=doctors.availableSlots.slotB.a%></span>
+                        </div>
+                        <div>
+                            <strong id="Bb"><%=slotTime.slotBa%> to <%=slotTime.slotBb%></strong>
+                            <input type="radio" name="selectedSlot" value="slotB.b" id="slotB.b" required></input>
+                            <span id="slotBb"><%=doctors.availableSlots.slotB.b%></span>
+                        </div>
+                        <div>
+                            <strong id="Bc"><%=slotTime.slotBb%> to <%=slotTime.slotBc%></strong>
+                            <input type="radio" name="selectedSlot" value="slotB.c" id="slotB.c" required></input>
+                            <span id="slotBc"><%=doctors.availableSlots.slotB.c%></span>
+                        </div>
+                        <div>
+                            <strong id="Bd"><%=slotTime.slotBc%> to <%=doctors.timing.evening.timingTo%></strong>
+                            <input type="radio" name="selectedSlot" value="slotB.d" id="slotB.d" required></input>
+                            <span id="slotBd"><%=doctors.availableSlots.slotB.d%></span>
+                        </div>
                     </div>
                   </div>
                   <div class="form-group col-md-6">
                       <label for="InputSlotDate">Prefered Time of Slot</label>
-                      <input class="form-control" name="preferSlot" type="time" id="timeField" required max="<%=doctors.timing.timingTo %>" min=<%=doctors.timing.timingFrom %>>
+                      <input class="form-control" name="preferSlot" type="time" id="timeField" required>
                       <small class="form-text text-muted">Elgible Slot time is <%= moment(doctors.timing.timingFrom, 'HH:mm').format('LT')%> to <%= moment(doctors.timing.timingTo, 'HH:mm').format('LT')%>. Slot Time may change</small>
                   </div>
                   <div class="form-group col-md-12">
@@ -93,14 +138,42 @@
         })
      
         function slotChecker(){
-            var slotA = parseInt(document.getElementById("labelForSlotA").innerHTML.slice(49,document.getElementById("labelForSlotA").innerHTML.length))
-            var slotB = parseInt(document.getElementById("labelForSlotB").innerHTML.slice(49,document.getElementById("labelForSlotB").innerHTML.length))
-            if(slotA==0){
-                document.getElementById("slotA").disabled = true
+             if(parseInt(document.getElementById("slotAa").innerHTML)==0){
+                document.getElementById("slotA.a").disabled = true
             }
-            if(slotB==0){
-                document.getElementById("slotB").disabled = true
+            if(parseInt(document.getElementById("slotAb").innerHTML)==0){
+                document.getElementById("slotA.b").disabled = true
             }
+            if(parseInt(document.getElementById("slotAc").innerHTML)==0){
+                document.getElementById("slotA.c").disabled = true
+            }
+            if(parseInt(document.getElementById("slotAd").innerHTML)==0){
+                document.getElementById("slotA.d").disabled = true
+            }
+            if(parseInt(document.getElementById("slotBa").innerHTML)==0){
+                document.getElementById("slotB.a").disabled = true
+            }
+            if(parseInt(document.getElementById("slotBb").innerHTML)==0){
+                document.getElementById("slotB.b").disabled = true
+            }
+            if(parseInt(document.getElementById("slotBc").innerHTML)==0){
+                document.getElementById("slotB.c").disabled = true
+            }
+            if(parseInt(document.getElementById("slotBd").innerHTML)==0){
+                document.getElementById("slotB.d").disabled = true
+            }
+
         }
+    </script>
+    <script>
+        $(document).ready(function() {
+    $('input[type=radio][name="selectedSlot"]').change(function() {
+        var id = $(this).val().slice(4,5) + $(this).val().slice(6)
+        var min = document.getElementById(id).innerHTML.slice(0,5)
+        var max = document.getElementById(id).innerHTML.slice(9)
+        document.getElementById("timeField").min = min
+        document.getElementById("timeField").max = max
+    });
+});
     </script>
 </html>

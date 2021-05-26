@@ -16,19 +16,59 @@ var docSchema = new mongoose.Schema({
     default: "Not Connected",
   },
   timing: {
-    timingFrom: String,
-    timingTo: String,
+    morning: {
+      timingFrom: String,
+      timingTo: String,
+    },
+    evening: {
+      timingFrom: String,
+      timingTo: String,
+    },
   },
   availableSlots: {
     slotA: {
-      type: Number,
-      default: 10,
-      min: 0,
+      a: {
+        type: Number,
+        default: 10,
+        min: 0,
+      },
+      b: {
+        type: Number,
+        default: 10,
+        min: 0,
+      },
+      c: {
+        type: Number,
+        default: 10,
+        min: 0,
+      },
+      d: {
+        type: Number,
+        default: 10,
+        min: 0,
+      },
     },
     slotB: {
-      type: Number,
-      default: 10,
-      min: 0,
+      a: {
+        type: Number,
+        default: 10,
+        min: 0,
+      },
+      b: {
+        type: Number,
+        default: 10,
+        min: 0,
+      },
+      c: {
+        type: Number,
+        default: 10,
+        min: 0,
+      },
+      d: {
+        type: Number,
+        default: 10,
+        min: 0,
+      },
     },
   },
   rating: { type: Number, default: 0, min: 0 },

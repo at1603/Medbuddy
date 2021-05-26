@@ -20,7 +20,9 @@
               <tr class="table100-head">
                 <th class="column1">S.N</th>
                 <th class="column1">Name</th>
-                <th class="column1">Disease</th>
+                <th class="column1">Problem</th>
+                <th class="colum1">Selected Slot</th>
+                <th class="column1">Slot Time</th>
                 <th class="column7"></th>
 
               </tr>
@@ -29,9 +31,11 @@
               <%for(var i=0;i<patients.length;i++){%>
               <%  if(patients[i].activityStatus == true){ %>
               <tr>
-                <td class="column1">1</td>
+                <td class="column1"><%=i+1%></td>
                 <td class="column1"><%=patients[i].patientId.firstName+" "+patients[i].patientId.lastName%></td>
                 <td class="column1"><%= patients[i].disease %></td>
+                <td class="column1"><%=(patients[i].selectedSlot.slice(4,5)=="A" ?"Morning":"Evening")%></td>
+                <td class="column1"><%=patients[i].slot%></td>
                 <td class="column7"><a href="/userDocSection/patientList/patientInfo/<%=patients[i].patientId._id%>"><i style="color: green;" class="fas fa-arrow-alt-circle-right fa-lg"></i></a></td>
 
               </tr>
