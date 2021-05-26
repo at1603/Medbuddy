@@ -6,31 +6,31 @@ const middleware = require("../middlewares/authMiddlewares")
 var sendMail = require("../public/jsFiles/mail");
 
 //Dashboard routes
-router.get("/user/doctor/dashboard", middleware.isLoggedIn, function(req, res) {
+router.get("/user/doctor/dashboard", middleware.isLoggedIn, function (req, res) {
     res.render("user/dashboards/docDashboard")
 });
 
-router.get("/user/patient/dashboard", middleware.isLoggedIn, function(req, res) {
+router.get("/user/patient/dashboard", middleware.isLoggedIn, function (req, res) {
     res.render("user/dashboards/patientDashboard")
 });
 //Manage hospital routes
 
-router.get("/hospHospSection/initialPage", middleware.isLoggedIn, middleware.checkHospAdminOwnership,  function(req, res) {
+router.get("/hospHospSection/initialPage", middleware.isLoggedIn, middleware.checkHospAdminOwnership, function (req, res) {
     res.render("hospHospSection/index");
 });
 
 //home page route
-router.get("/", function(req, res) {
-    res.render("landing");
+router.get("/", function (req, res) {
+    res.render("altLanding");
 });
 
 //about page route
-router.get("/about", function(req, res) {
+router.get("/about", function (req, res) {
     res.render("about");
 });
 
 //contact page route
-router.get("/contact", function(req, res) {
+router.get("/contact", function (req, res) {
     res.render("contact");
 });
 
@@ -47,7 +47,7 @@ router.post("/email", (req, res) => {
         Data.email,
         Data.subject,
         Data.text,
-        function(err, data) {
+        function (err, data) {
             if (err) {
                 res.status(500).json({ message: "Internal Error" });
             } else {
@@ -58,7 +58,7 @@ router.post("/email", (req, res) => {
     );
 });
 
-router.get("/timeline", function(req, res) {
+router.get("/timeline", function (req, res) {
     res.render("timeline");
 });
 
