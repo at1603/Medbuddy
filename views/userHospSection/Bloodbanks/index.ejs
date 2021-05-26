@@ -136,14 +136,20 @@
                     </div>
                     <div class="form row">
                         <div class="form-group col-md-4">
-                            <label for="inputstateofJob">State</label>
-                            <select style="border-radius: 25px;" onchange="print_city('state', this.selectedIndex);" id="donorState" class="form-control"></select>
+                            <label for="inputState">State</label>
+                            <select class="form-control" name="state" id="inputState" style="border-radius: 25px;">
+                                <option disabled selected>Select state</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttar Pradesh">New Delhi</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="inputCityofJob">City</label>
-                            <select style="border-radius: 25px;" id ="state" class="form-control" name="city"></select>
-                            <script language="javascript">print_state("donorState");</script>
-                        </div>
+                            <label for="inputCity">City</label>
+                            <select class="form-control" name="city" id="inputCity" style="border-radius: 25px;">
+                                <option disabled selected>Select City</option>
+                                <option value="Kanpur">Kanpur</option>
+                            </select>
+                        </div>  
                         <div class="form-group col-md-4">
                             <label for="pincode">Pin Code</label>
                             <input style="border-radius: 25px;" type="number" class="form-control" name="pinCode" placeholder="Pin Code" id="pinCode" min="0">
