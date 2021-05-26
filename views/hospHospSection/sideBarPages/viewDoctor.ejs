@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <%- include("../../partials/header"); -%>
+
+    <title>Page Title</title>
+    </head>
+    <body id="body-pd" >
+    <%-include("../../partials/altNavbar"); -%>
+    <%-include("../../partials/altAdminSideNavbar");-%>
+    <div class="row" style="display: flex;margin: 8rem 4rem;">
+        <div class="col-md-10">
+            <h3><%= doctor.handler_id.firstName + " " + doctor.handler_id.lastName %>'s Information: </h3>
+            <ul>
+                <div class="row">
+                    <div class="col-md-6">
+                        <li><h5><strong>Works At: </strong><%= doctor.workAtHosp%> </h5></li>
+                    </div>
+                    <div class="col-md-6">
+                        <li><h5><strong>Speciality:</strong> <%=doctor.speciality%></h5></li>
+                    </div>
+                    <div class="col-md-6">
+                        <li><h5><strong>Morning Timings: </strong><%= moment(doctor.timing.morning.timingFrom, 'HH:mm').format('LT')%> to <%= moment(doctor.timing.morning.timingTo, 'HH:mm').format('LT')%></h5></li>
+                    </div>
+                    <div class="col-md-6">
+                        <li><h5><strong>Evening Timings: </strong><%= moment(doctor.timing.evening.timingFrom, 'HH:mm').format('LT')%> to <%= moment(doctor.timing.evening.timingTo, 'HH:mm').format('LT')%></h5></li>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <li><h5><strong>Experience:</strong> <%= doctor.experience%> years</h5></li>
+                    </div>
+                    <div class="col-md-6">
+                        <li><h5><strong>Fees:</strong> Rs. <%= doctor.fees%></h5></li>
+                    </div>
+                </div>
+            </ul>
+        </div>
+        <div class="col-md-2" style="border-radius: 25px;text-align: center;justify-content:center;box-shadow: 0 0 20px 0px rgb(0 0 0 / 20%);">
+            <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-182-132174.png" class="img-fluid rounded-circle border" alt="https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-vector-avatar-icon-png-image_695765.jpg" style="margin-top: 2rem; width:60%; box-shadow: 6px 5px 18px 0px rgba(0,0,0,0.33);" >
+            <h5 id="username"><%=doctor.handler_id.username%></h5>
+            <h5 id="name"><%= doctor.handler_id.firstName + " " + doctor.handler_id.lastName%></h5>
+            <span><em>Joined <%= moment(doctor.handler_id.joinedAt).fromNow()%></em></span>
+        </div>
+    </div>
+    <%-include("../../partials/footer"); -%>
+    </body>
+</html>

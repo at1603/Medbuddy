@@ -4,13 +4,14 @@
 <body id="body-pd">
     <%- include("../../partials/altNavbar"); -%>
     <%- include("../../partials/altAdminSideNavbar"); -%>
-    <% if(foundDoctors.length > 0) {console.log(foundDoctors)} %>
+    <% console.log(foundDoctors, "sdfhkasf") %>
+    <% if(foundDoctors.length > 0) { %>
     <div class="container" style="margin-top: 4rem;">
         <table class="table table-striped">
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Username: </th>
+                <th scope="col">Name: </th>
                 <th scope="col">Speciality:</th>
                 <th scope="col">Qualifications: </th>
                 <th scope="col">Action</th>
@@ -21,11 +22,11 @@
                 <% foundDoctors.forEach(function(doctor){ count += 1%>
                     <tr>
                         <th scope="row"><%=count %></th>
-                        <td><%= doctor.handler.username%> </td>
+                        <td><%= doctor.handler_id.firstName + " " + doctor.handler_id.lastName%> </td>
                         <td><%= doctor.speciality%></td>
                         <td><%= doctor.qual%></td>
                         <td>
-                            <a class="btn btn-sm btn-info" style="margin-right:5px ; display: inline;" href="#">View Details</a>
+                            <a class="btn btn-sm btn-info" style="margin-right:5px ; display: inline;" href="/hospHospSection/dashboard/doctors/viewDoctor/<%=doctor._id%>">View Details</a>
                         </td>
                     </tr>
                 <% })%>
@@ -33,6 +34,9 @@
           </table>
           <a href="/" class="btn btn-xs btn-secondary" style=" margin-top: 2rem; float: right;">Go Back!</a>
     </div>
+    <% } else { %> 
+        <h5 style="text-align: center;">No Registered Doctors Found!!</h5>    
+    <% } %>
     <%- include("../../partials/footer"); -%>
 </body>
 </html>
