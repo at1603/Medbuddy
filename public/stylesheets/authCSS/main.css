@@ -1,7 +1,22 @@
 
 
 
+@media(max-width: 1366px) {
+  html.zoom{
+      zoom: 75%
+  }
+  .wrap-login100 {
+    margin-top: -7rem;
+  }
+  .txt1{
+    margin-top: -8rem;
+  }
 
+}
+
+html{
+  overflow: hidden;
+}
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
