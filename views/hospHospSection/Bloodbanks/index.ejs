@@ -53,8 +53,13 @@
                       <td><%= bloodbanks[i].currcapacity.abneg%></td>
                       <td><%= bloodbanks[i].price%></td>
                       <td><%= bloodbanks[i].contact.email%></td>
-                      <td><a href="/hospHospSection/bloodbank/specificRequest" class="btn btn-outline-danger">Request</a></td>
-
+                      <td>
+                        <% if(!bloodbanks[i].handlerId.equals(currentUser._id)) { %> 
+                          <a href="/hospHospSection/bloodbank/specificRequest" class="btn btn-outline-danger">Request</a>
+                          <% }else{ %>
+                          <p style="color: red">Your BloodBank!</p>
+                        <% } %>
+                      </td>
                     </tr>
                 <% } %>
               </tbody>
