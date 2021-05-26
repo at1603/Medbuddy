@@ -111,7 +111,7 @@
                   <div class="form-group col-md-6">
                       <label for="InputSlotDate">Prefered Time of Slot</label>
                       <input class="form-control" name="preferSlot" type="time" id="timeField" required>
-                      <small class="form-text text-muted">Elgible Slot time is <%= moment(doctors.timing.timingFrom, 'HH:mm').format('LT')%> to <%= moment(doctors.timing.timingTo, 'HH:mm').format('LT')%>. Slot Time may change</small>
+                      <small class="form-text text-muted">Elgible Slot time is <%= moment(doctors.timing.morning.timingFrom, 'HH:mm').format('LT')%> to <%= moment(doctors.timing.morning.timingTo, 'HH:mm').format('LT')%>. Slot Time may change</small>
                   </div>
                   <div class="form-group col-md-12">
                       <label for="InputDisease">Disease Description</label>
