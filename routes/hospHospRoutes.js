@@ -10,22 +10,11 @@ const ambulanceReqSchema = require("../models/hospModels/requestSchemas/ambulanc
 const _ = require('lodash');
 
 router.get("/hospHospSection/bloodBank", function(req, res) {
-    BloodBank.find(function(err, bloodbanks) {
-        if (err)
+    BloodBank.find().populate("relatedTo").exec(function(err, foundBloodBanks){
+        if(err){
             console.log(err);
-        else {
-            console.log("All the bloodbanks");
-            let hospitals = [];
-            for (let i = 0; i < bloodbanks.length; i++) {
-                Hospital.findById(bloodbanks[i].relatedTo, function(err, foundHospital) {
-                    if (err)
-                        console.log(err);
-                    else {
-                        hospitals.push(foundHospital);
-                        res.render("hospHospSection/Bloodbanks/index", { bloodbanks: bloodbanks, hospitals: hospitals });
-                    }
-                });
-            }
+        }else{
+            res.render("hospHospSection/Bloodbanks/index", { bloodbanks: foundBloodBanks});
         }
     });
 });

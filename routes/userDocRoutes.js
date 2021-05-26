@@ -9,11 +9,12 @@ const PatientHistory = require("../models/patientHistorySchema");
 const sendPrescriptionMail = require("../public/jsFiles/mail");
 const DoctorStats = require("../models/statsSchema/doctorStatsSchema");
 const PatientStats = require("../models/statsSchema/patientStatsSchema");
+const middleware = require("../middlewares/authMiddlewares");
 ////+++////
 
 //Doctor routes
 
-router.get("/generatePresc/:id", function (req, res) {
+router.get("/generatePresc/:id", middleware.isLoggedIn, function (req, res) {
   User.findById(req.params.id, function (err, foundPatient) {
     if (err) {
       console.log(err);
@@ -58,7 +59,7 @@ router.get("/generatePresc/:id", function (req, res) {
     }
   });
 });
-router.get("/userDocSection/doctor/createProfile", function (req, res) {
+router.get("/userDocSection/doctor/createProfile", middleware.isLoggedIn, function (req, res) {
   Doctor.findOne()
     .where("handler_id")
     .equals(req.user._id)
@@ -73,7 +74,7 @@ router.get("/userDocSection/doctor/createProfile", function (req, res) {
     });
 });
 
-router.get("/userDocSection/patientList", function (req, res) {
+router.get("/userDocSection/patientList", middleware.isLoggedIn, function (req, res) {
   Doctor.find(
     { handler_id: ObjectId(req.user._id) },
     { _id: 1 },
@@ -102,7 +103,7 @@ router.get("/userDocSection/patientList", function (req, res) {
   );
 });
 
-router.get("/userDocSection/patientList/patientInfo/:id", function (req, res) {
+router.get("/userDocSection/patientList/patientInfo/:id", middleware.isLoggedIn, function (req, res) {
   User.findById(req.params.id, function (err, foundPatient) {
     if (err) {
       console.log(err);
@@ -153,7 +154,7 @@ router.get("/userDocSection/patientList/patientInfo/:id", function (req, res) {
   });
 });
 
-router.get("/userDocSection/reports/:id", function (req, res) {
+router.get("/userDocSection/reports/:id", middleware.isLoggedIn, function (req, res) {
   res.render("userDocSection/reports");
 });
 
@@ -181,13 +182,13 @@ router.post("/sendEmail", (req, res) => {
   );
 });
 
-router.get("/userDocSection/consultDoc/presc", function (req, res) {
+router.get("/userDocSection/consultDoc/presc",  middleware.isLoggedIn, function (req, res) {
   res.render("userDocSection/docfiles/prescription");
 });
 
 // -------------Doctor Profile Post Routes ------------------//
 
-router.put("/userDocSection/createProfile", function (req, res) {
+router.put("/userDocSection/createProfile", middleware.isLoggedIn, function (req, res) {
   // res.sendStatus(200);
   Doctor.updateOne(
     { handler_id: ObjectId(req.user._id) },
@@ -207,7 +208,7 @@ router.put("/userDocSection/createProfile", function (req, res) {
 //patient routes
 
 //all doctors
-router.get("/userDocSection/docList/", function (req, res) {
+router.get("/userDocSection/docList/", middleware.isLoggedIn, function (req, res) {
   Doctor.find()
     .populate("handler_id", "firstName lastName")
     .exec(function (err, foundDoctors) {
@@ -231,7 +232,7 @@ router.get("/userDocSection/docList/", function (req, res) {
     });
 });
 
-router.get("/userDocSection/docList/docInfo/:id", function (req, res) {
+router.get("/userDocSection/docList/docInfo/:id", middleware.isLoggedIn, function (req, res) {
   Doctor.findById(req.params.id)
     .populate("handler_id")
     .exec(function (err, foundDoctor) {
@@ -443,7 +444,7 @@ router.get("/userDocSection/docList/docInfo/:id", function (req, res) {
 
 //my doctor
 
-router.get("/userDocSection/myAppointments", function (req, res) {
+router.get("/userDocSection/myAppointments", middleware.isLoggedIn, function (req, res) {
   Appointment.find({})
     .where("patientId")
     .equals(req.user._id)
@@ -467,7 +468,7 @@ router.get("/userDocSection/myAppointments/show", function (req, res) { });
 
 //book appointment button
 
-router.post("/userDocSection/createAppointment/:docId", function (req, res) {
+router.post("/userDocSection/createAppointment/:docId", middleware.isLoggedIn, function (req, res) {
   var emergency = false;
   if (req.body.emergency != undefined) {
     emergency = true;
@@ -500,7 +501,7 @@ router.post("/userDocSection/createAppointment/:docId", function (req, res) {
 
 //Appointment cancellation route
 router.post(
-  "/userDocSection/cancelAppointment/:appointId",
+  "/userDocSection/cancelAppointment/:appointId", middleware.isLoggedIn,
   function (req, res) {
     Appointment.findByIdAndUpdate(req.params.appointId, {
       $set: { activityStatus: false },
@@ -573,7 +574,7 @@ router.post(
   }
 );
 
-router.post("/generatePresc/addMedicine/:id", function (req, res) {
+router.post("/generatePresc/addMedicine/:id", middleware.isLoggedIn, function (req, res) {
   const MedicineData = JSON.parse(req.body.hiddenMedicineName);
   const TestData = JSON.parse(req.body.hiddenTest);
 
@@ -666,7 +667,7 @@ router.post("/generatePresc/addMedicine/:id", function (req, res) {
   );
 });
 
-router.post("/userDocSection/emailPrescription/:id", function (req, res) {
+router.post("/userDocSection/emailPrescription/:id", middleware.isLoggedIn, function (req, res) {
   sendPrescriptionMail.sendPrescriptionMail(
     req.body.email,
     req.body.filename,
@@ -686,7 +687,7 @@ router.post("/userDocSection/emailPrescription/:id", function (req, res) {
 
 //-------------Complete Appointment Route----------
 router.post(
-  "/userDocSection/completeAppointment/:patientUserId",
+  "/userDocSection/completeAppointment/:patientUserId", middleware.isLoggedIn,
   function (req, res) {
     Doctor.findOne(
       { handler_id: req.user._id },
@@ -724,19 +725,8 @@ router.post(
                         if (err) {
                           console.log(err);
                         } else {
-                          // const dynamicSlotKey =
-                          //   "availableSlots." + selectedSlot[0].selectedSlot;
-                          // Doctor.updateOne(
-                          //   { _id: ObjectId(foundDoctor._id) },
-                          //   { $inc: { [dynamicSlotKey]: 0 } }
-                          // ).exec(function (err) {
-                          //   if (err) {
-                          //     console.log(err);
-                          //   } else {
                           req.flash("success", "Appointment Completed");
                           res.redirect("/userDocSection/patientList");
-                          //   }
-                          // });
                         }
                       });
                     }
@@ -752,7 +742,7 @@ router.post(
 );
 
 //universal routes
-router.get("/userDocSection/appointments/:id", function (req, res) {
+router.get("/userDocSection/appointments/:id",  middleware.isLoggedIn, function (req, res) {
   res.render("userDocSection/appointments");
 });
 
