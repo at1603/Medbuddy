@@ -14,6 +14,7 @@ var docSchema = new mongoose.Schema({
   workAtHosp: {
     type: String,
     default: "Not Connected",
+    // ref: "Hospital"
   },
   timing: {
     morning: {
