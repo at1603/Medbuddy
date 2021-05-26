@@ -38,7 +38,6 @@ var indexRoutes = require("./routes/indexRoutes.js"),
   userHospIndexRoutes = require("./routes/userHospRoutes/indexRoutes"),
   bloodBankRoutes = require("./routes/userHospRoutes/bloodBankRoutes"),
   organDonationRoutes = require("./routes/userHospRoutes/organDonationRoutes"),
-  peekintoHospitalRoutes = require("./routes/userHospRoutes/peekIntoHospitalRoutes"),
   hospHospRoutes = require("./routes/hospHospRoutes"),
   miscRoutes = require("./routes/miscRoutes"),
   videoCallRoute = require("./videocall/videoRoutes"),
@@ -84,7 +83,6 @@ app.use(userHospIndexRoutes);
 app.use(dashBoardRoutes);
 app.use(bloodBankRoutes);
 app.use(organDonationRoutes);
-app.use(peekintoHospitalRoutes);
 app.use(hospHospRoutes);
 app.use(paymentRoutes);
 app.use(miscRoutes);
