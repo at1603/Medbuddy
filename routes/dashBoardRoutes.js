@@ -11,6 +11,7 @@ var ObjectId = require("mongodb").ObjectID;
 const Appointment = require("../models/appointmentSchema");
 const middleware = require("../middlewares/authMiddlewares");
 const { populate } = require("../models/docSchema");
+const middlewareObj = require("../middlewares/authMiddlewares");
 
 var router = express.Router();
 
@@ -305,7 +306,7 @@ router.get(
         } else {
           Doctor.find()
             .where("workingAt")
-            .equals(foundHosp._id)
+            .equals(foundHosp._id).populate("handler_id")
             .exec(function (error, foundDoctors) {
               if (error) {
                 console.log(error);
@@ -320,6 +321,19 @@ router.get(
   }
 );
 
+//----------- ViewDoctor Info for Admin --------------
+router.get("/hospHospSection/dashboard/doctors/viewDoctor/:docId", middleware.isLoggedIn, function(req, res){
+  Doctor.findById(req.params.docId).populate("handler_id")
+    .exec(function (error, foundDoctor) {
+      if (error) {
+        console.log(error);
+      } else {
+        res.render("hospHospSection/sideBarPages/viewDoctor", {
+          doctor: foundDoctor,
+        });
+      }
+  }); 
+});
 ////``````````````Hospital Admin Post request```````````````/////
 
 router.post(
