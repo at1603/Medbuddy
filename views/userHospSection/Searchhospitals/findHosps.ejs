@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../../partials/header"); -%>
+    <link rel="stylesheet" href="/stylesheets/globalCSS/formTheme.css">
+    <style>
+        select{
+            margin-left: 6rem
+        }
+
+        button{
+            margin-left: 6rem
+        }
+    </style>
+<body>
+    <%-include("../../partials/altNavbar"); -%>
+    <%-include("../../partials/altSidebar");-%>
+    <div class="container" style="margin-top: 8rem ;">
+        <form action="/userHospSection/searchHospitals/findHospitals" method="POST">
+            <h5 style="text-align: center; margin-bottom: 1rem;">Search Hospitals by Location</h5>
+            <div class="form-row" style="display: flex; justify-content:safe;">
+                <div class="form-group col-md-4">
+                    <select class="form-control" name="state" id="inputState">
+                        <option disabled selected>Select state</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Uttar Pradesh">New Delhi</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <select class="form-control" name="city" id="inputCity">
+                        <option disabled selected>Select City</option>
+                        <option value="Kanpur">Kanpur</option>
+                    </select>
+                </div>  
+                <div class="form-group col-md-2">
+                    <button class="btn btn-xs btn-success" style="border-radius: 50%;"><i class="fa fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <% if(flag == 0) { %>
+        
+    <% } else { %>
+        <% if(foundHospitals.length > 0) { %> 
+            <% foundHospitals.forEach(Hospital => { %>
+                <div class="jumbotron" style="background-color:rgba(211, 234, 224, 0.1); border: 1px solid black; border-radius: 25px; padding: 1rem 1rem 0.2rem; text-align: left; margin: 2rem auto; width: 80%;">
+                    <h3 style="text-align: center;"><strong>Hospital Details</strong></h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5><strong>Name: </strong> <%= Hospital.name %></h5>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><strong>Type: </strong> <%= Hospital.type %> </h5>
+                        </div>    
+                        <div class="col-md-6">
+                            <h5><strong>Speciality: </strong> <%= Hospital.speciality %> </h5>
+                        </div>    
+                        <div class="col-md-6">
+                            <h5><strong>Email: </strong> <%= Hospital.contact.email %> </h5>
+                        </div>    
+                        <div class="col-md-6">
+                            <h5><strong>Phone: </strong> <%= Hospital.contact.phone %> </h5>
+                        </div>    
+                        <div class="col-md-12">
+                            <h5><strong>Address: </strong><%= Hospital.address.street%> <%= Hospital.address.city%>, <%= Hospital.address.state%></h5>
+                        </div>
+                    </div>
+                </div> 
+            <% }); %>
+        <% } else { %> 
+            <h4 style="text-align: center; margin-top: 3rem;">No Hospitals Found!!</h4>
+        <% } %>
+    <% } %>
+
+    <%- include("../../partials/footer"); -%>
+</body>
+</html>
