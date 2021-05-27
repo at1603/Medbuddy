@@ -182,7 +182,7 @@ router.post("/sendEmail", (req, res) => {
   );
 });
 
-router.get("/userDocSection/consultDoc/presc",  middleware.isLoggedIn, function (req, res) {
+router.get("/userDocSection/consultDoc/presc", middleware.isLoggedIn, function (req, res) {
   res.render("userDocSection/docfiles/prescription");
 });
 
@@ -491,10 +491,21 @@ router.post("/userDocSection/createAppointment/:docId", middleware.isLoggedIn, f
         console.log(err);
       } else {
         newAppointment.paidDoctorFees = foundDoctor.fees;
-        res.render("user/Payment/transaction", {
-          newAppointment: newAppointment,
-          doctorData: foundDoctor,
-        });
+        User.findOne({ _id: ObjectId(req.user._id) }).exec(function (err, foundUserInfo) {
+          if (err) {
+            console.log(err)
+          }
+          else {
+            console.log(foundUserInfo, "transaction wala page")
+            res.render("user/Payment/transaction", {
+              newAppointment: newAppointment,
+              doctorData: foundDoctor,
+              foundUserInfo: foundUserInfo
+            });
+
+          }
+        })
+
       }
     });
 });
@@ -742,7 +753,7 @@ router.post(
 );
 
 //universal routes
-router.get("/userDocSection/appointments/:id",  middleware.isLoggedIn, function (req, res) {
+router.get("/userDocSection/appointments/:id", middleware.isLoggedIn, function (req, res) {
   res.render("userDocSection/appointments");
 });
 
