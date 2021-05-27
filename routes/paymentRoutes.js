@@ -8,16 +8,17 @@ const Appointment = require("../models/appointmentSchema");
 const PatientHistory = require("../models/patientHistorySchema");
 const DoctorStats = require("../models/statsSchema/doctorStatsSchema");
 const PatientStats = require("../models/statsSchema/patientStatsSchema");
+const sendReceiptMail = require("../public/jsFiles/mail");
+
 
 router.get("/user/transaction", middleware.isLoggedIn, function (req, res) {
-  res.render("user/Payment/transaction");
+  console.log("sssssssssssssssssssssssssssssss", req.user._id)
+
 });
 
 router.post("/user/transaction/bookAppointment/:docId", function (req, res) {
   let newAppointment = JSON.parse(req.body.newAppointment);
-  console.log(newAppointment)
   const dynamicSlotkey = "availableSlots." + newAppointment.selectedSlot;
-  console.log(dynamicSlotkey)
   Doctor.find(
     { _id: ObjectId(req.params.docId) },
     { [dynamicSlotkey]: 1, handler_id: 1 }
@@ -91,9 +92,23 @@ router.post("/user/transaction/bookAppointment/:docId", function (req, res) {
                                     if (err) {
                                       console.log(err);
                                     } else {
-                                      res.redirect(
-                                        "/userDocSection/patientDashboard"
+
+                                      sendReceiptMail.sendReceiptMail(
+                                        req.body.patientEmail,
+                                        req.body.filename,
+                                        req.body.pdf,
+                                        function (err, result) {
+                                          if (err) {
+                                            console.log(err);
+                                          } else {
+                                            console.log("Successfully emailed Receipt");
+                                            res.redirect(
+                                              "/userDocSection/patientDashboard"
+                                            );
+                                          }
+                                        }
                                       );
+
                                     }
                                   });
                                 }
@@ -169,8 +184,21 @@ router.post("/user/transaction/bookAppointment/:docId", function (req, res) {
                                     if (err) {
                                       console.log(err);
                                     } else {
-                                      res.redirect(
-                                        "/userDocSection/patientDashboard"
+
+                                      sendReceiptMail.sendReceiptMail(
+                                        req.body.patientEmail,
+                                        req.body.filename,
+                                        req.body.pdf,
+                                        function (err, result) {
+                                          if (err) {
+                                            console.log(err);
+                                          } else {
+                                            console.log("Successfully emailed Receipt");
+                                            res.redirect(
+                                              "/userDocSection/patientDashboard"
+                                            );
+                                          }
+                                        }
                                       );
                                     }
                                   });

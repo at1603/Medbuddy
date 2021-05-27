@@ -31,7 +31,30 @@ const sendMail = (text, receiver, cb) => {
     }
   });
 };
-
+const sendReceiptMail = (receiver, fileName, encodedString, cb) => {
+  const mailOptions = {
+    sender: "medbuddyHack2021@gmail.com",
+    from: "MedBuddy",
+    to: receiver,
+    subject: "Appointment Receipt",
+    html: "<p>This is your payment Receipt </p>",
+    attachments: [
+      {
+        filename: fileName,
+        content: new Buffer.from(encodedString, "base64"),
+        encoding: "base64",
+        contentType: "application/pdf",
+      },
+    ],
+  };
+  transporter.sendMail(mailOptions, function (err, data) {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, data);
+    }
+  });
+};
 const sendPrescriptionMail = (receiver, fileName, encodedString, cb) => {
   const mailOptions = {
     sender: "medbuddyHack2021@gmail.com",
@@ -76,4 +99,5 @@ module.exports = {
   sendMail,
   sendPrescriptionMail,
   sendContactUsMail,
+  sendReceiptMail
 };

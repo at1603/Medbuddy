@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-  <link rel="stylesheet" href="/stylesheets/landing.css" />
-  <!-- <link rel="stylesheet" href="/stylesheets/partials/navbar.css" /> -->
-  <script>
+<link rel="stylesheet" href="/stylesheets/landing.css" />
+<!-- <link rel="stylesheet" href="/stylesheets/partials/navbar.css" /> -->
+<script>
     // $(document).ready(function() {
     //     $("#confirmbtn").click(function(){
     //         $('#hiddenAppointInput').val(JSON.stringify(newAppointment));
     //         console.log(JSON.stringify(newAppointment), "sfsafasf")
     //     });
     // });
-  </script>
-  <%- include("../../partials/header"); -%>
-  <body id="body-pd">
-    <%-include("../../partials/altNavbar");-%>
-    <%-include("../../partials/altSidebar");-%>
+</script>
+<%- include("../../partials/header"); -%>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+  <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 
-    <div
-      style="
+  <body id="body-pd">
+    <%- include("../../partials/altNavbar"); -%>
+      <%- include("../../partials/altSidebar"); -%>
+
+        <div id="print" style="
         justify-content: center;
         width: 60%;
         margin: auto;
@@ -24,145 +26,139 @@
         border-radius: 25px;
         padding: 2rem;
         background-color: #eeeeeec5;
-      "
-    >
-      <h3 style="text-align: center"><strong>Payment Page</strong></h3>
-      <div class="row">
-        <div class="col-md-12">
-          <h4 style="margin-bottom: 0.5rem; margin-top: 1rem">Doctor's Info</h4>
-          <div>
-            <span style="display: inline"
-              >Mr./Mrs./Ms./:
-              <strong
-                ><%= doctorData.handler_id.firstName + " " +
-                doctorData.handler_id.lastName %></strong
-              ></span
-            >
+      ">
+          <h3 style="text-align: center"><strong>Payment Page</strong></h3>
+          <div class="row">
+            <div class="col-md-12">
+              <h4 style="margin-bottom: 0.5rem; margin-top: 1rem">Doctor's Info</h4>
+              <div>
+                <span style="display: inline">Mr./Mrs./Ms./:
+                  <strong>
+                    <%= doctorData.handler_id.firstName + " " + doctorData.handler_id.lastName %>
+                  </strong></span>
+              </div>
+              <div>
+                <span style="display: inline">Speciality: <strong>
+                    <%= doctorData.speciality %>
+                  </strong></span>
+              </div>
+              <div>
+                <span style="display: inline">Contact Email:
+                  <strong>
+                    <%= doctorData.handler_id.email %>
+                  </strong></span>
+              </div>
+            </div>
           </div>
-          <div>
-            <span style="display: inline"
-              >Speciality: <strong><%= doctorData.speciality %></strong></span
-            >
+          <div class="row">
+            <div class="col-md-12">
+              <h4 style="margin-bottom: 0.5rem; margin-top: 1rem">
+                Patient's Appointment Info
+              </h4>
+              <div>
+                <span style="display: inline">Registered By:
+                  <strong>
+                    <%= currentUser.firstName + " " + currentUser.lastName %>
+                  </strong></span>
+              </div>
+              <div>
+                <span style="display: inline">Phone Number: <strong>
+                    <%= newAppointment.phone %>
+                  </strong></span>
+              </div>
+              <div>
+                <span style="display: inline">Prefered Slot:
+                  <strong>
+                    <%= (newAppointment.selectedSlot.toString().trim()==='slotA' ) ? "Morning" : "Evening" %>, <%=
+                        moment(newAppointment.slot, 'HH:mm' ).format('LT') %>
+                  </strong></span>
+              </div>
+              <div>
+                <span style="display: inline">Disease: <strong>
+                    <%= newAppointment.disease %>
+                  </strong></span>
+              </div>
+              <div>
+                <span style="display: inline">Emergency Appointment:
+                  <strong>
+                    <%= newAppointment.isEmergency ? "Yes" : "No" %>
+                  </strong></span>
+              </div>
+            </div>
           </div>
-          <div>
-            <span style="display: inline"
-              >Contact Email:
-              <strong><%= doctorData.handler_id.email %></strong></span
-            >
+          <h5 style="margin-bottom: 0.5rem; margin-top: 1rem">
+            Transaction Details:
+          </h5>
+          <div class="row">
+            <div class="col-md-12" style="display: inline-flex">
+              <div class="col-md-8">Doctor's Fees:</div>
+              <div class="col-md-3" style="display: inline-flex">
+                <%= parseFloat(doctorData.fees).toFixed(2) %>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <h4 style="margin-bottom: 0.5rem; margin-top: 1rem">
-            Patient's Appointment Info
-          </h4>
-          <div>
-            <span style="display: inline"
-              >Registered By:
-              <strong
-                ><%= currentUser.firstName + " " + currentUser.lastName
-                %></strong
-              ></span
-            >
+          <div class="row">
+            <div class="col-md-12" style="display: inline-flex">
+              <div class="col-md-8">Convenience Charge:</div>
+              <div class="col-md-3" style="display: inline-flex">50.00</div>
+            </div>
           </div>
-          <div>
-            <span style="display: inline"
-              >Phone Number: <strong><%= newAppointment.phone %></strong></span
-            >
+          <div class="row">
+            <div class="col-md-12" style="display: inline-flex">
+              <div class="col-md-8">Emergency Charge:</div>
+              <div class="col-md-3" style="display: inline-flex">
+                <%= newAppointment.isEmergency ? "100.00" : "0.00" %>
+              </div>
+            </div>
           </div>
-          <div>
-            <span style="display: inline"
-              >Prefered Slot:
-              <strong
-                ><%= (newAppointment.selectedSlot.toString().trim() === 'slotA')
-                ? "Morning" : "Evening" %>, <%= moment(newAppointment.slot,
-                'HH:mm').format('LT') %></strong
-              ></span
-            >
+          <hr />
+          <div class="row">
+            <div class="col-md-12" style="display: inline-flex">
+              <div class="col-md-8">Total:</div>
+              <div class="col-md-3" style="display: inline-flex" id="totalExpenditure">
+                <%= newAppointment.isEmergency ? (parseFloat(doctorData.fees) + parseFloat(150)).toFixed(2) :
+                  (parseFloat(doctorData.fees) + parseFloat(50)).toFixed(2) %>
+              </div>
+            </div>
           </div>
-          <div>
-            <span style="display: inline"
-              >Disease: <strong><%= newAppointment.disease %></strong></span
-            >
-          </div>
-          <div>
-            <span style="display: inline"
-              >Emergency Appointment:
-              <strong
-                ><%= newAppointment.isEmergency ? "Yes" : "No" %></strong
-              ></span
-            >
-          </div>
-        </div>
-      </div>
-      <h5 style="margin-bottom: 0.5rem; margin-top: 1rem">
-        Transaction Details:
-      </h5>
-      <div class="row">
-        <div class="col-md-12" style="display: inline-flex">
-          <div class="col-md-8">Doctor's Fees:</div>
-          <div class="col-md-3" style="display: inline-flex">
-            <%= parseFloat(doctorData.fees).toFixed(2) %>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12" style="display: inline-flex">
-          <div class="col-md-8">Convenience Charge:</div>
-          <div class="col-md-3" style="display: inline-flex">50.00</div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12" style="display: inline-flex">
-          <div class="col-md-8">Emergency Charge:</div>
-          <div class="col-md-3" style="display: inline-flex">
-            <%= newAppointment.isEmergency ? "100.00" : "0.00" %>
-          </div>
-        </div>
-      </div>
-      <hr />
-      <div class="row">
-        <div class="col-md-12" style="display: inline-flex">
-          <div class="col-md-8">Total:</div>
-          <div
-            class="col-md-3"
-            style="display: inline-flex"
-            id="totalExpenditure"
-          >
-            <%= newAppointment.isEmergency ? (parseFloat(doctorData.fees) +
-            parseFloat(150)).toFixed(2) : (parseFloat(doctorData.fees) +
-            parseFloat(50)).toFixed(2) %>
-          </div>
-        </div>
-      </div>
-      <% //console.log(JSON.stringify(newAppointment, null, 4))%>
-      <form
-        action="/user/transaction/bookAppointment/<%=doctorData._id%>"
-        method="POST"
-      >
-        <!-- <input type="checkbox" name="confirm" id="confirmbtn" required /> -->
-        <input
-          type="hidden"
-          name="newAppointment"
-          id="hiddenAppointInput"
-          value="<%=JSON.stringify(newAppointment, null, 4)%>"
-        />
-        <input
-          type="hidden"
-          name="totalExpenditure"
-          value="<%= newAppointment.isEmergency ? (parseFloat(doctorData.fees) +
+          <% //console.log(JSON.stringify(newAppointment, null, 4))%>
+            <form id="form" action="/user/transaction/bookAppointment/<%=doctorData._id%>" method="POST">
+              <!-- <input type="checkbox" name="confirm" id="confirmbtn" required /> -->
+              <input type="hidden" name="newAppointment" id="hiddenAppointInput"
+                value="<%=JSON.stringify(newAppointment, null, 4)%>" />
+              <input type="hidden" name="patientEmail" id="patientEmail" value="<%=foundUserInfo.email%>">
+              <input type="hidden" name="filename" id="filename" value="<%=foundUserInfo._id%>+'.pdf'">
+              <input type="hidden" name="pdf" id="pdf">
+              <input type="hidden" name="totalExpenditure" value="<%= newAppointment.isEmergency ? (parseFloat(doctorData.fees) +
         parseFloat(150)).toFixed(2) : (parseFloat(doctorData.fees) +
-        parseFloat(50)).toFixed(2) %>"
-        />
-        <button
-          class="btn btn-success btn-sm"
-          style="margin-left: 30rem; margin-top: 2rem; margin-bottom: 2rem"
-        >
-          Confirm and Book!
-        </button>
-      </form>
-    </div>
-    <%-include("../../partials/footer");-%>
+        parseFloat(50)).toFixed(2) %>" />
+              <button id="pay" class="btn btn-success btn-sm" type="button"
+                style="margin-left: 30rem; margin-top: 2rem; margin-bottom: 2rem">
+                Confirm and Book!
+              </button>
+            </form>
+        </div>
+        <div id="print-btn"></div>
+        <%- include("../../partials/footer"); -%>
   </body>
+  <script>
+    var specialElementHandlers = {
+      '#print-btn': function (element, renderer) {
+        return true;
+      }
+    };
+    $("#pay").click(function () {
+      console.log("chal toh rhahahsa")
+      var doc = new jsPDF();
+      doc.fromHTML($('#print').html(), 15, 15, {
+        'width': 170,
+        'elementHandlers': specialElementHandlers
+      });
+      var pdf = btoa(doc.output());
+      document.getElementById("pdf").value = pdf
+      $("#form").submit()
+
+    });
+  </script>
+
 </html>
